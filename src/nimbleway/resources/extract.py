@@ -909,6 +909,7 @@ class ExtractResource(SyncAPIResource):
         render: Union[Literal["true", "false"], bool] | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
         render_options: extract_create_params.RenderOptions | Omit = omit,
+        request_timeout: float | Omit = omit,
         requests: Iterable[Optional[object]] | Omit = omit,
         return_response_headers_as_header: Union[Literal["true", "false"], bool] | Omit = omit,
         save_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
@@ -983,7 +984,6 @@ class ExtractResource(SyncAPIResource):
         storage_url: Optional[str] | Omit = omit,
         tag: str | Omit = omit,
         template: extract_create_params.Template | Omit = omit,
-        api_timeout: float | Omit = omit,
         transform: object | Omit = omit,
         type: str | Omit = omit,
         user_context: Optional[str] | Omit = omit,
@@ -1090,6 +1090,8 @@ class ExtractResource(SyncAPIResource):
 
           render_flow: Array of actions to perform during browser rendering
 
+          request_timeout: Request timeout in milliseconds
+
           requests: Array of request objects to process in batch
 
           return_response_headers_as_header: Whether to return response headers in HTTP headers
@@ -1113,8 +1115,6 @@ class ExtractResource(SyncAPIResource):
           tag: User-defined tag for request identification
 
           template: Userbrowser creation template configuration
-
-          api_timeout: Request timeout in milliseconds
 
           transform: Transformation rules to apply to the response
 
@@ -1184,6 +1184,7 @@ class ExtractResource(SyncAPIResource):
                     "render": render,
                     "render_flow": render_flow,
                     "render_options": render_options,
+                    "request_timeout": request_timeout,
                     "requests": requests,
                     "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
@@ -1200,7 +1201,6 @@ class ExtractResource(SyncAPIResource):
                     "storage_url": storage_url,
                     "tag": tag,
                     "template": template,
-                    "api_timeout": api_timeout,
                     "transform": transform,
                     "type": type,
                     "user_context": user_context,
@@ -2101,6 +2101,7 @@ class AsyncExtractResource(AsyncAPIResource):
         render: Union[Literal["true", "false"], bool] | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
         render_options: extract_create_params.RenderOptions | Omit = omit,
+        request_timeout: float | Omit = omit,
         requests: Iterable[Optional[object]] | Omit = omit,
         return_response_headers_as_header: Union[Literal["true", "false"], bool] | Omit = omit,
         save_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
@@ -2175,7 +2176,6 @@ class AsyncExtractResource(AsyncAPIResource):
         storage_url: Optional[str] | Omit = omit,
         tag: str | Omit = omit,
         template: extract_create_params.Template | Omit = omit,
-        api_timeout: float | Omit = omit,
         transform: object | Omit = omit,
         type: str | Omit = omit,
         user_context: Optional[str] | Omit = omit,
@@ -2282,6 +2282,8 @@ class AsyncExtractResource(AsyncAPIResource):
 
           render_flow: Array of actions to perform during browser rendering
 
+          request_timeout: Request timeout in milliseconds
+
           requests: Array of request objects to process in batch
 
           return_response_headers_as_header: Whether to return response headers in HTTP headers
@@ -2305,8 +2307,6 @@ class AsyncExtractResource(AsyncAPIResource):
           tag: User-defined tag for request identification
 
           template: Userbrowser creation template configuration
-
-          api_timeout: Request timeout in milliseconds
 
           transform: Transformation rules to apply to the response
 
@@ -2376,6 +2376,7 @@ class AsyncExtractResource(AsyncAPIResource):
                     "render": render,
                     "render_flow": render_flow,
                     "render_options": render_options,
+                    "request_timeout": request_timeout,
                     "requests": requests,
                     "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
@@ -2392,7 +2393,6 @@ class AsyncExtractResource(AsyncAPIResource):
                     "storage_url": storage_url,
                     "tag": tag,
                     "template": template,
-                    "api_timeout": api_timeout,
                     "transform": transform,
                     "type": type,
                     "user_context": user_context,

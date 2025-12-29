@@ -978,6 +978,9 @@ class ExtractCreateParams(TypedDict, total=False):
 
     render_options: RenderOptions
 
+    request_timeout: float
+    """Request timeout in milliseconds"""
+
     requests: Iterable[Optional[object]]
     """Array of request objects to process in batch"""
 
@@ -1078,9 +1081,6 @@ class ExtractCreateParams(TypedDict, total=False):
 
     template: Template
     """Userbrowser creation template configuration"""
-
-    api_timeout: Annotated[float, PropertyInfo(alias="timeout")]
-    """Request timeout in milliseconds"""
 
     transform: object
     """Transformation rules to apply to the response"""
