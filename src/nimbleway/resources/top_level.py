@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import extract_create_params
+from ..types import top_level_extract_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,40 +19,40 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.extract_create_response import ExtractCreateResponse
+from ..types.top_level_extract_response import TopLevelExtractResponse
 
-__all__ = ["ExtractResource", "AsyncExtractResource"]
+__all__ = ["TopLevelResource", "AsyncTopLevelResource"]
 
 
-class ExtractResource(SyncAPIResource):
+class TopLevelResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ExtractResourceWithRawResponse:
+    def with_raw_response(self) -> TopLevelResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/nimbleway-python#accessing-raw-response-data-eg-headers
         """
-        return ExtractResourceWithRawResponse(self)
+        return TopLevelResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ExtractResourceWithStreamingResponse:
+    def with_streaming_response(self) -> TopLevelResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/nimbleway-python#with_streaming_response
         """
-        return ExtractResourceWithStreamingResponse(self)
+        return TopLevelResourceWithStreamingResponse(self)
 
-    def create(
+    def extract(
         self,
         *,
         url: str,
-        browser: extract_create_params.Browser | Omit = omit,
+        browser: top_level_extract_params.Browser | Omit = omit,
         city: str | Omit = omit,
         client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
-        cookies: Union[Iterable[extract_create_params.CookiesUnionMember0], str] | Omit = omit,
+        cookies: Union[Iterable[top_level_extract_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
             "AD",
             "AE",
@@ -307,7 +307,7 @@ class ExtractResource(SyncAPIResource):
             "ALL",
         ]
         | Omit = omit,
-        debug_options: extract_create_params.DebugOptions | Omit = omit,
+        debug_options: top_level_extract_params.DebugOptions | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
@@ -856,15 +856,15 @@ class ExtractResource(SyncAPIResource):
         ]
         | Omit = omit,
         markdown: bool | Omit = omit,
-        metadata: extract_create_params.Metadata | Omit = omit,
+        metadata: top_level_extract_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
-        network_capture: Iterable[extract_create_params.NetworkCapture] | Omit = omit,
+        network_capture: Iterable[top_level_extract_params.NetworkCapture] | Omit = omit,
         no_html: bool | Omit = omit,
         no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
-        parse_options: extract_create_params.ParseOptions | Omit = omit,
+        parse_options: top_level_extract_params.ParseOptions | Omit = omit,
         parser: Union[Dict[str, Optional[object]], str] | Omit = omit,
         proxy_provider: Literal[
             "brightdata",
@@ -893,8 +893,8 @@ class ExtractResource(SyncAPIResource):
             "research",
         ]
         | Omit = omit,
-        proxy_providers: extract_create_params.ProxyProviders | Omit = omit,
-        query_template: extract_create_params.QueryTemplate | Omit = omit,
+        proxy_providers: top_level_extract_params.ProxyProviders | Omit = omit,
+        query_template: top_level_extract_params.QueryTemplate | Omit = omit,
         raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
@@ -902,11 +902,11 @@ class ExtractResource(SyncAPIResource):
         | Omit = omit,
         render: bool | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
-        render_options: extract_create_params.RenderOptions | Omit = omit,
+        render_options: top_level_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
         return_response_headers_as_header: bool | Omit = omit,
         save_userbrowser: bool | Omit = omit,
-        session: extract_create_params.Session | Omit = omit,
+        session: top_level_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
         skip_ubct: bool | Omit = omit,
         state: Literal[
@@ -969,16 +969,17 @@ class ExtractResource(SyncAPIResource):
         ]
         | Omit = omit,
         tag: str | Omit = omit,
-        template: extract_create_params.Template | Omit = omit,
+        template: top_level_extract_params.Template | Omit = omit,
         type: str | Omit = omit,
-        userbrowser_creation_template_rendered: extract_create_params.UserbrowserCreationTemplateRendered | Omit = omit,
+        userbrowser_creation_template_rendered: top_level_extract_params.UserbrowserCreationTemplateRendered
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractCreateResponse:
+    ) -> TopLevelExtractResponse:
         """
         Webit v2 Realtime Web Endpoint
 
@@ -1142,44 +1143,44 @@ class ExtractResource(SyncAPIResource):
                     "type": type,
                     "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
-                extract_create_params.ExtractCreateParams,
+                top_level_extract_params.TopLevelExtractParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExtractCreateResponse,
+            cast_to=TopLevelExtractResponse,
         )
 
 
-class AsyncExtractResource(AsyncAPIResource):
+class AsyncTopLevelResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncExtractResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncTopLevelResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/nimbleway-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncExtractResourceWithRawResponse(self)
+        return AsyncTopLevelResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncExtractResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncTopLevelResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/nimbleway-python#with_streaming_response
         """
-        return AsyncExtractResourceWithStreamingResponse(self)
+        return AsyncTopLevelResourceWithStreamingResponse(self)
 
-    async def create(
+    async def extract(
         self,
         *,
         url: str,
-        browser: extract_create_params.Browser | Omit = omit,
+        browser: top_level_extract_params.Browser | Omit = omit,
         city: str | Omit = omit,
         client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
-        cookies: Union[Iterable[extract_create_params.CookiesUnionMember0], str] | Omit = omit,
+        cookies: Union[Iterable[top_level_extract_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
             "AD",
             "AE",
@@ -1434,7 +1435,7 @@ class AsyncExtractResource(AsyncAPIResource):
             "ALL",
         ]
         | Omit = omit,
-        debug_options: extract_create_params.DebugOptions | Omit = omit,
+        debug_options: top_level_extract_params.DebugOptions | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
@@ -1983,15 +1984,15 @@ class AsyncExtractResource(AsyncAPIResource):
         ]
         | Omit = omit,
         markdown: bool | Omit = omit,
-        metadata: extract_create_params.Metadata | Omit = omit,
+        metadata: top_level_extract_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
-        network_capture: Iterable[extract_create_params.NetworkCapture] | Omit = omit,
+        network_capture: Iterable[top_level_extract_params.NetworkCapture] | Omit = omit,
         no_html: bool | Omit = omit,
         no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
-        parse_options: extract_create_params.ParseOptions | Omit = omit,
+        parse_options: top_level_extract_params.ParseOptions | Omit = omit,
         parser: Union[Dict[str, Optional[object]], str] | Omit = omit,
         proxy_provider: Literal[
             "brightdata",
@@ -2020,8 +2021,8 @@ class AsyncExtractResource(AsyncAPIResource):
             "research",
         ]
         | Omit = omit,
-        proxy_providers: extract_create_params.ProxyProviders | Omit = omit,
-        query_template: extract_create_params.QueryTemplate | Omit = omit,
+        proxy_providers: top_level_extract_params.ProxyProviders | Omit = omit,
+        query_template: top_level_extract_params.QueryTemplate | Omit = omit,
         raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
@@ -2029,11 +2030,11 @@ class AsyncExtractResource(AsyncAPIResource):
         | Omit = omit,
         render: bool | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
-        render_options: extract_create_params.RenderOptions | Omit = omit,
+        render_options: top_level_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
         return_response_headers_as_header: bool | Omit = omit,
         save_userbrowser: bool | Omit = omit,
-        session: extract_create_params.Session | Omit = omit,
+        session: top_level_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
         skip_ubct: bool | Omit = omit,
         state: Literal[
@@ -2096,16 +2097,17 @@ class AsyncExtractResource(AsyncAPIResource):
         ]
         | Omit = omit,
         tag: str | Omit = omit,
-        template: extract_create_params.Template | Omit = omit,
+        template: top_level_extract_params.Template | Omit = omit,
         type: str | Omit = omit,
-        userbrowser_creation_template_rendered: extract_create_params.UserbrowserCreationTemplateRendered | Omit = omit,
+        userbrowser_creation_template_rendered: top_level_extract_params.UserbrowserCreationTemplateRendered
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractCreateResponse:
+    ) -> TopLevelExtractResponse:
         """
         Webit v2 Realtime Web Endpoint
 
@@ -2269,46 +2271,46 @@ class AsyncExtractResource(AsyncAPIResource):
                     "type": type,
                     "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
-                extract_create_params.ExtractCreateParams,
+                top_level_extract_params.TopLevelExtractParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=ExtractCreateResponse,
+            cast_to=TopLevelExtractResponse,
         )
 
 
-class ExtractResourceWithRawResponse:
-    def __init__(self, extract: ExtractResource) -> None:
-        self._extract = extract
+class TopLevelResourceWithRawResponse:
+    def __init__(self, top_level: TopLevelResource) -> None:
+        self._top_level = top_level
 
-        self.create = to_raw_response_wrapper(
-            extract.create,
+        self.extract = to_raw_response_wrapper(
+            top_level.extract,
         )
 
 
-class AsyncExtractResourceWithRawResponse:
-    def __init__(self, extract: AsyncExtractResource) -> None:
-        self._extract = extract
+class AsyncTopLevelResourceWithRawResponse:
+    def __init__(self, top_level: AsyncTopLevelResource) -> None:
+        self._top_level = top_level
 
-        self.create = async_to_raw_response_wrapper(
-            extract.create,
+        self.extract = async_to_raw_response_wrapper(
+            top_level.extract,
         )
 
 
-class ExtractResourceWithStreamingResponse:
-    def __init__(self, extract: ExtractResource) -> None:
-        self._extract = extract
+class TopLevelResourceWithStreamingResponse:
+    def __init__(self, top_level: TopLevelResource) -> None:
+        self._top_level = top_level
 
-        self.create = to_streamed_response_wrapper(
-            extract.create,
+        self.extract = to_streamed_response_wrapper(
+            top_level.extract,
         )
 
 
-class AsyncExtractResourceWithStreamingResponse:
-    def __init__(self, extract: AsyncExtractResource) -> None:
-        self._extract = extract
+class AsyncTopLevelResourceWithStreamingResponse:
+    def __init__(self, top_level: AsyncTopLevelResource) -> None:
+        self._top_level = top_level
 
-        self.create = async_to_streamed_response_wrapper(
-            extract.create,
+        self.extract = async_to_streamed_response_wrapper(
+            top_level.extract,
         )

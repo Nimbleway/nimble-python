@@ -2,5 +2,5 @@
 
 from __future__ import annotations
 
-from .extract_create_params import ExtractCreateParams as ExtractCreateParams
-from .extract_create_response import ExtractCreateResponse as ExtractCreateResponse
+from .top_level_extract_params import TopLevelExtractParams as TopLevelExtractParams
+from .top_level_extract_response import TopLevelExtractResponse as TopLevelExtractResponse

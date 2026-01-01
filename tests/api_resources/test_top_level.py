@@ -9,26 +9,26 @@ import pytest
 
 from nimbleway import Nimbleway, AsyncNimbleway
 from tests.utils import assert_matches_type
-from nimbleway.types import ExtractCreateResponse
+from nimbleway.types import TopLevelExtractResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestExtract:
+class TestTopLevel:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create(self, client: Nimbleway) -> None:
-        extract = client.extract.create(
+    def test_method_extract(self, client: Nimbleway) -> None:
+        top_level = client.top_level.extract(
             url="https://example.com/page",
         )
-        assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+        assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_with_all_params(self, client: Nimbleway) -> None:
-        extract = client.extract.create(
+    def test_method_extract_with_all_params(self, client: Nimbleway) -> None:
+        top_level = client.top_level.extract(
             url="https://example.com/page",
             browser="chrome",
             city="Los Angeles",
@@ -223,52 +223,52 @@ class TestExtract:
                 "render_flow_rendered": [{"foo": {}}],
             },
         )
-        assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+        assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: Nimbleway) -> None:
-        response = client.extract.with_raw_response.create(
+    def test_raw_response_extract(self, client: Nimbleway) -> None:
+        response = client.top_level.with_raw_response.extract(
             url="https://example.com/page",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        extract = response.parse()
-        assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+        top_level = response.parse()
+        assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: Nimbleway) -> None:
-        with client.extract.with_streaming_response.create(
+    def test_streaming_response_extract(self, client: Nimbleway) -> None:
+        with client.top_level.with_streaming_response.extract(
             url="https://example.com/page",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            extract = response.parse()
-            assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+            top_level = response.parse()
+            assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncExtract:
+class TestAsyncTopLevel:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncNimbleway) -> None:
-        extract = await async_client.extract.create(
+    async def test_method_extract(self, async_client: AsyncNimbleway) -> None:
+        top_level = await async_client.top_level.extract(
             url="https://example.com/page",
         )
-        assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+        assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncNimbleway) -> None:
-        extract = await async_client.extract.create(
+    async def test_method_extract_with_all_params(self, async_client: AsyncNimbleway) -> None:
+        top_level = await async_client.top_level.extract(
             url="https://example.com/page",
             browser="chrome",
             city="Los Angeles",
@@ -463,30 +463,30 @@ class TestAsyncExtract:
                 "render_flow_rendered": [{"foo": {}}],
             },
         )
-        assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+        assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncNimbleway) -> None:
-        response = await async_client.extract.with_raw_response.create(
+    async def test_raw_response_extract(self, async_client: AsyncNimbleway) -> None:
+        response = await async_client.top_level.with_raw_response.extract(
             url="https://example.com/page",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        extract = await response.parse()
-        assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+        top_level = await response.parse()
+        assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncNimbleway) -> None:
-        async with async_client.extract.with_streaming_response.create(
+    async def test_streaming_response_extract(self, async_client: AsyncNimbleway) -> None:
+        async with async_client.top_level.with_streaming_response.extract(
             url="https://example.com/page",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            extract = await response.parse()
-            assert_matches_type(ExtractCreateResponse, extract, path=["response"])
+            top_level = await response.parse()
+            assert_matches_type(TopLevelExtractResponse, top_level, path=["response"])
 
         assert cast(Any, response.is_closed) is True
