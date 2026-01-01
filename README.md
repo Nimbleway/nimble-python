@@ -35,7 +35,7 @@ client = Nimbleway(
     api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.top_level.extract(
+response = client.extract(
     url="https://example.com/page",
 )
 print(response.id)
@@ -61,7 +61,7 @@ client = AsyncNimbleway(
 
 
 async def main() -> None:
-    response = await client.top_level.extract(
+    response = await client.extract(
         url="https://example.com/page",
     )
     print(response.id)
@@ -97,7 +97,7 @@ async def main() -> None:
         api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.top_level.extract(
+        response = await client.extract(
             url="https://example.com/page",
         )
         print(response.id)
@@ -124,7 +124,7 @@ from nimbleway import Nimbleway
 
 client = Nimbleway()
 
-response = client.top_level.extract(
+response = client.extract(
     url="https://example.com/page",
     debug_options={},
 )
@@ -147,7 +147,7 @@ from nimbleway import Nimbleway
 client = Nimbleway()
 
 try:
-    client.top_level.extract(
+    client.extract(
         url="https://example.com/page",
     )
 except nimbleway.APIConnectionError as e:
@@ -192,7 +192,7 @@ client = Nimbleway(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).top_level.extract(
+client.with_options(max_retries=5).extract(
     url="https://example.com/page",
 )
 ```
@@ -217,7 +217,7 @@ client = Nimbleway(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).top_level.extract(
+client.with_options(timeout=5.0).extract(
     url="https://example.com/page",
 )
 ```
@@ -260,13 +260,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from nimbleway import Nimbleway
 
 client = Nimbleway()
-response = client.top_level.with_raw_response.extract(
+response = client.with_raw_response.extract(
     url="https://example.com/page",
 )
 print(response.headers.get('X-My-Header'))
 
-top_level = response.parse()  # get the object that `top_level.extract()` would have returned
-print(top_level.id)
+client = response.parse()  # get the object that `extract()` would have returned
+print(client.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/nimbleway-python/tree/main/src/nimbleway/_response.py) object.
@@ -280,7 +280,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.top_level.with_streaming_response.extract(
+with client.with_streaming_response.extract(
     url="https://example.com/page",
 ) as response:
     print(response.headers.get("X-My-Header"))

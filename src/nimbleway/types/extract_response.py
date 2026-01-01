@@ -2,10 +2,10 @@
 
 from .._models import BaseModel
 
-__all__ = ["TopLevelExtractResponse"]
+__all__ = ["ExtractResponse"]
 
 
-class TopLevelExtractResponse(BaseModel):
+class ExtractResponse(BaseModel):
     id: str
 
     status: float

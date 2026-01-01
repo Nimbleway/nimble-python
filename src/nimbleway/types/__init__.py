@@ -2,5 +2,5 @@
 
 from __future__ import annotations
 
-from .top_level_extract_params import TopLevelExtractParams as TopLevelExtractParams
-from .top_level_extract_response import TopLevelExtractResponse as TopLevelExtractResponse
+from .extract_response import ExtractResponse as ExtractResponse
+from .client_extract_params import ClientExtractParams as ClientExtractParams
