@@ -746,7 +746,7 @@ class TestNimbleway:
         respx_mock.post("/v1/extract").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.top_level.with_streaming_response.extract(url="https://example.com/page").__enter__()
+            client.with_streaming_response.extract(url="https://example.com/page").__enter__()
 
         assert _get_open_connections(client) == 0
 
@@ -756,7 +756,7 @@ class TestNimbleway:
         respx_mock.post("/v1/extract").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.top_level.with_streaming_response.extract(url="https://example.com/page").__enter__()
+            client.with_streaming_response.extract(url="https://example.com/page").__enter__()
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -785,7 +785,7 @@ class TestNimbleway:
 
         respx_mock.post("/v1/extract").mock(side_effect=retry_handler)
 
-        response = client.top_level.with_raw_response.extract(url="https://example.com/page")
+        response = client.with_raw_response.extract(url="https://example.com/page")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -809,7 +809,7 @@ class TestNimbleway:
 
         respx_mock.post("/v1/extract").mock(side_effect=retry_handler)
 
-        response = client.top_level.with_raw_response.extract(
+        response = client.with_raw_response.extract(
             url="https://example.com/page", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -834,7 +834,7 @@ class TestNimbleway:
 
         respx_mock.post("/v1/extract").mock(side_effect=retry_handler)
 
-        response = client.top_level.with_raw_response.extract(
+        response = client.with_raw_response.extract(
             url="https://example.com/page", extra_headers={"x-stainless-retry-count": "42"}
         )
 
@@ -1593,7 +1593,7 @@ class TestAsyncNimbleway:
         respx_mock.post("/v1/extract").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.top_level.with_streaming_response.extract(url="https://example.com/page").__aenter__()
+            await async_client.with_streaming_response.extract(url="https://example.com/page").__aenter__()
 
         assert _get_open_connections(async_client) == 0
 
@@ -1605,7 +1605,7 @@ class TestAsyncNimbleway:
         respx_mock.post("/v1/extract").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.top_level.with_streaming_response.extract(url="https://example.com/page").__aenter__()
+            await async_client.with_streaming_response.extract(url="https://example.com/page").__aenter__()
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1634,7 +1634,7 @@ class TestAsyncNimbleway:
 
         respx_mock.post("/v1/extract").mock(side_effect=retry_handler)
 
-        response = await client.top_level.with_raw_response.extract(url="https://example.com/page")
+        response = await client.with_raw_response.extract(url="https://example.com/page")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1658,7 +1658,7 @@ class TestAsyncNimbleway:
 
         respx_mock.post("/v1/extract").mock(side_effect=retry_handler)
 
-        response = await client.top_level.with_raw_response.extract(
+        response = await client.with_raw_response.extract(
             url="https://example.com/page", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -1683,7 +1683,7 @@ class TestAsyncNimbleway:
 
         respx_mock.post("/v1/extract").mock(side_effect=retry_handler)
 
-        response = await client.top_level.with_raw_response.extract(
+        response = await client.with_raw_response.extract(
             url="https://example.com/page", extra_headers={"x-stainless-retry-count": "42"}
         )
 
