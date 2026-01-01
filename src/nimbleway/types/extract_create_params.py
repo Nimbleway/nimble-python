@@ -10,6 +10,8 @@ from .._utils import PropertyInfo
 
 __all__ = [
     "ExtractCreateParams",
+    "Browser",
+    "BrowserUnionMember1",
     "CookiesUnionMember0",
     "DebugOptions",
     "Metadata",
@@ -25,6 +27,7 @@ __all__ = [
     "RenderOptionsBrowserEngine",
     "RenderOptionsBrowserEngineUnionMember1",
     "RenderOptionsHackiumConfiguration",
+    "Session",
     "Template",
     "UserbrowserCreationTemplateRendered",
 ]
@@ -34,26 +37,8 @@ class ExtractCreateParams(TypedDict, total=False):
     url: Required[str]
     """Target URL to scrape"""
 
-    aggregate: Literal["csv", "ndjson", "json"]
-    """Format for aggregating multiple batch responses"""
-
-    async_timeout: float
-    """Maximum time in milliseconds for async operation to complete"""
-
-    base_domain: str
-    """Base domain to use instead of extracting from URL"""
-
-    batch_callback_url: str
-    """URL to call back when the entire batch completes"""
-
-    browser: Literal["chrome", "firefox"]
+    browser: Browser
     """Browser type to emulate"""
-
-    browser_version: str
-    """Specific browser version to emulate"""
-
-    callback_url: Optional[str]
-    """URL to call back when async operation completes"""
 
     city: str
     """City for geolocation"""
@@ -61,7 +46,7 @@ class ExtractCreateParams(TypedDict, total=False):
     client_timeout: float
     """Client-side timeout in milliseconds"""
 
-    consent_header: Union[Literal["true", "false"], bool]
+    consent_header: bool
     """Whether to automatically handle cookie consent headers"""
 
     cookies: Union[Iterable[CookiesUnionMember0], str]
@@ -328,7 +313,7 @@ class ExtractCreateParams(TypedDict, total=False):
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
-    disable_ip_check: Union[Literal["true", "false"], bool]
+    disable_ip_check: bool
     """Whether to disable IP address validation"""
 
     driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"]
@@ -340,7 +325,7 @@ class ExtractCreateParams(TypedDict, total=False):
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
 
-    export_userbrowser: Union[Literal["true", "false"], bool]
+    export_userbrowser: bool
     """Whether to export the userbrowser session"""
 
     format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"]
@@ -349,16 +334,13 @@ class ExtractCreateParams(TypedDict, total=False):
     headers: Dict[str, Union[str, SequenceNotStr[str], None]]
     """Custom HTTP headers to include in the request"""
 
-    headless: Union[Literal["true", "false"], bool]
-    """Whether to run browser in headless mode"""
-
-    http2: Union[Literal["true", "false"], bool]
+    http2: bool
     """Whether to use HTTP/2 protocol"""
 
-    ip6: Union[Literal["true", "false"], bool]
+    ip6: bool
     """Whether to use IPv6 for the request"""
 
-    is_xhr: Union[Literal["true", "false"], bool]
+    is_xhr: bool
     """Whether to emulate XMLHttpRequest behavior"""
 
     locale: Literal[
@@ -898,7 +880,7 @@ class ExtractCreateParams(TypedDict, total=False):
     ]
     """Locale for browser language and region settings"""
 
-    markdown: Union[Literal["true", "false"], bool]
+    markdown: bool
     """Whether to return response in Markdown format"""
 
     metadata: Metadata
@@ -913,16 +895,16 @@ class ExtractCreateParams(TypedDict, total=False):
     network_capture: Iterable[NetworkCapture]
     """Filters for capturing network traffic"""
 
-    no_html: Union[Literal["true", "false"], bool]
+    no_html: bool
     """Whether to exclude HTML from the response"""
 
-    no_userbrowser: Union[Literal["true", "false"], bool]
+    no_userbrowser: bool
     """Whether to disable browser-based rendering"""
 
     os: Literal["windows", "mac os", "linux", "android", "ios"]
     """Operating system to emulate"""
 
-    parse: Union[Literal["true", "false"], bool]
+    parse: bool
     """Whether to parse the response content"""
 
     parse_options: ParseOptions
@@ -955,6 +937,7 @@ class ExtractCreateParams(TypedDict, total=False):
         "proxit-rental",
         "ipfoxy",
         "brightup",
+        "research",
     ]
     """Proxy provider to use for the request"""
 
@@ -964,13 +947,13 @@ class ExtractCreateParams(TypedDict, total=False):
     query_template: QueryTemplate
     """Query template configuration for structured data extraction"""
 
-    raw_headers: Union[Literal["true", "false"], bool]
+    raw_headers: bool
     """Whether to return raw HTTP headers in response"""
 
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
 
-    render: Union[Literal["true", "false"], bool]
+    render: bool
     """Whether to render JavaScript content using a browser"""
 
     render_flow: Iterable[object]
@@ -978,25 +961,13 @@ class ExtractCreateParams(TypedDict, total=False):
 
     render_options: RenderOptions
 
-    request_timeout: float
-    """Request timeout in milliseconds"""
-
-    requests: Iterable[Optional[object]]
-    """Array of request objects to process in batch"""
-
-    return_response_headers_as_header: Union[Literal["true", "false"], bool]
+    return_response_headers_as_header: bool
     """Whether to return response headers in HTTP headers"""
 
-    save_userbrowser: Union[Literal["true", "false"], bool]
+    save_userbrowser: bool
     """Whether to save the userbrowser session for reuse"""
 
-    session_id: str
-
-    session_prefetch_userbrowser: bool
-
-    session_retry: bool
-
-    session_timeout: float
+    session: Session
 
     skill: Union[str, SequenceNotStr[str]]
     """Skills or capabilities required for the request"""
@@ -1064,38 +1035,30 @@ class ExtractCreateParams(TypedDict, total=False):
     ]
     """US state for geolocation (only valid when country is US)"""
 
-    storage_compress: Union[Literal["true", "false"], bool]
-    """Whether to compress stored data"""
-
-    storage_object_name: Optional[str]
-    """Custom name for the stored object"""
-
-    storage_type: Optional[str]
-    """Type of storage to use for results"""
-
-    storage_url: Optional[str]
-    """URL for storage location"""
-
     tag: str
     """User-defined tag for request identification"""
 
     template: Template
     """Userbrowser creation template configuration"""
 
-    transform: object
-    """Transformation rules to apply to the response"""
+    api_timeout: Annotated[float, PropertyInfo(alias="timeout")]
+    """Request timeout in milliseconds"""
 
     type: str
     """Type of query or scraping template"""
 
-    user_context: Optional[str]
-    """Custom user context data to be included in the callback response"""
-
     userbrowser_creation_template_rendered: UserbrowserCreationTemplateRendered
     """Pre-rendered userbrowser creation template configuration"""
 
-    with_proxy_usage: Union[Literal["true", "false"], bool]
-    """Include proxy usage information in the response"""
+
+class BrowserUnionMember1(TypedDict, total=False):
+    name: Required[Literal["chrome", "firefox"]]
+
+    version: str
+    """Specific browser version to emulate"""
+
+
+Browser: TypeAlias = Union[Literal["chrome", "firefox"], BrowserUnionMember1]
 
 
 class CookiesUnionMember0(TypedDict, total=False):
@@ -1148,6 +1111,8 @@ class DebugOptions(TypedDict, total=False):
     upload_engine_logs: Union[bool, Literal["never", "on-error", "always"]]
 
     verbose: Union[bool, Literal["never", "always"]]
+
+    with_proxy_usage: Union[bool, Literal["never", "always"]]
 
 
 class Metadata(TypedDict, total=False):
@@ -1215,7 +1180,7 @@ class NetworkCapture(TypedDict, total=False):
 class ParseOptions(TypedDict, total=False):
     """Configuration options for parsing behavior"""
 
-    merge_dynamic: Union[Literal["true", "false"], bool]
+    merge_dynamic: bool
     """Whether to merge dynamic parsing results with static results"""
 
 
@@ -1261,6 +1226,8 @@ class ProxyProviders(TypedDict, total=False):
     proxit_windows: Annotated[float, PropertyInfo(alias="proxit-windows")]
 
     rayobyte: float
+
+    research: float
 
     smartproxy: float
 
@@ -1427,8 +1394,18 @@ class RenderOptions(TypedDict, total=False):
     wait_until: Literal["load", "domcontentloaded", "idle0", "idle2", "networkidle0", "networkidle2", "navigate"]
     """Browser event to wait for before considering page loaded"""
 
-    with_performance_metrics: Union[Literal["true", "false"], bool]
+    with_performance_metrics: bool
     """Whether to collect performance metrics during rendering"""
+
+
+class Session(TypedDict, total=False):
+    id: str
+
+    prefetch_userbrowser: bool
+
+    retry: bool
+
+    timeout: float
 
 
 class Template(TypedDict, total=False):
