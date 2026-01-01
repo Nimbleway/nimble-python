@@ -199,6 +199,7 @@ class TestExtract:
                 "wait_until": "networkidle2",
                 "with_performance_metrics": True,
             },
+            request_timeout=30000,
             return_response_headers_as_header=True,
             save_userbrowser=False,
             session={
@@ -215,7 +216,6 @@ class TestExtract:
                 "name": "x",
                 "params": {},
             },
-            api_timeout=30000,
             type="generic",
             userbrowser_creation_template_rendered={
                 "id": "id",
@@ -439,6 +439,7 @@ class TestAsyncExtract:
                 "wait_until": "networkidle2",
                 "with_performance_metrics": True,
             },
+            request_timeout=30000,
             return_response_headers_as_header=True,
             save_userbrowser=False,
             session={
@@ -455,7 +456,6 @@ class TestAsyncExtract:
                 "name": "x",
                 "params": {},
             },
-            api_timeout=30000,
             type="generic",
             userbrowser_creation_template_rendered={
                 "id": "id",
