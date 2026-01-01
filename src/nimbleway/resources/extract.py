@@ -903,6 +903,7 @@ class ExtractResource(SyncAPIResource):
         render: bool | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
         render_options: extract_create_params.RenderOptions | Omit = omit,
+        request_timeout: float | Omit = omit,
         return_response_headers_as_header: bool | Omit = omit,
         save_userbrowser: bool | Omit = omit,
         session: extract_create_params.Session | Omit = omit,
@@ -969,7 +970,6 @@ class ExtractResource(SyncAPIResource):
         | Omit = omit,
         tag: str | Omit = omit,
         template: extract_create_params.Template | Omit = omit,
-        api_timeout: float | Omit = omit,
         type: str | Omit = omit,
         userbrowser_creation_template_rendered: extract_create_params.UserbrowserCreationTemplateRendered | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1059,6 +1059,8 @@ class ExtractResource(SyncAPIResource):
 
           render_flow: Array of actions to perform during browser rendering
 
+          request_timeout: Request timeout in milliseconds
+
           return_response_headers_as_header: Whether to return response headers in HTTP headers
 
           save_userbrowser: Whether to save the userbrowser session for reuse
@@ -1072,8 +1074,6 @@ class ExtractResource(SyncAPIResource):
           tag: User-defined tag for request identification
 
           template: Userbrowser creation template configuration
-
-          api_timeout: Request timeout in milliseconds
 
           type: Type of query or scraping template
 
@@ -1130,6 +1130,7 @@ class ExtractResource(SyncAPIResource):
                     "render": render,
                     "render_flow": render_flow,
                     "render_options": render_options,
+                    "request_timeout": request_timeout,
                     "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
                     "session": session,
@@ -1138,7 +1139,6 @@ class ExtractResource(SyncAPIResource):
                     "state": state,
                     "tag": tag,
                     "template": template,
-                    "api_timeout": api_timeout,
                     "type": type,
                     "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
@@ -2030,6 +2030,7 @@ class AsyncExtractResource(AsyncAPIResource):
         render: bool | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
         render_options: extract_create_params.RenderOptions | Omit = omit,
+        request_timeout: float | Omit = omit,
         return_response_headers_as_header: bool | Omit = omit,
         save_userbrowser: bool | Omit = omit,
         session: extract_create_params.Session | Omit = omit,
@@ -2096,7 +2097,6 @@ class AsyncExtractResource(AsyncAPIResource):
         | Omit = omit,
         tag: str | Omit = omit,
         template: extract_create_params.Template | Omit = omit,
-        api_timeout: float | Omit = omit,
         type: str | Omit = omit,
         userbrowser_creation_template_rendered: extract_create_params.UserbrowserCreationTemplateRendered | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2186,6 +2186,8 @@ class AsyncExtractResource(AsyncAPIResource):
 
           render_flow: Array of actions to perform during browser rendering
 
+          request_timeout: Request timeout in milliseconds
+
           return_response_headers_as_header: Whether to return response headers in HTTP headers
 
           save_userbrowser: Whether to save the userbrowser session for reuse
@@ -2199,8 +2201,6 @@ class AsyncExtractResource(AsyncAPIResource):
           tag: User-defined tag for request identification
 
           template: Userbrowser creation template configuration
-
-          api_timeout: Request timeout in milliseconds
 
           type: Type of query or scraping template
 
@@ -2257,6 +2257,7 @@ class AsyncExtractResource(AsyncAPIResource):
                     "render": render,
                     "render_flow": render_flow,
                     "render_options": render_options,
+                    "request_timeout": request_timeout,
                     "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
                     "session": session,
@@ -2265,7 +2266,6 @@ class AsyncExtractResource(AsyncAPIResource):
                     "state": state,
                     "tag": tag,
                     "template": template,
-                    "api_timeout": api_timeout,
                     "type": type,
                     "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },

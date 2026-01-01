@@ -961,6 +961,9 @@ class ExtractCreateParams(TypedDict, total=False):
 
     render_options: RenderOptions
 
+    request_timeout: float
+    """Request timeout in milliseconds"""
+
     return_response_headers_as_header: bool
     """Whether to return response headers in HTTP headers"""
 
@@ -1040,9 +1043,6 @@ class ExtractCreateParams(TypedDict, total=False):
 
     template: Template
     """Userbrowser creation template configuration"""
-
-    api_timeout: Annotated[float, PropertyInfo(alias="timeout")]
-    """Request timeout in milliseconds"""
 
     type: str
     """Type of query or scraping template"""
