@@ -32,8 +32,8 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import extract
-    from .resources.extract import ExtractResource, AsyncExtractResource
+    from .resources import top_level
+    from .resources.top_level import TopLevelResource, AsyncTopLevelResource
 
 __all__ = [
     "Timeout",
@@ -99,10 +99,10 @@ class Nimbleway(SyncAPIClient):
         )
 
     @cached_property
-    def extract(self) -> ExtractResource:
-        from .resources.extract import ExtractResource
+    def top_level(self) -> TopLevelResource:
+        from .resources.top_level import TopLevelResource
 
-        return ExtractResource(self)
+        return TopLevelResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimblewayWithRawResponse:
@@ -282,10 +282,10 @@ class AsyncNimbleway(AsyncAPIClient):
         )
 
     @cached_property
-    def extract(self) -> AsyncExtractResource:
-        from .resources.extract import AsyncExtractResource
+    def top_level(self) -> AsyncTopLevelResource:
+        from .resources.top_level import AsyncTopLevelResource
 
-        return AsyncExtractResource(self)
+        return AsyncTopLevelResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncNimblewayWithRawResponse:
@@ -420,10 +420,10 @@ class NimblewayWithRawResponse:
         self._client = client
 
     @cached_property
-    def extract(self) -> extract.ExtractResourceWithRawResponse:
-        from .resources.extract import ExtractResourceWithRawResponse
+    def top_level(self) -> top_level.TopLevelResourceWithRawResponse:
+        from .resources.top_level import TopLevelResourceWithRawResponse
 
-        return ExtractResourceWithRawResponse(self._client.extract)
+        return TopLevelResourceWithRawResponse(self._client.top_level)
 
 
 class AsyncNimblewayWithRawResponse:
@@ -433,10 +433,10 @@ class AsyncNimblewayWithRawResponse:
         self._client = client
 
     @cached_property
-    def extract(self) -> extract.AsyncExtractResourceWithRawResponse:
-        from .resources.extract import AsyncExtractResourceWithRawResponse
+    def top_level(self) -> top_level.AsyncTopLevelResourceWithRawResponse:
+        from .resources.top_level import AsyncTopLevelResourceWithRawResponse
 
-        return AsyncExtractResourceWithRawResponse(self._client.extract)
+        return AsyncTopLevelResourceWithRawResponse(self._client.top_level)
 
 
 class NimblewayWithStreamedResponse:
@@ -446,10 +446,10 @@ class NimblewayWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def extract(self) -> extract.ExtractResourceWithStreamingResponse:
-        from .resources.extract import ExtractResourceWithStreamingResponse
+    def top_level(self) -> top_level.TopLevelResourceWithStreamingResponse:
+        from .resources.top_level import TopLevelResourceWithStreamingResponse
 
-        return ExtractResourceWithStreamingResponse(self._client.extract)
+        return TopLevelResourceWithStreamingResponse(self._client.top_level)
 
 
 class AsyncNimblewayWithStreamedResponse:
@@ -459,10 +459,10 @@ class AsyncNimblewayWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def extract(self) -> extract.AsyncExtractResourceWithStreamingResponse:
-        from .resources.extract import AsyncExtractResourceWithStreamingResponse
+    def top_level(self) -> top_level.AsyncTopLevelResourceWithStreamingResponse:
+        from .resources.top_level import AsyncTopLevelResourceWithStreamingResponse
 
-        return AsyncExtractResourceWithStreamingResponse(self._client.extract)
+        return AsyncTopLevelResourceWithStreamingResponse(self._client.top_level)
 
 
 Client = Nimbleway

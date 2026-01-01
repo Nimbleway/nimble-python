@@ -9,7 +9,7 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
-    "ExtractCreateParams",
+    "TopLevelExtractParams",
     "Browser",
     "BrowserUnionMember1",
     "CookiesUnionMember0",
@@ -33,7 +33,7 @@ __all__ = [
 ]
 
 
-class ExtractCreateParams(TypedDict, total=False):
+class TopLevelExtractParams(TypedDict, total=False):
     url: Required[str]
     """Target URL to scrape"""
 

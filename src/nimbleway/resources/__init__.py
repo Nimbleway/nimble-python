@@ -1,19 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .extract import (
-    ExtractResource,
-    AsyncExtractResource,
-    ExtractResourceWithRawResponse,
-    AsyncExtractResourceWithRawResponse,
-    ExtractResourceWithStreamingResponse,
-    AsyncExtractResourceWithStreamingResponse,
+from .top_level import (
+    TopLevelResource,
+    AsyncTopLevelResource,
+    TopLevelResourceWithRawResponse,
+    AsyncTopLevelResourceWithRawResponse,
+    TopLevelResourceWithStreamingResponse,
+    AsyncTopLevelResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "ExtractResource",
-    "AsyncExtractResource",
-    "ExtractResourceWithRawResponse",
-    "AsyncExtractResourceWithRawResponse",
-    "ExtractResourceWithStreamingResponse",
-    "AsyncExtractResourceWithStreamingResponse",
+    "TopLevelResource",
+    "AsyncTopLevelResource",
+    "TopLevelResourceWithRawResponse",
+    "AsyncTopLevelResourceWithRawResponse",
+    "TopLevelResourceWithStreamingResponse",
+    "AsyncTopLevelResourceWithStreamingResponse",
 ]
