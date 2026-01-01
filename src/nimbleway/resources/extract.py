@@ -48,16 +48,10 @@ class ExtractResource(SyncAPIResource):
         self,
         *,
         url: str,
-        aggregate: Literal["csv", "ndjson", "json"] | Omit = omit,
-        async_timeout: float | Omit = omit,
-        base_domain: str | Omit = omit,
-        batch_callback_url: str | Omit = omit,
-        browser: Literal["chrome", "firefox"] | Omit = omit,
-        browser_version: str | Omit = omit,
-        callback_url: Optional[str] | Omit = omit,
+        browser: extract_create_params.Browser | Omit = omit,
         city: str | Omit = omit,
         client_timeout: float | Omit = omit,
-        consent_header: Union[Literal["true", "false"], bool] | Omit = omit,
+        consent_header: bool | Omit = omit,
         cookies: Union[Iterable[extract_create_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
             "AD",
@@ -315,17 +309,16 @@ class ExtractResource(SyncAPIResource):
         | Omit = omit,
         debug_options: extract_create_params.DebugOptions | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        disable_ip_check: Union[Literal["true", "false"], bool] | Omit = omit,
+        disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         dynamic_parser: Dict[str, Optional[object]] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        export_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
+        export_userbrowser: bool | Omit = omit,
         format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
-        headless: Union[Literal["true", "false"], bool] | Omit = omit,
-        http2: Union[Literal["true", "false"], bool] | Omit = omit,
-        ip6: Union[Literal["true", "false"], bool] | Omit = omit,
-        is_xhr: Union[Literal["true", "false"], bool] | Omit = omit,
+        http2: bool | Omit = omit,
+        ip6: bool | Omit = omit,
+        is_xhr: bool | Omit = omit,
         locale: Literal[
             "aa-DJ",
             "aa-ER",
@@ -862,15 +855,15 @@ class ExtractResource(SyncAPIResource):
             "auto",
         ]
         | Omit = omit,
-        markdown: Union[Literal["true", "false"], bool] | Omit = omit,
+        markdown: bool | Omit = omit,
         metadata: extract_create_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[extract_create_params.NetworkCapture] | Omit = omit,
-        no_html: Union[Literal["true", "false"], bool] | Omit = omit,
-        no_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
+        no_html: bool | Omit = omit,
+        no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
-        parse: Union[Literal["true", "false"], bool] | Omit = omit,
+        parse: bool | Omit = omit,
         parse_options: extract_create_params.ParseOptions | Omit = omit,
         parser: Union[Dict[str, Optional[object]], str] | Omit = omit,
         proxy_provider: Literal[
@@ -897,26 +890,22 @@ class ExtractResource(SyncAPIResource):
             "proxit-rental",
             "ipfoxy",
             "brightup",
+            "research",
         ]
         | Omit = omit,
         proxy_providers: extract_create_params.ProxyProviders | Omit = omit,
         query_template: extract_create_params.QueryTemplate | Omit = omit,
-        raw_headers: Union[Literal["true", "false"], bool] | Omit = omit,
+        raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
-        render: Union[Literal["true", "false"], bool] | Omit = omit,
+        render: bool | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
         render_options: extract_create_params.RenderOptions | Omit = omit,
-        request_timeout: float | Omit = omit,
-        requests: Iterable[Optional[object]] | Omit = omit,
-        return_response_headers_as_header: Union[Literal["true", "false"], bool] | Omit = omit,
-        save_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
-        session_id: str | Omit = omit,
-        session_prefetch_userbrowser: bool | Omit = omit,
-        session_retry: bool | Omit = omit,
-        session_timeout: float | Omit = omit,
+        return_response_headers_as_header: bool | Omit = omit,
+        save_userbrowser: bool | Omit = omit,
+        session: extract_create_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
         skip_ubct: bool | Omit = omit,
         state: Literal[
@@ -978,17 +967,11 @@ class ExtractResource(SyncAPIResource):
             "WY",
         ]
         | Omit = omit,
-        storage_compress: Union[Literal["true", "false"], bool] | Omit = omit,
-        storage_object_name: Optional[str] | Omit = omit,
-        storage_type: Optional[str] | Omit = omit,
-        storage_url: Optional[str] | Omit = omit,
         tag: str | Omit = omit,
         template: extract_create_params.Template | Omit = omit,
-        transform: object | Omit = omit,
+        api_timeout: float | Omit = omit,
         type: str | Omit = omit,
-        user_context: Optional[str] | Omit = omit,
         userbrowser_creation_template_rendered: extract_create_params.UserbrowserCreationTemplateRendered | Omit = omit,
-        with_proxy_usage: Union[Literal["true", "false"], bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1002,19 +985,7 @@ class ExtractResource(SyncAPIResource):
         Args:
           url: Target URL to scrape
 
-          aggregate: Format for aggregating multiple batch responses
-
-          async_timeout: Maximum time in milliseconds for async operation to complete
-
-          base_domain: Base domain to use instead of extracting from URL
-
-          batch_callback_url: URL to call back when the entire batch completes
-
           browser: Browser type to emulate
-
-          browser_version: Specific browser version to emulate
-
-          callback_url: URL to call back when async operation completes
 
           city: City for geolocation
 
@@ -1043,8 +1014,6 @@ class ExtractResource(SyncAPIResource):
           format: Response format
 
           headers: Custom HTTP headers to include in the request
-
-          headless: Whether to run browser in headless mode
 
           http2: Whether to use HTTP/2 protocol
 
@@ -1090,10 +1059,6 @@ class ExtractResource(SyncAPIResource):
 
           render_flow: Array of actions to perform during browser rendering
 
-          request_timeout: Request timeout in milliseconds
-
-          requests: Array of request objects to process in batch
-
           return_response_headers_as_header: Whether to return response headers in HTTP headers
 
           save_userbrowser: Whether to save the userbrowser session for reuse
@@ -1104,27 +1069,15 @@ class ExtractResource(SyncAPIResource):
 
           state: US state for geolocation (only valid when country is US)
 
-          storage_compress: Whether to compress stored data
-
-          storage_object_name: Custom name for the stored object
-
-          storage_type: Type of storage to use for results
-
-          storage_url: URL for storage location
-
           tag: User-defined tag for request identification
 
           template: Userbrowser creation template configuration
 
-          transform: Transformation rules to apply to the response
+          api_timeout: Request timeout in milliseconds
 
           type: Type of query or scraping template
 
-          user_context: Custom user context data to be included in the callback response
-
           userbrowser_creation_template_rendered: Pre-rendered userbrowser creation template configuration
-
-          with_proxy_usage: Include proxy usage information in the response
 
           extra_headers: Send extra headers
 
@@ -1139,13 +1092,7 @@ class ExtractResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "url": url,
-                    "aggregate": aggregate,
-                    "async_timeout": async_timeout,
-                    "base_domain": base_domain,
-                    "batch_callback_url": batch_callback_url,
                     "browser": browser,
-                    "browser_version": browser_version,
-                    "callback_url": callback_url,
                     "city": city,
                     "client_timeout": client_timeout,
                     "consent_header": consent_header,
@@ -1160,7 +1107,6 @@ class ExtractResource(SyncAPIResource):
                     "export_userbrowser": export_userbrowser,
                     "format": format,
                     "headers": headers,
-                    "headless": headless,
                     "http2": http2,
                     "ip6": ip6,
                     "is_xhr": is_xhr,
@@ -1184,28 +1130,17 @@ class ExtractResource(SyncAPIResource):
                     "render": render,
                     "render_flow": render_flow,
                     "render_options": render_options,
-                    "request_timeout": request_timeout,
-                    "requests": requests,
                     "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
-                    "session_id": session_id,
-                    "session_prefetch_userbrowser": session_prefetch_userbrowser,
-                    "session_retry": session_retry,
-                    "session_timeout": session_timeout,
+                    "session": session,
                     "skill": skill,
                     "skip_ubct": skip_ubct,
                     "state": state,
-                    "storage_compress": storage_compress,
-                    "storage_object_name": storage_object_name,
-                    "storage_type": storage_type,
-                    "storage_url": storage_url,
                     "tag": tag,
                     "template": template,
-                    "transform": transform,
+                    "api_timeout": api_timeout,
                     "type": type,
-                    "user_context": user_context,
                     "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
-                    "with_proxy_usage": with_proxy_usage,
                 },
                 extract_create_params.ExtractCreateParams,
             ),
@@ -1240,16 +1175,10 @@ class AsyncExtractResource(AsyncAPIResource):
         self,
         *,
         url: str,
-        aggregate: Literal["csv", "ndjson", "json"] | Omit = omit,
-        async_timeout: float | Omit = omit,
-        base_domain: str | Omit = omit,
-        batch_callback_url: str | Omit = omit,
-        browser: Literal["chrome", "firefox"] | Omit = omit,
-        browser_version: str | Omit = omit,
-        callback_url: Optional[str] | Omit = omit,
+        browser: extract_create_params.Browser | Omit = omit,
         city: str | Omit = omit,
         client_timeout: float | Omit = omit,
-        consent_header: Union[Literal["true", "false"], bool] | Omit = omit,
+        consent_header: bool | Omit = omit,
         cookies: Union[Iterable[extract_create_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
             "AD",
@@ -1507,17 +1436,16 @@ class AsyncExtractResource(AsyncAPIResource):
         | Omit = omit,
         debug_options: extract_create_params.DebugOptions | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        disable_ip_check: Union[Literal["true", "false"], bool] | Omit = omit,
+        disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         dynamic_parser: Dict[str, Optional[object]] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        export_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
+        export_userbrowser: bool | Omit = omit,
         format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
-        headless: Union[Literal["true", "false"], bool] | Omit = omit,
-        http2: Union[Literal["true", "false"], bool] | Omit = omit,
-        ip6: Union[Literal["true", "false"], bool] | Omit = omit,
-        is_xhr: Union[Literal["true", "false"], bool] | Omit = omit,
+        http2: bool | Omit = omit,
+        ip6: bool | Omit = omit,
+        is_xhr: bool | Omit = omit,
         locale: Literal[
             "aa-DJ",
             "aa-ER",
@@ -2054,15 +1982,15 @@ class AsyncExtractResource(AsyncAPIResource):
             "auto",
         ]
         | Omit = omit,
-        markdown: Union[Literal["true", "false"], bool] | Omit = omit,
+        markdown: bool | Omit = omit,
         metadata: extract_create_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[extract_create_params.NetworkCapture] | Omit = omit,
-        no_html: Union[Literal["true", "false"], bool] | Omit = omit,
-        no_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
+        no_html: bool | Omit = omit,
+        no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
-        parse: Union[Literal["true", "false"], bool] | Omit = omit,
+        parse: bool | Omit = omit,
         parse_options: extract_create_params.ParseOptions | Omit = omit,
         parser: Union[Dict[str, Optional[object]], str] | Omit = omit,
         proxy_provider: Literal[
@@ -2089,26 +2017,22 @@ class AsyncExtractResource(AsyncAPIResource):
             "proxit-rental",
             "ipfoxy",
             "brightup",
+            "research",
         ]
         | Omit = omit,
         proxy_providers: extract_create_params.ProxyProviders | Omit = omit,
         query_template: extract_create_params.QueryTemplate | Omit = omit,
-        raw_headers: Union[Literal["true", "false"], bool] | Omit = omit,
+        raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
-        render: Union[Literal["true", "false"], bool] | Omit = omit,
+        render: bool | Omit = omit,
         render_flow: Iterable[object] | Omit = omit,
         render_options: extract_create_params.RenderOptions | Omit = omit,
-        request_timeout: float | Omit = omit,
-        requests: Iterable[Optional[object]] | Omit = omit,
-        return_response_headers_as_header: Union[Literal["true", "false"], bool] | Omit = omit,
-        save_userbrowser: Union[Literal["true", "false"], bool] | Omit = omit,
-        session_id: str | Omit = omit,
-        session_prefetch_userbrowser: bool | Omit = omit,
-        session_retry: bool | Omit = omit,
-        session_timeout: float | Omit = omit,
+        return_response_headers_as_header: bool | Omit = omit,
+        save_userbrowser: bool | Omit = omit,
+        session: extract_create_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
         skip_ubct: bool | Omit = omit,
         state: Literal[
@@ -2170,17 +2094,11 @@ class AsyncExtractResource(AsyncAPIResource):
             "WY",
         ]
         | Omit = omit,
-        storage_compress: Union[Literal["true", "false"], bool] | Omit = omit,
-        storage_object_name: Optional[str] | Omit = omit,
-        storage_type: Optional[str] | Omit = omit,
-        storage_url: Optional[str] | Omit = omit,
         tag: str | Omit = omit,
         template: extract_create_params.Template | Omit = omit,
-        transform: object | Omit = omit,
+        api_timeout: float | Omit = omit,
         type: str | Omit = omit,
-        user_context: Optional[str] | Omit = omit,
         userbrowser_creation_template_rendered: extract_create_params.UserbrowserCreationTemplateRendered | Omit = omit,
-        with_proxy_usage: Union[Literal["true", "false"], bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2194,19 +2112,7 @@ class AsyncExtractResource(AsyncAPIResource):
         Args:
           url: Target URL to scrape
 
-          aggregate: Format for aggregating multiple batch responses
-
-          async_timeout: Maximum time in milliseconds for async operation to complete
-
-          base_domain: Base domain to use instead of extracting from URL
-
-          batch_callback_url: URL to call back when the entire batch completes
-
           browser: Browser type to emulate
-
-          browser_version: Specific browser version to emulate
-
-          callback_url: URL to call back when async operation completes
 
           city: City for geolocation
 
@@ -2235,8 +2141,6 @@ class AsyncExtractResource(AsyncAPIResource):
           format: Response format
 
           headers: Custom HTTP headers to include in the request
-
-          headless: Whether to run browser in headless mode
 
           http2: Whether to use HTTP/2 protocol
 
@@ -2282,10 +2186,6 @@ class AsyncExtractResource(AsyncAPIResource):
 
           render_flow: Array of actions to perform during browser rendering
 
-          request_timeout: Request timeout in milliseconds
-
-          requests: Array of request objects to process in batch
-
           return_response_headers_as_header: Whether to return response headers in HTTP headers
 
           save_userbrowser: Whether to save the userbrowser session for reuse
@@ -2296,27 +2196,15 @@ class AsyncExtractResource(AsyncAPIResource):
 
           state: US state for geolocation (only valid when country is US)
 
-          storage_compress: Whether to compress stored data
-
-          storage_object_name: Custom name for the stored object
-
-          storage_type: Type of storage to use for results
-
-          storage_url: URL for storage location
-
           tag: User-defined tag for request identification
 
           template: Userbrowser creation template configuration
 
-          transform: Transformation rules to apply to the response
+          api_timeout: Request timeout in milliseconds
 
           type: Type of query or scraping template
 
-          user_context: Custom user context data to be included in the callback response
-
           userbrowser_creation_template_rendered: Pre-rendered userbrowser creation template configuration
-
-          with_proxy_usage: Include proxy usage information in the response
 
           extra_headers: Send extra headers
 
@@ -2331,13 +2219,7 @@ class AsyncExtractResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "url": url,
-                    "aggregate": aggregate,
-                    "async_timeout": async_timeout,
-                    "base_domain": base_domain,
-                    "batch_callback_url": batch_callback_url,
                     "browser": browser,
-                    "browser_version": browser_version,
-                    "callback_url": callback_url,
                     "city": city,
                     "client_timeout": client_timeout,
                     "consent_header": consent_header,
@@ -2352,7 +2234,6 @@ class AsyncExtractResource(AsyncAPIResource):
                     "export_userbrowser": export_userbrowser,
                     "format": format,
                     "headers": headers,
-                    "headless": headless,
                     "http2": http2,
                     "ip6": ip6,
                     "is_xhr": is_xhr,
@@ -2376,28 +2257,17 @@ class AsyncExtractResource(AsyncAPIResource):
                     "render": render,
                     "render_flow": render_flow,
                     "render_options": render_options,
-                    "request_timeout": request_timeout,
-                    "requests": requests,
                     "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
-                    "session_id": session_id,
-                    "session_prefetch_userbrowser": session_prefetch_userbrowser,
-                    "session_retry": session_retry,
-                    "session_timeout": session_timeout,
+                    "session": session,
                     "skill": skill,
                     "skip_ubct": skip_ubct,
                     "state": state,
-                    "storage_compress": storage_compress,
-                    "storage_object_name": storage_object_name,
-                    "storage_type": storage_type,
-                    "storage_url": storage_url,
                     "tag": tag,
                     "template": template,
-                    "transform": transform,
+                    "api_timeout": api_timeout,
                     "type": type,
-                    "user_context": user_context,
                     "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
-                    "with_proxy_usage": with_proxy_usage,
                 },
                 extract_create_params.ExtractCreateParams,
             ),
