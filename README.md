@@ -36,7 +36,7 @@ client = Nimbleway(
 )
 
 response = client.extract(
-    url="https://example.com/page",
+    url="https://example.com",
 )
 print(response.id)
 ```
@@ -62,7 +62,7 @@ client = AsyncNimbleway(
 
 async def main() -> None:
     response = await client.extract(
-        url="https://example.com/page",
+        url="https://example.com",
     )
     print(response.id)
 
@@ -98,7 +98,7 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.extract(
-            url="https://example.com/page",
+            url="https://example.com",
         )
         print(response.id)
 
@@ -148,7 +148,7 @@ client = Nimbleway()
 
 try:
     client.extract(
-        url="https://example.com/page",
+        url="https://example.com",
     )
 except nimbleway.APIConnectionError as e:
     print("The server could not be reached")
@@ -193,7 +193,7 @@ client = Nimbleway(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).extract(
-    url="https://example.com/page",
+    url="https://example.com",
 )
 ```
 
@@ -218,7 +218,7 @@ client = Nimbleway(
 
 # Override per-request:
 client.with_options(timeout=5.0).extract(
-    url="https://example.com/page",
+    url="https://example.com",
 )
 ```
 
@@ -261,7 +261,7 @@ from nimbleway import Nimbleway
 
 client = Nimbleway()
 response = client.with_raw_response.extract(
-    url="https://example.com/page",
+    url="https://example.com",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -281,7 +281,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.with_streaming_response.extract(
-    url="https://example.com/page",
+    url="https://example.com",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
