@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping, Iterable, Optional
+from typing import Any, Dict, Union, Mapping, Iterable
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -205,6 +205,7 @@ class Nimbleway(SyncAPIClient):
     def extract(
         self,
         *,
+        debug_options: client_extract_params.DebugOptions,
         url: str,
         browser: client_extract_params.Browser | Omit = omit,
         city: str | Omit = omit,
@@ -465,11 +466,10 @@ class Nimbleway(SyncAPIClient):
             "ALL",
         ]
         | Omit = omit,
-        debug_options: client_extract_params.DebugOptions | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
-        dynamic_parser: Dict[str, Optional[object]] | Omit = omit,
+        dynamic_parser: Dict[str, object] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         export_userbrowser: bool | Omit = omit,
         format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
@@ -1023,7 +1023,7 @@ class Nimbleway(SyncAPIClient):
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parse_options: client_extract_params.ParseOptions | Omit = omit,
-        parser: Union[Dict[str, Optional[object]], str] | Omit = omit,
+        parser: Union[Dict[str, object], str] | Omit = omit,
         proxy_provider: Literal[
             "brightdata",
             "oxylabs",
@@ -1051,7 +1051,7 @@ class Nimbleway(SyncAPIClient):
             "research",
         ]
         | Omit = omit,
-        proxy_providers: client_extract_params.ProxyProviders | Omit = omit,
+        proxy_providers: Dict[str, float] | Omit = omit,
         query_template: client_extract_params.QueryTemplate | Omit = omit,
         raw_headers: bool | Omit = omit,
         referrer_type: Literal[
@@ -1059,7 +1059,7 @@ class Nimbleway(SyncAPIClient):
         ]
         | Omit = omit,
         render: bool | Omit = omit,
-        render_flow: Iterable[object] | Omit = omit,
+        render_flow: Iterable[Dict[str, object]] | Omit = omit,
         render_options: client_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
         return_response_headers_as_header: bool | Omit = omit,
@@ -1141,6 +1141,8 @@ class Nimbleway(SyncAPIClient):
         Webit v2 Realtime Web Endpoint
 
         Args:
+          debug_options: Debug and troubleshooting options for the request
+
           url: Target URL to scrape
 
           browser: Browser type to emulate
@@ -1154,8 +1156,6 @@ class Nimbleway(SyncAPIClient):
           cookies: Browser cookies as array of cookie objects
 
           country: Country code for geolocation and proxy selection
-
-          debug_options: Debug and troubleshooting options for the request
 
           device: Device type for browser emulation
 
@@ -1249,6 +1249,7 @@ class Nimbleway(SyncAPIClient):
             "/v1/extract",
             body=maybe_transform(
                 {
+                    "debug_options": debug_options,
                     "url": url,
                     "browser": browser,
                     "city": city,
@@ -1256,7 +1257,6 @@ class Nimbleway(SyncAPIClient):
                     "consent_header": consent_header,
                     "cookies": cookies,
                     "country": country,
-                    "debug_options": debug_options,
                     "device": device,
                     "disable_ip_check": disable_ip_check,
                     "driver": driver,
@@ -1486,6 +1486,7 @@ class AsyncNimbleway(AsyncAPIClient):
     async def extract(
         self,
         *,
+        debug_options: client_extract_params.DebugOptions,
         url: str,
         browser: client_extract_params.Browser | Omit = omit,
         city: str | Omit = omit,
@@ -1746,11 +1747,10 @@ class AsyncNimbleway(AsyncAPIClient):
             "ALL",
         ]
         | Omit = omit,
-        debug_options: client_extract_params.DebugOptions | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
-        dynamic_parser: Dict[str, Optional[object]] | Omit = omit,
+        dynamic_parser: Dict[str, object] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         export_userbrowser: bool | Omit = omit,
         format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
@@ -2304,7 +2304,7 @@ class AsyncNimbleway(AsyncAPIClient):
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parse_options: client_extract_params.ParseOptions | Omit = omit,
-        parser: Union[Dict[str, Optional[object]], str] | Omit = omit,
+        parser: Union[Dict[str, object], str] | Omit = omit,
         proxy_provider: Literal[
             "brightdata",
             "oxylabs",
@@ -2332,7 +2332,7 @@ class AsyncNimbleway(AsyncAPIClient):
             "research",
         ]
         | Omit = omit,
-        proxy_providers: client_extract_params.ProxyProviders | Omit = omit,
+        proxy_providers: Dict[str, float] | Omit = omit,
         query_template: client_extract_params.QueryTemplate | Omit = omit,
         raw_headers: bool | Omit = omit,
         referrer_type: Literal[
@@ -2340,7 +2340,7 @@ class AsyncNimbleway(AsyncAPIClient):
         ]
         | Omit = omit,
         render: bool | Omit = omit,
-        render_flow: Iterable[object] | Omit = omit,
+        render_flow: Iterable[Dict[str, object]] | Omit = omit,
         render_options: client_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
         return_response_headers_as_header: bool | Omit = omit,
@@ -2422,6 +2422,8 @@ class AsyncNimbleway(AsyncAPIClient):
         Webit v2 Realtime Web Endpoint
 
         Args:
+          debug_options: Debug and troubleshooting options for the request
+
           url: Target URL to scrape
 
           browser: Browser type to emulate
@@ -2435,8 +2437,6 @@ class AsyncNimbleway(AsyncAPIClient):
           cookies: Browser cookies as array of cookie objects
 
           country: Country code for geolocation and proxy selection
-
-          debug_options: Debug and troubleshooting options for the request
 
           device: Device type for browser emulation
 
@@ -2530,6 +2530,7 @@ class AsyncNimbleway(AsyncAPIClient):
             "/v1/extract",
             body=await async_maybe_transform(
                 {
+                    "debug_options": debug_options,
                     "url": url,
                     "browser": browser,
                     "city": city,
@@ -2537,7 +2538,6 @@ class AsyncNimbleway(AsyncAPIClient):
                     "consent_header": consent_header,
                     "cookies": cookies,
                     "country": country,
-                    "debug_options": debug_options,
                     "device": device,
                     "disable_ip_check": disable_ip_check,
                     "driver": driver,

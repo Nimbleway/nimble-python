@@ -10,22 +10,19 @@ from .._utils import PropertyInfo
 
 __all__ = [
     "ClientExtractParams",
+    "DebugOptions",
     "Browser",
     "BrowserUnionMember1",
     "CookiesUnionMember0",
-    "DebugOptions",
     "Metadata",
     "NetworkCapture",
     "NetworkCaptureURL",
     "ParseOptions",
-    "ProxyProviders",
     "QueryTemplate",
     "QueryTemplatePagination",
     "QueryTemplatePaginationNextPageParams",
     "QueryTemplatePaginationUnionMember1",
     "RenderOptions",
-    "RenderOptionsBrowserEngine",
-    "RenderOptionsBrowserEngineUnionMember1",
     "RenderOptionsHackiumConfiguration",
     "Session",
     "Template",
@@ -34,6 +31,9 @@ __all__ = [
 
 
 class ClientExtractParams(TypedDict, total=False):
+    debug_options: Required[DebugOptions]
+    """Debug and troubleshooting options for the request"""
+
     url: Required[str]
     """Target URL to scrape"""
 
@@ -307,9 +307,6 @@ class ClientExtractParams(TypedDict, total=False):
     ]
     """Country code for geolocation and proxy selection"""
 
-    debug_options: DebugOptions
-    """Debug and troubleshooting options for the request"""
-
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
@@ -319,7 +316,7 @@ class ClientExtractParams(TypedDict, total=False):
     driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"]
     """Browser driver to use"""
 
-    dynamic_parser: Dict[str, Optional[object]]
+    dynamic_parser: Dict[str, object]
     """Custom parser configuration as a key-value map"""
 
     expected_status_codes: Iterable[int]
@@ -910,7 +907,7 @@ class ClientExtractParams(TypedDict, total=False):
     parse_options: ParseOptions
     """Configuration options for parsing behavior"""
 
-    parser: Union[Dict[str, Optional[object]], str]
+    parser: Union[Dict[str, object], str]
     """Custom parser configuration as a key-value map"""
 
     proxy_provider: Literal[
@@ -941,7 +938,7 @@ class ClientExtractParams(TypedDict, total=False):
     ]
     """Proxy provider to use for the request"""
 
-    proxy_providers: ProxyProviders
+    proxy_providers: Dict[str, float]
     """Weighted distribution of proxy providers"""
 
     query_template: QueryTemplate
@@ -956,7 +953,7 @@ class ClientExtractParams(TypedDict, total=False):
     render: bool
     """Whether to render JavaScript content using a browser"""
 
-    render_flow: Iterable[object]
+    render_flow: Iterable[Dict[str, object]]
     """Array of actions to perform during browser rendering"""
 
     render_options: RenderOptions
@@ -1051,46 +1048,6 @@ class ClientExtractParams(TypedDict, total=False):
     """Pre-rendered userbrowser creation template configuration"""
 
 
-class BrowserUnionMember1(TypedDict, total=False):
-    name: Required[Literal["chrome", "firefox"]]
-
-    version: str
-    """Specific browser version to emulate"""
-
-
-Browser: TypeAlias = Union[Literal["chrome", "firefox"], BrowserUnionMember1]
-
-
-class CookiesUnionMember0(TypedDict, total=False):
-    creation: Optional[str]
-
-    domain: Optional[str]
-
-    expires: Union[Optional[str], Literal["Infinity"], None]
-
-    extensions: Optional[SequenceNotStr[str]]
-
-    host_only: Annotated[Optional[bool], PropertyInfo(alias="hostOnly")]
-
-    http_only: Annotated[Optional[bool], PropertyInfo(alias="httpOnly")]
-
-    last_accessed: Annotated[Optional[str], PropertyInfo(alias="lastAccessed")]
-
-    max_age: Annotated[Union[Literal["Infinity", "-Infinity"], float, None], PropertyInfo(alias="maxAge")]
-
-    name: str
-
-    path: Optional[str]
-
-    path_is_default: Annotated[Optional[bool], PropertyInfo(alias="pathIsDefault")]
-
-    same_site: Annotated[Literal["strict", "lax", "none"], PropertyInfo(alias="sameSite")]
-
-    secure: bool
-
-    value: str
-
-
 class DebugOptions(TypedDict, total=False):
     """Debug and troubleshooting options for the request"""
 
@@ -1115,43 +1072,86 @@ class DebugOptions(TypedDict, total=False):
     with_proxy_usage: Union[bool, Literal["never", "always"]]
 
 
+class BrowserUnionMember1(TypedDict, total=False):
+    name: Required[Literal["chrome", "firefox"]]
+
+    version: str
+    """Specific browser version to emulate"""
+
+
+Browser: TypeAlias = Union[Literal["chrome", "firefox"], BrowserUnionMember1]
+
+
+class CookiesUnionMember0Typed(TypedDict, total=False):
+    creation: Optional[str]
+
+    domain: Optional[str]
+
+    expires: str
+
+    extensions: Optional[SequenceNotStr[str]]
+
+    host_only: Annotated[Optional[bool], PropertyInfo(alias="hostOnly")]
+
+    http_only: Annotated[Optional[bool], PropertyInfo(alias="httpOnly")]
+
+    last_accessed: Annotated[Optional[str], PropertyInfo(alias="lastAccessed")]
+
+    max_age: Annotated[Union[Literal["Infinity", "-Infinity"], float, None], PropertyInfo(alias="maxAge")]
+
+    name: str
+
+    path: Optional[str]
+
+    path_is_default: Annotated[Optional[bool], PropertyInfo(alias="pathIsDefault")]
+
+    same_site: Annotated[Literal["strict", "lax", "none"], PropertyInfo(alias="sameSite")]
+
+    secure: bool
+
+    value: str
+
+
+CookiesUnionMember0: TypeAlias = Union[CookiesUnionMember0Typed, Dict[str, object]]
+
+
 class Metadata(TypedDict, total=False):
     """Structured metadata about the request execution context"""
 
-    account_name: Optional[str]
+    account_name: str
     """Account name associated with the request"""
 
-    definition_id: Optional[int]
+    definition_id: int
     """Definition identifier"""
 
-    definition_name: Optional[str]
+    definition_name: str
     """Name of the definition"""
 
-    endpoint: Optional[str]
+    endpoint: str
     """API endpoint being called"""
 
-    execution_id: Optional[str]
+    execution_id: str
     """Unique identifier for this execution"""
 
-    flowit_task_id: Optional[str]
+    flowit_task_id: str
     """FlowIt task identifier"""
 
-    input_id: Optional[str]
+    input_id: str
     """Input data identifier"""
 
-    pipeline_execution_id: Optional[int]
+    pipeline_execution_id: int
     """Identifier for the pipeline execution"""
 
-    query_template_id: Optional[str]
+    query_template_id: str
     """Query template identifier"""
 
-    source: Optional[str]
+    source: str
     """Source system or application making the request"""
 
-    template_id: Optional[int]
+    template_id: int
     """Template identifier"""
 
-    template_name: Optional[str]
+    template_name: str
     """Name of the template"""
 
 
@@ -1165,6 +1165,7 @@ class NetworkCapture(TypedDict, total=False):
     method: Literal["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"]
 
     resource_type: Union[str, SequenceNotStr[str]]
+    """Resource type for network capture filtering"""
 
     status_code: Union[float, Iterable[float]]
 
@@ -1177,71 +1178,22 @@ class NetworkCapture(TypedDict, total=False):
     wait_for_requests_count_timeout: float
 
 
-class ParseOptions(TypedDict, total=False):
+class ParseOptionsTyped(TypedDict, total=False):
     """Configuration options for parsing behavior"""
 
     merge_dynamic: bool
     """Whether to merge dynamic parsing results with static results"""
 
 
-class ProxyProviders(TypedDict, total=False):
-    """Weighted distribution of proxy providers"""
-
-    _911proxy: Annotated[float, PropertyInfo(alias="911proxy")]
-
-    always: float
-
-    brightdata: float
-
-    brightup: float
-
-    direct911proxy: float
-
-    froxy: float
-
-    ipfoxy: float
-
-    local: float
-
-    nimble_isp: Annotated[float, PropertyInfo(alias="nimble-isp")]
-
-    nimble_isp_mobile: Annotated[float, PropertyInfo(alias="nimble-isp-mobile")]
-
-    oculusproxies: float
-
-    oxylabs: float
-
-    packetstream: float
-
-    proxit: float
-
-    proxit_preprod: float
-
-    proxit_linux: Annotated[float, PropertyInfo(alias="proxit-linux")]
-
-    proxit_macos: Annotated[float, PropertyInfo(alias="proxit-macos")]
-
-    proxit_rental: Annotated[float, PropertyInfo(alias="proxit-rental")]
-
-    proxit_windows: Annotated[float, PropertyInfo(alias="proxit-windows")]
-
-    rayobyte: float
-
-    research: float
-
-    smartproxy: float
-
-    thesocialproxy: float
-
-    thesocialproxy2: float
+ParseOptions: TypeAlias = Union[ParseOptionsTyped, Dict[str, object]]
 
 
 class QueryTemplatePaginationNextPageParams(TypedDict, total=False):
-    next_page_params: Required[object]
+    next_page_params: Required[Dict[str, object]]
 
 
 class QueryTemplatePaginationUnionMember1(TypedDict, total=False):
-    next_page_params: Required[object]
+    next_page_params: Required[Dict[str, object]]
 
 
 QueryTemplatePagination: TypeAlias = Union[
@@ -1249,7 +1201,7 @@ QueryTemplatePagination: TypeAlias = Union[
 ]
 
 
-class QueryTemplate(TypedDict, total=False):
+class QueryTemplateTyped(TypedDict, total=False):
     """Query template configuration for structured data extraction"""
 
     id: Required[str]
@@ -1258,22 +1210,10 @@ class QueryTemplate(TypedDict, total=False):
 
     pagination: QueryTemplatePagination
 
-    params: Dict[str, Optional[object]]
+    params: Dict[str, object]
 
 
-class RenderOptionsBrowserEngineUnionMember1(TypedDict, total=False):
-    chrome: float
-
-    firefox: float
-
-    hackfox: float
-
-    hackium: float
-
-
-RenderOptionsBrowserEngine: TypeAlias = Union[
-    Literal["chrome", "hackium", "firefox", "hackfox"], RenderOptionsBrowserEngineUnionMember1
-]
+QueryTemplate: TypeAlias = Union[QueryTemplateTyped, Dict[str, object]]
 
 
 class RenderOptionsHackiumConfiguration(TypedDict, total=False):
@@ -1303,7 +1243,7 @@ class RenderOptions(TypedDict, total=False):
     blocked_domains: SequenceNotStr[str]
     """Domains to block from loading"""
 
-    browser_engine: RenderOptionsBrowserEngine
+    browser_engine: Union[Literal["chrome", "hackium", "firefox", "hackfox"], Dict[str, float]]
     """Browser engine to use, or weighted distribution of engines"""
 
     cache: bool
@@ -1413,7 +1353,7 @@ class Template(TypedDict, total=False):
 
     name: Required[str]
 
-    params: object
+    params: Dict[str, object]
 
 
 class UserbrowserCreationTemplateRendered(TypedDict, total=False):

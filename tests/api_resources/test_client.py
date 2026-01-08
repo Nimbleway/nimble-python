@@ -21,6 +21,7 @@ class TestClient:
     @parametrize
     def test_method_extract(self, client: Nimbleway) -> None:
         client_ = client.extract(
+            debug_options={},
             url="https://example.com/page",
         )
         assert_matches_type(ExtractResponse, client_, path=["response"])
@@ -29,6 +30,18 @@ class TestClient:
     @parametrize
     def test_method_extract_with_all_params(self, client: Nimbleway) -> None:
         client_ = client.extract(
+            debug_options={
+                "collect_har": True,
+                "no_retry_mode": True,
+                "record_screen": True,
+                "redact": True,
+                "show_cursor": True,
+                "solve_captcha": True,
+                "trace": True,
+                "upload_engine_logs": True,
+                "verbose": True,
+                "with_proxy_usage": True,
+            },
             url="https://example.com/page",
             browser="chrome",
             city="Los Angeles",
@@ -38,7 +51,7 @@ class TestClient:
                 {
                     "creation": "creation",
                     "domain": "domain",
-                    "expires": "string",
+                    "expires": "expires",
                     "extensions": ["string"],
                     "host_only": True,
                     "http_only": True,
@@ -53,18 +66,6 @@ class TestClient:
                 }
             ],
             country="US",
-            debug_options={
-                "collect_har": True,
-                "no_retry_mode": True,
-                "record_screen": True,
-                "redact": True,
-                "show_cursor": True,
-                "solve_captcha": True,
-                "trace": True,
-                "upload_engine_logs": True,
-                "verbose": True,
-                "with_proxy_usage": True,
-            },
             device="desktop",
             disable_ip_check=False,
             driver="vx8",
@@ -100,7 +101,7 @@ class TestClient:
             network_capture=[
                 {
                     "method": "GET",
-                    "resource_type": "string",
+                    "resource_type": "document",
                     "status_code": 100,
                     "url": {
                         "value": "value",
@@ -119,49 +120,19 @@ class TestClient:
             parser={"myParser": "bar"},
             proxy_provider="brightdata",
             proxy_providers={
-                "_911proxy": 1,
-                "always": 1,
                 "brightdata": 70,
-                "brightup": 1,
-                "direct911proxy": 1,
-                "froxy": 1,
-                "ipfoxy": 1,
-                "local": 1,
-                "nimble_isp": 1,
-                "nimble_isp_mobile": 1,
-                "oculusproxies": 1,
                 "oxylabs": 30,
-                "packetstream": 1,
-                "proxit": 1,
-                "proxit_preprod": 1,
-                "proxit_linux": 1,
-                "proxit_macos": 1,
-                "proxit_rental": 1,
-                "proxit_windows": 1,
-                "rayobyte": 1,
-                "research": 1,
-                "smartproxy": 1,
-                "thesocialproxy": 1,
-                "thesocialproxy2": 1,
             },
             query_template={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "api_type": "WEB",
-                "pagination": {"next_page_params": {}},
+                "pagination": {"next_page_params": {"foo": "bar"}},
                 "params": {"foo": "bar"},
             },
             raw_headers=True,
             referrer_type="random",
             render=True,
-            render_flow=[
-                {"wait": {"delay": 2000}},
-                {
-                    "click": {
-                        "selector": "#load-more",
-                        "timeout": 5000,
-                    }
-                },
-            ],
+            render_flow=[{"wait": "bar"}, {"click": "bar"}],
             render_options={
                 "adblock": True,
                 "blocked_domains": ["ads.example.com", "tracker.com"],
@@ -214,13 +185,13 @@ class TestClient:
             tag="campaign-2024-q1",
             template={
                 "name": "x",
-                "params": {},
+                "params": {"foo": "bar"},
             },
             type="generic",
             userbrowser_creation_template_rendered={
                 "id": "id",
                 "allowed_parameter_names": ["x"],
-                "render_flow_rendered": [{"foo": {}}],
+                "render_flow_rendered": [{"foo": "bar"}],
             },
         )
         assert_matches_type(ExtractResponse, client_, path=["response"])
@@ -229,6 +200,7 @@ class TestClient:
     @parametrize
     def test_raw_response_extract(self, client: Nimbleway) -> None:
         response = client.with_raw_response.extract(
+            debug_options={},
             url="https://example.com/page",
         )
 
@@ -241,6 +213,7 @@ class TestClient:
     @parametrize
     def test_streaming_response_extract(self, client: Nimbleway) -> None:
         with client.with_streaming_response.extract(
+            debug_options={},
             url="https://example.com/page",
         ) as response:
             assert not response.is_closed
@@ -261,6 +234,7 @@ class TestAsyncClient:
     @parametrize
     async def test_method_extract(self, async_client: AsyncNimbleway) -> None:
         client = await async_client.extract(
+            debug_options={},
             url="https://example.com/page",
         )
         assert_matches_type(ExtractResponse, client, path=["response"])
@@ -269,6 +243,18 @@ class TestAsyncClient:
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncNimbleway) -> None:
         client = await async_client.extract(
+            debug_options={
+                "collect_har": True,
+                "no_retry_mode": True,
+                "record_screen": True,
+                "redact": True,
+                "show_cursor": True,
+                "solve_captcha": True,
+                "trace": True,
+                "upload_engine_logs": True,
+                "verbose": True,
+                "with_proxy_usage": True,
+            },
             url="https://example.com/page",
             browser="chrome",
             city="Los Angeles",
@@ -278,7 +264,7 @@ class TestAsyncClient:
                 {
                     "creation": "creation",
                     "domain": "domain",
-                    "expires": "string",
+                    "expires": "expires",
                     "extensions": ["string"],
                     "host_only": True,
                     "http_only": True,
@@ -293,18 +279,6 @@ class TestAsyncClient:
                 }
             ],
             country="US",
-            debug_options={
-                "collect_har": True,
-                "no_retry_mode": True,
-                "record_screen": True,
-                "redact": True,
-                "show_cursor": True,
-                "solve_captcha": True,
-                "trace": True,
-                "upload_engine_logs": True,
-                "verbose": True,
-                "with_proxy_usage": True,
-            },
             device="desktop",
             disable_ip_check=False,
             driver="vx8",
@@ -340,7 +314,7 @@ class TestAsyncClient:
             network_capture=[
                 {
                     "method": "GET",
-                    "resource_type": "string",
+                    "resource_type": "document",
                     "status_code": 100,
                     "url": {
                         "value": "value",
@@ -359,49 +333,19 @@ class TestAsyncClient:
             parser={"myParser": "bar"},
             proxy_provider="brightdata",
             proxy_providers={
-                "_911proxy": 1,
-                "always": 1,
                 "brightdata": 70,
-                "brightup": 1,
-                "direct911proxy": 1,
-                "froxy": 1,
-                "ipfoxy": 1,
-                "local": 1,
-                "nimble_isp": 1,
-                "nimble_isp_mobile": 1,
-                "oculusproxies": 1,
                 "oxylabs": 30,
-                "packetstream": 1,
-                "proxit": 1,
-                "proxit_preprod": 1,
-                "proxit_linux": 1,
-                "proxit_macos": 1,
-                "proxit_rental": 1,
-                "proxit_windows": 1,
-                "rayobyte": 1,
-                "research": 1,
-                "smartproxy": 1,
-                "thesocialproxy": 1,
-                "thesocialproxy2": 1,
             },
             query_template={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "api_type": "WEB",
-                "pagination": {"next_page_params": {}},
+                "pagination": {"next_page_params": {"foo": "bar"}},
                 "params": {"foo": "bar"},
             },
             raw_headers=True,
             referrer_type="random",
             render=True,
-            render_flow=[
-                {"wait": {"delay": 2000}},
-                {
-                    "click": {
-                        "selector": "#load-more",
-                        "timeout": 5000,
-                    }
-                },
-            ],
+            render_flow=[{"wait": "bar"}, {"click": "bar"}],
             render_options={
                 "adblock": True,
                 "blocked_domains": ["ads.example.com", "tracker.com"],
@@ -454,13 +398,13 @@ class TestAsyncClient:
             tag="campaign-2024-q1",
             template={
                 "name": "x",
-                "params": {},
+                "params": {"foo": "bar"},
             },
             type="generic",
             userbrowser_creation_template_rendered={
                 "id": "id",
                 "allowed_parameter_names": ["x"],
-                "render_flow_rendered": [{"foo": {}}],
+                "render_flow_rendered": [{"foo": "bar"}],
             },
         )
         assert_matches_type(ExtractResponse, client, path=["response"])
@@ -469,6 +413,7 @@ class TestAsyncClient:
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncNimbleway) -> None:
         response = await async_client.with_raw_response.extract(
+            debug_options={},
             url="https://example.com/page",
         )
 
@@ -481,6 +426,7 @@ class TestAsyncClient:
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncNimbleway) -> None:
         async with async_client.with_streaming_response.extract(
+            debug_options={},
             url="https://example.com/page",
         ) as response:
             assert not response.is_closed
