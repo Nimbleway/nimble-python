@@ -10,6 +10,8 @@ import pytest
 from nimbleway import Nimbleway, AsyncNimbleway
 from tests.utils import assert_matches_type
 from nimbleway.types import (
+    MapResponse,
+    SearchResponse,
     ExtractResponse,
     ExtractTemplateResponse,
 )
@@ -264,6 +266,109 @@ class TestClient:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_map(self, client: Nimbleway) -> None:
+        client_ = client.map(
+            url="https://example.com",
+        )
+        assert_matches_type(MapResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_map_with_all_params(self, client: Nimbleway) -> None:
+        client_ = client.map(
+            url="https://example.com",
+            country="US",
+            domain_filter="all",
+            limit=1000,
+            locale="en-US",
+            sitemap="include",
+        )
+        assert_matches_type(MapResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_map(self, client: Nimbleway) -> None:
+        response = client.with_raw_response.map(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client_ = response.parse()
+        assert_matches_type(MapResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_map(self, client: Nimbleway) -> None:
+        with client.with_streaming_response.map(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client_ = response.parse()
+            assert_matches_type(MapResponse, client_, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_search(self, client: Nimbleway) -> None:
+        client_ = client.search(
+            query="x",
+        )
+        assert_matches_type(SearchResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_search_with_all_params(self, client: Nimbleway) -> None:
+        client_ = client.search(
+            query="x",
+            country="country",
+            deep_search=True,
+            end_date="end_date",
+            exclude_domains=["string"],
+            include_answer=True,
+            include_domains=["string"],
+            locale="locale",
+            max_subagents=1,
+            num_results=1,
+            parsing_type="plain_text",
+            search_engine="google_search",
+            start_date="start_date",
+            time_range="hour",
+            topic="general",
+        )
+        assert_matches_type(SearchResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_search(self, client: Nimbleway) -> None:
+        response = client.with_raw_response.search(
+            query="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client_ = response.parse()
+        assert_matches_type(SearchResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_search(self, client: Nimbleway) -> None:
+        with client.with_streaming_response.search(
+            query="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client_ = response.parse()
+            assert_matches_type(SearchResponse, client_, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncClient:
     parametrize = pytest.mark.parametrize(
@@ -511,5 +616,108 @@ class TestAsyncClient:
 
             client = await response.parse()
             assert_matches_type(ExtractTemplateResponse, client, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_map(self, async_client: AsyncNimbleway) -> None:
+        client = await async_client.map(
+            url="https://example.com",
+        )
+        assert_matches_type(MapResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_map_with_all_params(self, async_client: AsyncNimbleway) -> None:
+        client = await async_client.map(
+            url="https://example.com",
+            country="US",
+            domain_filter="all",
+            limit=1000,
+            locale="en-US",
+            sitemap="include",
+        )
+        assert_matches_type(MapResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_map(self, async_client: AsyncNimbleway) -> None:
+        response = await async_client.with_raw_response.map(
+            url="https://example.com",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client = await response.parse()
+        assert_matches_type(MapResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_map(self, async_client: AsyncNimbleway) -> None:
+        async with async_client.with_streaming_response.map(
+            url="https://example.com",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client = await response.parse()
+            assert_matches_type(MapResponse, client, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_search(self, async_client: AsyncNimbleway) -> None:
+        client = await async_client.search(
+            query="x",
+        )
+        assert_matches_type(SearchResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_search_with_all_params(self, async_client: AsyncNimbleway) -> None:
+        client = await async_client.search(
+            query="x",
+            country="country",
+            deep_search=True,
+            end_date="end_date",
+            exclude_domains=["string"],
+            include_answer=True,
+            include_domains=["string"],
+            locale="locale",
+            max_subagents=1,
+            num_results=1,
+            parsing_type="plain_text",
+            search_engine="google_search",
+            start_date="start_date",
+            time_range="hour",
+            topic="general",
+        )
+        assert_matches_type(SearchResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_search(self, async_client: AsyncNimbleway) -> None:
+        response = await async_client.with_raw_response.search(
+            query="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client = await response.parse()
+        assert_matches_type(SearchResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_search(self, async_client: AsyncNimbleway) -> None:
+        async with async_client.with_streaming_response.search(
+            query="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client = await response.parse()
+            assert_matches_type(SearchResponse, client, path=["response"])
 
         assert cast(Any, response.is_closed) is True
