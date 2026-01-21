@@ -9,7 +9,10 @@ import pytest
 
 from nimbleway import Nimbleway, AsyncNimbleway
 from tests.utils import assert_matches_type
-from nimbleway.types import ExtractResponse
+from nimbleway.types import (
+    ExtractResponse,
+    ExtractTemplateResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -224,6 +227,43 @@ class TestClient:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_extract_template(self, client: Nimbleway) -> None:
+        client_ = client.extract_template(
+            params={"foo": "bar"},
+            template="template",
+        )
+        assert_matches_type(ExtractTemplateResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_extract_template(self, client: Nimbleway) -> None:
+        response = client.with_raw_response.extract_template(
+            params={"foo": "bar"},
+            template="template",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client_ = response.parse()
+        assert_matches_type(ExtractTemplateResponse, client_, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_extract_template(self, client: Nimbleway) -> None:
+        with client.with_streaming_response.extract_template(
+            params={"foo": "bar"},
+            template="template",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client_ = response.parse()
+            assert_matches_type(ExtractTemplateResponse, client_, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncClient:
     parametrize = pytest.mark.parametrize(
@@ -434,5 +474,42 @@ class TestAsyncClient:
 
             client = await response.parse()
             assert_matches_type(ExtractResponse, client, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_extract_template(self, async_client: AsyncNimbleway) -> None:
+        client = await async_client.extract_template(
+            params={"foo": "bar"},
+            template="template",
+        )
+        assert_matches_type(ExtractTemplateResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_extract_template(self, async_client: AsyncNimbleway) -> None:
+        response = await async_client.with_raw_response.extract_template(
+            params={"foo": "bar"},
+            template="template",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        client = await response.parse()
+        assert_matches_type(ExtractTemplateResponse, client, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_extract_template(self, async_client: AsyncNimbleway) -> None:
+        async with async_client.with_streaming_response.extract_template(
+            params={"foo": "bar"},
+            template="template",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            client = await response.parse()
+            assert_matches_type(ExtractTemplateResponse, client, path=["response"])
 
         assert cast(Any, response.is_closed) is True

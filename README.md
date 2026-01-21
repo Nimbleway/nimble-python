@@ -37,9 +37,12 @@ pip install git+ssh://git@github.com/stainless-sdks/nimbleway-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from nimbleway import Nimbleway
 
-client = Nimbleway()
+client = Nimbleway(
+    api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+)
 
 response = client.extract(
     debug_options={},
@@ -58,10 +61,13 @@ so that your API Key is not stored in source control.
 Simply import `AsyncNimbleway` instead of `Nimbleway` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from nimbleway import AsyncNimbleway
 
-client = AsyncNimbleway()
+client = AsyncNimbleway(
+    api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
@@ -91,6 +97,7 @@ pip install 'nimbleway[aiohttp] @ git+ssh://git@github.com/stainless-sdks/nimble
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from nimbleway import DefaultAioHttpClient
 from nimbleway import AsyncNimbleway
@@ -98,6 +105,7 @@ from nimbleway import AsyncNimbleway
 
 async def main() -> None:
     async with AsyncNimbleway(
+        api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.extract(
