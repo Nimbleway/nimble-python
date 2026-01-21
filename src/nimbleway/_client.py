@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping, Iterable
+from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, Iterable
 from typing_extensions import Self, Literal, override
 
 import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_extract_params
+from .types import client_extract_params, client_extract_template_params
 from ._types import (
     Body,
     Omit,
@@ -48,6 +48,11 @@ from ._base_client import (
     make_request_options,
 )
 from .types.extract_response import ExtractResponse
+from .types.extract_template_response import ExtractTemplateResponse
+
+if TYPE_CHECKING:
+    from .resources import crawl
+    from .resources.crawl import CrawlResource, AsyncCrawlResource
 
 __all__ = [
     "Timeout",
@@ -111,6 +116,12 @@ class Nimbleway(SyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+    @cached_property
+    def crawl(self) -> CrawlResource:
+        from .resources.crawl import CrawlResource
+
+        return CrawlResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimblewayWithRawResponse:
@@ -1308,6 +1319,45 @@ class Nimbleway(SyncAPIClient):
             cast_to=ExtractResponse,
         )
 
+    def extract_template(
+        self,
+        *,
+        params: Dict[str, object],
+        template: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExtractTemplateResponse:
+        """
+        Execute WSA Template Realtime Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v1/extract-template",
+            body=maybe_transform(
+                {
+                    "params": params,
+                    "template": template,
+                },
+                client_extract_template_params.ClientExtractTemplateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExtractTemplateResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -1392,6 +1442,12 @@ class AsyncNimbleway(AsyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+    @cached_property
+    def crawl(self) -> AsyncCrawlResource:
+        from .resources.crawl import AsyncCrawlResource
+
+        return AsyncCrawlResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncNimblewayWithRawResponse:
@@ -2589,6 +2645,45 @@ class AsyncNimbleway(AsyncAPIClient):
             cast_to=ExtractResponse,
         )
 
+    async def extract_template(
+        self,
+        *,
+        params: Dict[str, object],
+        template: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExtractTemplateResponse:
+        """
+        Execute WSA Template Realtime Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v1/extract-template",
+            body=await async_maybe_transform(
+                {
+                    "params": params,
+                    "template": template,
+                },
+                client_extract_template_params.ClientExtractTemplateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExtractTemplateResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -2632,6 +2727,15 @@ class NimblewayWithRawResponse:
         self.extract = to_raw_response_wrapper(
             client.extract,
         )
+        self.extract_template = to_raw_response_wrapper(
+            client.extract_template,
+        )
+
+    @cached_property
+    def crawl(self) -> crawl.CrawlResourceWithRawResponse:
+        from .resources.crawl import CrawlResourceWithRawResponse
+
+        return CrawlResourceWithRawResponse(self._client.crawl)
 
 
 class AsyncNimblewayWithRawResponse:
@@ -2643,6 +2747,15 @@ class AsyncNimblewayWithRawResponse:
         self.extract = async_to_raw_response_wrapper(
             client.extract,
         )
+        self.extract_template = async_to_raw_response_wrapper(
+            client.extract_template,
+        )
+
+    @cached_property
+    def crawl(self) -> crawl.AsyncCrawlResourceWithRawResponse:
+        from .resources.crawl import AsyncCrawlResourceWithRawResponse
+
+        return AsyncCrawlResourceWithRawResponse(self._client.crawl)
 
 
 class NimblewayWithStreamedResponse:
@@ -2654,6 +2767,15 @@ class NimblewayWithStreamedResponse:
         self.extract = to_streamed_response_wrapper(
             client.extract,
         )
+        self.extract_template = to_streamed_response_wrapper(
+            client.extract_template,
+        )
+
+    @cached_property
+    def crawl(self) -> crawl.CrawlResourceWithStreamingResponse:
+        from .resources.crawl import CrawlResourceWithStreamingResponse
+
+        return CrawlResourceWithStreamingResponse(self._client.crawl)
 
 
 class AsyncNimblewayWithStreamedResponse:
@@ -2665,6 +2787,15 @@ class AsyncNimblewayWithStreamedResponse:
         self.extract = async_to_streamed_response_wrapper(
             client.extract,
         )
+        self.extract_template = async_to_streamed_response_wrapper(
+            client.extract_template,
+        )
+
+    @cached_property
+    def crawl(self) -> crawl.AsyncCrawlResourceWithStreamingResponse:
+        from .resources.crawl import AsyncCrawlResourceWithStreamingResponse
+
+        return AsyncCrawlResourceWithStreamingResponse(self._client.crawl)
 
 
 Client = Nimbleway
