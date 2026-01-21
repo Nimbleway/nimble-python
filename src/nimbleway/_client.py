@@ -1138,7 +1138,7 @@ class Nimbleway(SyncAPIClient):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExtractResponse:
         """
-        Webit v2 Realtime Web Endpoint
+        Webit v2 Realtime extract Endpoint
 
         Args:
           debug_options: Debug and troubleshooting options for the request
@@ -2419,7 +2419,7 @@ class AsyncNimbleway(AsyncAPIClient):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExtractResponse:
         """
-        Webit v2 Realtime Web Endpoint
+        Webit v2 Realtime extract Endpoint
 
         Args:
           debug_options: Debug and troubleshooting options for the request
