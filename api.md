@@ -18,17 +18,11 @@ Methods:
 Types:
 
 ```python
-from nimbleway.types import (
-    CrawlListResponse,
-    CrawlRootResponse,
-    CrawlStatusResponse,
-    CrawlTerminateResponse,
-)
+from nimbleway.types import CrawlRootResponse, CrawlStatusResponse, CrawlTerminateResponse
 ```
 
 Methods:
 
-- <code title="get /v1/crawl">client.crawl.<a href="./src/nimbleway/resources/crawl.py">list</a>(\*\*<a href="src/nimbleway/types/crawl_list_params.py">params</a>) -> <a href="./src/nimbleway/types/crawl_list_response.py">CrawlListResponse</a></code>
 - <code title="post /v1/crawl">client.crawl.<a href="./src/nimbleway/resources/crawl.py">root</a>(\*\*<a href="src/nimbleway/types/crawl_root_params.py">params</a>) -> <a href="./src/nimbleway/types/crawl_root_response.py">CrawlRootResponse</a></code>
 - <code title="get /v1/crawl/{id}">client.crawl.<a href="./src/nimbleway/resources/crawl.py">status</a>(id) -> <a href="./src/nimbleway/types/crawl_status_response.py">CrawlStatusResponse</a></code>
 - <code title="delete /v1/crawl/{id}">client.crawl.<a href="./src/nimbleway/resources/crawl.py">terminate</a>(id) -> <a href="./src/nimbleway/types/crawl_terminate_response.py">CrawlTerminateResponse</a></code>
