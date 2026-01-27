@@ -262,7 +262,6 @@ class ClientMapParams(TypedDict, total=False):
         "ZA",
         "ZM",
         "ZW",
-        "ALL",
     ]
     """Country code for geolocation and proxy selection"""
 
