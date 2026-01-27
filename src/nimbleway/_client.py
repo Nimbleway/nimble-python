@@ -1615,7 +1615,6 @@ class Nimbleway(SyncAPIClient):
             "ZA",
             "ZM",
             "ZW",
-            "ALL",
         ]
         | Omit = omit,
         domain_filter: Literal["domain", "subdomain", "all"] | Omit = omit,
@@ -3884,7 +3883,6 @@ class AsyncNimbleway(AsyncAPIClient):
             "ZA",
             "ZM",
             "ZW",
-            "ALL",
         ]
         | Omit = omit,
         domain_filter: Literal["domain", "subdomain", "all"] | Omit = omit,
