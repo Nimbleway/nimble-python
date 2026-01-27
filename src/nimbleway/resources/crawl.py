@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import crawl_list_params, crawl_root_params
+from ..types import crawl_root_params
 from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,7 +18,6 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.crawl_list_response import CrawlListResponse
 from ..types.crawl_root_response import CrawlRootResponse
 from ..types.crawl_status_response import CrawlStatusResponse
 from ..types.crawl_terminate_response import CrawlTerminateResponse
@@ -46,56 +44,6 @@ class CrawlResource(SyncAPIResource):
         For more information, see https://www.github.com/stainless-sdks/nimbleway-python#with_streaming_response
         """
         return CrawlResourceWithStreamingResponse(self)
-
-    def list(
-        self,
-        *,
-        status: Literal["pending", "in_progress", "completed", "failed", "canceled"],
-        cursor: Optional[str] | Omit = omit,
-        limit: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlListResponse:
-        """
-        Get crawl data by filters
-
-        Args:
-          status: Filter crawls by their status.
-
-          cursor: Cursor for pagination.
-
-          limit: Number of crawls to return per page.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/v1/crawl",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "status": status,
-                        "cursor": cursor,
-                        "limit": limit,
-                    },
-                    crawl_list_params.CrawlListParams,
-                ),
-            ),
-            cast_to=CrawlListResponse,
-        )
 
     def root(
         self,
@@ -274,56 +222,6 @@ class AsyncCrawlResource(AsyncAPIResource):
         """
         return AsyncCrawlResourceWithStreamingResponse(self)
 
-    async def list(
-        self,
-        *,
-        status: Literal["pending", "in_progress", "completed", "failed", "canceled"],
-        cursor: Optional[str] | Omit = omit,
-        limit: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlListResponse:
-        """
-        Get crawl data by filters
-
-        Args:
-          status: Filter crawls by their status.
-
-          cursor: Cursor for pagination.
-
-          limit: Number of crawls to return per page.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/v1/crawl",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "status": status,
-                        "cursor": cursor,
-                        "limit": limit,
-                    },
-                    crawl_list_params.CrawlListParams,
-                ),
-            ),
-            cast_to=CrawlListResponse,
-        )
-
     async def root(
         self,
         *,
@@ -485,9 +383,6 @@ class CrawlResourceWithRawResponse:
     def __init__(self, crawl: CrawlResource) -> None:
         self._crawl = crawl
 
-        self.list = to_raw_response_wrapper(
-            crawl.list,
-        )
         self.root = to_raw_response_wrapper(
             crawl.root,
         )
@@ -503,9 +398,6 @@ class AsyncCrawlResourceWithRawResponse:
     def __init__(self, crawl: AsyncCrawlResource) -> None:
         self._crawl = crawl
 
-        self.list = async_to_raw_response_wrapper(
-            crawl.list,
-        )
         self.root = async_to_raw_response_wrapper(
             crawl.root,
         )
@@ -521,9 +413,6 @@ class CrawlResourceWithStreamingResponse:
     def __init__(self, crawl: CrawlResource) -> None:
         self._crawl = crawl
 
-        self.list = to_streamed_response_wrapper(
-            crawl.list,
-        )
         self.root = to_streamed_response_wrapper(
             crawl.root,
         )
@@ -539,9 +428,6 @@ class AsyncCrawlResourceWithStreamingResponse:
     def __init__(self, crawl: AsyncCrawlResource) -> None:
         self._crawl = crawl
 
-        self.list = async_to_streamed_response_wrapper(
-            crawl.list,
-        )
         self.root = async_to_streamed_response_wrapper(
             crawl.root,
         )
