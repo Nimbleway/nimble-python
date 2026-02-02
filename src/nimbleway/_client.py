@@ -2210,6 +2210,7 @@ class Nimbleway(SyncAPIClient):
         self,
         *,
         query: str,
+        content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
         deep_search: bool | Omit = omit,
         end_date: Optional[str] | Omit = omit,
@@ -2223,7 +2224,7 @@ class Nimbleway(SyncAPIClient):
         search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
-        topic: Literal["general", "news", "location", "coding", "geo", "shopping", "social"] | Omit = omit,
+        topic: Literal["general", "news", "location", "coding", "academic", "geo", "shopping", "social"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2236,6 +2237,10 @@ class Nimbleway(SyncAPIClient):
 
         Args:
           query: Search query string
+
+          content_type: Filter by content type (only supported with focus=general). Supports semantic
+              groups ('documents', 'spreadsheets', 'presentations') and specific formats
+              ('pdf', 'docx', 'xlsx', etc.)
 
           deep_search: If True, fetches and extracts full page content for each search result. If
               False, returns only metadata (title, snippet, URL)
@@ -2279,6 +2284,7 @@ class Nimbleway(SyncAPIClient):
             body=maybe_transform(
                 {
                     "query": query,
+                    "content_type": content_type,
                     "country": country,
                     "deep_search": deep_search,
                     "end_date": end_date,
@@ -4478,6 +4484,7 @@ class AsyncNimbleway(AsyncAPIClient):
         self,
         *,
         query: str,
+        content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
         deep_search: bool | Omit = omit,
         end_date: Optional[str] | Omit = omit,
@@ -4491,7 +4498,7 @@ class AsyncNimbleway(AsyncAPIClient):
         search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
-        topic: Literal["general", "news", "location", "coding", "geo", "shopping", "social"] | Omit = omit,
+        topic: Literal["general", "news", "location", "coding", "academic", "geo", "shopping", "social"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4504,6 +4511,10 @@ class AsyncNimbleway(AsyncAPIClient):
 
         Args:
           query: Search query string
+
+          content_type: Filter by content type (only supported with focus=general). Supports semantic
+              groups ('documents', 'spreadsheets', 'presentations') and specific formats
+              ('pdf', 'docx', 'xlsx', etc.)
 
           deep_search: If True, fetches and extracts full page content for each search result. If
               False, returns only metadata (title, snippet, URL)
@@ -4547,6 +4558,7 @@ class AsyncNimbleway(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "query": query,
+                    "content_type": content_type,
                     "country": country,
                     "deep_search": deep_search,
                     "end_date": end_date,

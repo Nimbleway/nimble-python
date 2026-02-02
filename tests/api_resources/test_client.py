@@ -326,6 +326,7 @@ class TestClient:
     def test_method_search_with_all_params(self, client: Nimbleway) -> None:
         client_ = client.search(
             query="x",
+            content_type=["string"],
             country="country",
             deep_search=True,
             end_date="end_date",
@@ -679,6 +680,7 @@ class TestAsyncClient:
     async def test_method_search_with_all_params(self, async_client: AsyncNimbleway) -> None:
         client = await async_client.search(
             query="x",
+            content_type=["string"],
             country="country",
             deep_search=True,
             end_date="end_date",
