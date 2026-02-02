@@ -42,6 +42,8 @@ from nimbleway import Nimbleway
 
 client = Nimbleway(
     api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+    # defaults to "staging".
+    environment="production",
 )
 
 response = client.extract(
@@ -67,6 +69,8 @@ from nimbleway import AsyncNimbleway
 
 client = AsyncNimbleway(
     api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+    # defaults to "staging".
+    environment="production",
 )
 
 
