@@ -1,11 +1,11 @@
 [project]
-name = "nimbleway"
+name = "nimble_python"
 version = "0.0.1"
-description = "The official Python library for the nimbleway API"
+description = "The official Python library for the nimble API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Nimbleway", email = "support@nimbleway.com" },
+{ name = "Nimble", email = "support@nimbleway.com" },
 ]
 
 dependencies = [
@@ -37,8 +37,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Nimbleway/nimbleway-python"
-Repository = "https://github.com/Nimbleway/nimbleway-python"
+Homepage = "https://github.com/Nimbleway/nimble-python"
+Repository = "https://github.com/Nimbleway/nimble-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
@@ -86,7 +86,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/nimbleway"]
+packages = ["src/nimble_python"]
 
 [tool.hatch.build.targets.sdist]
 # Basically everything except hidden files/directories (such as .github, .devcontainers, .python-version, etc)
@@ -112,7 +112,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/Nimbleway/nimbleway-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/Nimbleway/nimble-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -154,7 +154,7 @@ show_error_codes = true
 #
 # We also exclude our `tests` as mypy doesn't always infer
 # types correctly and Pyright will still catch any type errors.
-exclude = ['src/nimbleway/_files.py', '_dev/.*.py', 'tests/.*']
+exclude = ['src/nimble_python/_files.py', '_dev/.*.py', 'tests/.*']
 
 strict_equality = true
 implicit_reexport = true
@@ -246,7 +246,7 @@ length-sort = true
 length-sort-straight = true
 combine-as-imports = true
 extra-standard-library = ["typing_extensions"]
-known-first-party = ["nimbleway", "tests"]
+known-first-party = ["nimble_python", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "bin/**.py" = ["T201", "T203"]

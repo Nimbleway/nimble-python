@@ -7,17 +7,17 @@ from ._proxy import LazyProxy
 
 
 class ResourcesProxy(LazyProxy[Any]):
-    """A proxy for the `nimbleway.resources` module.
+    """A proxy for the `nimble_python.resources` module.
 
-    This is used so that we can lazily import `nimbleway.resources` only when
-    needed *and* so that users can just import `nimbleway` and reference `nimbleway.resources`
+    This is used so that we can lazily import `nimble_python.resources` only when
+    needed *and* so that users can just import `nimble_python` and reference `nimble_python.resources`
     """
 
     @override
     def __load__(self) -> Any:
         import importlib
 
-        mod = importlib.import_module("nimbleway.resources")
+        mod = importlib.import_module("nimble_python.resources")
         return mod
 
 

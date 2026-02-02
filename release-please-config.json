@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/nimbleway/_version.py"
+    "src/nimble_python/_version.py"
   ]
 }
