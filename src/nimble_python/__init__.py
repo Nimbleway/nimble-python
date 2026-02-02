@@ -8,13 +8,13 @@ from ._utils import file_from_path
 from ._client import (
     ENVIRONMENTS,
     Client,
+    Nimble,
     Stream,
     Timeout,
-    Nimbleway,
     Transport,
     AsyncClient,
+    AsyncNimble,
     AsyncStream,
-    AsyncNimbleway,
     RequestOptions,
 )
 from ._models import BaseModel
@@ -23,10 +23,10 @@ from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIR
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
+    NimbleError,
     ConflictError,
     NotFoundError,
     APIStatusError,
-    NimblewayError,
     RateLimitError,
     APITimeoutError,
     BadRequestError,
@@ -52,7 +52,7 @@ __all__ = [
     "not_given",
     "Omit",
     "omit",
-    "NimblewayError",
+    "NimbleError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -72,8 +72,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "Nimbleway",
-    "AsyncNimbleway",
+    "Nimble",
+    "AsyncNimble",
     "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
@@ -93,12 +93,12 @@ _setup_logging()
 # Update the __module__ attribute for exported symbols so that
 # error messages point to this module instead of the module
 # it was originally defined in, e.g.
-# nimbleway._exceptions.NotFoundError -> nimbleway.NotFoundError
+# nimble_python._exceptions.NotFoundError -> nimble_python.NotFoundError
 __locals = locals()
 for __name in __all__:
     if not __name.startswith("__"):
         try:
-            __locals[__name].__module__ = "nimbleway"
+            __locals[__name].__module__ = "nimble_python"
         except (TypeError, AttributeError):
             # Some of our exported symbols are builtins which we can't set attributes for.
             pass

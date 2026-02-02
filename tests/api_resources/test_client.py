@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from nimbleway import Nimbleway, AsyncNimbleway
 from tests.utils import assert_matches_type
-from nimbleway.types import (
+from nimble_python import Nimble, AsyncNimble
+from nimble_python.types import (
     MapResponse,
     SearchResponse,
     ExtractResponse,
@@ -24,7 +24,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_extract(self, client: Nimbleway) -> None:
+    def test_method_extract(self, client: Nimble) -> None:
         client_ = client.extract(
             debug_options={},
             url="https://example.com/page",
@@ -33,7 +33,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_extract_with_all_params(self, client: Nimbleway) -> None:
+    def test_method_extract_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract(
             debug_options={
                 "collect_har": True,
@@ -203,7 +203,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_extract(self, client: Nimbleway) -> None:
+    def test_raw_response_extract(self, client: Nimble) -> None:
         response = client.with_raw_response.extract(
             debug_options={},
             url="https://example.com/page",
@@ -216,7 +216,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_extract(self, client: Nimbleway) -> None:
+    def test_streaming_response_extract(self, client: Nimble) -> None:
         with client.with_streaming_response.extract(
             debug_options={},
             url="https://example.com/page",
@@ -231,7 +231,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_extract_template(self, client: Nimbleway) -> None:
+    def test_method_extract_template(self, client: Nimble) -> None:
         client_ = client.extract_template(
             params={"foo": "bar"},
             template="template",
@@ -240,7 +240,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_extract_template(self, client: Nimbleway) -> None:
+    def test_raw_response_extract_template(self, client: Nimble) -> None:
         response = client.with_raw_response.extract_template(
             params={"foo": "bar"},
             template="template",
@@ -253,7 +253,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_extract_template(self, client: Nimbleway) -> None:
+    def test_streaming_response_extract_template(self, client: Nimble) -> None:
         with client.with_streaming_response.extract_template(
             params={"foo": "bar"},
             template="template",
@@ -268,7 +268,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_map(self, client: Nimbleway) -> None:
+    def test_method_map(self, client: Nimble) -> None:
         client_ = client.map(
             url="https://example.com",
         )
@@ -276,7 +276,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_map_with_all_params(self, client: Nimbleway) -> None:
+    def test_method_map_with_all_params(self, client: Nimble) -> None:
         client_ = client.map(
             url="https://example.com",
             country="US",
@@ -289,7 +289,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_map(self, client: Nimbleway) -> None:
+    def test_raw_response_map(self, client: Nimble) -> None:
         response = client.with_raw_response.map(
             url="https://example.com",
         )
@@ -301,7 +301,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_map(self, client: Nimbleway) -> None:
+    def test_streaming_response_map(self, client: Nimble) -> None:
         with client.with_streaming_response.map(
             url="https://example.com",
         ) as response:
@@ -315,7 +315,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_search(self, client: Nimbleway) -> None:
+    def test_method_search(self, client: Nimble) -> None:
         client_ = client.search(
             query="x",
         )
@@ -323,7 +323,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_search_with_all_params(self, client: Nimbleway) -> None:
+    def test_method_search_with_all_params(self, client: Nimble) -> None:
         client_ = client.search(
             query="x",
             content_type=["string"],
@@ -346,7 +346,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_search(self, client: Nimbleway) -> None:
+    def test_raw_response_search(self, client: Nimble) -> None:
         response = client.with_raw_response.search(
             query="x",
         )
@@ -358,7 +358,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_search(self, client: Nimbleway) -> None:
+    def test_streaming_response_search(self, client: Nimble) -> None:
         with client.with_streaming_response.search(
             query="x",
         ) as response:
@@ -378,7 +378,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_extract(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_extract(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
             debug_options={},
             url="https://example.com/page",
@@ -387,7 +387,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_extract_with_all_params(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_extract_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
             debug_options={
                 "collect_har": True,
@@ -557,7 +557,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_extract(self, async_client: AsyncNimbleway) -> None:
+    async def test_raw_response_extract(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.extract(
             debug_options={},
             url="https://example.com/page",
@@ -570,7 +570,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_extract(self, async_client: AsyncNimbleway) -> None:
+    async def test_streaming_response_extract(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.extract(
             debug_options={},
             url="https://example.com/page",
@@ -585,7 +585,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_extract_template(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_extract_template(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract_template(
             params={"foo": "bar"},
             template="template",
@@ -594,7 +594,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_extract_template(self, async_client: AsyncNimbleway) -> None:
+    async def test_raw_response_extract_template(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.extract_template(
             params={"foo": "bar"},
             template="template",
@@ -607,7 +607,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_extract_template(self, async_client: AsyncNimbleway) -> None:
+    async def test_streaming_response_extract_template(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.extract_template(
             params={"foo": "bar"},
             template="template",
@@ -622,7 +622,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_map(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_map(self, async_client: AsyncNimble) -> None:
         client = await async_client.map(
             url="https://example.com",
         )
@@ -630,7 +630,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_map_with_all_params(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_map_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.map(
             url="https://example.com",
             country="US",
@@ -643,7 +643,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_map(self, async_client: AsyncNimbleway) -> None:
+    async def test_raw_response_map(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.map(
             url="https://example.com",
         )
@@ -655,7 +655,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_map(self, async_client: AsyncNimbleway) -> None:
+    async def test_streaming_response_map(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.map(
             url="https://example.com",
         ) as response:
@@ -669,7 +669,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_search(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_search(self, async_client: AsyncNimble) -> None:
         client = await async_client.search(
             query="x",
         )
@@ -677,7 +677,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_search_with_all_params(self, async_client: AsyncNimbleway) -> None:
+    async def test_method_search_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.search(
             query="x",
             content_type=["string"],
@@ -700,7 +700,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_search(self, async_client: AsyncNimbleway) -> None:
+    async def test_raw_response_search(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.search(
             query="x",
         )
@@ -712,7 +712,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_search(self, async_client: AsyncNimbleway) -> None:
+    async def test_streaming_response_search(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.search(
             query="x",
         ) as response:

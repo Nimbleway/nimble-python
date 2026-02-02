@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class NimblewayError(Exception):
+class NimbleError(Exception):
     pass
 
 
-class APIError(NimblewayError):
+class APIError(NimbleError):
     message: str
     request: httpx.Request
 
