@@ -14,6 +14,13 @@ class ClientSearchParams(TypedDict, total=False):
     query: Required[str]
     """Search query string"""
 
+    content_type: Optional[SequenceNotStr[str]]
+    """Filter by content type (only supported with focus=general).
+
+    Supports semantic groups ('documents', 'spreadsheets', 'presentations') and
+    specific formats ('pdf', 'docx', 'xlsx', etc.)
+    """
+
     country: str
 
     deep_search: bool
@@ -64,5 +71,5 @@ class ClientSearchParams(TypedDict, total=False):
     time_range: Optional[Literal["hour", "day", "week", "month", "year"]]
     """Time range filters passed to Webit SERP API as 'time' parameter."""
 
-    topic: Literal["general", "news", "location", "coding", "geo", "shopping", "social"]
+    topic: Literal["general", "news", "location", "coding", "academic", "geo", "shopping", "social"]
     """Search focus/specialization (general, news, or location)"""

@@ -6,7 +6,9 @@ from .map_response import MapResponse as MapResponse
 from .search_response import SearchResponse as SearchResponse
 from .extract_response import ExtractResponse as ExtractResponse
 from .client_map_params import ClientMapParams as ClientMapParams
+from .crawl_list_params import CrawlListParams as CrawlListParams
 from .crawl_root_params import CrawlRootParams as CrawlRootParams
+from .crawl_list_response import CrawlListResponse as CrawlListResponse
 from .crawl_root_response import CrawlRootResponse as CrawlRootResponse
 from .client_search_params import ClientSearchParams as ClientSearchParams
 from .client_extract_params import ClientExtractParams as ClientExtractParams
