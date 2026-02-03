@@ -37,8 +37,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/nimbleway-python"
-Repository = "https://github.com/stainless-sdks/nimbleway-python"
+Homepage = "https://github.com/Nimbleway/nimble-python"
+Repository = "https://github.com/Nimbleway/nimble-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
@@ -112,7 +112,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/nimbleway-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/Nimbleway/nimble-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
