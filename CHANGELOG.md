@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.0 (2026-02-03)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/Nimbleway/nimble-python/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** Increase default timeout ([bb00c82](https://github.com/Nimbleway/nimble-python/commit/bb00c82062da9d9e812383364adf8c5b31f3c787))
+* **api:** manual updates ([fc70a1c](https://github.com/Nimbleway/nimble-python/commit/fc70a1cbc9dd6651de1ee8a564dfebb34f98af79))
+* trigger new release ([e1af702](https://github.com/Nimbleway/nimble-python/commit/e1af702364372e7140b4ed647bf63181272eb7be))
+
+
+### Chores
+
+* **api:** remove staging environment ([3788e48](https://github.com/Nimbleway/nimble-python/commit/3788e48dce4f59c8ecff201fc69078dc17a8d6e9))
+* **api:** Rename to nimble ([0dcaeda](https://github.com/Nimbleway/nimble-python/commit/0dcaedab384eddc0202a3228f3e013fc97c8a398))
+* remove custom code ([25cdd8b](https://github.com/Nimbleway/nimble-python/commit/25cdd8b57e91a4d1269ffc16de8ffb450560b425))
+* trigger release ([15b0fdb](https://github.com/Nimbleway/nimble-python/commit/15b0fdba8e7cfefa23871a1f65e0e45d8d786cff))
+* update SDK settings ([1eca32d](https://github.com/Nimbleway/nimble-python/commit/1eca32d03bf29acf16cd1c95a3bdf1fc8aa736e6))
+* update SDK settings ([e5719fa](https://github.com/Nimbleway/nimble-python/commit/e5719fa5eb38f4d9559642824225e991fdfe78c4))
+* update SDK settings ([b5717bf](https://github.com/Nimbleway/nimble-python/commit/b5717bf9aa3c3bae35331356817f4fcabc7914da))
+
 ## 0.2.0 (2026-02-03)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/Nimbleway/nimble-python/compare/v0.1.0...v0.2.0)
