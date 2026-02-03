@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING
 import anyio
 
 if TYPE_CHECKING:
-    from ._client import Nimble, AsyncNimble
+    from ._client import Nimbleway, AsyncNimbleway
 
 
 class SyncAPIResource:
-    _client: Nimble
+    _client: Nimbleway
 
-    def __init__(self, client: Nimble) -> None:
+    def __init__(self, client: Nimbleway) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -28,9 +28,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncNimble
+    _client: AsyncNimbleway
 
-    def __init__(self, client: AsyncNimble) -> None:
+    def __init__(self, client: AsyncNimbleway) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

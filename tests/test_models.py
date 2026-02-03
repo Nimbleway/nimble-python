@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from nimble_python._utils import PropertyInfo
-from nimble_python._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from nimble_python._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
+from nimbleway._utils import PropertyInfo
+from nimbleway._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from nimbleway._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

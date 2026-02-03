@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from nimble_python._qs import Querystring, stringify
+from nimbleway._qs import Querystring, stringify
 
 
 def test_empty() -> None:
