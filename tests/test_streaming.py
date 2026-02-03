@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from nimbleway import Nimbleway, AsyncNimbleway
-from nimbleway._streaming import Stream, AsyncStream, ServerSentEvent
+from nimble_python import Nimbleway, AsyncNimbleway
+from nimble_python._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

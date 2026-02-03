@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from nimbleway import Nimbleway, AsyncNimbleway
 from tests.utils import assert_matches_type
-from nimbleway.types import (
+from nimble_python import Nimbleway, AsyncNimbleway
+from nimble_python.types import (
     MapResponse,
     SearchResponse,
     ExtractResponse,

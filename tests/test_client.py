@@ -19,12 +19,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from nimbleway import Nimbleway, AsyncNimbleway, APIResponseValidationError
-from nimbleway._types import Omit
-from nimbleway._utils import asyncify
-from nimbleway._models import BaseModel, FinalRequestOptions
-from nimbleway._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
-from nimbleway._base_client import (
+from nimble_python import Nimbleway, AsyncNimbleway, APIResponseValidationError
+from nimble_python._types import Omit
+from nimble_python._utils import asyncify
+from nimble_python._models import BaseModel, FinalRequestOptions
+from nimble_python._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from nimble_python._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -286,10 +286,10 @@ class TestNimbleway:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "nimbleway/_legacy_response.py",
-                        "nimbleway/_response.py",
+                        "nimble_python/_legacy_response.py",
+                        "nimble_python/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "nimbleway/_compat.py",
+                        "nimble_python/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -404,7 +404,7 @@ class TestNimbleway:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with update_env(**{"NIMBLEWAY_API_KEY": Omit()}):
+        with update_env(**{"NIMBLE_API_KEY": Omit()}):
             client2 = Nimbleway(base_url=base_url, api_key=None, _strict_response_validation=True)
 
         with pytest.raises(
@@ -867,7 +867,7 @@ class TestNimbleway:
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Nimbleway) -> None:
         respx_mock.post("/v1/extract").mock(side_effect=httpx.TimeoutException("Test timeout error"))
@@ -877,7 +877,7 @@ class TestNimbleway:
 
         assert _get_open_connections(client) == 0
 
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Nimbleway) -> None:
         respx_mock.post("/v1/extract").mock(return_value=httpx.Response(500))
@@ -887,7 +887,7 @@ class TestNimbleway:
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
@@ -918,7 +918,7 @@ class TestNimbleway:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
         self, client: Nimbleway, failures_before_success: int, respx_mock: MockRouter
@@ -943,7 +943,7 @@ class TestNimbleway:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
         self, client: Nimbleway, failures_before_success: int, respx_mock: MockRouter
@@ -1190,10 +1190,10 @@ class TestAsyncNimbleway:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "nimbleway/_legacy_response.py",
-                        "nimbleway/_response.py",
+                        "nimble_python/_legacy_response.py",
+                        "nimble_python/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "nimbleway/_compat.py",
+                        "nimble_python/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1310,7 +1310,7 @@ class TestAsyncNimbleway:
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with update_env(**{"NIMBLEWAY_API_KEY": Omit()}):
+        with update_env(**{"NIMBLE_API_KEY": Omit()}):
             client2 = AsyncNimbleway(base_url=base_url, api_key=None, _strict_response_validation=True)
 
         with pytest.raises(
@@ -1790,7 +1790,7 @@ class TestAsyncNimbleway:
         calculated = async_client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncNimbleway
@@ -1804,7 +1804,7 @@ class TestAsyncNimbleway:
 
         assert _get_open_connections(async_client) == 0
 
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncNimbleway
@@ -1818,7 +1818,7 @@ class TestAsyncNimbleway:
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
@@ -1849,7 +1849,7 @@ class TestAsyncNimbleway:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_omit_retry_count_header(
         self, async_client: AsyncNimbleway, failures_before_success: int, respx_mock: MockRouter
@@ -1874,7 +1874,7 @@ class TestAsyncNimbleway:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("nimbleway._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("nimble_python._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_overwrite_retry_count_header(
         self, async_client: AsyncNimbleway, failures_before_success: int, respx_mock: MockRouter

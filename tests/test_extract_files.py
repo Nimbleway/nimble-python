@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from nimbleway._types import FileTypes
-from nimbleway._utils import extract_files
+from nimble_python._types import FileTypes
+from nimble_python._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

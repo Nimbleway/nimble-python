@@ -1,7 +1,7 @@
 # Nimbleway Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/nimbleway.svg?label=pypi%20(stable))](https://pypi.org/project/nimbleway/)
+[![PyPI version](https://img.shields.io/pypi/v/nimble_python.svg?label=pypi%20(stable))](https://pypi.org/project/nimble_python/)
 
 The Nimbleway Python library provides convenient access to the Nimbleway REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -13,8 +13,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Use the Nimbleway MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=nimbleway-mcp&config=eyJuYW1lIjoibmltYmxld2F5LW1jcCIsInRyYW5zcG9ydCI6Imh0dHAiLCJ1cmwiOiJodHRwczovL25pbWJsZXdheS5zdGxtY3AuY29tIiwiaGVhZGVycyI6eyJ4LW5pbWJsZXdheS1hcGkta2V5IjoiTXkgQVBJIEtleSJ9fQ)
-[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22nimbleway-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fnimbleway.stlmcp.com%22%2C%22headers%22%3A%7B%22x-nimbleway-api-key%22%3A%22My%20API%20Key%22%7D%7D)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=nimble-mcp&config=eyJuYW1lIjoibmltYmxlLW1jcCIsInRyYW5zcG9ydCI6Imh0dHAiLCJ1cmwiOiJodHRwczovL25pbWJsZXdheS5zdGxtY3AuY29tIiwiaGVhZGVycyI6eyJ4LW5pbWJsZS1hcGkta2V5IjoiTXkgQVBJIEtleSJ9fQ)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22nimble-mcp%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fnimbleway.stlmcp.com%22%2C%22headers%22%3A%7B%22x-nimble-api-key%22%3A%22My%20API%20Key%22%7D%7D)
 
 > Note: You may need to set environment variables in your MCP client.
 
@@ -30,7 +30,7 @@ pip install git+ssh://git@github.com/stainless-sdks/nimbleway-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install nimbleway`
+> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install nimble_python`
 
 ## Usage
 
@@ -38,10 +38,10 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from nimbleway import Nimbleway
+from nimble_python import Nimbleway
 
 client = Nimbleway(
-    api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
     # defaults to "staging".
     environment="production",
 )
@@ -55,7 +55,7 @@ print(response.id)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `NIMBLEWAY_API_KEY="My API Key"` to your `.env` file
+to add `NIMBLE_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -65,10 +65,10 @@ Simply import `AsyncNimbleway` instead of `Nimbleway` and use `await` with each 
 ```python
 import os
 import asyncio
-from nimbleway import AsyncNimbleway
+from nimble_python import AsyncNimbleway
 
 client = AsyncNimbleway(
-    api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
     # defaults to "staging".
     environment="production",
 )
@@ -95,7 +95,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from this staging repo
-pip install 'nimbleway[aiohttp] @ git+ssh://git@github.com/stainless-sdks/nimbleway-python.git'
+pip install 'nimble_python[aiohttp] @ git+ssh://git@github.com/stainless-sdks/nimbleway-python.git'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
@@ -103,13 +103,13 @@ Then you can enable it by instantiating the client with `http_client=DefaultAioH
 ```python
 import os
 import asyncio
-from nimbleway import DefaultAioHttpClient
-from nimbleway import AsyncNimbleway
+from nimble_python import DefaultAioHttpClient
+from nimble_python import AsyncNimbleway
 
 
 async def main() -> None:
     async with AsyncNimbleway(
-        api_key=os.environ.get("NIMBLEWAY_API_KEY"),  # This is the default and can be omitted
+        api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.extract(
@@ -136,7 +136,7 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from nimbleway import Nimbleway
+from nimble_python import Nimbleway
 
 client = Nimbleway()
 
@@ -149,16 +149,16 @@ print(response.debug_options)
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `nimbleway.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `nimble_python.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `nimbleway.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `nimble_python.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `nimbleway.APIError`.
+All errors inherit from `nimble_python.APIError`.
 
 ```python
-import nimbleway
-from nimbleway import Nimbleway
+import nimble_python
+from nimble_python import Nimbleway
 
 client = Nimbleway()
 
@@ -167,12 +167,12 @@ try:
         debug_options={},
         url="https://example.com",
     )
-except nimbleway.APIConnectionError as e:
+except nimble_python.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except nimbleway.RateLimitError as e:
+except nimble_python.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except nimbleway.APIStatusError as e:
+except nimble_python.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -200,7 +200,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from nimbleway import Nimbleway
+from nimble_python import Nimbleway
 
 # Configure the default for all requests:
 client = Nimbleway(
@@ -221,7 +221,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from nimbleway import Nimbleway
+from nimble_python import Nimbleway
 
 # Configure the default for all requests:
 client = Nimbleway(
@@ -276,7 +276,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from nimbleway import Nimbleway
+from nimble_python import Nimbleway
 
 client = Nimbleway()
 response = client.with_raw_response.extract(
@@ -289,9 +289,9 @@ client = response.parse()  # get the object that `extract()` would have returned
 print(client.id)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/nimbleway-python/tree/main/src/nimbleway/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/nimbleway-python/tree/main/src/nimble_python/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/nimbleway-python/tree/main/src/nimbleway/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/nimbleway-python/tree/main/src/nimble_python/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -356,7 +356,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from nimbleway import Nimbleway, DefaultHttpxClient
+from nimble_python import Nimbleway, DefaultHttpxClient
 
 client = Nimbleway(
     # Or use the `NIMBLEWAY_BASE_URL` env var
@@ -379,7 +379,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from nimbleway import Nimbleway
+from nimble_python import Nimbleway
 
 with Nimbleway() as client:
   # make requests here
@@ -407,8 +407,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import nimbleway
-print(nimbleway.__version__)
+import nimble_python
+print(nimble_python.__version__)
 ```
 
 ## Requirements

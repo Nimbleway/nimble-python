@@ -10,15 +10,15 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from nimbleway import Nimbleway, AsyncNimbleway, DefaultAioHttpClient
-from nimbleway._utils import is_dict
+from nimble_python import Nimbleway, AsyncNimbleway, DefaultAioHttpClient
+from nimble_python._utils import is_dict
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("nimbleway").setLevel(logging.DEBUG)
+logging.getLogger("nimble_python").setLevel(logging.DEBUG)
 
 
 # automatically add `pytest.mark.asyncio()` to all of our async tests
