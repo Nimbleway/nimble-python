@@ -5,8 +5,8 @@ from typing import Union
 
 import pydantic
 
-from nimble_python import _compat
-from nimble_python._utils._json import openapi_dumps
+from nimbleway import _compat
+from nimbleway._utils._json import openapi_dumps
 
 
 class TestOpenapiDumps:
