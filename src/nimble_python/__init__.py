@@ -8,13 +8,13 @@ from ._utils import file_from_path
 from ._client import (
     ENVIRONMENTS,
     Client,
-    Nimble,
     Stream,
     Timeout,
+    Nimbleway,
     Transport,
     AsyncClient,
-    AsyncNimble,
     AsyncStream,
+    AsyncNimbleway,
     RequestOptions,
 )
 from ._models import BaseModel
@@ -23,10 +23,10 @@ from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIR
 from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
-    NimbleError,
     ConflictError,
     NotFoundError,
     APIStatusError,
+    NimblewayError,
     RateLimitError,
     APITimeoutError,
     BadRequestError,
@@ -52,7 +52,7 @@ __all__ = [
     "not_given",
     "Omit",
     "omit",
-    "NimbleError",
+    "NimblewayError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -72,8 +72,8 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "Nimble",
-    "AsyncNimble",
+    "Nimbleway",
+    "AsyncNimbleway",
     "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",

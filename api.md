@@ -1,4 +1,4 @@
-# Nimble
+# Nimbleway
 
 Types:
 

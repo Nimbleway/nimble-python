@@ -10,7 +10,7 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from nimble_python import Nimble, AsyncNimble, DefaultAioHttpClient
+from nimble_python import Nimbleway, AsyncNimbleway, DefaultAioHttpClient
 from nimble_python._utils import is_dict
 
 if TYPE_CHECKING:
@@ -49,17 +49,17 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[Nimble]:
+def client(request: FixtureRequest) -> Iterator[Nimbleway]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with Nimble(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Nimbleway(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncNimble]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncNimbleway]:
     param = getattr(request, "param", True)
 
     # defaults
@@ -78,7 +78,7 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncNimble]:
     else:
         raise TypeError(f"Unexpected fixture parameter type {type(param)}, expected bool or dict")
 
-    async with AsyncNimble(
+    async with AsyncNimbleway(
         base_url=base_url, api_key=api_key, _strict_response_validation=strict, http_client=http_client
     ) as client:
         yield client

@@ -14,7 +14,7 @@ def _basic_config() -> None:
 
 
 def setup_logging() -> None:
-    env = os.environ.get("NIMBLE_LOG")
+    env = os.environ.get("NIMBLEWAY_LOG")
     if env == "debug":
         _basic_config()
         logger.setLevel(logging.DEBUG)

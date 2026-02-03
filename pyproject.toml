@@ -1,11 +1,11 @@
 [project]
 name = "nimble_python"
-version = "0.1.0"
-description = "The official Python library for the nimble API"
+version = "0.2.0"
+description = "The official Python library for the nimbleway API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Nimble", email = "support@nimbleway.com" },
+{ name = "Nimbleway", email = "support@nimbleway.com" },
 ]
 
 dependencies = [
