@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, Iterable, Optional, cast
+from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, Iterable, Optional
 from typing_extensions import Self, Literal, override
 
 import httpx
@@ -56,36 +56,18 @@ if TYPE_CHECKING:
     from .resources import crawl
     from .resources.crawl import CrawlResource, AsyncCrawlResource
 
-__all__ = [
-    "ENVIRONMENTS",
-    "Timeout",
-    "Transport",
-    "ProxiesTypes",
-    "RequestOptions",
-    "Nimbleway",
-    "AsyncNimbleway",
-    "Client",
-    "AsyncClient",
-]
-
-ENVIRONMENTS: Dict[str, str] = {
-    "staging": "https://gateway.staging.webit.live",
-    "production": "https://gateway.webit.live",
-}
+__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 
 
-class Nimbleway(SyncAPIClient):
+class Nimble(SyncAPIClient):
     # client options
     api_key: str | None
-
-    _environment: Literal["staging", "production"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["staging", "production"] | NotGiven = not_given,
-        base_url: str | httpx.URL | None | NotGiven = not_given,
+        base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -104,7 +86,7 @@ class Nimbleway(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Nimbleway client instance.
+        """Construct a new synchronous Nimble client instance.
 
         This automatically infers the `api_key` argument from the `NIMBLE_API_KEY` environment variable if it is not provided.
         """
@@ -112,31 +94,10 @@ class Nimbleway(SyncAPIClient):
             api_key = os.environ.get("NIMBLE_API_KEY")
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("NIMBLEWAY_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `NIMBLEWAY_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "staging"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("NIMBLE_BASE_URL")
+        if base_url is None:
+            base_url = f"https://gateway.webit.live"
 
         super().__init__(
             version=__version__,
@@ -156,12 +117,12 @@ class Nimbleway(SyncAPIClient):
         return CrawlResource(self)
 
     @cached_property
-    def with_raw_response(self) -> NimblewayWithRawResponse:
-        return NimblewayWithRawResponse(self)
+    def with_raw_response(self) -> NimbleWithRawResponse:
+        return NimbleWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> NimblewayWithStreamedResponse:
-        return NimblewayWithStreamedResponse(self)
+    def with_streaming_response(self) -> NimbleWithStreamedResponse:
+        return NimbleWithStreamedResponse(self)
 
     @property
     @override
@@ -198,7 +159,6 @@ class Nimbleway(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["staging", "production"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -234,7 +194,6 @@ class Nimbleway(SyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -2374,18 +2333,15 @@ class Nimbleway(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncNimbleway(AsyncAPIClient):
+class AsyncNimble(AsyncAPIClient):
     # client options
     api_key: str | None
-
-    _environment: Literal["staging", "production"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["staging", "production"] | NotGiven = not_given,
-        base_url: str | httpx.URL | None | NotGiven = not_given,
+        base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -2404,7 +2360,7 @@ class AsyncNimbleway(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncNimbleway client instance.
+        """Construct a new async AsyncNimble client instance.
 
         This automatically infers the `api_key` argument from the `NIMBLE_API_KEY` environment variable if it is not provided.
         """
@@ -2412,31 +2368,10 @@ class AsyncNimbleway(AsyncAPIClient):
             api_key = os.environ.get("NIMBLE_API_KEY")
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("NIMBLEWAY_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `NIMBLEWAY_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "staging"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("NIMBLE_BASE_URL")
+        if base_url is None:
+            base_url = f"https://gateway.webit.live"
 
         super().__init__(
             version=__version__,
@@ -2456,12 +2391,12 @@ class AsyncNimbleway(AsyncAPIClient):
         return AsyncCrawlResource(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncNimblewayWithRawResponse:
-        return AsyncNimblewayWithRawResponse(self)
+    def with_raw_response(self) -> AsyncNimbleWithRawResponse:
+        return AsyncNimbleWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncNimblewayWithStreamedResponse:
-        return AsyncNimblewayWithStreamedResponse(self)
+    def with_streaming_response(self) -> AsyncNimbleWithStreamedResponse:
+        return AsyncNimbleWithStreamedResponse(self)
 
     @property
     @override
@@ -2498,7 +2433,6 @@ class AsyncNimbleway(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["staging", "production"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -2534,7 +2468,6 @@ class AsyncNimbleway(AsyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -4674,10 +4607,10 @@ class AsyncNimbleway(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class NimblewayWithRawResponse:
-    _client: Nimbleway
+class NimbleWithRawResponse:
+    _client: Nimble
 
-    def __init__(self, client: Nimbleway) -> None:
+    def __init__(self, client: Nimble) -> None:
         self._client = client
 
         self.extract = to_raw_response_wrapper(
@@ -4700,10 +4633,10 @@ class NimblewayWithRawResponse:
         return CrawlResourceWithRawResponse(self._client.crawl)
 
 
-class AsyncNimblewayWithRawResponse:
-    _client: AsyncNimbleway
+class AsyncNimbleWithRawResponse:
+    _client: AsyncNimble
 
-    def __init__(self, client: AsyncNimbleway) -> None:
+    def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
         self.extract = async_to_raw_response_wrapper(
@@ -4726,10 +4659,10 @@ class AsyncNimblewayWithRawResponse:
         return AsyncCrawlResourceWithRawResponse(self._client.crawl)
 
 
-class NimblewayWithStreamedResponse:
-    _client: Nimbleway
+class NimbleWithStreamedResponse:
+    _client: Nimble
 
-    def __init__(self, client: Nimbleway) -> None:
+    def __init__(self, client: Nimble) -> None:
         self._client = client
 
         self.extract = to_streamed_response_wrapper(
@@ -4752,10 +4685,10 @@ class NimblewayWithStreamedResponse:
         return CrawlResourceWithStreamingResponse(self._client.crawl)
 
 
-class AsyncNimblewayWithStreamedResponse:
-    _client: AsyncNimbleway
+class AsyncNimbleWithStreamedResponse:
+    _client: AsyncNimble
 
-    def __init__(self, client: AsyncNimbleway) -> None:
+    def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
         self.extract = async_to_streamed_response_wrapper(
@@ -4778,6 +4711,6 @@ class AsyncNimblewayWithStreamedResponse:
         return AsyncCrawlResourceWithStreamingResponse(self._client.crawl)
 
 
-Client = Nimbleway
+Client = Nimble
 
-AsyncClient = AsyncNimbleway
+AsyncClient = AsyncNimble
