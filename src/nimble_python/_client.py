@@ -106,10 +106,10 @@ class Nimbleway(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Nimbleway client instance.
 
-        This automatically infers the `api_key` argument from the `NIMBLEWAY_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `NIMBLE_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("NIMBLEWAY_API_KEY")
+            api_key = os.environ.get("NIMBLE_API_KEY")
         self.api_key = api_key
 
         self._environment = environment
@@ -2406,10 +2406,10 @@ class AsyncNimbleway(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncNimbleway client instance.
 
-        This automatically infers the `api_key` argument from the `NIMBLEWAY_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `NIMBLE_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("NIMBLEWAY_API_KEY")
+            api_key = os.environ.get("NIMBLE_API_KEY")
         self.api_key = api_key
 
         self._environment = environment
