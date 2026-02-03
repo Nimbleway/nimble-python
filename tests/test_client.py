@@ -698,16 +698,6 @@ class TestNimble:
             client = Nimble(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(NIMBLE_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                Nimble(api_key=api_key, _strict_response_validation=True, environment="staging")
-
-            client = Nimble(base_url=None, api_key=api_key, _strict_response_validation=True, environment="staging")
-            assert str(client.base_url).startswith("https://gateway.staging.webit.live")
-
-            client.close()
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -1609,18 +1599,6 @@ class TestAsyncNimble:
         with update_env(NIMBLE_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncNimble(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
-
-        # explicit environment arg requires explicitness
-        with update_env(NIMBLE_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncNimble(api_key=api_key, _strict_response_validation=True, environment="staging")
-
-            client = AsyncNimble(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="staging"
-            )
-            assert str(client.base_url).startswith("https://gateway.staging.webit.live")
-
-            await client.close()
 
     @pytest.mark.parametrize(
         "client",
