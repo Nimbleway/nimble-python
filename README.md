@@ -41,9 +41,9 @@ client = Nimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.extract(
-    debug_options={},
-    url="https://example.com",
+response = client.extract_template(
+    params={"prompt": "Who is the best NBA of all times?"},
+    template="chatgpt",
 )
 print(response.id)
 ```
@@ -68,9 +68,9 @@ client = AsyncNimble(
 
 
 async def main() -> None:
-    response = await client.extract(
-        debug_options={},
-        url="https://example.com",
+    response = await client.extract_template(
+        params={"prompt": "Who is the best NBA of all times?"},
+        template="chatgpt",
     )
     print(response.id)
 
@@ -105,9 +105,9 @@ async def main() -> None:
         api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.extract(
-            debug_options={},
-            url="https://example.com",
+        response = await client.extract_template(
+            params={"prompt": "Who is the best NBA of all times?"},
+            template="chatgpt",
         )
         print(response.id)
 
