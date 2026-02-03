@@ -70,7 +70,7 @@ __all__ = [
 
 ENVIRONMENTS: Dict[str, str] = {
     "staging": "https://gateway.staging.webit.live",
-    "production": "https://gateway.webit.live",
+    "production": "https://sdk.nimbleway.com",
 }
 
 
