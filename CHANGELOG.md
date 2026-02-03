@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0 (2026-02-03)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/Nimbleway/nimble-python/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([dbbb503](https://github.com/Nimbleway/nimble-python/commit/dbbb503d1ba49d48f7159cf792e41a5fbcaf0461))
+
+
+### Chores
+
+* **api:** Revert to gateway.webit.live ([45b8b23](https://github.com/Nimbleway/nimble-python/commit/45b8b23f99cc5215d298eedb5457bca62ecc8da7))
+* update SDK settings ([7496741](https://github.com/Nimbleway/nimble-python/commit/7496741054fef00e311f97b076e2e135fc72554f))
+* update SDK settings ([785c2e1](https://github.com/Nimbleway/nimble-python/commit/785c2e1efa3922961dd8dc6130eb8e122a2eec1e))
+
 ## 0.1.0 (2026-02-03)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/Nimbleway/nimble-python/compare/v0.0.1...v0.1.0)
