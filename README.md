@@ -39,8 +39,6 @@ from nimble_python import Nimble
 
 client = Nimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
-    # defaults to "staging".
-    environment="production",
 )
 
 response = client.extract(
@@ -66,8 +64,6 @@ from nimble_python import AsyncNimble
 
 client = AsyncNimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
-    # defaults to "staging".
-    environment="production",
 )
 
 

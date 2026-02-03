@@ -5,18 +5,7 @@ import typing as _t
 from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes, omit, not_given
 from ._utils import file_from_path
-from ._client import (
-    ENVIRONMENTS,
-    Client,
-    Nimble,
-    Stream,
-    Timeout,
-    Transport,
-    AsyncClient,
-    AsyncNimble,
-    AsyncStream,
-    RequestOptions,
-)
+from ._client import Client, Nimble, Stream, Timeout, Transport, AsyncClient, AsyncNimble, AsyncStream, RequestOptions
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
@@ -74,7 +63,6 @@ __all__ = [
     "AsyncStream",
     "Nimble",
     "AsyncNimble",
-    "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",
