@@ -106,7 +106,7 @@ class Nimble(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("NIMBLE_BASE_URL")
         if base_url is None:
-            base_url = f"https://gateway.webit.live"
+            base_url = f"https://sdk.nimbleway.com"
 
         super().__init__(
             version=__version__,
@@ -2509,7 +2509,7 @@ class AsyncNimble(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("NIMBLE_BASE_URL")
         if base_url is None:
-            base_url = f"https://gateway.webit.live"
+            base_url = f"https://sdk.nimbleway.com"
 
         super().__init__(
             version=__version__,
