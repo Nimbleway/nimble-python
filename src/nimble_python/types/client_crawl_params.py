@@ -9,7 +9,7 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
-    "CrawlRootParams",
+    "ClientCrawlParams",
     "Callback",
     "CallbackUnionMember0",
     "ExtractOptions",
@@ -32,7 +32,7 @@ __all__ = [
 ]
 
 
-class CrawlRootParams(TypedDict, total=False):
+class ClientCrawlParams(TypedDict, total=False):
     url: Required[str]
     """Url to crawl."""
 
