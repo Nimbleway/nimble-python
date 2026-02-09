@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["CrawlRootResponse", "CrawlOptions", "CrawlOptionsCallback", "CrawlOptionsCallbackUnionMember0", "Task"]
+__all__ = ["CrawlResponse", "CrawlOptions", "CrawlOptionsCallback", "CrawlOptionsCallbackUnionMember0", "Task"]
 
 
 class CrawlOptionsCallbackUnionMember0(BaseModel):
@@ -69,7 +69,7 @@ class Task(BaseModel):
     updated_at: Union[str, Dict[str, object], None] = None
 
 
-class CrawlRootResponse(BaseModel):
+class CrawlResponse(BaseModel):
     id: str
 
     account_name: str
