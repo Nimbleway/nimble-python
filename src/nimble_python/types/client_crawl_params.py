@@ -9,11 +9,10 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
-    "CrawlRootParams",
+    "ClientCrawlParams",
     "Callback",
     "CallbackUnionMember0",
     "ExtractOptions",
-    "ExtractOptionsDebugOptions",
     "ExtractOptionsBrowser",
     "ExtractOptionsBrowserUnionMember1",
     "ExtractOptionsCookiesUnionMember0",
@@ -33,7 +32,7 @@ __all__ = [
 ]
 
 
-class CrawlRootParams(TypedDict, total=False):
+class ClientCrawlParams(TypedDict, total=False):
     url: Required[str]
     """Url to crawl."""
 
@@ -78,43 +77,15 @@ class CrawlRootParams(TypedDict, total=False):
 
 class CallbackUnionMember0(TypedDict, total=False):
     url: Required[str]
-    """Webhook URL to receive crawl results."""
 
-    events: List[Literal["completed", "page", "failed", "started"]]
-    """Type of events that should be sent to the webhook URL. (default: all)"""
+    events: List[Literal["started", "page", "completed", "failed"]]
 
-    headers: Dict[str, object]
-    """Headers to send to the webhook URL."""
+    headers: Dict[str, str]
 
     metadata: Dict[str, object]
-    """Custom metadata that will be included in all webhook payloads for this crawl."""
 
 
 Callback: TypeAlias = Union[CallbackUnionMember0, str]
-
-
-class ExtractOptionsDebugOptions(TypedDict, total=False):
-    """Debug and troubleshooting options for the request"""
-
-    collect_har: Union[bool, Literal["never", "on-error", "always"]]
-
-    no_retry_mode: Union[bool, Literal["never", "always"]]
-
-    record_screen: Union[bool, Literal["never", "on-error", "always"]]
-
-    redact: Union[bool, Literal["never", "always"]]
-
-    show_cursor: Union[bool, Literal["never", "always"]]
-
-    solve_captcha: Union[bool, Literal["never", "always"]]
-
-    trace: Union[bool, Literal["never", "on-error", "always"]]
-
-    upload_engine_logs: Union[bool, Literal["never", "on-error", "always"]]
-
-    verbose: Union[bool, Literal["never", "always"]]
-
-    with_proxy_usage: Union[bool, Literal["never", "always"]]
 
 
 class ExtractOptionsBrowserUnionMember1(TypedDict, total=False):
@@ -412,12 +383,6 @@ class ExtractOptionsUserbrowserCreationTemplateRendered(TypedDict, total=False):
 
 
 class ExtractOptions(TypedDict, total=False):
-    debug_options: Required[ExtractOptionsDebugOptions]
-    """Debug and troubleshooting options for the request"""
-
-    url: Required[str]
-    """Target URL to scrape"""
-
     browser: ExtractOptionsBrowser
     """Browser type to emulate"""
 
@@ -702,9 +667,6 @@ class ExtractOptions(TypedDict, total=False):
 
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
-
-    export_userbrowser: bool
-    """Whether to export the userbrowser session"""
 
     format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"]
     """Response format"""
@@ -1342,9 +1304,6 @@ class ExtractOptions(TypedDict, total=False):
     request_timeout: float
     """Request timeout in milliseconds"""
 
-    return_response_headers_as_header: bool
-    """Whether to return response headers in HTTP headers"""
-
     save_userbrowser: bool
     """Whether to save the userbrowser session for reuse"""
 
@@ -1424,6 +1383,9 @@ class ExtractOptions(TypedDict, total=False):
 
     type: str
     """Type of query or scraping template"""
+
+    url: str
+    """Target URL to scrape"""
 
     userbrowser_creation_template_rendered: ExtractOptionsUserbrowserCreationTemplateRendered
     """Pre-rendered userbrowser creation template configuration"""

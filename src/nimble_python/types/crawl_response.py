@@ -7,18 +7,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = [
-    "CrawlListResponse",
-    "Data",
-    "DataCrawlOptions",
-    "DataCrawlOptionsCallback",
-    "DataCrawlOptionsCallbackUnionMember0",
-    "DataTask",
-    "Pagination",
-]
+__all__ = ["CrawlResponse", "CrawlOptions", "CrawlOptionsCallback", "CrawlOptionsCallbackUnionMember0", "Task"]
 
 
-class DataCrawlOptionsCallbackUnionMember0(BaseModel):
+class CrawlOptionsCallbackUnionMember0(BaseModel):
     url: str
 
     events: Optional[List[Literal["started", "page", "completed", "failed"]]] = None
@@ -28,10 +20,10 @@ class DataCrawlOptionsCallbackUnionMember0(BaseModel):
     metadata: Optional[Dict[str, object]] = None
 
 
-DataCrawlOptionsCallback: TypeAlias = Union[DataCrawlOptionsCallbackUnionMember0, str]
+CrawlOptionsCallback: TypeAlias = Union[CrawlOptionsCallbackUnionMember0, str]
 
 
-class DataCrawlOptions(BaseModel):
+class CrawlOptions(BaseModel):
     allow_external_links: bool
 
     allow_subdomains: bool
@@ -46,7 +38,7 @@ class DataCrawlOptions(BaseModel):
 
     sitemap: Literal["skip", "include", "only"]
 
-    callback: Optional[DataCrawlOptionsCallback] = None
+    callback: Optional[CrawlOptionsCallback] = None
 
     exclude_paths: Optional[List[str]] = None
 
@@ -65,7 +57,7 @@ class DataCrawlOptions(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class DataTask(BaseModel):
+class Task(BaseModel):
     crawl_id: str
 
     status: Literal["pending", "completed", "failed"]
@@ -77,12 +69,12 @@ class DataTask(BaseModel):
     updated_at: Union[str, Dict[str, object], None] = None
 
 
-class Data(BaseModel):
+class CrawlResponse(BaseModel):
     id: str
 
     account_name: str
 
-    crawl_options: DataCrawlOptions
+    crawl_options: CrawlOptions
 
     created_at: Union[str, Dict[str, object]]
 
@@ -106,22 +98,6 @@ class Data(BaseModel):
 
     pending: Optional[float] = None
 
-    tasks: Optional[List[DataTask]] = None
+    tasks: Optional[List[Task]] = None
 
     total: Optional[float] = None
-
-
-class Pagination(BaseModel):
-    has_next: bool
-
-    next_cursor: Optional[str] = None
-
-    total: Optional[float] = None
-
-
-class CrawlListResponse(BaseModel):
-    """Successful get crawl response"""
-
-    data: List[Data]
-
-    pagination: Pagination

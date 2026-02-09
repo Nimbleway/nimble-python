@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0 (2026-02-09)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/Nimbleway/nimble-python/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** Add agents and rename agent ([a72d77b](https://github.com/Nimbleway/nimble-python/commit/a72d77b446b25b5f685066254ff0bdfb05918bad))
+* **api:** api update ([6f67725](https://github.com/Nimbleway/nimble-python/commit/6f67725ba6f96018e072780ae22d38cfd1ba0ad8))
+* **api:** Move crawl to client ([118165a](https://github.com/Nimbleway/nimble-python/commit/118165ab63206ae7e6435b8486c25f5bf71f55a5))
+* **api:** To sdk.nimbleway.com ([3dc176d](https://github.com/Nimbleway/nimble-python/commit/3dc176de8a29d3df6bfb6385d941a7881a8f56cd))
+
+
+### Chores
+
+* configure new SDK language ([1034102](https://github.com/Nimbleway/nimble-python/commit/103410232991048870d008a98e1a6a8baf8977d6))
+
 ## 0.3.0 (2026-02-03)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/Nimbleway/nimble-python/compare/v0.2.0...v0.3.0)

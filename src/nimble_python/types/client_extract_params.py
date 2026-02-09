@@ -10,7 +10,6 @@ from .._utils import PropertyInfo
 
 __all__ = [
     "ClientExtractParams",
-    "DebugOptions",
     "Browser",
     "BrowserUnionMember1",
     "CookiesUnionMember0",
@@ -31,9 +30,6 @@ __all__ = [
 
 
 class ClientExtractParams(TypedDict, total=False):
-    debug_options: Required[DebugOptions]
-    """Debug and troubleshooting options for the request"""
-
     url: Required[str]
     """Target URL to scrape"""
 
@@ -321,9 +317,6 @@ class ClientExtractParams(TypedDict, total=False):
 
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
-
-    export_userbrowser: bool
-    """Whether to export the userbrowser session"""
 
     format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"]
     """Response format"""
@@ -961,9 +954,6 @@ class ClientExtractParams(TypedDict, total=False):
     request_timeout: float
     """Request timeout in milliseconds"""
 
-    return_response_headers_as_header: bool
-    """Whether to return response headers in HTTP headers"""
-
     save_userbrowser: bool
     """Whether to save the userbrowser session for reuse"""
 
@@ -1046,30 +1036,6 @@ class ClientExtractParams(TypedDict, total=False):
 
     userbrowser_creation_template_rendered: UserbrowserCreationTemplateRendered
     """Pre-rendered userbrowser creation template configuration"""
-
-
-class DebugOptions(TypedDict, total=False):
-    """Debug and troubleshooting options for the request"""
-
-    collect_har: Union[bool, Literal["never", "on-error", "always"]]
-
-    no_retry_mode: Union[bool, Literal["never", "always"]]
-
-    record_screen: Union[bool, Literal["never", "on-error", "always"]]
-
-    redact: Union[bool, Literal["never", "always"]]
-
-    show_cursor: Union[bool, Literal["never", "always"]]
-
-    solve_captcha: Union[bool, Literal["never", "always"]]
-
-    trace: Union[bool, Literal["never", "on-error", "always"]]
-
-    upload_engine_logs: Union[bool, Literal["never", "on-error", "always"]]
-
-    verbose: Union[bool, Literal["never", "always"]]
-
-    with_proxy_usage: Union[bool, Literal["never", "always"]]
 
 
 class BrowserUnionMember1(TypedDict, total=False):
