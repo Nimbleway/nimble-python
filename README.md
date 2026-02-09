@@ -42,7 +42,7 @@ client = Nimble(
 )
 
 response = client.extract(
-    url="https://example.com",
+    url="https://example.com/page",
 )
 print(response.task_id)
 ```
@@ -68,7 +68,7 @@ client = AsyncNimble(
 
 async def main() -> None:
     response = await client.extract(
-        url="https://example.com",
+        url="https://example.com/page",
     )
     print(response.task_id)
 
@@ -104,7 +104,7 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.extract(
-            url="https://example.com",
+            url="https://example.com/page",
         )
         print(response.task_id)
 
@@ -154,7 +154,7 @@ client = Nimble()
 
 try:
     client.extract(
-        url="https://example.com",
+        url="https://example.com/page",
     )
 except nimble_python.APIConnectionError as e:
     print("The server could not be reached")
@@ -199,7 +199,7 @@ client = Nimble(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).extract(
-    url="https://example.com",
+    url="https://example.com/page",
 )
 ```
 
@@ -224,7 +224,7 @@ client = Nimble(
 
 # Override per-request:
 client.with_options(timeout=5.0).extract(
-    url="https://example.com",
+    url="https://example.com/page",
 )
 ```
 
@@ -267,7 +267,7 @@ from nimble_python import Nimble
 
 client = Nimble()
 response = client.with_raw_response.extract(
-    url="https://example.com",
+    url="https://example.com/page",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -287,7 +287,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.with_streaming_response.extract(
-    url="https://example.com",
+    url="https://example.com/page",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
