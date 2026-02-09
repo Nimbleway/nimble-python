@@ -5,7 +5,14 @@ from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["SearchResponse", "Result", "ResultMetadata", "ResultMetadataSerpMetadata", "ResultMetadataWsaMetadata"]
+__all__ = [
+    "SearchResponse",
+    "Result",
+    "ResultMetadata",
+    "ResultMetadataSerpMetadata",
+    "ResultMetadataWsaMetadata",
+    "AnswerCitation",
+]
 
 
 class ResultMetadataSerpMetadata(BaseModel):
@@ -52,6 +59,16 @@ class Result(BaseModel):
     extra_fields: Optional[Dict[str, object]] = None
 
 
+class AnswerCitation(BaseModel):
+    """Citation model that maps citation markers to result indices."""
+
+    marker: int
+    """Citation marker number (e.g., 1 for [1])"""
+
+    result_index: int
+    """Zero-based index into the results array"""
+
+
 class SearchResponse(BaseModel):
     """Response model from SearchService with results and optional LLM answer.
 
@@ -68,3 +85,6 @@ class SearchResponse(BaseModel):
     """Number of results returned"""
 
     answer: Optional[str] = None
+
+    answer_citations: Optional[List[AnswerCitation]] = None
+    """Citations mapping citation markers to result indices"""

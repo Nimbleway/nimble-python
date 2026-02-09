@@ -41,11 +41,10 @@ client = Nimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.extract_template(
-    params={"prompt": "Who is the best NBA of all times?"},
-    template="chatgpt",
+response = client.extract(
+    url="https://example.com",
 )
-print(response.id)
+print(response.task_id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -68,11 +67,10 @@ client = AsyncNimble(
 
 
 async def main() -> None:
-    response = await client.extract_template(
-        params={"prompt": "Who is the best NBA of all times?"},
-        template="chatgpt",
+    response = await client.extract(
+        url="https://example.com",
     )
-    print(response.id)
+    print(response.task_id)
 
 
 asyncio.run(main())
@@ -105,11 +103,10 @@ async def main() -> None:
         api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.extract_template(
-            params={"prompt": "Who is the best NBA of all times?"},
-            template="chatgpt",
+        response = await client.extract(
+            url="https://example.com",
         )
-        print(response.id)
+        print(response.task_id)
 
 
 asyncio.run(main())
@@ -134,10 +131,10 @@ from nimble_python import Nimble
 client = Nimble()
 
 response = client.extract(
-    debug_options={},
     url="https://example.com/page",
+    metadata={},
 )
-print(response.debug_options)
+print(response.metadata)
 ```
 
 ## Handling errors
@@ -157,7 +154,6 @@ client = Nimble()
 
 try:
     client.extract(
-        debug_options={},
         url="https://example.com",
     )
 except nimble_python.APIConnectionError as e:
@@ -203,7 +199,6 @@ client = Nimble(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).extract(
-    debug_options={},
     url="https://example.com",
 )
 ```
@@ -229,7 +224,6 @@ client = Nimble(
 
 # Override per-request:
 client.with_options(timeout=5.0).extract(
-    debug_options={},
     url="https://example.com",
 )
 ```
@@ -273,13 +267,12 @@ from nimble_python import Nimble
 
 client = Nimble()
 response = client.with_raw_response.extract(
-    debug_options={},
     url="https://example.com",
 )
 print(response.headers.get('X-My-Header'))
 
 client = response.parse()  # get the object that `extract()` would have returned
-print(client.id)
+print(client.task_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/Nimbleway/nimble-python/tree/main/src/nimble_python/_response.py) object.
@@ -294,7 +287,6 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.with_streaming_response.extract(
-    debug_options={},
     url="https://example.com",
 ) as response:
     print(response.headers.get("X-My-Header"))

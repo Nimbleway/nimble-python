@@ -26,7 +26,7 @@ class TestCrawl:
     @parametrize
     def test_method_list(self, client: Nimble) -> None:
         crawl = client.crawl.list(
-            status="pending",
+            status="queued",
         )
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
@@ -34,7 +34,7 @@ class TestCrawl:
     @parametrize
     def test_method_list_with_all_params(self, client: Nimble) -> None:
         crawl = client.crawl.list(
-            status="pending",
+            status="queued",
             cursor="cursor",
             limit=10,
         )
@@ -44,7 +44,7 @@ class TestCrawl:
     @parametrize
     def test_raw_response_list(self, client: Nimble) -> None:
         response = client.crawl.with_raw_response.list(
-            status="pending",
+            status="queued",
         )
 
         assert response.is_closed is True
@@ -56,7 +56,7 @@ class TestCrawl:
     @parametrize
     def test_streaming_response_list(self, client: Nimble) -> None:
         with client.crawl.with_streaming_response.list(
-            status="pending",
+            status="queued",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -70,7 +70,7 @@ class TestCrawl:
     @parametrize
     def test_method_root(self, client: Nimble) -> None:
         crawl = client.crawl.root(
-            url="https://example.com",
+            url="url",
         )
         assert_matches_type(CrawlRootResponse, crawl, path=["response"])
 
@@ -78,31 +78,18 @@ class TestCrawl:
     @parametrize
     def test_method_root_with_all_params(self, client: Nimble) -> None:
         crawl = client.crawl.root(
-            url="https://example.com",
+            url="url",
             allow_external_links=False,
             allow_subdomains=False,
             callback={
-                "url": "https://example.com/webhook",
-                "events": ["page"],
-                "headers": {"X-Custom-Header": "bar"},
-                "metadata": {"crawlId": "bar"},
+                "url": "https://example.com",
+                "events": ["started"],
+                "headers": {"foo": "string"},
+                "metadata": {"foo": "bar"},
             },
             crawl_entire_domain=False,
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
-                "debug_options": {
-                    "collect_har": True,
-                    "no_retry_mode": True,
-                    "record_screen": True,
-                    "redact": True,
-                    "show_cursor": True,
-                    "solve_captcha": True,
-                    "trace": True,
-                    "upload_engine_logs": True,
-                    "verbose": True,
-                    "with_proxy_usage": True,
-                },
-                "url": "https://example.com/page",
                 "browser": "chrome",
                 "city": "Los Angeles",
                 "client_timeout": 25000,
@@ -131,7 +118,6 @@ class TestCrawl:
                 "driver": "vx8",
                 "dynamic_parser": {"myParser": "bar"},
                 "expected_status_codes": [200, 201],
-                "export_userbrowser": False,
                 "format": "json",
                 "headers": {
                     "User-Agent": "CustomBot/1.0",
@@ -198,7 +184,7 @@ class TestCrawl:
                     "blocked_domains": ["ads.example.com", "tracker.com"],
                     "browser_engine": "chrome",
                     "cache": False,
-                    "connector_type": "webit-cdp",
+                    "connector_type": "puppeteer",
                     "disabled_resources": ["image", "stylesheet"],
                     "enable_2captcha": True,
                     "extensions": ["extension-id-1", "extension-id-2"],
@@ -221,7 +207,7 @@ class TestCrawl:
                     "no_accept_encoding": True,
                     "override_permissions": True,
                     "random_header_order": True,
-                    "render_type": "load",
+                    "render_type": "domcontentloaded",
                     "store_local_storage": True,
                     "timeout": 30000,
                     "typing_interval": 100,
@@ -231,7 +217,6 @@ class TestCrawl:
                     "with_performance_metrics": True,
                 },
                 "request_timeout": 30000,
-                "return_response_headers_as_header": True,
                 "save_userbrowser": False,
                 "session": {
                     "id": "id",
@@ -248,6 +233,7 @@ class TestCrawl:
                     "params": {"foo": "bar"},
                 },
                 "type": "generic",
+                "url": "https://example.com/page",
                 "userbrowser_creation_template_rendered": {
                     "id": "id",
                     "allowed_parameter_names": ["x"],
@@ -267,7 +253,7 @@ class TestCrawl:
     @parametrize
     def test_raw_response_root(self, client: Nimble) -> None:
         response = client.crawl.with_raw_response.root(
-            url="https://example.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -279,7 +265,7 @@ class TestCrawl:
     @parametrize
     def test_streaming_response_root(self, client: Nimble) -> None:
         with client.crawl.with_streaming_response.root(
-            url="https://example.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -383,7 +369,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_method_list(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.list(
-            status="pending",
+            status="queued",
         )
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
@@ -391,7 +377,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.list(
-            status="pending",
+            status="queued",
             cursor="cursor",
             limit=10,
         )
@@ -401,7 +387,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncNimble) -> None:
         response = await async_client.crawl.with_raw_response.list(
-            status="pending",
+            status="queued",
         )
 
         assert response.is_closed is True
@@ -413,7 +399,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncNimble) -> None:
         async with async_client.crawl.with_streaming_response.list(
-            status="pending",
+            status="queued",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -427,7 +413,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_method_root(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.root(
-            url="https://example.com",
+            url="url",
         )
         assert_matches_type(CrawlRootResponse, crawl, path=["response"])
 
@@ -435,31 +421,18 @@ class TestAsyncCrawl:
     @parametrize
     async def test_method_root_with_all_params(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.root(
-            url="https://example.com",
+            url="url",
             allow_external_links=False,
             allow_subdomains=False,
             callback={
-                "url": "https://example.com/webhook",
-                "events": ["page"],
-                "headers": {"X-Custom-Header": "bar"},
-                "metadata": {"crawlId": "bar"},
+                "url": "https://example.com",
+                "events": ["started"],
+                "headers": {"foo": "string"},
+                "metadata": {"foo": "bar"},
             },
             crawl_entire_domain=False,
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
-                "debug_options": {
-                    "collect_har": True,
-                    "no_retry_mode": True,
-                    "record_screen": True,
-                    "redact": True,
-                    "show_cursor": True,
-                    "solve_captcha": True,
-                    "trace": True,
-                    "upload_engine_logs": True,
-                    "verbose": True,
-                    "with_proxy_usage": True,
-                },
-                "url": "https://example.com/page",
                 "browser": "chrome",
                 "city": "Los Angeles",
                 "client_timeout": 25000,
@@ -488,7 +461,6 @@ class TestAsyncCrawl:
                 "driver": "vx8",
                 "dynamic_parser": {"myParser": "bar"},
                 "expected_status_codes": [200, 201],
-                "export_userbrowser": False,
                 "format": "json",
                 "headers": {
                     "User-Agent": "CustomBot/1.0",
@@ -555,7 +527,7 @@ class TestAsyncCrawl:
                     "blocked_domains": ["ads.example.com", "tracker.com"],
                     "browser_engine": "chrome",
                     "cache": False,
-                    "connector_type": "webit-cdp",
+                    "connector_type": "puppeteer",
                     "disabled_resources": ["image", "stylesheet"],
                     "enable_2captcha": True,
                     "extensions": ["extension-id-1", "extension-id-2"],
@@ -578,7 +550,7 @@ class TestAsyncCrawl:
                     "no_accept_encoding": True,
                     "override_permissions": True,
                     "random_header_order": True,
-                    "render_type": "load",
+                    "render_type": "domcontentloaded",
                     "store_local_storage": True,
                     "timeout": 30000,
                     "typing_interval": 100,
@@ -588,7 +560,6 @@ class TestAsyncCrawl:
                     "with_performance_metrics": True,
                 },
                 "request_timeout": 30000,
-                "return_response_headers_as_header": True,
                 "save_userbrowser": False,
                 "session": {
                     "id": "id",
@@ -605,6 +576,7 @@ class TestAsyncCrawl:
                     "params": {"foo": "bar"},
                 },
                 "type": "generic",
+                "url": "https://example.com/page",
                 "userbrowser_creation_template_rendered": {
                     "id": "id",
                     "allowed_parameter_names": ["x"],
@@ -624,7 +596,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_raw_response_root(self, async_client: AsyncNimble) -> None:
         response = await async_client.crawl.with_raw_response.root(
-            url="https://example.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -636,7 +608,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_streaming_response_root(self, async_client: AsyncNimble) -> None:
         async with async_client.crawl.with_streaming_response.root(
-            url="https://example.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

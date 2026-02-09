@@ -1,11 +1,321 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Dict, List, Union, Optional
+from typing_extensions import Literal, TypeAlias
+
+from pydantic import Field as FieldInfo
+
 from .._models import BaseModel
 
-__all__ = ["ExtractResponse"]
+__all__ = [
+    "ExtractResponse",
+    "Data",
+    "DataBrowserActions",
+    "DataBrowserActionsResult",
+    "DataBrowserActionsResultUnionMember0",
+    "DataBrowserActionsResultUnionMember1",
+    "DataNetworkCapture",
+    "DataNetworkCaptureFilter",
+    "DataNetworkCaptureFilterURL",
+    "DataNetworkCaptureResult",
+    "DataNetworkCaptureResultRequest",
+    "DataNetworkCaptureResultResponse",
+    "DataParsing",
+    "DataParsingUnionMember0",
+    "DataParsingUnionMember1",
+    "DataRedirect",
+    "Metadata",
+    "Debug",
+    "Pagination",
+    "PaginationNextPageParams",
+    "PaginationUnionMember1",
+]
+
+
+class DataBrowserActionsResultUnionMember0(BaseModel):
+    duration: float
+
+    name: str
+
+    status: Literal["no-run", "in-progress", "done", "error", "skipped"]
+
+    result: Optional[object] = None
+
+
+class DataBrowserActionsResultUnionMember1(BaseModel):
+    duration: float
+
+    error: str
+
+    name: str
+
+    status: Literal["no-run", "in-progress", "done", "error", "skipped"]
+
+
+DataBrowserActionsResult: TypeAlias = Union[DataBrowserActionsResultUnionMember0, DataBrowserActionsResultUnionMember1]
+
+
+class DataBrowserActions(BaseModel):
+    """The render flow browser actions status results."""
+
+    results: List[DataBrowserActionsResult]
+
+    success: bool
+
+
+class DataNetworkCaptureFilterURL(BaseModel):
+    type: Literal["exact", "contains"]
+
+    value: str
+
+
+class DataNetworkCaptureFilter(BaseModel):
+    validation: bool
+
+    wait_for_requests_count: float
+
+    method: Optional[Literal["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"]] = None
+
+    resource_type: Union[
+        Literal[
+            "document",
+            "stylesheet",
+            "image",
+            "media",
+            "font",
+            "script",
+            "texttrack",
+            "xhr",
+            "fetch",
+            "prefetch",
+            "eventsource",
+            "websocket",
+            "manifest",
+            "signedexchange",
+            "ping",
+            "cspviolationreport",
+            "preflight",
+            "other",
+            "fedcm",
+        ],
+        List[
+            Literal[
+                "document",
+                "stylesheet",
+                "image",
+                "media",
+                "font",
+                "script",
+                "texttrack",
+                "xhr",
+                "fetch",
+                "prefetch",
+                "eventsource",
+                "websocket",
+                "manifest",
+                "signedexchange",
+                "ping",
+                "cspviolationreport",
+                "preflight",
+                "other",
+                "fedcm",
+            ]
+        ],
+        None,
+    ] = None
+    """Resource type for network capture filtering"""
+
+    status_code: Union[float, List[float], None] = None
+
+    url: Optional[DataNetworkCaptureFilterURL] = None
+
+    wait_for_requests_count_timeout: Optional[float] = None
+
+
+class DataNetworkCaptureResultRequest(BaseModel):
+    headers: Dict[str, str]
+
+    method: str
+
+    resource_type: Literal[
+        "document",
+        "stylesheet",
+        "image",
+        "media",
+        "font",
+        "script",
+        "texttrack",
+        "xhr",
+        "fetch",
+        "prefetch",
+        "eventsource",
+        "websocket",
+        "manifest",
+        "signedexchange",
+        "ping",
+        "cspviolationreport",
+        "preflight",
+        "other",
+        "fedcm",
+    ]
+    """Resource type for network capture filtering"""
+
+    url: str
+
+    body: Optional[str] = None
+
+
+class DataNetworkCaptureResultResponse(BaseModel):
+    body: str
+
+    headers: Dict[str, str]
+
+    serialization: Literal["none", "base64"]
+
+    status: float
+
+    status_text: str
+
+
+class DataNetworkCaptureResult(BaseModel):
+    request: DataNetworkCaptureResultRequest
+
+    response: DataNetworkCaptureResultResponse
+
+
+class DataNetworkCapture(BaseModel):
+    filter: DataNetworkCaptureFilter
+
+    results: List[DataNetworkCaptureResult]
+
+    error_message: Optional[str] = FieldInfo(alias="errorMessage", default=None)
+
+
+class DataParsingUnionMember0(BaseModel):
+    entities: Dict[str, object]
+
+    status: Literal["success"]
+
+
+class DataParsingUnionMember1(BaseModel):
+    error: str
+
+    status: Literal["error"]
+
+
+DataParsing: TypeAlias = Union[DataParsingUnionMember0, DataParsingUnionMember1, Dict[str, object]]
+
+
+class DataRedirect(BaseModel):
+    status_code: float
+
+    url: str
+
+
+class Data(BaseModel):
+    browser_actions: Optional[DataBrowserActions] = None
+    """The render flow browser actions status results."""
+
+    cookies: Optional[List[object]] = None
+    """The cookies collected from browser actions during the task."""
+
+    eval: Optional[List[object]] = None
+    """The evaluation results from browser actions during the task."""
+
+    fetch: Optional[List[object]] = None
+    """The http requests from browser actions made during the task."""
+
+    headers: Optional[Dict[str, str]] = None
+    """The headers received during the task."""
+
+    html: Optional[str] = None
+    """The HTML content of the page."""
+
+    markdown: Optional[str] = None
+    """The Markdown version of the HTML content."""
+
+    network_capture: Optional[List[DataNetworkCapture]] = None
+    """The network capture data collected during the task."""
+
+    parsing: Optional[DataParsing] = None
+    """The parsing results extracted from the HTML & network content."""
+
+    redirects: Optional[List[DataRedirect]] = None
+    """The list of redirects that occurred during the task."""
+
+    screenshots: Optional[List[object]] = None
+    """The screenshots from browser actions taken during the task."""
+
+
+class Metadata(BaseModel):
+    driver: Optional[str] = None
+    """The driver used for the task."""
+
+    localization_id: Optional[str] = None
+    """The localization identifier for the query."""
+
+    query_duration: Optional[float] = None
+    """The duration in milliseconds of the query processing."""
+
+    query_time: Optional[str] = None
+    """The time when the query was received."""
+
+    response_parameters: Optional[object] = None
+    """Additional response parameters."""
+
+    tag: Optional[str] = None
+    """A tag associated with the query."""
+
+    template_id: Optional[str] = None
+    """The identifier of the template used for the query."""
+
+
+class Debug(BaseModel):
+    performance_metrics: Optional[Dict[str, float]] = None
+    """Performance metrics collected during the task."""
+
+    proxy_total_bytes_usage: Optional[float] = None
+    """Total bytes used by the proxy during the task."""
+
+    transformed_output: Optional[object] = None
+    """The transformed output after applying any transformations."""
+
+    userbrowser: Optional[object] = None
+    """The userbrowser instance using during the task."""
+
+
+class PaginationNextPageParams(BaseModel):
+    next_page_params: Dict[str, object]
+
+
+class PaginationUnionMember1(BaseModel):
+    next_page_params: Dict[str, object]
+
+
+Pagination: TypeAlias = Union[PaginationNextPageParams, List[PaginationUnionMember1]]
 
 
 class ExtractResponse(BaseModel):
-    id: str
+    data: Data
 
-    status: float
+    metadata: Metadata
+
+    status: Literal["success", "skipped", "fatal", "error", "postponed", "ignored", "rejected", "blocked"]
+    """The status of the task."""
+
+    task_id: str
+    """Unique identifier for the task."""
+
+    url: str
+    """The final URL."""
+
+    debug: Optional[Debug] = None
+
+    pagination: Optional[Pagination] = None
+    """Pagination information if applicable."""
+
+    status_code: Optional[float] = None
+    """The HTTP status code of the task."""
+
+    warnings: Optional[List[str]] = None
+    """List of warnings generated during the task."""
