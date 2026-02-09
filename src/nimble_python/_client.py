@@ -10,7 +10,7 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_map_params, client_search_params, client_extract_params, client_extract_template_params
+from .types import client_map_params, client_search_params, client_extract_params
 from ._types import (
     Body,
     Omit,
@@ -50,7 +50,6 @@ from ._base_client import (
 from .types.map_response import MapResponse
 from .types.search_response import SearchResponse
 from .types.extract_response import ExtractResponse
-from .types.extract_template_response import ExtractTemplateResponse
 
 if TYPE_CHECKING:
     from .resources import crawl
@@ -209,7 +208,6 @@ class Nimble(SyncAPIClient):
     def extract(
         self,
         *,
-        debug_options: client_extract_params.DebugOptions,
         url: str,
         browser: client_extract_params.Browser | Omit = omit,
         city: str | Omit = omit,
@@ -475,7 +473,6 @@ class Nimble(SyncAPIClient):
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         dynamic_parser: Dict[str, object] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        export_userbrowser: bool | Omit = omit,
         format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
@@ -1066,7 +1063,6 @@ class Nimble(SyncAPIClient):
         render_flow: Iterable[Dict[str, object]] | Omit = omit,
         render_options: client_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
-        return_response_headers_as_header: bool | Omit = omit,
         save_userbrowser: bool | Omit = omit,
         session: client_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -1142,11 +1138,9 @@ class Nimble(SyncAPIClient):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExtractResponse:
         """
-        Webit v2 Realtime extract Endpoint
+        Extract
 
         Args:
-          debug_options: Debug and troubleshooting options for the request
-
           url: Target URL to scrape
 
           browser: Browser type to emulate
@@ -1170,8 +1164,6 @@ class Nimble(SyncAPIClient):
           dynamic_parser: Custom parser configuration as a key-value map
 
           expected_status_codes: Expected HTTP status codes for successful requests
-
-          export_userbrowser: Whether to export the userbrowser session
 
           format: Response format
 
@@ -1223,8 +1215,6 @@ class Nimble(SyncAPIClient):
 
           request_timeout: Request timeout in milliseconds
 
-          return_response_headers_as_header: Whether to return response headers in HTTP headers
-
           save_userbrowser: Whether to save the userbrowser session for reuse
 
           skill: Skills or capabilities required for the request
@@ -1253,7 +1243,6 @@ class Nimble(SyncAPIClient):
             "/v1/extract",
             body=maybe_transform(
                 {
-                    "debug_options": debug_options,
                     "url": url,
                     "browser": browser,
                     "city": city,
@@ -1266,7 +1255,6 @@ class Nimble(SyncAPIClient):
                     "driver": driver,
                     "dynamic_parser": dynamic_parser,
                     "expected_status_codes": expected_status_codes,
-                    "export_userbrowser": export_userbrowser,
                     "format": format,
                     "headers": headers,
                     "http2": http2,
@@ -1293,7 +1281,6 @@ class Nimble(SyncAPIClient):
                     "render_flow": render_flow,
                     "render_options": render_options,
                     "request_timeout": request_timeout,
-                    "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
                     "session": session,
                     "skill": skill,
@@ -1310,45 +1297,6 @@ class Nimble(SyncAPIClient):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExtractResponse,
-        )
-
-    def extract_template(
-        self,
-        *,
-        params: Dict[str, object],
-        template: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractTemplateResponse:
-        """
-        Execute WSA Template Realtime Endpoint
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self.post(
-            "/v1/extract-template",
-            body=maybe_transform(
-                {
-                    "params": params,
-                    "template": template,
-                },
-                client_extract_template_params.ClientExtractTemplateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ExtractTemplateResponse,
         )
 
     def map(
@@ -2483,7 +2431,6 @@ class AsyncNimble(AsyncAPIClient):
     async def extract(
         self,
         *,
-        debug_options: client_extract_params.DebugOptions,
         url: str,
         browser: client_extract_params.Browser | Omit = omit,
         city: str | Omit = omit,
@@ -2749,7 +2696,6 @@ class AsyncNimble(AsyncAPIClient):
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         dynamic_parser: Dict[str, object] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        export_userbrowser: bool | Omit = omit,
         format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
@@ -3340,7 +3286,6 @@ class AsyncNimble(AsyncAPIClient):
         render_flow: Iterable[Dict[str, object]] | Omit = omit,
         render_options: client_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
-        return_response_headers_as_header: bool | Omit = omit,
         save_userbrowser: bool | Omit = omit,
         session: client_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -3416,11 +3361,9 @@ class AsyncNimble(AsyncAPIClient):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ExtractResponse:
         """
-        Webit v2 Realtime extract Endpoint
+        Extract
 
         Args:
-          debug_options: Debug and troubleshooting options for the request
-
           url: Target URL to scrape
 
           browser: Browser type to emulate
@@ -3444,8 +3387,6 @@ class AsyncNimble(AsyncAPIClient):
           dynamic_parser: Custom parser configuration as a key-value map
 
           expected_status_codes: Expected HTTP status codes for successful requests
-
-          export_userbrowser: Whether to export the userbrowser session
 
           format: Response format
 
@@ -3497,8 +3438,6 @@ class AsyncNimble(AsyncAPIClient):
 
           request_timeout: Request timeout in milliseconds
 
-          return_response_headers_as_header: Whether to return response headers in HTTP headers
-
           save_userbrowser: Whether to save the userbrowser session for reuse
 
           skill: Skills or capabilities required for the request
@@ -3527,7 +3466,6 @@ class AsyncNimble(AsyncAPIClient):
             "/v1/extract",
             body=await async_maybe_transform(
                 {
-                    "debug_options": debug_options,
                     "url": url,
                     "browser": browser,
                     "city": city,
@@ -3540,7 +3478,6 @@ class AsyncNimble(AsyncAPIClient):
                     "driver": driver,
                     "dynamic_parser": dynamic_parser,
                     "expected_status_codes": expected_status_codes,
-                    "export_userbrowser": export_userbrowser,
                     "format": format,
                     "headers": headers,
                     "http2": http2,
@@ -3567,7 +3504,6 @@ class AsyncNimble(AsyncAPIClient):
                     "render_flow": render_flow,
                     "render_options": render_options,
                     "request_timeout": request_timeout,
-                    "return_response_headers_as_header": return_response_headers_as_header,
                     "save_userbrowser": save_userbrowser,
                     "session": session,
                     "skill": skill,
@@ -3584,45 +3520,6 @@ class AsyncNimble(AsyncAPIClient):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExtractResponse,
-        )
-
-    async def extract_template(
-        self,
-        *,
-        params: Dict[str, object],
-        template: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ExtractTemplateResponse:
-        """
-        Execute WSA Template Realtime Endpoint
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self.post(
-            "/v1/extract-template",
-            body=await async_maybe_transform(
-                {
-                    "params": params,
-                    "template": template,
-                },
-                client_extract_template_params.ClientExtractTemplateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=ExtractTemplateResponse,
         )
 
     async def map(
@@ -4616,9 +4513,6 @@ class NimbleWithRawResponse:
         self.extract = to_raw_response_wrapper(
             client.extract,
         )
-        self.extract_template = to_raw_response_wrapper(
-            client.extract_template,
-        )
         self.map = to_raw_response_wrapper(
             client.map,
         )
@@ -4641,9 +4535,6 @@ class AsyncNimbleWithRawResponse:
 
         self.extract = async_to_raw_response_wrapper(
             client.extract,
-        )
-        self.extract_template = async_to_raw_response_wrapper(
-            client.extract_template,
         )
         self.map = async_to_raw_response_wrapper(
             client.map,
@@ -4668,9 +4559,6 @@ class NimbleWithStreamedResponse:
         self.extract = to_streamed_response_wrapper(
             client.extract,
         )
-        self.extract_template = to_streamed_response_wrapper(
-            client.extract_template,
-        )
         self.map = to_streamed_response_wrapper(
             client.map,
         )
@@ -4693,9 +4581,6 @@ class AsyncNimbleWithStreamedResponse:
 
         self.extract = async_to_streamed_response_wrapper(
             client.extract,
-        )
-        self.extract_template = async_to_streamed_response_wrapper(
-            client.extract_template,
         )
         self.map = async_to_streamed_response_wrapper(
             client.map,

@@ -9,7 +9,7 @@ __all__ = ["CrawlListParams"]
 
 
 class CrawlListParams(TypedDict, total=False):
-    status: Required[Literal["pending", "in_progress", "completed", "failed", "canceled"]]
+    status: Required[Literal["queued", "running", "succeeded", "failed", "canceled"]]
     """Filter crawls by their status."""
 
     cursor: Optional[str]

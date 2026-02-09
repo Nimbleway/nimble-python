@@ -13,7 +13,6 @@ from nimble_python.types import (
     MapResponse,
     SearchResponse,
     ExtractResponse,
-    ExtractTemplateResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -26,7 +25,6 @@ class TestClient:
     @parametrize
     def test_method_extract(self, client: Nimble) -> None:
         client_ = client.extract(
-            debug_options={},
             url="https://example.com/page",
         )
         assert_matches_type(ExtractResponse, client_, path=["response"])
@@ -35,18 +33,6 @@ class TestClient:
     @parametrize
     def test_method_extract_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract(
-            debug_options={
-                "collect_har": True,
-                "no_retry_mode": True,
-                "record_screen": True,
-                "redact": True,
-                "show_cursor": True,
-                "solve_captcha": True,
-                "trace": True,
-                "upload_engine_logs": True,
-                "verbose": True,
-                "with_proxy_usage": True,
-            },
             url="https://example.com/page",
             browser="chrome",
             city="Los Angeles",
@@ -76,7 +62,6 @@ class TestClient:
             driver="vx8",
             dynamic_parser={"myParser": "bar"},
             expected_status_codes=[200, 201],
-            export_userbrowser=False,
             format="json",
             headers={
                 "User-Agent": "CustomBot/1.0",
@@ -143,7 +128,7 @@ class TestClient:
                 "blocked_domains": ["ads.example.com", "tracker.com"],
                 "browser_engine": "chrome",
                 "cache": False,
-                "connector_type": "webit-cdp",
+                "connector_type": "puppeteer",
                 "disabled_resources": ["image", "stylesheet"],
                 "enable_2captcha": True,
                 "extensions": ["extension-id-1", "extension-id-2"],
@@ -166,7 +151,7 @@ class TestClient:
                 "no_accept_encoding": True,
                 "override_permissions": True,
                 "random_header_order": True,
-                "render_type": "load",
+                "render_type": "domcontentloaded",
                 "store_local_storage": True,
                 "timeout": 30000,
                 "typing_interval": 100,
@@ -176,7 +161,6 @@ class TestClient:
                 "with_performance_metrics": True,
             },
             request_timeout=30000,
-            return_response_headers_as_header=True,
             save_userbrowser=False,
             session={
                 "id": "id",
@@ -205,7 +189,6 @@ class TestClient:
     @parametrize
     def test_raw_response_extract(self, client: Nimble) -> None:
         response = client.with_raw_response.extract(
-            debug_options={},
             url="https://example.com/page",
         )
 
@@ -218,7 +201,6 @@ class TestClient:
     @parametrize
     def test_streaming_response_extract(self, client: Nimble) -> None:
         with client.with_streaming_response.extract(
-            debug_options={},
             url="https://example.com/page",
         ) as response:
             assert not response.is_closed
@@ -231,46 +213,9 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_extract_template(self, client: Nimble) -> None:
-        client_ = client.extract_template(
-            params={"foo": "bar"},
-            template="template",
-        )
-        assert_matches_type(ExtractTemplateResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_extract_template(self, client: Nimble) -> None:
-        response = client.with_raw_response.extract_template(
-            params={"foo": "bar"},
-            template="template",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        client_ = response.parse()
-        assert_matches_type(ExtractTemplateResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_extract_template(self, client: Nimble) -> None:
-        with client.with_streaming_response.extract_template(
-            params={"foo": "bar"},
-            template="template",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            client_ = response.parse()
-            assert_matches_type(ExtractTemplateResponse, client_, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     def test_method_map(self, client: Nimble) -> None:
         client_ = client.map(
-            url="https://example.com",
+            url="url",
         )
         assert_matches_type(MapResponse, client_, path=["response"])
 
@@ -278,7 +223,7 @@ class TestClient:
     @parametrize
     def test_method_map_with_all_params(self, client: Nimble) -> None:
         client_ = client.map(
-            url="https://example.com",
+            url="url",
             country="US",
             domain_filter="all",
             limit=1000,
@@ -291,7 +236,7 @@ class TestClient:
     @parametrize
     def test_raw_response_map(self, client: Nimble) -> None:
         response = client.with_raw_response.map(
-            url="https://example.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -303,7 +248,7 @@ class TestClient:
     @parametrize
     def test_streaming_response_map(self, client: Nimble) -> None:
         with client.with_streaming_response.map(
-            url="https://example.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -380,7 +325,6 @@ class TestAsyncClient:
     @parametrize
     async def test_method_extract(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
-            debug_options={},
             url="https://example.com/page",
         )
         assert_matches_type(ExtractResponse, client, path=["response"])
@@ -389,18 +333,6 @@ class TestAsyncClient:
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
-            debug_options={
-                "collect_har": True,
-                "no_retry_mode": True,
-                "record_screen": True,
-                "redact": True,
-                "show_cursor": True,
-                "solve_captcha": True,
-                "trace": True,
-                "upload_engine_logs": True,
-                "verbose": True,
-                "with_proxy_usage": True,
-            },
             url="https://example.com/page",
             browser="chrome",
             city="Los Angeles",
@@ -430,7 +362,6 @@ class TestAsyncClient:
             driver="vx8",
             dynamic_parser={"myParser": "bar"},
             expected_status_codes=[200, 201],
-            export_userbrowser=False,
             format="json",
             headers={
                 "User-Agent": "CustomBot/1.0",
@@ -497,7 +428,7 @@ class TestAsyncClient:
                 "blocked_domains": ["ads.example.com", "tracker.com"],
                 "browser_engine": "chrome",
                 "cache": False,
-                "connector_type": "webit-cdp",
+                "connector_type": "puppeteer",
                 "disabled_resources": ["image", "stylesheet"],
                 "enable_2captcha": True,
                 "extensions": ["extension-id-1", "extension-id-2"],
@@ -520,7 +451,7 @@ class TestAsyncClient:
                 "no_accept_encoding": True,
                 "override_permissions": True,
                 "random_header_order": True,
-                "render_type": "load",
+                "render_type": "domcontentloaded",
                 "store_local_storage": True,
                 "timeout": 30000,
                 "typing_interval": 100,
@@ -530,7 +461,6 @@ class TestAsyncClient:
                 "with_performance_metrics": True,
             },
             request_timeout=30000,
-            return_response_headers_as_header=True,
             save_userbrowser=False,
             session={
                 "id": "id",
@@ -559,7 +489,6 @@ class TestAsyncClient:
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.extract(
-            debug_options={},
             url="https://example.com/page",
         )
 
@@ -572,7 +501,6 @@ class TestAsyncClient:
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.extract(
-            debug_options={},
             url="https://example.com/page",
         ) as response:
             assert not response.is_closed
@@ -585,46 +513,9 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_extract_template(self, async_client: AsyncNimble) -> None:
-        client = await async_client.extract_template(
-            params={"foo": "bar"},
-            template="template",
-        )
-        assert_matches_type(ExtractTemplateResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_extract_template(self, async_client: AsyncNimble) -> None:
-        response = await async_client.with_raw_response.extract_template(
-            params={"foo": "bar"},
-            template="template",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        client = await response.parse()
-        assert_matches_type(ExtractTemplateResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_extract_template(self, async_client: AsyncNimble) -> None:
-        async with async_client.with_streaming_response.extract_template(
-            params={"foo": "bar"},
-            template="template",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            client = await response.parse()
-            assert_matches_type(ExtractTemplateResponse, client, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
     async def test_method_map(self, async_client: AsyncNimble) -> None:
         client = await async_client.map(
-            url="https://example.com",
+            url="url",
         )
         assert_matches_type(MapResponse, client, path=["response"])
 
@@ -632,7 +523,7 @@ class TestAsyncClient:
     @parametrize
     async def test_method_map_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.map(
-            url="https://example.com",
+            url="url",
             country="US",
             domain_filter="all",
             limit=1000,
@@ -645,7 +536,7 @@ class TestAsyncClient:
     @parametrize
     async def test_raw_response_map(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.map(
-            url="https://example.com",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -657,7 +548,7 @@ class TestAsyncClient:
     @parametrize
     async def test_streaming_response_map(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.map(
-            url="https://example.com",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

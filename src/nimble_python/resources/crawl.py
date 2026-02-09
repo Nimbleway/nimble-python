@@ -50,7 +50,7 @@ class CrawlResource(SyncAPIResource):
     def list(
         self,
         *,
-        status: Literal["pending", "in_progress", "completed", "failed", "canceled"],
+        status: Literal["queued", "running", "succeeded", "failed", "canceled"],
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -61,7 +61,7 @@ class CrawlResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CrawlListResponse:
         """
-        Get crawl data by filters
+        Crawl by Filter
 
         Args:
           status: Filter crawls by their status.
@@ -230,7 +230,7 @@ class CrawlResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CrawlTerminateResponse:
         """
-        Cancel crawl task
+        Cancel Crawl
 
         Args:
           id: The unique identifier of the crawl task.
@@ -277,7 +277,7 @@ class AsyncCrawlResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        status: Literal["pending", "in_progress", "completed", "failed", "canceled"],
+        status: Literal["queued", "running", "succeeded", "failed", "canceled"],
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -288,7 +288,7 @@ class AsyncCrawlResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CrawlListResponse:
         """
-        Get crawl data by filters
+        Crawl by Filter
 
         Args:
           status: Filter crawls by their status.
@@ -457,7 +457,7 @@ class AsyncCrawlResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CrawlTerminateResponse:
         """
-        Cancel crawl task
+        Cancel Crawl
 
         Args:
           id: The unique identifier of the crawl task.

@@ -14,5 +14,3 @@ from .client_search_params import ClientSearchParams as ClientSearchParams
 from .client_extract_params import ClientExtractParams as ClientExtractParams
 from .crawl_status_response import CrawlStatusResponse as CrawlStatusResponse
 from .crawl_terminate_response import CrawlTerminateResponse as CrawlTerminateResponse
-from .extract_template_response import ExtractTemplateResponse as ExtractTemplateResponse
-from .client_extract_template_params import ClientExtractTemplateParams as ClientExtractTemplateParams
