@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import os
 from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, Iterable, Optional
-from typing_extensions import Self, Literal, override
+from typing_extensions import Self, Literal, overload, override
 
 import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_map_params, client_search_params, client_extract_params
+from .types import client_map_params, client_agent_params, client_search_params, client_extract_params
 from ._types import (
     Body,
     Omit,
@@ -27,6 +27,7 @@ from ._types import (
 )
 from ._utils import (
     is_given,
+    required_args,
     maybe_transform,
     get_async_library,
     async_maybe_transform,
@@ -48,12 +49,14 @@ from ._base_client import (
     make_request_options,
 )
 from .types.map_response import MapResponse
+from .types.agent_response import AgentResponse
 from .types.search_response import SearchResponse
 from .types.extract_response import ExtractResponse
 
 if TYPE_CHECKING:
-    from .resources import crawl
+    from .resources import crawl, agents
     from .resources.crawl import CrawlResource, AsyncCrawlResource
+    from .resources.agents import AgentsResource, AsyncAgentsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 
@@ -108,6 +111,12 @@ class Nimble(SyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+    @cached_property
+    def agents(self) -> AgentsResource:
+        from .resources.agents import AgentsResource
+
+        return AgentsResource(self)
 
     @cached_property
     def crawl(self) -> CrawlResource:
@@ -204,6 +213,94 @@ class Nimble(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    @overload
+    def agent(
+        self,
+        *,
+        params: Dict[str, object],
+        template: str,
+        localization: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentResponse:
+        """
+        Execute WSA Realtime Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def agent(
+        self,
+        *,
+        agent: str,
+        params: Dict[str, object],
+        localization: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentResponse:
+        """
+        Execute WSA Realtime Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["params", "template"], ["agent", "params"])
+    def agent(
+        self,
+        *,
+        params: Dict[str, object],
+        template: str | Omit = omit,
+        localization: bool | Omit = omit,
+        agent: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentResponse:
+        return self.post(
+            "/v1/agent",
+            body=maybe_transform(
+                {
+                    "params": params,
+                    "template": template,
+                    "localization": localization,
+                    "agent": agent,
+                },
+                client_agent_params.ClientAgentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentResponse,
+        )
 
     def extract(
         self,
@@ -2333,6 +2430,12 @@ class AsyncNimble(AsyncAPIClient):
         )
 
     @cached_property
+    def agents(self) -> AsyncAgentsResource:
+        from .resources.agents import AsyncAgentsResource
+
+        return AsyncAgentsResource(self)
+
+    @cached_property
     def crawl(self) -> AsyncCrawlResource:
         from .resources.crawl import AsyncCrawlResource
 
@@ -2427,6 +2530,94 @@ class AsyncNimble(AsyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    @overload
+    async def agent(
+        self,
+        *,
+        params: Dict[str, object],
+        template: str,
+        localization: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentResponse:
+        """
+        Execute WSA Realtime Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def agent(
+        self,
+        *,
+        agent: str,
+        params: Dict[str, object],
+        localization: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentResponse:
+        """
+        Execute WSA Realtime Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["params", "template"], ["agent", "params"])
+    async def agent(
+        self,
+        *,
+        params: Dict[str, object],
+        template: str | Omit = omit,
+        localization: bool | Omit = omit,
+        agent: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentResponse:
+        return await self.post(
+            "/v1/agent",
+            body=await async_maybe_transform(
+                {
+                    "params": params,
+                    "template": template,
+                    "localization": localization,
+                    "agent": agent,
+                },
+                client_agent_params.ClientAgentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentResponse,
+        )
 
     async def extract(
         self,
@@ -4510,6 +4701,9 @@ class NimbleWithRawResponse:
     def __init__(self, client: Nimble) -> None:
         self._client = client
 
+        self.agent = to_raw_response_wrapper(
+            client.agent,
+        )
         self.extract = to_raw_response_wrapper(
             client.extract,
         )
@@ -4519,6 +4713,12 @@ class NimbleWithRawResponse:
         self.search = to_raw_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithRawResponse:
+        from .resources.agents import AgentsResourceWithRawResponse
+
+        return AgentsResourceWithRawResponse(self._client.agents)
 
     @cached_property
     def crawl(self) -> crawl.CrawlResourceWithRawResponse:
@@ -4533,6 +4733,9 @@ class AsyncNimbleWithRawResponse:
     def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
+        self.agent = async_to_raw_response_wrapper(
+            client.agent,
+        )
         self.extract = async_to_raw_response_wrapper(
             client.extract,
         )
@@ -4542,6 +4745,12 @@ class AsyncNimbleWithRawResponse:
         self.search = async_to_raw_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
+        from .resources.agents import AsyncAgentsResourceWithRawResponse
+
+        return AsyncAgentsResourceWithRawResponse(self._client.agents)
 
     @cached_property
     def crawl(self) -> crawl.AsyncCrawlResourceWithRawResponse:
@@ -4556,6 +4765,9 @@ class NimbleWithStreamedResponse:
     def __init__(self, client: Nimble) -> None:
         self._client = client
 
+        self.agent = to_streamed_response_wrapper(
+            client.agent,
+        )
         self.extract = to_streamed_response_wrapper(
             client.extract,
         )
@@ -4565,6 +4777,12 @@ class NimbleWithStreamedResponse:
         self.search = to_streamed_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
+        from .resources.agents import AgentsResourceWithStreamingResponse
+
+        return AgentsResourceWithStreamingResponse(self._client.agents)
 
     @cached_property
     def crawl(self) -> crawl.CrawlResourceWithStreamingResponse:
@@ -4579,6 +4797,9 @@ class AsyncNimbleWithStreamedResponse:
     def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
+        self.agent = async_to_streamed_response_wrapper(
+            client.agent,
+        )
         self.extract = async_to_streamed_response_wrapper(
             client.extract,
         )
@@ -4588,6 +4809,12 @@ class AsyncNimbleWithStreamedResponse:
         self.search = async_to_streamed_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
+        from .resources.agents import AsyncAgentsResourceWithStreamingResponse
+
+        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
 
     @cached_property
     def crawl(self) -> crawl.AsyncCrawlResourceWithStreamingResponse:
