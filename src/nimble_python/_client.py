@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Dict, Union, Mapping, Iterable, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Union, Mapping, Iterable, Optional
 from typing_extensions import Self, Literal, overload, override
 
 import httpx
@@ -400,6 +400,7 @@ class Nimble(SyncAPIClient):
         *,
         url: str,
         browser: client_extract_params.Browser | Omit = omit,
+        browser_actions: Iterable[client_extract_params.BrowserAction] | Omit = omit,
         city: str | Omit = omit,
         client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
@@ -661,9 +662,8 @@ class Nimble(SyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
-        dynamic_parser: Dict[str, object] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
+        formats: List[Literal["html", "markdown"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         ip6: bool | Omit = omit,
@@ -1204,16 +1204,13 @@ class Nimble(SyncAPIClient):
             "auto",
         ]
         | Omit = omit,
-        markdown: bool | Omit = omit,
         metadata: client_extract_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[client_extract_params.NetworkCapture] | Omit = omit,
-        no_html: bool | Omit = omit,
         no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
-        parse_options: client_extract_params.ParseOptions | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
         proxy_provider: Literal[
             "brightdata",
@@ -1335,6 +1332,8 @@ class Nimble(SyncAPIClient):
 
           browser: Browser type to emulate
 
+          browser_actions: Array of browser automation actions to execute sequentially
+
           city: City for geolocation
 
           client_timeout: Client-side timeout in milliseconds
@@ -1351,11 +1350,9 @@ class Nimble(SyncAPIClient):
 
           driver: Browser driver to use
 
-          dynamic_parser: Custom parser configuration as a key-value map
-
           expected_status_codes: Expected HTTP status codes for successful requests
 
-          format: Response format
+          formats: List of acceptable response formats in order of preference
 
           headers: Custom HTTP headers to include in the request
 
@@ -1367,8 +1364,6 @@ class Nimble(SyncAPIClient):
 
           locale: Locale for browser language and region settings
 
-          markdown: Whether to return response in Markdown format
-
           metadata: Structured metadata about the request execution context
 
           method: HTTP method for the request
@@ -1377,15 +1372,11 @@ class Nimble(SyncAPIClient):
 
           network_capture: Filters for capturing network traffic
 
-          no_html: Whether to exclude HTML from the response
-
           no_userbrowser: Whether to disable browser-based rendering
 
           os: Operating system to emulate
 
           parse: Whether to parse the response content
-
-          parse_options: Configuration options for parsing behavior
 
           parser: Custom parser configuration as a key-value map
 
@@ -1435,6 +1426,7 @@ class Nimble(SyncAPIClient):
                 {
                     "url": url,
                     "browser": browser,
+                    "browser_actions": browser_actions,
                     "city": city,
                     "client_timeout": client_timeout,
                     "consent_header": consent_header,
@@ -1443,24 +1435,20 @@ class Nimble(SyncAPIClient):
                     "device": device,
                     "disable_ip_check": disable_ip_check,
                     "driver": driver,
-                    "dynamic_parser": dynamic_parser,
                     "expected_status_codes": expected_status_codes,
-                    "format": format,
+                    "formats": formats,
                     "headers": headers,
                     "http2": http2,
                     "ip6": ip6,
                     "is_xhr": is_xhr,
                     "locale": locale,
-                    "markdown": markdown,
                     "metadata": metadata,
                     "method": method,
                     "native_mode": native_mode,
                     "network_capture": network_capture,
-                    "no_html": no_html,
                     "no_userbrowser": no_userbrowser,
                     "os": os,
                     "parse": parse,
-                    "parse_options": parse_options,
                     "parser": parser,
                     "proxy_provider": proxy_provider,
                     "proxy_providers": proxy_providers,
@@ -2803,6 +2791,7 @@ class AsyncNimble(AsyncAPIClient):
         *,
         url: str,
         browser: client_extract_params.Browser | Omit = omit,
+        browser_actions: Iterable[client_extract_params.BrowserAction] | Omit = omit,
         city: str | Omit = omit,
         client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
@@ -3064,9 +3053,8 @@ class AsyncNimble(AsyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
-        dynamic_parser: Dict[str, object] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"] | Omit = omit,
+        formats: List[Literal["html", "markdown"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         ip6: bool | Omit = omit,
@@ -3607,16 +3595,13 @@ class AsyncNimble(AsyncAPIClient):
             "auto",
         ]
         | Omit = omit,
-        markdown: bool | Omit = omit,
         metadata: client_extract_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[client_extract_params.NetworkCapture] | Omit = omit,
-        no_html: bool | Omit = omit,
         no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
-        parse_options: client_extract_params.ParseOptions | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
         proxy_provider: Literal[
             "brightdata",
@@ -3738,6 +3723,8 @@ class AsyncNimble(AsyncAPIClient):
 
           browser: Browser type to emulate
 
+          browser_actions: Array of browser automation actions to execute sequentially
+
           city: City for geolocation
 
           client_timeout: Client-side timeout in milliseconds
@@ -3754,11 +3741,9 @@ class AsyncNimble(AsyncAPIClient):
 
           driver: Browser driver to use
 
-          dynamic_parser: Custom parser configuration as a key-value map
-
           expected_status_codes: Expected HTTP status codes for successful requests
 
-          format: Response format
+          formats: List of acceptable response formats in order of preference
 
           headers: Custom HTTP headers to include in the request
 
@@ -3770,8 +3755,6 @@ class AsyncNimble(AsyncAPIClient):
 
           locale: Locale for browser language and region settings
 
-          markdown: Whether to return response in Markdown format
-
           metadata: Structured metadata about the request execution context
 
           method: HTTP method for the request
@@ -3780,15 +3763,11 @@ class AsyncNimble(AsyncAPIClient):
 
           network_capture: Filters for capturing network traffic
 
-          no_html: Whether to exclude HTML from the response
-
           no_userbrowser: Whether to disable browser-based rendering
 
           os: Operating system to emulate
 
           parse: Whether to parse the response content
-
-          parse_options: Configuration options for parsing behavior
 
           parser: Custom parser configuration as a key-value map
 
@@ -3838,6 +3817,7 @@ class AsyncNimble(AsyncAPIClient):
                 {
                     "url": url,
                     "browser": browser,
+                    "browser_actions": browser_actions,
                     "city": city,
                     "client_timeout": client_timeout,
                     "consent_header": consent_header,
@@ -3846,24 +3826,20 @@ class AsyncNimble(AsyncAPIClient):
                     "device": device,
                     "disable_ip_check": disable_ip_check,
                     "driver": driver,
-                    "dynamic_parser": dynamic_parser,
                     "expected_status_codes": expected_status_codes,
-                    "format": format,
+                    "formats": formats,
                     "headers": headers,
                     "http2": http2,
                     "ip6": ip6,
                     "is_xhr": is_xhr,
                     "locale": locale,
-                    "markdown": markdown,
                     "metadata": metadata,
                     "method": method,
                     "native_mode": native_mode,
                     "network_capture": network_capture,
-                    "no_html": no_html,
                     "no_userbrowser": no_userbrowser,
                     "os": os,
                     "parse": parse,
-                    "parse_options": parse_options,
                     "parser": parser,
                     "proxy_provider": proxy_provider,
                     "proxy_providers": proxy_providers,

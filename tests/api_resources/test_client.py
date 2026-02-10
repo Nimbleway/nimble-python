@@ -142,6 +142,54 @@ class TestClient:
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
                 "browser": "chrome",
+                "browser_actions": [
+                    {"goto": "https://example.com/login"},
+                    {"wait_for_element": "#login-form"},
+                    {
+                        "fill": {
+                            "selector": "#username",
+                            "value": "user@example.com",
+                            "click_on_element": True,
+                            "delay": 1000,
+                            "mode": "type",
+                            "mouse_movement_strategy": "linear",
+                            "required": "true",
+                            "scroll": True,
+                            "skip": "true",
+                            "timeout": 0,
+                            "typing_interval": 1000,
+                            "typing_strategy": "simple",
+                            "visible": True,
+                        }
+                    },
+                    {
+                        "fill": {
+                            "selector": "#password",
+                            "value": "password123",
+                            "click_on_element": True,
+                            "delay": 1000,
+                            "mode": "type",
+                            "mouse_movement_strategy": "linear",
+                            "required": "true",
+                            "scroll": True,
+                            "skip": "true",
+                            "timeout": 0,
+                            "typing_interval": 1000,
+                            "typing_strategy": "simple",
+                            "visible": True,
+                        }
+                    },
+                    {"click": "#submit"},
+                    {
+                        "screenshot": {
+                            "format": "png",
+                            "full_page": True,
+                            "quality": 0,
+                            "required": "true",
+                            "skip": "true",
+                        }
+                    },
+                ],
                 "city": "Los Angeles",
                 "client_timeout": 25000,
                 "consent_header": True,
@@ -167,9 +215,8 @@ class TestClient:
                 "device": "desktop",
                 "disable_ip_check": False,
                 "driver": "vx8",
-                "dynamic_parser": {"myParser": "bar"},
                 "expected_status_codes": [200, 201],
-                "format": "json",
+                "formats": ["html"],
                 "headers": {
                     "User-Agent": "CustomBot/1.0",
                     "Accept-Language": "en-US",
@@ -178,7 +225,6 @@ class TestClient:
                 "ip6": False,
                 "is_xhr": True,
                 "locale": "en-US",
-                "markdown": False,
                 "metadata": {
                     "account_name": "acme-corp",
                     "definition_id": 456,
@@ -209,11 +255,9 @@ class TestClient:
                         "wait_for_requests_count_timeout": 1,
                     }
                 ],
-                "no_html": False,
                 "no_userbrowser": False,
                 "os": "windows",
                 "parse": True,
-                "parse_options": {"merge_dynamic": True},
                 "parser": {"myParser": "bar"},
                 "proxy_provider": "brightdata",
                 "proxy_providers": {
@@ -340,6 +384,54 @@ class TestClient:
         client_ = client.extract(
             url="https://example.com/page",
             browser="chrome",
+            browser_actions=[
+                {"goto": "https://example.com/login"},
+                {"wait_for_element": "#login-form"},
+                {
+                    "fill": {
+                        "selector": "#username",
+                        "value": "user@example.com",
+                        "click_on_element": True,
+                        "delay": 1000,
+                        "mode": "type",
+                        "mouse_movement_strategy": "linear",
+                        "required": "true",
+                        "scroll": True,
+                        "skip": "true",
+                        "timeout": 0,
+                        "typing_interval": 1000,
+                        "typing_strategy": "simple",
+                        "visible": True,
+                    }
+                },
+                {
+                    "fill": {
+                        "selector": "#password",
+                        "value": "password123",
+                        "click_on_element": True,
+                        "delay": 1000,
+                        "mode": "type",
+                        "mouse_movement_strategy": "linear",
+                        "required": "true",
+                        "scroll": True,
+                        "skip": "true",
+                        "timeout": 0,
+                        "typing_interval": 1000,
+                        "typing_strategy": "simple",
+                        "visible": True,
+                    }
+                },
+                {"click": "#submit"},
+                {
+                    "screenshot": {
+                        "format": "png",
+                        "full_page": True,
+                        "quality": 0,
+                        "required": "true",
+                        "skip": "true",
+                    }
+                },
+            ],
             city="Los Angeles",
             client_timeout=25000,
             consent_header=True,
@@ -365,9 +457,8 @@ class TestClient:
             device="desktop",
             disable_ip_check=False,
             driver="vx8",
-            dynamic_parser={"myParser": "bar"},
             expected_status_codes=[200, 201],
-            format="json",
+            formats=["html"],
             headers={
                 "User-Agent": "CustomBot/1.0",
                 "Accept-Language": "en-US",
@@ -376,7 +467,6 @@ class TestClient:
             ip6=False,
             is_xhr=True,
             locale="en-US",
-            markdown=False,
             metadata={
                 "account_name": "acme-corp",
                 "definition_id": 456,
@@ -407,11 +497,9 @@ class TestClient:
                     "wait_for_requests_count_timeout": 1,
                 }
             ],
-            no_html=False,
             no_userbrowser=False,
             os="windows",
             parse=True,
-            parse_options={"merge_dynamic": True},
             parser={"myParser": "bar"},
             proxy_provider="brightdata",
             proxy_providers={
@@ -745,6 +833,54 @@ class TestAsyncClient:
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
                 "browser": "chrome",
+                "browser_actions": [
+                    {"goto": "https://example.com/login"},
+                    {"wait_for_element": "#login-form"},
+                    {
+                        "fill": {
+                            "selector": "#username",
+                            "value": "user@example.com",
+                            "click_on_element": True,
+                            "delay": 1000,
+                            "mode": "type",
+                            "mouse_movement_strategy": "linear",
+                            "required": "true",
+                            "scroll": True,
+                            "skip": "true",
+                            "timeout": 0,
+                            "typing_interval": 1000,
+                            "typing_strategy": "simple",
+                            "visible": True,
+                        }
+                    },
+                    {
+                        "fill": {
+                            "selector": "#password",
+                            "value": "password123",
+                            "click_on_element": True,
+                            "delay": 1000,
+                            "mode": "type",
+                            "mouse_movement_strategy": "linear",
+                            "required": "true",
+                            "scroll": True,
+                            "skip": "true",
+                            "timeout": 0,
+                            "typing_interval": 1000,
+                            "typing_strategy": "simple",
+                            "visible": True,
+                        }
+                    },
+                    {"click": "#submit"},
+                    {
+                        "screenshot": {
+                            "format": "png",
+                            "full_page": True,
+                            "quality": 0,
+                            "required": "true",
+                            "skip": "true",
+                        }
+                    },
+                ],
                 "city": "Los Angeles",
                 "client_timeout": 25000,
                 "consent_header": True,
@@ -770,9 +906,8 @@ class TestAsyncClient:
                 "device": "desktop",
                 "disable_ip_check": False,
                 "driver": "vx8",
-                "dynamic_parser": {"myParser": "bar"},
                 "expected_status_codes": [200, 201],
-                "format": "json",
+                "formats": ["html"],
                 "headers": {
                     "User-Agent": "CustomBot/1.0",
                     "Accept-Language": "en-US",
@@ -781,7 +916,6 @@ class TestAsyncClient:
                 "ip6": False,
                 "is_xhr": True,
                 "locale": "en-US",
-                "markdown": False,
                 "metadata": {
                     "account_name": "acme-corp",
                     "definition_id": 456,
@@ -812,11 +946,9 @@ class TestAsyncClient:
                         "wait_for_requests_count_timeout": 1,
                     }
                 ],
-                "no_html": False,
                 "no_userbrowser": False,
                 "os": "windows",
                 "parse": True,
-                "parse_options": {"merge_dynamic": True},
                 "parser": {"myParser": "bar"},
                 "proxy_provider": "brightdata",
                 "proxy_providers": {
@@ -943,6 +1075,54 @@ class TestAsyncClient:
         client = await async_client.extract(
             url="https://example.com/page",
             browser="chrome",
+            browser_actions=[
+                {"goto": "https://example.com/login"},
+                {"wait_for_element": "#login-form"},
+                {
+                    "fill": {
+                        "selector": "#username",
+                        "value": "user@example.com",
+                        "click_on_element": True,
+                        "delay": 1000,
+                        "mode": "type",
+                        "mouse_movement_strategy": "linear",
+                        "required": "true",
+                        "scroll": True,
+                        "skip": "true",
+                        "timeout": 0,
+                        "typing_interval": 1000,
+                        "typing_strategy": "simple",
+                        "visible": True,
+                    }
+                },
+                {
+                    "fill": {
+                        "selector": "#password",
+                        "value": "password123",
+                        "click_on_element": True,
+                        "delay": 1000,
+                        "mode": "type",
+                        "mouse_movement_strategy": "linear",
+                        "required": "true",
+                        "scroll": True,
+                        "skip": "true",
+                        "timeout": 0,
+                        "typing_interval": 1000,
+                        "typing_strategy": "simple",
+                        "visible": True,
+                    }
+                },
+                {"click": "#submit"},
+                {
+                    "screenshot": {
+                        "format": "png",
+                        "full_page": True,
+                        "quality": 0,
+                        "required": "true",
+                        "skip": "true",
+                    }
+                },
+            ],
             city="Los Angeles",
             client_timeout=25000,
             consent_header=True,
@@ -968,9 +1148,8 @@ class TestAsyncClient:
             device="desktop",
             disable_ip_check=False,
             driver="vx8",
-            dynamic_parser={"myParser": "bar"},
             expected_status_codes=[200, 201],
-            format="json",
+            formats=["html"],
             headers={
                 "User-Agent": "CustomBot/1.0",
                 "Accept-Language": "en-US",
@@ -979,7 +1158,6 @@ class TestAsyncClient:
             ip6=False,
             is_xhr=True,
             locale="en-US",
-            markdown=False,
             metadata={
                 "account_name": "acme-corp",
                 "definition_id": 456,
@@ -1010,11 +1188,9 @@ class TestAsyncClient:
                     "wait_for_requests_count_timeout": 1,
                 }
             ],
-            no_html=False,
             no_userbrowser=False,
             os="windows",
             parse=True,
-            parse_options={"merge_dynamic": True},
             parser={"myParser": "bar"},
             proxy_provider="brightdata",
             proxy_providers={
