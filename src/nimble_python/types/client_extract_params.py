@@ -12,11 +12,51 @@ __all__ = [
     "ClientExtractParams",
     "Browser",
     "BrowserUnionMember1",
+    "BrowserAction",
+    "BrowserActionAutoScrollAction",
+    "BrowserActionAutoScrollActionAutoScroll",
+    "BrowserActionAutoScrollActionAutoScrollUnionMember3",
+    "BrowserActionClickAction",
+    "BrowserActionClickActionClick",
+    "BrowserActionClickActionClickUnionMember2",
+    "BrowserActionEvalAction",
+    "BrowserActionEvalActionEval",
+    "BrowserActionEvalActionEvalUnionMember1",
+    "BrowserActionFetchAction",
+    "BrowserActionFetchActionFetch",
+    "BrowserActionFetchActionFetchUnionMember1",
+    "BrowserActionFillAction",
+    "BrowserActionFillActionFill",
+    "BrowserActionFillActionFillType",
+    "BrowserActionFillActionFillPaste",
+    "BrowserActionGetCookiesAction",
+    "BrowserActionGetCookiesActionGetCookies",
+    "BrowserActionGetCookiesActionGetCookiesUnionMember1",
+    "BrowserActionGotoAction",
+    "BrowserActionGotoActionGoto",
+    "BrowserActionGotoActionGotoUnionMember1",
+    "BrowserActionPressAction",
+    "BrowserActionPressActionPress",
+    "BrowserActionPressActionPressUnionMember1",
+    "BrowserActionScreenshotAction",
+    "BrowserActionScreenshotActionScreenshot",
+    "BrowserActionScreenshotActionScreenshotUnionMember1",
+    "BrowserActionScrollAction",
+    "BrowserActionScrollActionScroll",
+    "BrowserActionScrollActionScrollUnionMember2",
+    "BrowserActionWaitAction",
+    "BrowserActionWaitActionWait",
+    "BrowserActionWaitActionWaitUnionMember2",
+    "BrowserActionWaitForElementAction",
+    "BrowserActionWaitForElementActionWaitForElement",
+    "BrowserActionWaitForElementActionWaitForElementUnionMember2",
+    "BrowserActionWaitForNavigationAction",
+    "BrowserActionWaitForNavigationActionWaitForNavigation",
+    "BrowserActionWaitForNavigationActionWaitForNavigationUnionMember1",
     "CookiesUnionMember0",
     "Metadata",
     "NetworkCapture",
     "NetworkCaptureURL",
-    "ParseOptions",
     "QueryTemplate",
     "QueryTemplatePagination",
     "QueryTemplatePaginationNextPageParams",
@@ -35,6 +75,9 @@ class ClientExtractParams(TypedDict, total=False):
 
     browser: Browser
     """Browser type to emulate"""
+
+    browser_actions: Iterable[BrowserAction]
+    """Array of browser automation actions to execute sequentially"""
 
     city: str
     """City for geolocation"""
@@ -312,14 +355,11 @@ class ClientExtractParams(TypedDict, total=False):
     driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"]
     """Browser driver to use"""
 
-    dynamic_parser: Dict[str, object]
-    """Custom parser configuration as a key-value map"""
-
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
 
-    format: Literal["json", "html", "csv", "raw", "json-lines", "markdown"]
-    """Response format"""
+    formats: List[Literal["html", "markdown"]]
+    """List of acceptable response formats in order of preference"""
 
     headers: Dict[str, Union[str, SequenceNotStr[str], None]]
     """Custom HTTP headers to include in the request"""
@@ -870,9 +910,6 @@ class ClientExtractParams(TypedDict, total=False):
     ]
     """Locale for browser language and region settings"""
 
-    markdown: bool
-    """Whether to return response in Markdown format"""
-
     metadata: Metadata
     """Structured metadata about the request execution context"""
 
@@ -885,9 +922,6 @@ class ClientExtractParams(TypedDict, total=False):
     network_capture: Iterable[NetworkCapture]
     """Filters for capturing network traffic"""
 
-    no_html: bool
-    """Whether to exclude HTML from the response"""
-
     no_userbrowser: bool
     """Whether to disable browser-based rendering"""
 
@@ -896,9 +930,6 @@ class ClientExtractParams(TypedDict, total=False):
 
     parse: bool
     """Whether to parse the response content"""
-
-    parse_options: ParseOptions
-    """Configuration options for parsing behavior"""
 
     parser: Union[Dict[str, object], str]
     """Custom parser configuration as a key-value map"""
@@ -1048,6 +1079,869 @@ class BrowserUnionMember1(TypedDict, total=False):
 Browser: TypeAlias = Union[Literal["chrome", "firefox"], BrowserUnionMember1]
 
 
+class BrowserActionAutoScrollActionAutoScrollUnionMember3(TypedDict, total=False):
+    click_selector: Union[str, SequenceNotStr[str]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    container: Union[str, SequenceNotStr[str]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    delay_after_scroll: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    idle_timeout: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    loading_selector: Union[str, SequenceNotStr[str]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    max_duration: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    pause_on_selector: Union[str, SequenceNotStr[str]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    step_size: float
+
+
+BrowserActionAutoScrollActionAutoScroll: TypeAlias = Union[
+    bool, float, str, BrowserActionAutoScrollActionAutoScrollUnionMember3
+]
+
+
+class BrowserActionAutoScrollAction(TypedDict, total=False):
+    """Continuously scroll to load dynamic content"""
+
+    auto_scroll: Required[BrowserActionAutoScrollActionAutoScroll]
+
+
+class BrowserActionClickActionClickUnionMember2(TypedDict, total=False):
+    selector: Required[Union[str, SequenceNotStr[str]]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    count: float
+
+    delay: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    offset_x: int
+
+    offset_y: int
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    scroll: bool
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    steps: float
+
+    strategy: Literal["linear", "ghost-cursor", "windmouse"]
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+    visible: bool
+
+
+BrowserActionClickActionClick: TypeAlias = Union[str, SequenceNotStr[str], BrowserActionClickActionClickUnionMember2]
+
+
+class BrowserActionClickAction(TypedDict, total=False):
+    """Click on an element by selector"""
+
+    click: Required[BrowserActionClickActionClick]
+
+
+class BrowserActionEvalActionEvalUnionMember1(TypedDict, total=False):
+    code: Required[str]
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+
+BrowserActionEvalActionEval: TypeAlias = Union[str, BrowserActionEvalActionEvalUnionMember1]
+
+
+class BrowserActionEvalAction(TypedDict, total=False):
+    """Execute JavaScript code in page context"""
+
+    eval: Required[BrowserActionEvalActionEval]
+
+
+class BrowserActionFetchActionFetchUnionMember1(TypedDict, total=False):
+    url: Required[str]
+
+    body: str
+
+    headers: Dict[str, str]
+
+    method: Literal["GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"]
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+
+BrowserActionFetchActionFetch: TypeAlias = Union[str, BrowserActionFetchActionFetchUnionMember1]
+
+
+class BrowserActionFetchAction(TypedDict, total=False):
+    """Make an HTTP request in browser context"""
+
+    fetch: Required[BrowserActionFetchActionFetch]
+
+
+class BrowserActionFillActionFillType(TypedDict, total=False):
+    selector: Required[Union[str, SequenceNotStr[str]]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    value: Required[str]
+
+    click_on_element: bool
+
+    delay: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    mode: Literal["type"]
+
+    mouse_movement_strategy: Literal["linear", "ghost-cursor", "windmouse"]
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    scroll: bool
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+    typing_interval: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    typing_strategy: Literal["simple", "distribution"]
+
+    visible: bool
+
+
+class BrowserActionFillActionFillPaste(TypedDict, total=False):
+    mode: Required[Literal["paste"]]
+
+    selector: Required[Union[str, SequenceNotStr[str]]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    value: Required[str]
+
+    click_on_element: bool
+
+    delay: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    scroll: bool
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+    visible: bool
+
+
+BrowserActionFillActionFill: TypeAlias = Union[BrowserActionFillActionFillType, BrowserActionFillActionFillPaste]
+
+
+class BrowserActionFillAction(TypedDict, total=False):
+    """Fill text into an input field"""
+
+    fill: Required[BrowserActionFillActionFill]
+    """Fill options with mode-specific fields.
+
+    Use "type" mode for behavioral typing simulation, or "paste" mode for instant
+    paste.
+    """
+
+
+class BrowserActionGetCookiesActionGetCookiesUnionMember1Typed(TypedDict, total=False):
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+
+BrowserActionGetCookiesActionGetCookiesUnionMember1: TypeAlias = Union[
+    BrowserActionGetCookiesActionGetCookiesUnionMember1Typed, Dict[str, object]
+]
+
+BrowserActionGetCookiesActionGetCookies: TypeAlias = Union[bool, BrowserActionGetCookiesActionGetCookiesUnionMember1]
+
+
+class BrowserActionGetCookiesAction(TypedDict, total=False):
+    """Retrieve browser cookies"""
+
+    get_cookies: Required[BrowserActionGetCookiesActionGetCookies]
+
+
+class BrowserActionGotoActionGotoUnionMember1(TypedDict, total=False):
+    url: Required[str]
+
+    referer: str
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+    wait_until: Literal["load", "domcontentloaded", "networkidle0", "networkidle2"]
+
+
+BrowserActionGotoActionGoto: TypeAlias = Union[str, BrowserActionGotoActionGotoUnionMember1]
+
+
+class BrowserActionGotoAction(TypedDict, total=False):
+    """Navigate to a URL"""
+
+    goto: Required[BrowserActionGotoActionGoto]
+
+
+class BrowserActionPressActionPressUnionMember1(TypedDict, total=False):
+    key: Required[
+        Literal[
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "Power",
+            "Eject",
+            "Abort",
+            "Help",
+            "Backspace",
+            "Tab",
+            "Numpad5",
+            "NumpadEnter",
+            "Enter",
+            "\r",
+            "\n",
+            "ShiftLeft",
+            "ShiftRight",
+            "ControlLeft",
+            "ControlRight",
+            "AltLeft",
+            "AltRight",
+            "Pause",
+            "CapsLock",
+            "Escape",
+            "Convert",
+            "NonConvert",
+            "Space",
+            "Numpad9",
+            "PageUp",
+            "Numpad3",
+            "PageDown",
+            "End",
+            "Numpad1",
+            "Home",
+            "Numpad7",
+            "ArrowLeft",
+            "Numpad4",
+            "Numpad8",
+            "ArrowUp",
+            "ArrowRight",
+            "Numpad6",
+            "Numpad2",
+            "ArrowDown",
+            "Select",
+            "Open",
+            "PrintScreen",
+            "Insert",
+            "Numpad0",
+            "Delete",
+            "NumpadDecimal",
+            "Digit0",
+            "Digit1",
+            "Digit2",
+            "Digit3",
+            "Digit4",
+            "Digit5",
+            "Digit6",
+            "Digit7",
+            "Digit8",
+            "Digit9",
+            "KeyA",
+            "KeyB",
+            "KeyC",
+            "KeyD",
+            "KeyE",
+            "KeyF",
+            "KeyG",
+            "KeyH",
+            "KeyI",
+            "KeyJ",
+            "KeyK",
+            "KeyL",
+            "KeyM",
+            "KeyN",
+            "KeyO",
+            "KeyP",
+            "KeyQ",
+            "KeyR",
+            "KeyS",
+            "KeyT",
+            "KeyU",
+            "KeyV",
+            "KeyW",
+            "KeyX",
+            "KeyY",
+            "KeyZ",
+            "MetaLeft",
+            "MetaRight",
+            "ContextMenu",
+            "NumpadMultiply",
+            "NumpadAdd",
+            "NumpadSubtract",
+            "NumpadDivide",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "F17",
+            "F18",
+            "F19",
+            "F20",
+            "F21",
+            "F22",
+            "F23",
+            "F24",
+            "NumLock",
+            "ScrollLock",
+            "AudioVolumeMute",
+            "AudioVolumeDown",
+            "AudioVolumeUp",
+            "MediaTrackNext",
+            "MediaTrackPrevious",
+            "MediaStop",
+            "MediaPlayPause",
+            "Semicolon",
+            "Equal",
+            "NumpadEqual",
+            "Comma",
+            "Minus",
+            "Period",
+            "Slash",
+            "Backquote",
+            "BracketLeft",
+            "Backslash",
+            "BracketRight",
+            "Quote",
+            "AltGraph",
+            "Props",
+            "Cancel",
+            "Clear",
+            "Shift",
+            "Control",
+            "Alt",
+            "Accept",
+            "ModeChange",
+            " ",
+            "Print",
+            "Execute",
+            " ",
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z",
+            "Meta",
+            "*",
+            "+",
+            "-",
+            "/",
+            ";",
+            "=",
+            ",",
+            ".",
+            "`",
+            "[",
+            "\\",
+            "]",
+            "'",
+            "Attn",
+            "CrSel",
+            "ExSel",
+            "EraseEof",
+            "Play",
+            "ZoomOut",
+            ")",
+            "!",
+            "@",
+            "#",
+            "$",
+            "%",
+            "^",
+            "&",
+            "(",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+            ":",
+            "<",
+            "_",
+            ">",
+            "?",
+            "~",
+            "{",
+            "|",
+            "}",
+            '"',
+            "SoftLeft",
+            "SoftRight",
+            "Camera",
+            "Call",
+            "EndCall",
+            "VolumeDown",
+            "VolumeUp",
+        ]
+    ]
+
+    delay: Union[float, str]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+
+BrowserActionPressActionPress: TypeAlias = Union[str, BrowserActionPressActionPressUnionMember1]
+
+
+class BrowserActionPressAction(TypedDict, total=False):
+    """Press a keyboard key"""
+
+    press: Required[BrowserActionPressActionPress]
+
+
+class BrowserActionScreenshotActionScreenshotUnionMember1(TypedDict, total=False):
+    format: Literal["png", "jpeg", "webp"]
+
+    full_page: bool
+
+    quality: float
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+
+BrowserActionScreenshotActionScreenshot: TypeAlias = Union[bool, BrowserActionScreenshotActionScreenshotUnionMember1]
+
+
+class BrowserActionScreenshotAction(TypedDict, total=False):
+    """Capture a page screenshot"""
+
+    screenshot: Required[BrowserActionScreenshotActionScreenshot]
+
+
+class BrowserActionScrollActionScrollUnionMember2(TypedDict, total=False):
+    container: Union[str, SequenceNotStr[str]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    to: Union[str, SequenceNotStr[str]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    visible: bool
+
+    x: float
+
+    y: float
+
+
+BrowserActionScrollActionScroll: TypeAlias = Union[float, str, BrowserActionScrollActionScrollUnionMember2]
+
+
+class BrowserActionScrollAction(TypedDict, total=False):
+    """Scroll the page or an element"""
+
+    scroll: Required[BrowserActionScrollActionScroll]
+
+
+class BrowserActionWaitActionWaitUnionMember2(TypedDict, total=False):
+    duration: Required[Union[float, str]]
+    """Duration value that accepts various formats.
+
+    Supports: number (ms), string ("1000"), or string with unit ("2s", "500ms",
+    "2m", "1h")
+    """
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+
+BrowserActionWaitActionWait: TypeAlias = Union[float, str, BrowserActionWaitActionWaitUnionMember2]
+
+
+class BrowserActionWaitAction(TypedDict, total=False):
+    """Wait for a specified duration"""
+
+    wait: Required[BrowserActionWaitActionWait]
+
+
+class BrowserActionWaitForElementActionWaitForElementUnionMember2(TypedDict, total=False):
+    selector: Required[Union[str, SequenceNotStr[str]]]
+    """CSS selector or array of alternative selectors.
+
+    Use an array when you have multiple possible selectors for the same element.
+    """
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+    visible: bool
+
+
+BrowserActionWaitForElementActionWaitForElement: TypeAlias = Union[
+    str, SequenceNotStr[str], BrowserActionWaitForElementActionWaitForElementUnionMember2
+]
+
+
+class BrowserActionWaitForElementAction(TypedDict, total=False):
+    """Wait for an element to appear or reach a specific state"""
+
+    wait_for_element: Required[BrowserActionWaitForElementActionWaitForElement]
+
+
+class BrowserActionWaitForNavigationActionWaitForNavigationUnionMember1(TypedDict, total=False):
+    navigation: Required[Literal["load", "domcontentloaded", "networkidle0", "networkidle2"]]
+
+    required: Union[Literal["true", "false"], bool]
+    """Whether this action is required.
+
+    If true, pipeline stops on failure. Accepts boolean or string "true"/"false".
+    Default: true.
+    """
+
+    skip: Union[Literal["true", "false"], bool]
+    """Whether to skip this action.
+
+    Accepts boolean or string "true"/"false". Default: false.
+    """
+
+    timeout: float
+    """Timeout in milliseconds.
+
+    Set to 0 for infinite timeout (no timeout). Default: 15000ms.
+    """
+
+
+BrowserActionWaitForNavigationActionWaitForNavigation: TypeAlias = Union[
+    Literal["load", "domcontentloaded", "networkidle0", "networkidle2"],
+    BrowserActionWaitForNavigationActionWaitForNavigationUnionMember1,
+]
+
+
+class BrowserActionWaitForNavigationAction(TypedDict, total=False):
+    """Wait for page navigation to complete"""
+
+    wait_for_navigation: Required[BrowserActionWaitForNavigationActionWaitForNavigation]
+
+
+BrowserAction: TypeAlias = Union[
+    BrowserActionAutoScrollAction,
+    BrowserActionClickAction,
+    BrowserActionEvalAction,
+    BrowserActionFetchAction,
+    BrowserActionFillAction,
+    BrowserActionGetCookiesAction,
+    BrowserActionGotoAction,
+    BrowserActionPressAction,
+    BrowserActionScreenshotAction,
+    BrowserActionScrollAction,
+    BrowserActionWaitAction,
+    BrowserActionWaitForElementAction,
+    BrowserActionWaitForNavigationAction,
+]
+
+
 class CookiesUnionMember0Typed(TypedDict, total=False):
     creation: Optional[str]
 
@@ -1142,16 +2036,6 @@ class NetworkCapture(TypedDict, total=False):
     wait_for_requests_count: float
 
     wait_for_requests_count_timeout: float
-
-
-class ParseOptionsTyped(TypedDict, total=False):
-    """Configuration options for parsing behavior"""
-
-    merge_dynamic: bool
-    """Whether to merge dynamic parsing results with static results"""
-
-
-ParseOptions: TypeAlias = Union[ParseOptionsTyped, Dict[str, object]]
 
 
 class QueryTemplatePaginationNextPageParams(TypedDict, total=False):

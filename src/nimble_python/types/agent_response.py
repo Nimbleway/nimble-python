@@ -12,8 +12,6 @@ __all__ = [
     "Data",
     "DataBrowserActions",
     "DataBrowserActionsResult",
-    "DataBrowserActionsResultUnionMember0",
-    "DataBrowserActionsResultUnionMember1",
     "DataNetworkCapture",
     "DataNetworkCaptureFilter",
     "DataNetworkCaptureFilterURL",
@@ -32,35 +30,43 @@ __all__ = [
 ]
 
 
-class DataBrowserActionsResultUnionMember0(BaseModel):
+class DataBrowserActionsResult(BaseModel):
     duration: float
 
-    name: str
+    name: Literal[
+        "goto",
+        "wait",
+        "wait_for_element",
+        "wait_for_navigation",
+        "click",
+        "fill",
+        "press",
+        "scroll",
+        "auto_scroll",
+        "screenshot",
+        "get_cookies",
+        "eval",
+        "fetch",
+    ]
 
     status: Literal["no-run", "in-progress", "done", "error", "skipped"]
+
+    error: Optional[str] = None
 
     result: Optional[object] = None
 
 
-class DataBrowserActionsResultUnionMember1(BaseModel):
-    duration: float
-
-    error: str
-
-    name: str
-
-    status: Literal["no-run", "in-progress", "done", "error", "skipped"]
-
-
-DataBrowserActionsResult: TypeAlias = Union[DataBrowserActionsResultUnionMember0, DataBrowserActionsResultUnionMember1]
-
-
 class DataBrowserActions(BaseModel):
-    """The render flow browser actions status results."""
+    """Browser actions execution results.
+
+    Present only when browser_actions were specified in the request.
+    """
 
     results: List[DataBrowserActionsResult]
 
     success: bool
+
+    total_duration: float
 
 
 class DataNetworkCaptureFilterURL(BaseModel):
@@ -214,7 +220,10 @@ class DataRedirect(BaseModel):
 
 class Data(BaseModel):
     browser_actions: Optional[DataBrowserActions] = None
-    """The render flow browser actions status results."""
+    """Browser actions execution results.
+
+    Present only when browser_actions were specified in the request.
+    """
 
     cookies: Optional[List[object]] = None
     """The cookies collected from browser actions during the task."""
@@ -248,6 +257,9 @@ class Data(BaseModel):
 
 
 class Metadata(BaseModel):
+    agent: Optional[str] = None
+    """The name of the agent used for the query."""
+
     driver: Optional[str] = None
     """The driver used for the task."""
 
@@ -265,9 +277,6 @@ class Metadata(BaseModel):
 
     tag: Optional[str] = None
     """A tag associated with the query."""
-
-    template_id: Optional[str] = None
-    """The identifier of the template used for the query."""
 
 
 class Debug(BaseModel):
