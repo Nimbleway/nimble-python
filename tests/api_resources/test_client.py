@@ -328,7 +328,7 @@ class TestClient:
                     "params": {"foo": "bar"},
                 },
                 "type": "generic",
-                "url": "https://example.com/page",
+                "url": "url",
                 "userbrowser_creation_template_rendered": {
                     "id": "id",
                     "allowed_parameter_names": ["x"],
@@ -374,7 +374,7 @@ class TestClient:
     @parametrize
     def test_method_extract(self, client: Nimble) -> None:
         client_ = client.extract(
-            url="https://example.com/page",
+            url="url",
         )
         assert_matches_type(ExtractResponse, client_, path=["response"])
 
@@ -382,7 +382,7 @@ class TestClient:
     @parametrize
     def test_method_extract_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract(
-            url="https://example.com/page",
+            url="url",
             browser="chrome",
             browser_actions=[
                 {"goto": "https://example.com/login"},
@@ -582,7 +582,7 @@ class TestClient:
     @parametrize
     def test_raw_response_extract(self, client: Nimble) -> None:
         response = client.with_raw_response.extract(
-            url="https://example.com/page",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -594,7 +594,7 @@ class TestClient:
     @parametrize
     def test_streaming_response_extract(self, client: Nimble) -> None:
         with client.with_streaming_response.extract(
-            url="https://example.com/page",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -1019,7 +1019,7 @@ class TestAsyncClient:
                     "params": {"foo": "bar"},
                 },
                 "type": "generic",
-                "url": "https://example.com/page",
+                "url": "url",
                 "userbrowser_creation_template_rendered": {
                     "id": "id",
                     "allowed_parameter_names": ["x"],
@@ -1065,7 +1065,7 @@ class TestAsyncClient:
     @parametrize
     async def test_method_extract(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
-            url="https://example.com/page",
+            url="url",
         )
         assert_matches_type(ExtractResponse, client, path=["response"])
 
@@ -1073,7 +1073,7 @@ class TestAsyncClient:
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
-            url="https://example.com/page",
+            url="url",
             browser="chrome",
             browser_actions=[
                 {"goto": "https://example.com/login"},
@@ -1273,7 +1273,7 @@ class TestAsyncClient:
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.extract(
-            url="https://example.com/page",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -1285,7 +1285,7 @@ class TestAsyncClient:
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.extract(
-            url="https://example.com/page",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
