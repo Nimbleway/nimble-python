@@ -13,7 +13,6 @@ from nimble_python.types import (
     MapResponse,
     AgentResponse,
     CrawlResponse,
-    SearchResponse,
     ExtractResponse,
 )
 
@@ -226,18 +225,28 @@ class TestClient:
                 "is_xhr": True,
                 "locale": "en-US",
                 "metadata": {
-                    "account_name": "acme-corp",
-                    "definition_id": 456,
-                    "definition_name": "product-scraper",
-                    "endpoint": "/api/v2/scrape",
-                    "execution_id": "exec-abc123",
-                    "flowit_task_id": "task-xyz789",
-                    "input_id": "input-123",
-                    "pipeline_execution_id": 12345,
-                    "query_template_id": "template-qry-001",
-                    "source": "web-app",
-                    "template_id": 789,
-                    "template_name": "e-commerce-template",
+                    "account_name": "account_name",
+                    "api_type": "api_type",
+                    "crawl_depth": -9007199254740991,
+                    "crawl_id": "crawl_id",
+                    "definition_id": -9007199254740991,
+                    "definition_name": "definition_name",
+                    "endpoint": "endpoint",
+                    "execution_id": "execution_id",
+                    "flowit_task_id": "flowit_task_id",
+                    "input_id": "input_id",
+                    "is_public_wsa": True,
+                    "is_sitemap": True,
+                    "is_wsa": True,
+                    "parser_id": "parser_id",
+                    "pipeline_execution_id": -9007199254740991,
+                    "query_template_id": "query_template_id",
+                    "source": "source",
+                    "template_id": -9007199254740991,
+                    "template_name": "template_name",
+                    "wsa_id": "wsa_id",
+                    "wsa_name": "wsa_name",
+                    "wsa_version": 0,
                 },
                 "method": "GET",
                 "native_mode": "requester",
@@ -468,18 +477,28 @@ class TestClient:
             is_xhr=True,
             locale="en-US",
             metadata={
-                "account_name": "acme-corp",
-                "definition_id": 456,
-                "definition_name": "product-scraper",
-                "endpoint": "/api/v2/scrape",
-                "execution_id": "exec-abc123",
-                "flowit_task_id": "task-xyz789",
-                "input_id": "input-123",
-                "pipeline_execution_id": 12345,
-                "query_template_id": "template-qry-001",
-                "source": "web-app",
-                "template_id": 789,
-                "template_name": "e-commerce-template",
+                "account_name": "account_name",
+                "api_type": "api_type",
+                "crawl_depth": -9007199254740991,
+                "crawl_id": "crawl_id",
+                "definition_id": -9007199254740991,
+                "definition_name": "definition_name",
+                "endpoint": "endpoint",
+                "execution_id": "execution_id",
+                "flowit_task_id": "flowit_task_id",
+                "input_id": "input_id",
+                "is_public_wsa": True,
+                "is_sitemap": True,
+                "is_wsa": True,
+                "parser_id": "parser_id",
+                "pipeline_execution_id": -9007199254740991,
+                "query_template_id": "query_template_id",
+                "source": "source",
+                "template_id": -9007199254740991,
+                "template_name": "template_name",
+                "wsa_id": "wsa_id",
+                "wsa_name": "wsa_name",
+                "wsa_version": 0,
             },
             method="GET",
             native_mode="requester",
@@ -648,63 +667,6 @@ class TestClient:
 
             client_ = response.parse()
             assert_matches_type(MapResponse, client_, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_search(self, client: Nimble) -> None:
-        client_ = client.search(
-            query="x",
-        )
-        assert_matches_type(SearchResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_search_with_all_params(self, client: Nimble) -> None:
-        client_ = client.search(
-            query="x",
-            content_type=["string"],
-            country="country",
-            deep_search=True,
-            end_date="end_date",
-            exclude_domains=["string"],
-            include_answer=True,
-            include_domains=["string"],
-            locale="locale",
-            max_subagents=1,
-            num_results=1,
-            parsing_type="plain_text",
-            search_engine="google_search",
-            start_date="start_date",
-            time_range="hour",
-            topic="general",
-        )
-        assert_matches_type(SearchResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_search(self, client: Nimble) -> None:
-        response = client.with_raw_response.search(
-            query="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        client_ = response.parse()
-        assert_matches_type(SearchResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_search(self, client: Nimble) -> None:
-        with client.with_streaming_response.search(
-            query="x",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            client_ = response.parse()
-            assert_matches_type(SearchResponse, client_, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -917,18 +879,28 @@ class TestAsyncClient:
                 "is_xhr": True,
                 "locale": "en-US",
                 "metadata": {
-                    "account_name": "acme-corp",
-                    "definition_id": 456,
-                    "definition_name": "product-scraper",
-                    "endpoint": "/api/v2/scrape",
-                    "execution_id": "exec-abc123",
-                    "flowit_task_id": "task-xyz789",
-                    "input_id": "input-123",
-                    "pipeline_execution_id": 12345,
-                    "query_template_id": "template-qry-001",
-                    "source": "web-app",
-                    "template_id": 789,
-                    "template_name": "e-commerce-template",
+                    "account_name": "account_name",
+                    "api_type": "api_type",
+                    "crawl_depth": -9007199254740991,
+                    "crawl_id": "crawl_id",
+                    "definition_id": -9007199254740991,
+                    "definition_name": "definition_name",
+                    "endpoint": "endpoint",
+                    "execution_id": "execution_id",
+                    "flowit_task_id": "flowit_task_id",
+                    "input_id": "input_id",
+                    "is_public_wsa": True,
+                    "is_sitemap": True,
+                    "is_wsa": True,
+                    "parser_id": "parser_id",
+                    "pipeline_execution_id": -9007199254740991,
+                    "query_template_id": "query_template_id",
+                    "source": "source",
+                    "template_id": -9007199254740991,
+                    "template_name": "template_name",
+                    "wsa_id": "wsa_id",
+                    "wsa_name": "wsa_name",
+                    "wsa_version": 0,
                 },
                 "method": "GET",
                 "native_mode": "requester",
@@ -1159,18 +1131,28 @@ class TestAsyncClient:
             is_xhr=True,
             locale="en-US",
             metadata={
-                "account_name": "acme-corp",
-                "definition_id": 456,
-                "definition_name": "product-scraper",
-                "endpoint": "/api/v2/scrape",
-                "execution_id": "exec-abc123",
-                "flowit_task_id": "task-xyz789",
-                "input_id": "input-123",
-                "pipeline_execution_id": 12345,
-                "query_template_id": "template-qry-001",
-                "source": "web-app",
-                "template_id": 789,
-                "template_name": "e-commerce-template",
+                "account_name": "account_name",
+                "api_type": "api_type",
+                "crawl_depth": -9007199254740991,
+                "crawl_id": "crawl_id",
+                "definition_id": -9007199254740991,
+                "definition_name": "definition_name",
+                "endpoint": "endpoint",
+                "execution_id": "execution_id",
+                "flowit_task_id": "flowit_task_id",
+                "input_id": "input_id",
+                "is_public_wsa": True,
+                "is_sitemap": True,
+                "is_wsa": True,
+                "parser_id": "parser_id",
+                "pipeline_execution_id": -9007199254740991,
+                "query_template_id": "query_template_id",
+                "source": "source",
+                "template_id": -9007199254740991,
+                "template_name": "template_name",
+                "wsa_id": "wsa_id",
+                "wsa_name": "wsa_name",
+                "wsa_version": 0,
             },
             method="GET",
             native_mode="requester",
@@ -1339,62 +1321,5 @@ class TestAsyncClient:
 
             client = await response.parse()
             assert_matches_type(MapResponse, client, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_search(self, async_client: AsyncNimble) -> None:
-        client = await async_client.search(
-            query="x",
-        )
-        assert_matches_type(SearchResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_search_with_all_params(self, async_client: AsyncNimble) -> None:
-        client = await async_client.search(
-            query="x",
-            content_type=["string"],
-            country="country",
-            deep_search=True,
-            end_date="end_date",
-            exclude_domains=["string"],
-            include_answer=True,
-            include_domains=["string"],
-            locale="locale",
-            max_subagents=1,
-            num_results=1,
-            parsing_type="plain_text",
-            search_engine="google_search",
-            start_date="start_date",
-            time_range="hour",
-            topic="general",
-        )
-        assert_matches_type(SearchResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_search(self, async_client: AsyncNimble) -> None:
-        response = await async_client.with_raw_response.search(
-            query="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        client = await response.parse()
-        assert_matches_type(SearchResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_search(self, async_client: AsyncNimble) -> None:
-        async with async_client.with_streaming_response.search(
-            query="x",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            client = await response.parse()
-            assert_matches_type(SearchResponse, client, path=["response"])
 
         assert cast(Any, response.is_closed) is True

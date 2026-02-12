@@ -5,7 +5,6 @@ from __future__ import annotations
 from .map_response import MapResponse as MapResponse
 from .agent_response import AgentResponse as AgentResponse
 from .crawl_response import CrawlResponse as CrawlResponse
-from .search_response import SearchResponse as SearchResponse
 from .extract_response import ExtractResponse as ExtractResponse
 from .agent_list_params import AgentListParams as AgentListParams
 from .client_map_params import ClientMapParams as ClientMapParams
@@ -15,7 +14,6 @@ from .agent_list_response import AgentListResponse as AgentListResponse
 from .client_agent_params import ClientAgentParams as ClientAgentParams
 from .client_crawl_params import ClientCrawlParams as ClientCrawlParams
 from .crawl_list_response import CrawlListResponse as CrawlListResponse
-from .client_search_params import ClientSearchParams as ClientSearchParams
 from .client_extract_params import ClientExtractParams as ClientExtractParams
 from .crawl_status_response import CrawlStatusResponse as CrawlStatusResponse
 from .crawl_terminate_response import CrawlTerminateResponse as CrawlTerminateResponse

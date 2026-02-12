@@ -1979,40 +1979,48 @@ class Metadata(TypedDict, total=False):
     """Structured metadata about the request execution context"""
 
     account_name: str
-    """Account name associated with the request"""
+
+    api_type: str
+
+    crawl_depth: int
+
+    crawl_id: str
 
     definition_id: int
-    """Definition identifier"""
 
     definition_name: str
-    """Name of the definition"""
 
     endpoint: str
-    """API endpoint being called"""
 
     execution_id: str
-    """Unique identifier for this execution"""
 
     flowit_task_id: str
-    """FlowIt task identifier"""
 
     input_id: str
-    """Input data identifier"""
+
+    is_public_wsa: bool
+
+    is_sitemap: bool
+
+    is_wsa: bool
+
+    parser_id: str
 
     pipeline_execution_id: int
-    """Identifier for the pipeline execution"""
 
     query_template_id: str
-    """Query template identifier"""
 
     source: str
-    """Source system or application making the request"""
 
     template_id: int
-    """Template identifier"""
 
     template_name: str
-    """Name of the template"""
+
+    wsa_id: str
+
+    wsa_name: str
+
+    wsa_version: float
 
 
 class NetworkCaptureURL(TypedDict, total=False):
