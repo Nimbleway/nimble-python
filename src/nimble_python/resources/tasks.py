@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal
-
 import httpx
 
-from ..types import crawl_list_params
+from ..types import task_list_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform
 from .._compat import cached_property
@@ -20,55 +17,52 @@ from .._response import (
 )
 from ..pagination import SyncCrawlPagination, AsyncCrawlPagination
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.crawl_list_response import CrawlListResponse
-from ..types.crawl_status_response import CrawlStatusResponse
-from ..types.crawl_terminate_response import CrawlTerminateResponse
+from ..types.task_get_response import TaskGetResponse
+from ..types.task_list_response import TaskListResponse
+from ..types.task_results_response import TaskResultsResponse
 
-__all__ = ["CrawlResource", "AsyncCrawlResource"]
+__all__ = ["TasksResource", "AsyncTasksResource"]
 
 
-class CrawlResource(SyncAPIResource):
+class TasksResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CrawlResourceWithRawResponse:
+    def with_raw_response(self) -> TasksResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#accessing-raw-response-data-eg-headers
         """
-        return CrawlResourceWithRawResponse(self)
+        return TasksResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CrawlResourceWithStreamingResponse:
+    def with_streaming_response(self) -> TasksResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#with_streaming_response
         """
-        return CrawlResourceWithStreamingResponse(self)
+        return TasksResourceWithStreamingResponse(self)
 
     def list(
         self,
         *,
-        cursor: Optional[str] | Omit = omit,
+        cursor: str | Omit = omit,
         limit: int | Omit = omit,
-        status: Literal["queued", "running", "succeeded", "failed", "canceled", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCrawlPagination[CrawlListResponse]:
+    ) -> SyncCrawlPagination[TaskListResponse]:
         """
-        Crawl by Filter
+        Retrieve a paginated list of tasks for the authenticated account.
 
         Args:
-          cursor: Cursor for pagination.
+          cursor: Cursor for pagination. Use the next_cursor from the previous response.
 
-          limit: Number of crawls to return per page.
-
-          status: Filter crawls by their status.
+          limit: Number of tasks to return per page.
 
           extra_headers: Send extra headers
 
@@ -79,8 +73,8 @@ class CrawlResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/v1/crawl",
-            page=SyncCrawlPagination[CrawlListResponse],
+            "/v1/tasks",
+            page=SyncCrawlPagination[TaskListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -90,17 +84,16 @@ class CrawlResource(SyncAPIResource):
                     {
                         "cursor": cursor,
                         "limit": limit,
-                        "status": status,
                     },
-                    crawl_list_params.CrawlListParams,
+                    task_list_params.TaskListParams,
                 ),
             ),
-            model=CrawlListResponse,
+            model=TaskListResponse,
         )
 
-    def status(
+    def get(
         self,
-        id: str,
+        task_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -108,12 +101,12 @@ class CrawlResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlStatusResponse:
+    ) -> TaskGetResponse:
         """
-        Get crawl data
+        Retrieve the details of a specific task by its ID.
 
         Args:
-          id: The unique identifier of the crawl task.
+          task_id: The unique identifier of the task.
 
           extra_headers: Send extra headers
 
@@ -123,19 +116,19 @@ class CrawlResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return self._get(
-            f"/v1/crawl/{id}",
+            f"/v1/tasks/{task_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CrawlStatusResponse,
+            cast_to=TaskGetResponse,
         )
 
-    def terminate(
+    def results(
         self,
-        id: str,
+        task_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -143,12 +136,12 @@ class CrawlResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlTerminateResponse:
+    ) -> TaskResultsResponse:
         """
-        Cancel Crawl
+        Retrieve the results of a completed task.
 
         Args:
-          id: The unique identifier of the crawl task.
+          task_id: The unique identifier of the task.
 
           extra_headers: Send extra headers
 
@@ -158,59 +151,56 @@ class CrawlResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._delete(
-            f"/v1/crawl/{id}",
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
+        return self._get(
+            f"/v1/tasks/{task_id}/results",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CrawlTerminateResponse,
+            cast_to=TaskResultsResponse,
         )
 
 
-class AsyncCrawlResource(AsyncAPIResource):
+class AsyncTasksResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCrawlResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncTasksResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncCrawlResourceWithRawResponse(self)
+        return AsyncTasksResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCrawlResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncTasksResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#with_streaming_response
         """
-        return AsyncCrawlResourceWithStreamingResponse(self)
+        return AsyncTasksResourceWithStreamingResponse(self)
 
     def list(
         self,
         *,
-        cursor: Optional[str] | Omit = omit,
+        cursor: str | Omit = omit,
         limit: int | Omit = omit,
-        status: Literal["queued", "running", "succeeded", "failed", "canceled", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[CrawlListResponse, AsyncCrawlPagination[CrawlListResponse]]:
+    ) -> AsyncPaginator[TaskListResponse, AsyncCrawlPagination[TaskListResponse]]:
         """
-        Crawl by Filter
+        Retrieve a paginated list of tasks for the authenticated account.
 
         Args:
-          cursor: Cursor for pagination.
+          cursor: Cursor for pagination. Use the next_cursor from the previous response.
 
-          limit: Number of crawls to return per page.
-
-          status: Filter crawls by their status.
+          limit: Number of tasks to return per page.
 
           extra_headers: Send extra headers
 
@@ -221,8 +211,8 @@ class AsyncCrawlResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/v1/crawl",
-            page=AsyncCrawlPagination[CrawlListResponse],
+            "/v1/tasks",
+            page=AsyncCrawlPagination[TaskListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -232,17 +222,16 @@ class AsyncCrawlResource(AsyncAPIResource):
                     {
                         "cursor": cursor,
                         "limit": limit,
-                        "status": status,
                     },
-                    crawl_list_params.CrawlListParams,
+                    task_list_params.TaskListParams,
                 ),
             ),
-            model=CrawlListResponse,
+            model=TaskListResponse,
         )
 
-    async def status(
+    async def get(
         self,
-        id: str,
+        task_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -250,12 +239,12 @@ class AsyncCrawlResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlStatusResponse:
+    ) -> TaskGetResponse:
         """
-        Get crawl data
+        Retrieve the details of a specific task by its ID.
 
         Args:
-          id: The unique identifier of the crawl task.
+          task_id: The unique identifier of the task.
 
           extra_headers: Send extra headers
 
@@ -265,19 +254,19 @@ class AsyncCrawlResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return await self._get(
-            f"/v1/crawl/{id}",
+            f"/v1/tasks/{task_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CrawlStatusResponse,
+            cast_to=TaskGetResponse,
         )
 
-    async def terminate(
+    async def results(
         self,
-        id: str,
+        task_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -285,12 +274,12 @@ class AsyncCrawlResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlTerminateResponse:
+    ) -> TaskResultsResponse:
         """
-        Cancel Crawl
+        Retrieve the results of a completed task.
 
         Args:
-          id: The unique identifier of the crawl task.
+          task_id: The unique identifier of the task.
 
           extra_headers: Send extra headers
 
@@ -300,72 +289,72 @@ class AsyncCrawlResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._delete(
-            f"/v1/crawl/{id}",
+        if not task_id:
+            raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
+        return await self._get(
+            f"/v1/tasks/{task_id}/results",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CrawlTerminateResponse,
+            cast_to=TaskResultsResponse,
         )
 
 
-class CrawlResourceWithRawResponse:
-    def __init__(self, crawl: CrawlResource) -> None:
-        self._crawl = crawl
+class TasksResourceWithRawResponse:
+    def __init__(self, tasks: TasksResource) -> None:
+        self._tasks = tasks
 
         self.list = to_raw_response_wrapper(
-            crawl.list,
+            tasks.list,
         )
-        self.status = to_raw_response_wrapper(
-            crawl.status,
+        self.get = to_raw_response_wrapper(
+            tasks.get,
         )
-        self.terminate = to_raw_response_wrapper(
-            crawl.terminate,
+        self.results = to_raw_response_wrapper(
+            tasks.results,
         )
 
 
-class AsyncCrawlResourceWithRawResponse:
-    def __init__(self, crawl: AsyncCrawlResource) -> None:
-        self._crawl = crawl
+class AsyncTasksResourceWithRawResponse:
+    def __init__(self, tasks: AsyncTasksResource) -> None:
+        self._tasks = tasks
 
         self.list = async_to_raw_response_wrapper(
-            crawl.list,
+            tasks.list,
         )
-        self.status = async_to_raw_response_wrapper(
-            crawl.status,
+        self.get = async_to_raw_response_wrapper(
+            tasks.get,
         )
-        self.terminate = async_to_raw_response_wrapper(
-            crawl.terminate,
+        self.results = async_to_raw_response_wrapper(
+            tasks.results,
         )
 
 
-class CrawlResourceWithStreamingResponse:
-    def __init__(self, crawl: CrawlResource) -> None:
-        self._crawl = crawl
+class TasksResourceWithStreamingResponse:
+    def __init__(self, tasks: TasksResource) -> None:
+        self._tasks = tasks
 
         self.list = to_streamed_response_wrapper(
-            crawl.list,
+            tasks.list,
         )
-        self.status = to_streamed_response_wrapper(
-            crawl.status,
+        self.get = to_streamed_response_wrapper(
+            tasks.get,
         )
-        self.terminate = to_streamed_response_wrapper(
-            crawl.terminate,
+        self.results = to_streamed_response_wrapper(
+            tasks.results,
         )
 
 
-class AsyncCrawlResourceWithStreamingResponse:
-    def __init__(self, crawl: AsyncCrawlResource) -> None:
-        self._crawl = crawl
+class AsyncTasksResourceWithStreamingResponse:
+    def __init__(self, tasks: AsyncTasksResource) -> None:
+        self._tasks = tasks
 
         self.list = async_to_streamed_response_wrapper(
-            crawl.list,
+            tasks.list,
         )
-        self.status = async_to_streamed_response_wrapper(
-            crawl.status,
+        self.get = async_to_streamed_response_wrapper(
+            tasks.get,
         )
-        self.terminate = async_to_streamed_response_wrapper(
-            crawl.terminate,
+        self.results = async_to_streamed_response_wrapper(
+            tasks.results,
         )
