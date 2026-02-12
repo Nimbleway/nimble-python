@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.5.0 (2026-02-12)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/Nimbleway/nimble-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** add browser_actions, remove search method, update extract parameters ([ae29531](https://github.com/Nimbleway/nimble-python/commit/ae29531f5882f6344327a1fec38a211b33042cfd))
+* **api:** api update ([07bfd54](https://github.com/Nimbleway/nimble-python/commit/07bfd5493c461ca377118d15d48c2f03fc74fadf))
+* **api:** api update ([691e98f](https://github.com/Nimbleway/nimble-python/commit/691e98f9bbec60505e6503c21cd1e7beca100089))
+* **api:** api update ([c28dfc0](https://github.com/Nimbleway/nimble-python/commit/c28dfc06a0541b9a34e1a9720fe17912e14d4510))
+* **api:** api update ([5a03bb6](https://github.com/Nimbleway/nimble-python/commit/5a03bb6b343d89f88ba90e37e05115edd22e10a0))
+* **api:** manual updates ([ea9b017](https://github.com/Nimbleway/nimble-python/commit/ea9b017da698c9003d7d8705d74b6464d574b5ee))
+* **api:** manual updates ([5ff9f95](https://github.com/Nimbleway/nimble-python/commit/5ff9f959dfd96319f5d9a5774642928a40e403fb))
+* **api:** manual updates ([f92a797](https://github.com/Nimbleway/nimble-python/commit/f92a797664b06b49848f8d75a9f860792e7402be))
+
+
+### Chores
+
+* **internal:** bump dependencies ([fbd9597](https://github.com/Nimbleway/nimble-python/commit/fbd9597337a8423aa11675f1a3d0f1c8d45ef502))
+* **internal:** fix lint error on Python 3.14 ([48e9753](https://github.com/Nimbleway/nimble-python/commit/48e97535c899d49463dcca47af04d99383d414d6))
+
 ## 0.4.0 (2026-02-09)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/Nimbleway/nimble-python/compare/v0.3.0...v0.4.0)
