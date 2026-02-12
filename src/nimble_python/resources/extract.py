@@ -51,8 +51,8 @@ class ExtractResource(SyncAPIResource):
         url: str,
         browser: extract_async_params.Browser | Omit = omit,
         browser_actions: Iterable[extract_async_params.BrowserAction] | Omit = omit,
+        callback_url: str | Omit = omit,
         city: str | Omit = omit,
-        client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
         cookies: Union[Iterable[extract_async_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
@@ -310,13 +310,11 @@ class ExtractResource(SyncAPIResource):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
-        ip6: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
         locale: Literal[
             "aa-DJ",
@@ -854,56 +852,19 @@ class ExtractResource(SyncAPIResource):
             "auto",
         ]
         | Omit = omit,
-        metadata: extract_async_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
-        native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[extract_async_params.NetworkCapture] | Omit = omit,
-        no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
-        proxy_provider: Literal[
-            "brightdata",
-            "oxylabs",
-            "smartproxy",
-            "proxit",
-            "proxit_preprod",
-            "local",
-            "rayobyte",
-            "always",
-            "oculusproxies",
-            "froxy",
-            "packetstream",
-            "911proxy",
-            "direct911proxy",
-            "thesocialproxy",
-            "thesocialproxy2",
-            "nimble-isp",
-            "nimble-isp-mobile",
-            "proxit-linux",
-            "proxit-macos",
-            "proxit-windows",
-            "proxit-rental",
-            "ipfoxy",
-            "brightup",
-            "research",
-        ]
-        | Omit = omit,
-        proxy_providers: Dict[str, float] | Omit = omit,
-        query_template: extract_async_params.QueryTemplate | Omit = omit,
-        raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
         render: bool | Omit = omit,
-        render_flow: Iterable[Dict[str, object]] | Omit = omit,
-        render_options: extract_async_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
-        save_userbrowser: bool | Omit = omit,
         session: extract_async_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
-        skip_ubct: bool | Omit = omit,
         state: Literal[
             "AL",
             "AK",
@@ -963,10 +924,11 @@ class ExtractResource(SyncAPIResource):
             "WY",
         ]
         | Omit = omit,
+        storage_compress: bool | Omit = omit,
+        storage_object_name: str | Omit = omit,
+        storage_type: str | Omit = omit,
+        storage_url: str | Omit = omit,
         tag: str | Omit = omit,
-        template: extract_async_params.Template | Omit = omit,
-        type: str | Omit = omit,
-        userbrowser_creation_template_rendered: extract_async_params.UserbrowserCreationTemplateRendered | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -984,9 +946,9 @@ class ExtractResource(SyncAPIResource):
 
           browser_actions: Array of browser automation actions to execute sequentially
 
-          city: City for geolocation
+          callback_url: URL to call back when async operation completes
 
-          client_timeout: Client-side timeout in milliseconds
+          city: City for geolocation
 
           consent_header: Whether to automatically handle cookie consent headers
 
@@ -995,8 +957,6 @@ class ExtractResource(SyncAPIResource):
           country: Country code for geolocation and proxy selection
 
           device: Device type for browser emulation
-
-          disable_ip_check: Whether to disable IP address validation
 
           driver: Browser driver to use
 
@@ -1008,21 +968,13 @@ class ExtractResource(SyncAPIResource):
 
           http2: Whether to use HTTP/2 protocol
 
-          ip6: Whether to use IPv6 for the request
-
           is_xhr: Whether to emulate XMLHttpRequest behavior
 
           locale: Locale for browser language and region settings
 
-          metadata: Structured metadata about the request execution context
-
           method: HTTP method for the request
 
-          native_mode: Native execution mode
-
           network_capture: Filters for capturing network traffic
-
-          no_userbrowser: Whether to disable browser-based rendering
 
           os: Operating system to emulate
 
@@ -1030,37 +982,25 @@ class ExtractResource(SyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
-          proxy_provider: Proxy provider to use for the request
-
-          proxy_providers: Weighted distribution of proxy providers
-
-          query_template: Query template configuration for structured data extraction
-
-          raw_headers: Whether to return raw HTTP headers in response
-
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
 
-          render_flow: Array of actions to perform during browser rendering
-
           request_timeout: Request timeout in milliseconds
-
-          save_userbrowser: Whether to save the userbrowser session for reuse
 
           skill: Skills or capabilities required for the request
 
-          skip_ubct: Whether to skip userbrowser creation template processing
-
           state: US state for geolocation (only valid when country is US)
 
+          storage_compress: Whether to compress stored data
+
+          storage_object_name: Custom name for the stored object
+
+          storage_type: Type of storage to use for results
+
+          storage_url: URL for storage location
+
           tag: User-defined tag for request identification
-
-          template: Userbrowser creation template configuration
-
-          type: Type of query or scraping template
-
-          userbrowser_creation_template_rendered: Pre-rendered userbrowser creation template configuration
 
           extra_headers: Send extra headers
 
@@ -1077,47 +1017,35 @@ class ExtractResource(SyncAPIResource):
                     "url": url,
                     "browser": browser,
                     "browser_actions": browser_actions,
+                    "callback_url": callback_url,
                     "city": city,
-                    "client_timeout": client_timeout,
                     "consent_header": consent_header,
                     "cookies": cookies,
                     "country": country,
                     "device": device,
-                    "disable_ip_check": disable_ip_check,
                     "driver": driver,
                     "expected_status_codes": expected_status_codes,
                     "formats": formats,
                     "headers": headers,
                     "http2": http2,
-                    "ip6": ip6,
                     "is_xhr": is_xhr,
                     "locale": locale,
-                    "metadata": metadata,
                     "method": method,
-                    "native_mode": native_mode,
                     "network_capture": network_capture,
-                    "no_userbrowser": no_userbrowser,
                     "os": os,
                     "parse": parse,
                     "parser": parser,
-                    "proxy_provider": proxy_provider,
-                    "proxy_providers": proxy_providers,
-                    "query_template": query_template,
-                    "raw_headers": raw_headers,
                     "referrer_type": referrer_type,
                     "render": render,
-                    "render_flow": render_flow,
-                    "render_options": render_options,
                     "request_timeout": request_timeout,
-                    "save_userbrowser": save_userbrowser,
                     "session": session,
                     "skill": skill,
-                    "skip_ubct": skip_ubct,
                     "state": state,
+                    "storage_compress": storage_compress,
+                    "storage_object_name": storage_object_name,
+                    "storage_type": storage_type,
+                    "storage_url": storage_url,
                     "tag": tag,
-                    "template": template,
-                    "type": type,
-                    "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
                 extract_async_params.ExtractAsyncParams,
             ),
@@ -1134,7 +1062,6 @@ class ExtractResource(SyncAPIResource):
         browser: extract_extract_params.Browser | Omit = omit,
         browser_actions: Iterable[extract_extract_params.BrowserAction] | Omit = omit,
         city: str | Omit = omit,
-        client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
         cookies: Union[Iterable[extract_extract_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
@@ -1392,13 +1319,11 @@ class ExtractResource(SyncAPIResource):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
-        ip6: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
         locale: Literal[
             "aa-DJ",
@@ -1936,56 +1861,19 @@ class ExtractResource(SyncAPIResource):
             "auto",
         ]
         | Omit = omit,
-        metadata: extract_extract_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
-        native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[extract_extract_params.NetworkCapture] | Omit = omit,
-        no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
-        proxy_provider: Literal[
-            "brightdata",
-            "oxylabs",
-            "smartproxy",
-            "proxit",
-            "proxit_preprod",
-            "local",
-            "rayobyte",
-            "always",
-            "oculusproxies",
-            "froxy",
-            "packetstream",
-            "911proxy",
-            "direct911proxy",
-            "thesocialproxy",
-            "thesocialproxy2",
-            "nimble-isp",
-            "nimble-isp-mobile",
-            "proxit-linux",
-            "proxit-macos",
-            "proxit-windows",
-            "proxit-rental",
-            "ipfoxy",
-            "brightup",
-            "research",
-        ]
-        | Omit = omit,
-        proxy_providers: Dict[str, float] | Omit = omit,
-        query_template: extract_extract_params.QueryTemplate | Omit = omit,
-        raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
         render: bool | Omit = omit,
-        render_flow: Iterable[Dict[str, object]] | Omit = omit,
-        render_options: extract_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
-        save_userbrowser: bool | Omit = omit,
         session: extract_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
-        skip_ubct: bool | Omit = omit,
         state: Literal[
             "AL",
             "AK",
@@ -2046,10 +1934,6 @@ class ExtractResource(SyncAPIResource):
         ]
         | Omit = omit,
         tag: str | Omit = omit,
-        template: extract_extract_params.Template | Omit = omit,
-        type: str | Omit = omit,
-        userbrowser_creation_template_rendered: extract_extract_params.UserbrowserCreationTemplateRendered
-        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2069,8 +1953,6 @@ class ExtractResource(SyncAPIResource):
 
           city: City for geolocation
 
-          client_timeout: Client-side timeout in milliseconds
-
           consent_header: Whether to automatically handle cookie consent headers
 
           cookies: Browser cookies as array of cookie objects
@@ -2078,8 +1960,6 @@ class ExtractResource(SyncAPIResource):
           country: Country code for geolocation and proxy selection
 
           device: Device type for browser emulation
-
-          disable_ip_check: Whether to disable IP address validation
 
           driver: Browser driver to use
 
@@ -2091,21 +1971,13 @@ class ExtractResource(SyncAPIResource):
 
           http2: Whether to use HTTP/2 protocol
 
-          ip6: Whether to use IPv6 for the request
-
           is_xhr: Whether to emulate XMLHttpRequest behavior
 
           locale: Locale for browser language and region settings
 
-          metadata: Structured metadata about the request execution context
-
           method: HTTP method for the request
 
-          native_mode: Native execution mode
-
           network_capture: Filters for capturing network traffic
-
-          no_userbrowser: Whether to disable browser-based rendering
 
           os: Operating system to emulate
 
@@ -2113,37 +1985,17 @@ class ExtractResource(SyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
-          proxy_provider: Proxy provider to use for the request
-
-          proxy_providers: Weighted distribution of proxy providers
-
-          query_template: Query template configuration for structured data extraction
-
-          raw_headers: Whether to return raw HTTP headers in response
-
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
 
-          render_flow: Array of actions to perform during browser rendering
-
           request_timeout: Request timeout in milliseconds
 
-          save_userbrowser: Whether to save the userbrowser session for reuse
-
           skill: Skills or capabilities required for the request
-
-          skip_ubct: Whether to skip userbrowser creation template processing
 
           state: US state for geolocation (only valid when country is US)
 
           tag: User-defined tag for request identification
-
-          template: Userbrowser creation template configuration
-
-          type: Type of query or scraping template
-
-          userbrowser_creation_template_rendered: Pre-rendered userbrowser creation template configuration
 
           extra_headers: Send extra headers
 
@@ -2161,46 +2013,29 @@ class ExtractResource(SyncAPIResource):
                     "browser": browser,
                     "browser_actions": browser_actions,
                     "city": city,
-                    "client_timeout": client_timeout,
                     "consent_header": consent_header,
                     "cookies": cookies,
                     "country": country,
                     "device": device,
-                    "disable_ip_check": disable_ip_check,
                     "driver": driver,
                     "expected_status_codes": expected_status_codes,
                     "formats": formats,
                     "headers": headers,
                     "http2": http2,
-                    "ip6": ip6,
                     "is_xhr": is_xhr,
                     "locale": locale,
-                    "metadata": metadata,
                     "method": method,
-                    "native_mode": native_mode,
                     "network_capture": network_capture,
-                    "no_userbrowser": no_userbrowser,
                     "os": os,
                     "parse": parse,
                     "parser": parser,
-                    "proxy_provider": proxy_provider,
-                    "proxy_providers": proxy_providers,
-                    "query_template": query_template,
-                    "raw_headers": raw_headers,
                     "referrer_type": referrer_type,
                     "render": render,
-                    "render_flow": render_flow,
-                    "render_options": render_options,
                     "request_timeout": request_timeout,
-                    "save_userbrowser": save_userbrowser,
                     "session": session,
                     "skill": skill,
-                    "skip_ubct": skip_ubct,
                     "state": state,
                     "tag": tag,
-                    "template": template,
-                    "type": type,
-                    "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
                 extract_extract_params.ExtractExtractParams,
             ),
@@ -2237,8 +2072,8 @@ class AsyncExtractResource(AsyncAPIResource):
         url: str,
         browser: extract_async_params.Browser | Omit = omit,
         browser_actions: Iterable[extract_async_params.BrowserAction] | Omit = omit,
+        callback_url: str | Omit = omit,
         city: str | Omit = omit,
-        client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
         cookies: Union[Iterable[extract_async_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
@@ -2496,13 +2331,11 @@ class AsyncExtractResource(AsyncAPIResource):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
-        ip6: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
         locale: Literal[
             "aa-DJ",
@@ -3040,56 +2873,19 @@ class AsyncExtractResource(AsyncAPIResource):
             "auto",
         ]
         | Omit = omit,
-        metadata: extract_async_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
-        native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[extract_async_params.NetworkCapture] | Omit = omit,
-        no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
-        proxy_provider: Literal[
-            "brightdata",
-            "oxylabs",
-            "smartproxy",
-            "proxit",
-            "proxit_preprod",
-            "local",
-            "rayobyte",
-            "always",
-            "oculusproxies",
-            "froxy",
-            "packetstream",
-            "911proxy",
-            "direct911proxy",
-            "thesocialproxy",
-            "thesocialproxy2",
-            "nimble-isp",
-            "nimble-isp-mobile",
-            "proxit-linux",
-            "proxit-macos",
-            "proxit-windows",
-            "proxit-rental",
-            "ipfoxy",
-            "brightup",
-            "research",
-        ]
-        | Omit = omit,
-        proxy_providers: Dict[str, float] | Omit = omit,
-        query_template: extract_async_params.QueryTemplate | Omit = omit,
-        raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
         render: bool | Omit = omit,
-        render_flow: Iterable[Dict[str, object]] | Omit = omit,
-        render_options: extract_async_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
-        save_userbrowser: bool | Omit = omit,
         session: extract_async_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
-        skip_ubct: bool | Omit = omit,
         state: Literal[
             "AL",
             "AK",
@@ -3149,10 +2945,11 @@ class AsyncExtractResource(AsyncAPIResource):
             "WY",
         ]
         | Omit = omit,
+        storage_compress: bool | Omit = omit,
+        storage_object_name: str | Omit = omit,
+        storage_type: str | Omit = omit,
+        storage_url: str | Omit = omit,
         tag: str | Omit = omit,
-        template: extract_async_params.Template | Omit = omit,
-        type: str | Omit = omit,
-        userbrowser_creation_template_rendered: extract_async_params.UserbrowserCreationTemplateRendered | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3170,9 +2967,9 @@ class AsyncExtractResource(AsyncAPIResource):
 
           browser_actions: Array of browser automation actions to execute sequentially
 
-          city: City for geolocation
+          callback_url: URL to call back when async operation completes
 
-          client_timeout: Client-side timeout in milliseconds
+          city: City for geolocation
 
           consent_header: Whether to automatically handle cookie consent headers
 
@@ -3181,8 +2978,6 @@ class AsyncExtractResource(AsyncAPIResource):
           country: Country code for geolocation and proxy selection
 
           device: Device type for browser emulation
-
-          disable_ip_check: Whether to disable IP address validation
 
           driver: Browser driver to use
 
@@ -3194,21 +2989,13 @@ class AsyncExtractResource(AsyncAPIResource):
 
           http2: Whether to use HTTP/2 protocol
 
-          ip6: Whether to use IPv6 for the request
-
           is_xhr: Whether to emulate XMLHttpRequest behavior
 
           locale: Locale for browser language and region settings
 
-          metadata: Structured metadata about the request execution context
-
           method: HTTP method for the request
 
-          native_mode: Native execution mode
-
           network_capture: Filters for capturing network traffic
-
-          no_userbrowser: Whether to disable browser-based rendering
 
           os: Operating system to emulate
 
@@ -3216,37 +3003,25 @@ class AsyncExtractResource(AsyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
-          proxy_provider: Proxy provider to use for the request
-
-          proxy_providers: Weighted distribution of proxy providers
-
-          query_template: Query template configuration for structured data extraction
-
-          raw_headers: Whether to return raw HTTP headers in response
-
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
 
-          render_flow: Array of actions to perform during browser rendering
-
           request_timeout: Request timeout in milliseconds
-
-          save_userbrowser: Whether to save the userbrowser session for reuse
 
           skill: Skills or capabilities required for the request
 
-          skip_ubct: Whether to skip userbrowser creation template processing
-
           state: US state for geolocation (only valid when country is US)
 
+          storage_compress: Whether to compress stored data
+
+          storage_object_name: Custom name for the stored object
+
+          storage_type: Type of storage to use for results
+
+          storage_url: URL for storage location
+
           tag: User-defined tag for request identification
-
-          template: Userbrowser creation template configuration
-
-          type: Type of query or scraping template
-
-          userbrowser_creation_template_rendered: Pre-rendered userbrowser creation template configuration
 
           extra_headers: Send extra headers
 
@@ -3263,47 +3038,35 @@ class AsyncExtractResource(AsyncAPIResource):
                     "url": url,
                     "browser": browser,
                     "browser_actions": browser_actions,
+                    "callback_url": callback_url,
                     "city": city,
-                    "client_timeout": client_timeout,
                     "consent_header": consent_header,
                     "cookies": cookies,
                     "country": country,
                     "device": device,
-                    "disable_ip_check": disable_ip_check,
                     "driver": driver,
                     "expected_status_codes": expected_status_codes,
                     "formats": formats,
                     "headers": headers,
                     "http2": http2,
-                    "ip6": ip6,
                     "is_xhr": is_xhr,
                     "locale": locale,
-                    "metadata": metadata,
                     "method": method,
-                    "native_mode": native_mode,
                     "network_capture": network_capture,
-                    "no_userbrowser": no_userbrowser,
                     "os": os,
                     "parse": parse,
                     "parser": parser,
-                    "proxy_provider": proxy_provider,
-                    "proxy_providers": proxy_providers,
-                    "query_template": query_template,
-                    "raw_headers": raw_headers,
                     "referrer_type": referrer_type,
                     "render": render,
-                    "render_flow": render_flow,
-                    "render_options": render_options,
                     "request_timeout": request_timeout,
-                    "save_userbrowser": save_userbrowser,
                     "session": session,
                     "skill": skill,
-                    "skip_ubct": skip_ubct,
                     "state": state,
+                    "storage_compress": storage_compress,
+                    "storage_object_name": storage_object_name,
+                    "storage_type": storage_type,
+                    "storage_url": storage_url,
                     "tag": tag,
-                    "template": template,
-                    "type": type,
-                    "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
                 extract_async_params.ExtractAsyncParams,
             ),
@@ -3320,7 +3083,6 @@ class AsyncExtractResource(AsyncAPIResource):
         browser: extract_extract_params.Browser | Omit = omit,
         browser_actions: Iterable[extract_extract_params.BrowserAction] | Omit = omit,
         city: str | Omit = omit,
-        client_timeout: float | Omit = omit,
         consent_header: bool | Omit = omit,
         cookies: Union[Iterable[extract_extract_params.CookiesUnionMember0], str] | Omit = omit,
         country: Literal[
@@ -3578,13 +3340,11 @@ class AsyncExtractResource(AsyncAPIResource):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        disable_ip_check: bool | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
-        ip6: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
         locale: Literal[
             "aa-DJ",
@@ -4122,56 +3882,19 @@ class AsyncExtractResource(AsyncAPIResource):
             "auto",
         ]
         | Omit = omit,
-        metadata: extract_extract_params.Metadata | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
-        native_mode: Literal["requester", "apm", "direct"] | Omit = omit,
         network_capture: Iterable[extract_extract_params.NetworkCapture] | Omit = omit,
-        no_userbrowser: bool | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
-        proxy_provider: Literal[
-            "brightdata",
-            "oxylabs",
-            "smartproxy",
-            "proxit",
-            "proxit_preprod",
-            "local",
-            "rayobyte",
-            "always",
-            "oculusproxies",
-            "froxy",
-            "packetstream",
-            "911proxy",
-            "direct911proxy",
-            "thesocialproxy",
-            "thesocialproxy2",
-            "nimble-isp",
-            "nimble-isp-mobile",
-            "proxit-linux",
-            "proxit-macos",
-            "proxit-windows",
-            "proxit-rental",
-            "ipfoxy",
-            "brightup",
-            "research",
-        ]
-        | Omit = omit,
-        proxy_providers: Dict[str, float] | Omit = omit,
-        query_template: extract_extract_params.QueryTemplate | Omit = omit,
-        raw_headers: bool | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
         render: bool | Omit = omit,
-        render_flow: Iterable[Dict[str, object]] | Omit = omit,
-        render_options: extract_extract_params.RenderOptions | Omit = omit,
         request_timeout: float | Omit = omit,
-        save_userbrowser: bool | Omit = omit,
         session: extract_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
-        skip_ubct: bool | Omit = omit,
         state: Literal[
             "AL",
             "AK",
@@ -4232,10 +3955,6 @@ class AsyncExtractResource(AsyncAPIResource):
         ]
         | Omit = omit,
         tag: str | Omit = omit,
-        template: extract_extract_params.Template | Omit = omit,
-        type: str | Omit = omit,
-        userbrowser_creation_template_rendered: extract_extract_params.UserbrowserCreationTemplateRendered
-        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -4255,8 +3974,6 @@ class AsyncExtractResource(AsyncAPIResource):
 
           city: City for geolocation
 
-          client_timeout: Client-side timeout in milliseconds
-
           consent_header: Whether to automatically handle cookie consent headers
 
           cookies: Browser cookies as array of cookie objects
@@ -4264,8 +3981,6 @@ class AsyncExtractResource(AsyncAPIResource):
           country: Country code for geolocation and proxy selection
 
           device: Device type for browser emulation
-
-          disable_ip_check: Whether to disable IP address validation
 
           driver: Browser driver to use
 
@@ -4277,21 +3992,13 @@ class AsyncExtractResource(AsyncAPIResource):
 
           http2: Whether to use HTTP/2 protocol
 
-          ip6: Whether to use IPv6 for the request
-
           is_xhr: Whether to emulate XMLHttpRequest behavior
 
           locale: Locale for browser language and region settings
 
-          metadata: Structured metadata about the request execution context
-
           method: HTTP method for the request
 
-          native_mode: Native execution mode
-
           network_capture: Filters for capturing network traffic
-
-          no_userbrowser: Whether to disable browser-based rendering
 
           os: Operating system to emulate
 
@@ -4299,37 +4006,17 @@ class AsyncExtractResource(AsyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
-          proxy_provider: Proxy provider to use for the request
-
-          proxy_providers: Weighted distribution of proxy providers
-
-          query_template: Query template configuration for structured data extraction
-
-          raw_headers: Whether to return raw HTTP headers in response
-
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
 
-          render_flow: Array of actions to perform during browser rendering
-
           request_timeout: Request timeout in milliseconds
 
-          save_userbrowser: Whether to save the userbrowser session for reuse
-
           skill: Skills or capabilities required for the request
-
-          skip_ubct: Whether to skip userbrowser creation template processing
 
           state: US state for geolocation (only valid when country is US)
 
           tag: User-defined tag for request identification
-
-          template: Userbrowser creation template configuration
-
-          type: Type of query or scraping template
-
-          userbrowser_creation_template_rendered: Pre-rendered userbrowser creation template configuration
 
           extra_headers: Send extra headers
 
@@ -4347,46 +4034,29 @@ class AsyncExtractResource(AsyncAPIResource):
                     "browser": browser,
                     "browser_actions": browser_actions,
                     "city": city,
-                    "client_timeout": client_timeout,
                     "consent_header": consent_header,
                     "cookies": cookies,
                     "country": country,
                     "device": device,
-                    "disable_ip_check": disable_ip_check,
                     "driver": driver,
                     "expected_status_codes": expected_status_codes,
                     "formats": formats,
                     "headers": headers,
                     "http2": http2,
-                    "ip6": ip6,
                     "is_xhr": is_xhr,
                     "locale": locale,
-                    "metadata": metadata,
                     "method": method,
-                    "native_mode": native_mode,
                     "network_capture": network_capture,
-                    "no_userbrowser": no_userbrowser,
                     "os": os,
                     "parse": parse,
                     "parser": parser,
-                    "proxy_provider": proxy_provider,
-                    "proxy_providers": proxy_providers,
-                    "query_template": query_template,
-                    "raw_headers": raw_headers,
                     "referrer_type": referrer_type,
                     "render": render,
-                    "render_flow": render_flow,
-                    "render_options": render_options,
                     "request_timeout": request_timeout,
-                    "save_userbrowser": save_userbrowser,
                     "session": session,
                     "skill": skill,
-                    "skip_ubct": skip_ubct,
                     "state": state,
                     "tag": tag,
-                    "template": template,
-                    "type": type,
-                    "userbrowser_creation_template_rendered": userbrowser_creation_template_rendered,
                 },
                 extract_extract_params.ExtractExtractParams,
             ),

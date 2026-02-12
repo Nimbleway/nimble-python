@@ -23,54 +23,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_agent_overload_1(self, client: Nimble) -> None:
-        client_ = client.agent(
-            params={"foo": "bar"},
-            template="template",
-        )
-        assert_matches_type(AgentResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_agent_with_all_params_overload_1(self, client: Nimble) -> None:
-        client_ = client.agent(
-            params={"foo": "bar"},
-            template="template",
-            localization=True,
-        )
-        assert_matches_type(AgentResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_agent_overload_1(self, client: Nimble) -> None:
-        response = client.with_raw_response.agent(
-            params={"foo": "bar"},
-            template="template",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        client_ = response.parse()
-        assert_matches_type(AgentResponse, client_, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_agent_overload_1(self, client: Nimble) -> None:
-        with client.with_streaming_response.agent(
-            params={"foo": "bar"},
-            template="template",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            client_ = response.parse()
-            assert_matches_type(AgentResponse, client_, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_agent_overload_2(self, client: Nimble) -> None:
+    def test_method_agent(self, client: Nimble) -> None:
         client_ = client.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -79,7 +32,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_agent_with_all_params_overload_2(self, client: Nimble) -> None:
+    def test_method_agent_with_all_params(self, client: Nimble) -> None:
         client_ = client.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -89,7 +42,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_agent_overload_2(self, client: Nimble) -> None:
+    def test_raw_response_agent(self, client: Nimble) -> None:
         response = client.with_raw_response.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -102,7 +55,7 @@ class TestClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_agent_overload_2(self, client: Nimble) -> None:
+    def test_streaming_response_agent(self, client: Nimble) -> None:
         with client.with_streaming_response.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -189,7 +142,6 @@ class TestClient:
                     },
                 ],
                 "city": "Los Angeles",
-                "client_timeout": 25000,
                 "consent_header": True,
                 "cookies": [
                     {
@@ -211,7 +163,6 @@ class TestClient:
                 ],
                 "country": "US",
                 "device": "desktop",
-                "disable_ip_check": False,
                 "driver": "vx8",
                 "expected_status_codes": [200, 201],
                 "formats": ["html"],
@@ -220,35 +171,9 @@ class TestClient:
                     "Accept-Language": "en-US",
                 },
                 "http2": True,
-                "ip6": False,
                 "is_xhr": True,
                 "locale": "en-US",
-                "metadata": {
-                    "account_name": "account_name",
-                    "api_type": "api_type",
-                    "crawl_depth": -9007199254740991,
-                    "crawl_id": "crawl_id",
-                    "definition_id": -9007199254740991,
-                    "definition_name": "definition_name",
-                    "endpoint": "endpoint",
-                    "execution_id": "execution_id",
-                    "flowit_task_id": "flowit_task_id",
-                    "input_id": "input_id",
-                    "is_public_wsa": True,
-                    "is_sitemap": True,
-                    "is_wsa": True,
-                    "parser_id": "parser_id",
-                    "pipeline_execution_id": -9007199254740991,
-                    "query_template_id": "query_template_id",
-                    "source": "source",
-                    "template_id": -9007199254740991,
-                    "template_name": "template_name",
-                    "wsa_id": "wsa_id",
-                    "wsa_name": "wsa_name",
-                    "wsa_version": 0,
-                },
                 "method": "GET",
-                "native_mode": "requester",
                 "network_capture": [
                     {
                         "method": "GET",
@@ -263,64 +188,12 @@ class TestClient:
                         "wait_for_requests_count_timeout": 1,
                     }
                 ],
-                "no_userbrowser": False,
                 "os": "windows",
                 "parse": True,
                 "parser": {"myParser": "bar"},
-                "proxy_provider": "brightdata",
-                "proxy_providers": {
-                    "brightdata": 70,
-                    "oxylabs": 30,
-                },
-                "query_template": {
-                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "api_type": "WEB",
-                    "pagination": {"next_page_params": {"foo": "bar"}},
-                    "params": {"foo": "bar"},
-                },
-                "raw_headers": True,
                 "referrer_type": "random",
                 "render": True,
-                "render_flow": [{"wait": "bar"}, {"click": "bar"}],
-                "render_options": {
-                    "adblock": True,
-                    "blocked_domains": ["ads.example.com", "tracker.com"],
-                    "browser_engine": "chrome",
-                    "cache": False,
-                    "connector_type": "puppeteer",
-                    "disabled_resources": ["image", "stylesheet"],
-                    "enable_2captcha": True,
-                    "extensions": ["extension-id-1", "extension-id-2"],
-                    "fingerprint_id": "fp-abc123",
-                    "hackium_configuration": {
-                        "collect_logs": True,
-                        "do_not_fix_math_salt": True,
-                        "enable_document_element_spoof": True,
-                        "enable_document_has_focus": True,
-                        "enable_fake_navigation_history": True,
-                        "enable_key_ordering": True,
-                        "enable_sniffer": True,
-                        "enable_verbose_logs": True,
-                    },
-                    "headless": True,
-                    "include_iframes": True,
-                    "load_local_storage": True,
-                    "local_storage_keys_to_load": ["authToken", "userId"],
-                    "mouse_strategy": "linear",
-                    "no_accept_encoding": True,
-                    "override_permissions": True,
-                    "random_header_order": True,
-                    "render_type": "domcontentloaded",
-                    "store_local_storage": True,
-                    "timeout": 30000,
-                    "typing_interval": 100,
-                    "typing_strategy": "simple",
-                    "userbrowser": True,
-                    "wait_until": "networkidle2",
-                    "with_performance_metrics": True,
-                },
                 "request_timeout": 30000,
-                "save_userbrowser": False,
                 "session": {
                     "id": "id",
                     "prefetch_userbrowser": True,
@@ -328,20 +201,9 @@ class TestClient:
                     "timeout": 1,
                 },
                 "skill": "dynamic-content",
-                "skip_ubct": False,
                 "state": "CA",
                 "tag": "campaign-2024-q1",
-                "template": {
-                    "name": "x",
-                    "params": {"foo": "bar"},
-                },
-                "type": "generic",
                 "url": "url",
-                "userbrowser_creation_template_rendered": {
-                    "id": "id",
-                    "allowed_parameter_names": ["x"],
-                    "render_flow_rendered": [{"foo": "bar"}],
-                },
             },
             ignore_query_parameters=False,
             include_paths=["/include-this-path", "/and-this-path"],
@@ -433,54 +295,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_agent_overload_1(self, async_client: AsyncNimble) -> None:
-        client = await async_client.agent(
-            params={"foo": "bar"},
-            template="template",
-        )
-        assert_matches_type(AgentResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_agent_with_all_params_overload_1(self, async_client: AsyncNimble) -> None:
-        client = await async_client.agent(
-            params={"foo": "bar"},
-            template="template",
-            localization=True,
-        )
-        assert_matches_type(AgentResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_agent_overload_1(self, async_client: AsyncNimble) -> None:
-        response = await async_client.with_raw_response.agent(
-            params={"foo": "bar"},
-            template="template",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        client = await response.parse()
-        assert_matches_type(AgentResponse, client, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_agent_overload_1(self, async_client: AsyncNimble) -> None:
-        async with async_client.with_streaming_response.agent(
-            params={"foo": "bar"},
-            template="template",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            client = await response.parse()
-            assert_matches_type(AgentResponse, client, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_agent_overload_2(self, async_client: AsyncNimble) -> None:
+    async def test_method_agent(self, async_client: AsyncNimble) -> None:
         client = await async_client.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -489,7 +304,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_agent_with_all_params_overload_2(self, async_client: AsyncNimble) -> None:
+    async def test_method_agent_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -499,7 +314,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_agent_overload_2(self, async_client: AsyncNimble) -> None:
+    async def test_raw_response_agent(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -512,7 +327,7 @@ class TestAsyncClient:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_agent_overload_2(self, async_client: AsyncNimble) -> None:
+    async def test_streaming_response_agent(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.agent(
             agent="agent",
             params={"foo": "bar"},
@@ -599,7 +414,6 @@ class TestAsyncClient:
                     },
                 ],
                 "city": "Los Angeles",
-                "client_timeout": 25000,
                 "consent_header": True,
                 "cookies": [
                     {
@@ -621,7 +435,6 @@ class TestAsyncClient:
                 ],
                 "country": "US",
                 "device": "desktop",
-                "disable_ip_check": False,
                 "driver": "vx8",
                 "expected_status_codes": [200, 201],
                 "formats": ["html"],
@@ -630,35 +443,9 @@ class TestAsyncClient:
                     "Accept-Language": "en-US",
                 },
                 "http2": True,
-                "ip6": False,
                 "is_xhr": True,
                 "locale": "en-US",
-                "metadata": {
-                    "account_name": "account_name",
-                    "api_type": "api_type",
-                    "crawl_depth": -9007199254740991,
-                    "crawl_id": "crawl_id",
-                    "definition_id": -9007199254740991,
-                    "definition_name": "definition_name",
-                    "endpoint": "endpoint",
-                    "execution_id": "execution_id",
-                    "flowit_task_id": "flowit_task_id",
-                    "input_id": "input_id",
-                    "is_public_wsa": True,
-                    "is_sitemap": True,
-                    "is_wsa": True,
-                    "parser_id": "parser_id",
-                    "pipeline_execution_id": -9007199254740991,
-                    "query_template_id": "query_template_id",
-                    "source": "source",
-                    "template_id": -9007199254740991,
-                    "template_name": "template_name",
-                    "wsa_id": "wsa_id",
-                    "wsa_name": "wsa_name",
-                    "wsa_version": 0,
-                },
                 "method": "GET",
-                "native_mode": "requester",
                 "network_capture": [
                     {
                         "method": "GET",
@@ -673,64 +460,12 @@ class TestAsyncClient:
                         "wait_for_requests_count_timeout": 1,
                     }
                 ],
-                "no_userbrowser": False,
                 "os": "windows",
                 "parse": True,
                 "parser": {"myParser": "bar"},
-                "proxy_provider": "brightdata",
-                "proxy_providers": {
-                    "brightdata": 70,
-                    "oxylabs": 30,
-                },
-                "query_template": {
-                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "api_type": "WEB",
-                    "pagination": {"next_page_params": {"foo": "bar"}},
-                    "params": {"foo": "bar"},
-                },
-                "raw_headers": True,
                 "referrer_type": "random",
                 "render": True,
-                "render_flow": [{"wait": "bar"}, {"click": "bar"}],
-                "render_options": {
-                    "adblock": True,
-                    "blocked_domains": ["ads.example.com", "tracker.com"],
-                    "browser_engine": "chrome",
-                    "cache": False,
-                    "connector_type": "puppeteer",
-                    "disabled_resources": ["image", "stylesheet"],
-                    "enable_2captcha": True,
-                    "extensions": ["extension-id-1", "extension-id-2"],
-                    "fingerprint_id": "fp-abc123",
-                    "hackium_configuration": {
-                        "collect_logs": True,
-                        "do_not_fix_math_salt": True,
-                        "enable_document_element_spoof": True,
-                        "enable_document_has_focus": True,
-                        "enable_fake_navigation_history": True,
-                        "enable_key_ordering": True,
-                        "enable_sniffer": True,
-                        "enable_verbose_logs": True,
-                    },
-                    "headless": True,
-                    "include_iframes": True,
-                    "load_local_storage": True,
-                    "local_storage_keys_to_load": ["authToken", "userId"],
-                    "mouse_strategy": "linear",
-                    "no_accept_encoding": True,
-                    "override_permissions": True,
-                    "random_header_order": True,
-                    "render_type": "domcontentloaded",
-                    "store_local_storage": True,
-                    "timeout": 30000,
-                    "typing_interval": 100,
-                    "typing_strategy": "simple",
-                    "userbrowser": True,
-                    "wait_until": "networkidle2",
-                    "with_performance_metrics": True,
-                },
                 "request_timeout": 30000,
-                "save_userbrowser": False,
                 "session": {
                     "id": "id",
                     "prefetch_userbrowser": True,
@@ -738,20 +473,9 @@ class TestAsyncClient:
                     "timeout": 1,
                 },
                 "skill": "dynamic-content",
-                "skip_ubct": False,
                 "state": "CA",
                 "tag": "campaign-2024-q1",
-                "template": {
-                    "name": "x",
-                    "params": {"foo": "bar"},
-                },
-                "type": "generic",
                 "url": "url",
-                "userbrowser_creation_template_rendered": {
-                    "id": "id",
-                    "allowed_parameter_names": ["x"],
-                    "render_flow_rendered": [{"foo": "bar"}],
-                },
             },
             ignore_query_parameters=False,
             include_paths=["/include-this-path", "/and-this-path"],
