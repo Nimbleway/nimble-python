@@ -9,11 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from nimble_python import Nimble, AsyncNimble
-from nimble_python.types import (
-    AgentGetResponse,
-    AgentListResponse,
-    AgentAsyncResponse,
-)
+from nimble_python.types import AgentGetResponse, AgentListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -56,58 +52,6 @@ class TestAgents:
 
             agent = response.parse()
             assert_matches_type(AgentListResponse, agent, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_async(self, client: Nimble) -> None:
-        agent = client.agents.async_(
-            agent="agent",
-            params={"foo": "bar"},
-        )
-        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_method_async_with_all_params(self, client: Nimble) -> None:
-        agent = client.agents.async_(
-            agent="agent",
-            params={"foo": "bar"},
-            callback_url="https://example.com/webhook/callback",
-            localization=True,
-            storage_compress=True,
-            storage_object_name="result-2024-01-15.json",
-            storage_type="s3",
-            storage_url="s3://bucket-name/path/to/object",
-        )
-        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_raw_response_async(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.async_(
-            agent="agent",
-            params={"foo": "bar"},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        agent = response.parse()
-        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    def test_streaming_response_async(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.async_(
-            agent="agent",
-            params={"foo": "bar"},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            agent = response.parse()
-            assert_matches_type(AgentAsyncResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -194,58 +138,6 @@ class TestAsyncAgents:
 
             agent = await response.parse()
             assert_matches_type(AgentListResponse, agent, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_async(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.async_(
-            agent="agent",
-            params={"foo": "bar"},
-        )
-        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_method_async_with_all_params(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.async_(
-            agent="agent",
-            params={"foo": "bar"},
-            callback_url="https://example.com/webhook/callback",
-            localization=True,
-            storage_compress=True,
-            storage_object_name="result-2024-01-15.json",
-            storage_type="s3",
-            storage_url="s3://bucket-name/path/to/object",
-        )
-        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_raw_response_async(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.async_(
-            agent="agent",
-            params={"foo": "bar"},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        agent = await response.parse()
-        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
-
-    @pytest.mark.skip(reason="Prism tests are disabled")
-    @parametrize
-    async def test_streaming_response_async(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.async_(
-            agent="agent",
-            params={"foo": "bar"},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            agent = await response.parse()
-            assert_matches_type(AgentAsyncResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

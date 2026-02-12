@@ -10,7 +10,6 @@ import pytest
 from tests.utils import assert_matches_type
 from nimble_python import Nimble, AsyncNimble
 from nimble_python.types import CrawlListResponse, CrawlStatusResponse, CrawlTerminateResponse
-from nimble_python.pagination import SyncCrawlPagination, AsyncCrawlPagination
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +21,7 @@ class TestCrawl:
     @parametrize
     def test_method_list(self, client: Nimble) -> None:
         crawl = client.crawl.list()
-        assert_matches_type(SyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+        assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -32,7 +31,7 @@ class TestCrawl:
             limit=10,
             status="queued",
         )
-        assert_matches_type(SyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+        assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -42,7 +41,7 @@ class TestCrawl:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         crawl = response.parse()
-        assert_matches_type(SyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+        assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -52,7 +51,7 @@ class TestCrawl:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             crawl = response.parse()
-            assert_matches_type(SyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+            assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -150,7 +149,7 @@ class TestAsyncCrawl:
     @parametrize
     async def test_method_list(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.list()
-        assert_matches_type(AsyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+        assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -160,7 +159,7 @@ class TestAsyncCrawl:
             limit=10,
             status="queued",
         )
-        assert_matches_type(AsyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+        assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -170,7 +169,7 @@ class TestAsyncCrawl:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         crawl = await response.parse()
-        assert_matches_type(AsyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+        assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -180,7 +179,7 @@ class TestAsyncCrawl:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             crawl = await response.parse()
-            assert_matches_type(AsyncCrawlPagination[CrawlListResponse], crawl, path=["response"])
+            assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

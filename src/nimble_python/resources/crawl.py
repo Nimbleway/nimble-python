@@ -9,7 +9,7 @@ import httpx
 
 from ..types import crawl_list_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -18,8 +18,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncCrawlPagination, AsyncCrawlPagination
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import make_request_options
 from ..types.crawl_list_response import CrawlListResponse
 from ..types.crawl_status_response import CrawlStatusResponse
 from ..types.crawl_terminate_response import CrawlTerminateResponse
@@ -59,7 +58,7 @@ class CrawlResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCrawlPagination[CrawlListResponse]:
+    ) -> CrawlListResponse:
         """
         Crawl by Filter
 
@@ -78,9 +77,8 @@ class CrawlResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return self._get(
             "/v1/crawl",
-            page=SyncCrawlPagination[CrawlListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -95,7 +93,7 @@ class CrawlResource(SyncAPIResource):
                     crawl_list_params.CrawlListParams,
                 ),
             ),
-            model=CrawlListResponse,
+            cast_to=CrawlListResponse,
         )
 
     def status(
@@ -189,7 +187,7 @@ class AsyncCrawlResource(AsyncAPIResource):
         """
         return AsyncCrawlResourceWithStreamingResponse(self)
 
-    def list(
+    async def list(
         self,
         *,
         cursor: Optional[str] | Omit = omit,
@@ -201,7 +199,7 @@ class AsyncCrawlResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[CrawlListResponse, AsyncCrawlPagination[CrawlListResponse]]:
+    ) -> CrawlListResponse:
         """
         Crawl by Filter
 
@@ -220,15 +218,14 @@ class AsyncCrawlResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return await self._get(
             "/v1/crawl",
-            page=AsyncCrawlPagination[CrawlListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "cursor": cursor,
                         "limit": limit,
@@ -237,7 +234,7 @@ class AsyncCrawlResource(AsyncAPIResource):
                     crawl_list_params.CrawlListParams,
                 ),
             ),
-            model=CrawlListResponse,
+            cast_to=CrawlListResponse,
         )
 
     async def status(

@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Dict
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import agent_list_params, agent_async_params
+from ..types import agent_list_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -21,7 +20,6 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.agent_get_response import AgentGetResponse
 from ..types.agent_list_response import AgentListResponse
-from ..types.agent_async_response import AgentAsyncResponse
 
 __all__ = ["AgentsResource", "AsyncAgentsResource"]
 
@@ -94,67 +92,6 @@ class AgentsResource(SyncAPIResource):
                 ),
             ),
             cast_to=AgentListResponse,
-        )
-
-    def async_(
-        self,
-        *,
-        agent: str,
-        params: Dict[str, object],
-        callback_url: str | Omit = omit,
-        localization: bool | Omit = omit,
-        storage_compress: bool | Omit = omit,
-        storage_object_name: str | Omit = omit,
-        storage_type: str | Omit = omit,
-        storage_url: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentAsyncResponse:
-        """
-        Execute WSA Realtime Endpoint
-
-        Args:
-          callback_url: URL to call back when async operation completes
-
-          storage_compress: Whether to compress stored data
-
-          storage_object_name: Custom name for the stored object
-
-          storage_type: Type of storage to use for results
-
-          storage_url: URL for storage location
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/v1/agent/async",
-            body=maybe_transform(
-                {
-                    "agent": agent,
-                    "params": params,
-                    "callback_url": callback_url,
-                    "localization": localization,
-                    "storage_compress": storage_compress,
-                    "storage_object_name": storage_object_name,
-                    "storage_type": storage_type,
-                    "storage_url": storage_url,
-                },
-                agent_async_params.AgentAsyncParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AgentAsyncResponse,
         )
 
     def get(
@@ -261,67 +198,6 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=AgentListResponse,
         )
 
-    async def async_(
-        self,
-        *,
-        agent: str,
-        params: Dict[str, object],
-        callback_url: str | Omit = omit,
-        localization: bool | Omit = omit,
-        storage_compress: bool | Omit = omit,
-        storage_object_name: str | Omit = omit,
-        storage_type: str | Omit = omit,
-        storage_url: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentAsyncResponse:
-        """
-        Execute WSA Realtime Endpoint
-
-        Args:
-          callback_url: URL to call back when async operation completes
-
-          storage_compress: Whether to compress stored data
-
-          storage_object_name: Custom name for the stored object
-
-          storage_type: Type of storage to use for results
-
-          storage_url: URL for storage location
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/v1/agent/async",
-            body=await async_maybe_transform(
-                {
-                    "agent": agent,
-                    "params": params,
-                    "callback_url": callback_url,
-                    "localization": localization,
-                    "storage_compress": storage_compress,
-                    "storage_object_name": storage_object_name,
-                    "storage_type": storage_type,
-                    "storage_url": storage_url,
-                },
-                agent_async_params.AgentAsyncParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AgentAsyncResponse,
-        )
-
     async def get(
         self,
         template_name: str,
@@ -363,9 +239,6 @@ class AgentsResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             agents.list,
         )
-        self.async_ = to_raw_response_wrapper(
-            agents.async_,
-        )
         self.get = to_raw_response_wrapper(
             agents.get,
         )
@@ -377,9 +250,6 @@ class AsyncAgentsResourceWithRawResponse:
 
         self.list = async_to_raw_response_wrapper(
             agents.list,
-        )
-        self.async_ = async_to_raw_response_wrapper(
-            agents.async_,
         )
         self.get = async_to_raw_response_wrapper(
             agents.get,
@@ -393,9 +263,6 @@ class AgentsResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             agents.list,
         )
-        self.async_ = to_streamed_response_wrapper(
-            agents.async_,
-        )
         self.get = to_streamed_response_wrapper(
             agents.get,
         )
@@ -407,9 +274,6 @@ class AsyncAgentsResourceWithStreamingResponse:
 
         self.list = async_to_streamed_response_wrapper(
             agents.list,
-        )
-        self.async_ = async_to_streamed_response_wrapper(
-            agents.async_,
         )
         self.get = async_to_streamed_response_wrapper(
             agents.get,
