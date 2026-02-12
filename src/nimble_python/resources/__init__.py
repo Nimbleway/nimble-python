@@ -8,6 +8,14 @@ from .crawl import (
     CrawlResourceWithStreamingResponse,
     AsyncCrawlResourceWithStreamingResponse,
 )
+from .tasks import (
+    TasksResource,
+    AsyncTasksResource,
+    TasksResourceWithRawResponse,
+    AsyncTasksResourceWithRawResponse,
+    TasksResourceWithStreamingResponse,
+    AsyncTasksResourceWithStreamingResponse,
+)
 from .agents import (
     AgentsResource,
     AsyncAgentsResource,
@@ -15,6 +23,14 @@ from .agents import (
     AsyncAgentsResourceWithRawResponse,
     AgentsResourceWithStreamingResponse,
     AsyncAgentsResourceWithStreamingResponse,
+)
+from .extract import (
+    ExtractResource,
+    AsyncExtractResource,
+    ExtractResourceWithRawResponse,
+    AsyncExtractResourceWithRawResponse,
+    ExtractResourceWithStreamingResponse,
+    AsyncExtractResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -24,10 +40,22 @@ __all__ = [
     "AsyncAgentsResourceWithRawResponse",
     "AgentsResourceWithStreamingResponse",
     "AsyncAgentsResourceWithStreamingResponse",
+    "ExtractResource",
+    "AsyncExtractResource",
+    "ExtractResourceWithRawResponse",
+    "AsyncExtractResourceWithRawResponse",
+    "ExtractResourceWithStreamingResponse",
+    "AsyncExtractResourceWithStreamingResponse",
     "CrawlResource",
     "AsyncCrawlResource",
     "CrawlResourceWithRawResponse",
     "AsyncCrawlResourceWithRawResponse",
     "CrawlResourceWithStreamingResponse",
     "AsyncCrawlResourceWithStreamingResponse",
+    "TasksResource",
+    "AsyncTasksResource",
+    "TasksResourceWithRawResponse",
+    "AsyncTasksResourceWithRawResponse",
+    "TasksResourceWithStreamingResponse",
+    "AsyncTasksResourceWithStreamingResponse",
 ]

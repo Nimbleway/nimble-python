@@ -41,7 +41,7 @@ client = Nimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.extract(
+response = client.extract.extract(
     url="url",
 )
 print(response.task_id)
@@ -67,7 +67,7 @@ client = AsyncNimble(
 
 
 async def main() -> None:
-    response = await client.extract(
+    response = await client.extract.extract(
         url="url",
     )
     print(response.task_id)
@@ -103,7 +103,7 @@ async def main() -> None:
         api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.extract(
+        response = await client.extract.extract(
             url="url",
         )
         print(response.task_id)
@@ -121,6 +121,69 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Pagination
+
+List methods in the Nimble API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from nimble_python import Nimble
+
+client = Nimble()
+
+all_crawls = []
+# Automatically fetches more pages as needed.
+for crawl in client.crawl.list():
+    # Do something with crawl here
+    all_crawls.append(crawl)
+print(all_crawls)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from nimble_python import AsyncNimble
+
+client = AsyncNimble()
+
+
+async def main() -> None:
+    all_crawls = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for crawl in client.crawl.list():
+        all_crawls.append(crawl)
+    print(all_crawls)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.crawl.list()
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.data)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.crawl.list()
+
+print(f"next page cursor: {first_page.pagination.next_cursor}")  # => "next page cursor: ..."
+for crawl in first_page.data:
+    print(crawl.crawl_id)
+
+# Remove `await` for non-async usage.
+```
+
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -130,7 +193,7 @@ from nimble_python import Nimble
 
 client = Nimble()
 
-response = client.extract(
+response = client.extract.extract(
     url="url",
     metadata={},
 )
@@ -153,7 +216,7 @@ from nimble_python import Nimble
 client = Nimble()
 
 try:
-    client.extract(
+    client.extract.extract(
         url="url",
     )
 except nimble_python.APIConnectionError as e:
@@ -198,7 +261,7 @@ client = Nimble(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).extract(
+client.with_options(max_retries=5).extract.extract(
     url="url",
 )
 ```
@@ -223,7 +286,7 @@ client = Nimble(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).extract(
+client.with_options(timeout=5.0).extract.extract(
     url="url",
 )
 ```
@@ -266,13 +329,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from nimble_python import Nimble
 
 client = Nimble()
-response = client.with_raw_response.extract(
+response = client.extract.with_raw_response.extract(
     url="url",
 )
 print(response.headers.get('X-My-Header'))
 
-client = response.parse()  # get the object that `extract()` would have returned
-print(client.task_id)
+extract = response.parse()  # get the object that `extract.extract()` would have returned
+print(extract.task_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/Nimbleway/nimble-python/tree/main/src/nimble_python/_response.py) object.
@@ -286,7 +349,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.with_streaming_response.extract(
+with client.extract.with_streaming_response.extract(
     url="url",
 ) as response:
     print(response.headers.get("X-My-Header"))
