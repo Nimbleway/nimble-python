@@ -9,7 +9,11 @@ import pytest
 
 from tests.utils import assert_matches_type
 from nimble_python import Nimble, AsyncNimble
-from nimble_python.types import AgentGetResponse, AgentListResponse
+from nimble_python.types import (
+    AgentGetResponse,
+    AgentListResponse,
+    AgentAsyncResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -52,6 +56,100 @@ class TestAgents:
 
             agent = response.parse()
             assert_matches_type(AgentListResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_async_overload_1(self, client: Nimble) -> None:
+        agent = client.agents.async_(
+            params={"foo": "bar"},
+            template="template",
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_async_with_all_params_overload_1(self, client: Nimble) -> None:
+        agent = client.agents.async_(
+            params={"foo": "bar"},
+            template="template",
+            localization=True,
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_async_overload_1(self, client: Nimble) -> None:
+        response = client.agents.with_raw_response.async_(
+            params={"foo": "bar"},
+            template="template",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_async_overload_1(self, client: Nimble) -> None:
+        with client.agents.with_streaming_response.async_(
+            params={"foo": "bar"},
+            template="template",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_async_overload_2(self, client: Nimble) -> None:
+        agent = client.agents.async_(
+            agent="agent",
+            params={"foo": "bar"},
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_async_with_all_params_overload_2(self, client: Nimble) -> None:
+        agent = client.agents.async_(
+            agent="agent",
+            params={"foo": "bar"},
+            localization=True,
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_async_overload_2(self, client: Nimble) -> None:
+        response = client.agents.with_raw_response.async_(
+            agent="agent",
+            params={"foo": "bar"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_async_overload_2(self, client: Nimble) -> None:
+        with client.agents.with_streaming_response.async_(
+            agent="agent",
+            params={"foo": "bar"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentAsyncResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -138,6 +236,100 @@ class TestAsyncAgents:
 
             agent = await response.parse()
             assert_matches_type(AgentListResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_async_overload_1(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agents.async_(
+            params={"foo": "bar"},
+            template="template",
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_async_with_all_params_overload_1(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agents.async_(
+            params={"foo": "bar"},
+            template="template",
+            localization=True,
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_async_overload_1(self, async_client: AsyncNimble) -> None:
+        response = await async_client.agents.with_raw_response.async_(
+            params={"foo": "bar"},
+            template="template",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_async_overload_1(self, async_client: AsyncNimble) -> None:
+        async with async_client.agents.with_streaming_response.async_(
+            params={"foo": "bar"},
+            template="template",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_async_overload_2(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agents.async_(
+            agent="agent",
+            params={"foo": "bar"},
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_async_with_all_params_overload_2(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agents.async_(
+            agent="agent",
+            params={"foo": "bar"},
+            localization=True,
+        )
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_async_overload_2(self, async_client: AsyncNimble) -> None:
+        response = await async_client.agents.with_raw_response.async_(
+            agent="agent",
+            params={"foo": "bar"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentAsyncResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_async_overload_2(self, async_client: AsyncNimble) -> None:
+        async with async_client.agents.with_streaming_response.async_(
+            agent="agent",
+            params={"foo": "bar"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentAsyncResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
