@@ -1531,7 +1531,6 @@ class BrowserActionPressActionPressUnionMember1(TypedDict, total=False):
             " ",
             "Print",
             "Execute",
-            " ",
             "a",
             "b",
             "c",
