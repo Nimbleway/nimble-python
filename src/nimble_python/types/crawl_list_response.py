@@ -66,21 +66,21 @@ class DataCrawlOptions(BaseModel):
 
 
 class DataTask(BaseModel):
-    crawl_id: str
-
     status: Literal["pending", "completed", "failed"]
 
-    webit_task_id: str
+    task_id: str
 
-    created_at: Union[str, Dict[str, object], None] = None
+    created_at: Optional[str] = None
 
-    updated_at: Union[str, Dict[str, object], None] = None
+    updated_at: Optional[str] = None
 
 
 class Data(BaseModel):
-    id: str
+    """Crawl API response"""
 
     account_name: str
+
+    crawl_id: str
 
     crawl_options: DataCrawlOptions
 
@@ -95,8 +95,6 @@ class Data(BaseModel):
     completed: Optional[float] = None
 
     completed_at: Union[str, Dict[str, object], None] = None
-
-    encrypted_token: Optional[str] = None
 
     extract_options: Optional[Dict[str, object]] = None
 
