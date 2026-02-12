@@ -19,8 +19,8 @@ __all__ = [
     "DataNetworkCaptureResultRequest",
     "DataNetworkCaptureResultResponse",
     "DataParsing",
-    "DataParsingUnionMember0",
-    "DataParsingUnionMember1",
+    "DataParsingParsingSuccessResult",
+    "DataParsingParsingErrorResult",
     "DataRedirect",
     "Metadata",
     "Debug",
@@ -197,19 +197,19 @@ class DataNetworkCapture(BaseModel):
     error_message: Optional[str] = FieldInfo(alias="errorMessage", default=None)
 
 
-class DataParsingUnionMember0(BaseModel):
+class DataParsingParsingSuccessResult(BaseModel):
     entities: Dict[str, object]
 
     status: Literal["success"]
 
 
-class DataParsingUnionMember1(BaseModel):
+class DataParsingParsingErrorResult(BaseModel):
     error: str
 
     status: Literal["error"]
 
 
-DataParsing: TypeAlias = Union[DataParsingUnionMember0, DataParsingUnionMember1, Dict[str, object]]
+DataParsing: TypeAlias = Union[DataParsingParsingSuccessResult, DataParsingParsingErrorResult, Dict[str, object]]
 
 
 class DataRedirect(BaseModel):
