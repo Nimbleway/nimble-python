@@ -10,7 +10,7 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_map_params, client_agent_params, client_crawl_params, client_extract_params
+from .types import client_map_params, client_extract_params
 from ._types import (
     Body,
     Omit,
@@ -48,8 +48,6 @@ from ._base_client import (
     make_request_options,
 )
 from .types.map_response import MapResponse
-from .types.agent_response import AgentResponse
-from .types.crawl_response import CrawlResponse
 from .types.extract_response import ExtractResponse
 
 if TYPE_CHECKING:
@@ -212,133 +210,6 @@ class Nimble(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
-
-    def agent(
-        self,
-        *,
-        agent: str,
-        params: Dict[str, object],
-        localization: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentResponse:
-        """
-        Execute WSA Realtime Endpoint
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self.post(
-            "/v1/agent",
-            body=maybe_transform(
-                {
-                    "agent": agent,
-                    "params": params,
-                    "localization": localization,
-                },
-                client_agent_params.ClientAgentParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AgentResponse,
-        )
-
-    def crawl(
-        self,
-        *,
-        url: str,
-        allow_external_links: bool | Omit = omit,
-        allow_subdomains: bool | Omit = omit,
-        callback: client_crawl_params.Callback | Omit = omit,
-        crawl_entire_domain: bool | Omit = omit,
-        exclude_paths: SequenceNotStr[str] | Omit = omit,
-        extract_options: client_crawl_params.ExtractOptions | Omit = omit,
-        ignore_query_parameters: bool | Omit = omit,
-        include_paths: SequenceNotStr[str] | Omit = omit,
-        limit: int | Omit = omit,
-        max_discovery_depth: int | Omit = omit,
-        name: str | Omit = omit,
-        sitemap: Literal["skip", "include", "only"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlResponse:
-        """
-        Create crawl task
-
-        Args:
-          url: Url to crawl.
-
-          allow_external_links: Allows the crawler to follow links to external websites.
-
-          allow_subdomains: Allows the crawler to follow links to subdomains of the main domain.
-
-          callback: Webhook configuration for receiving crawl results.
-
-          crawl_entire_domain: Allows the crawler to follow internal links to sibling or parent URLs, not just
-              child paths.
-
-          exclude_paths: URL pathname regex patterns that exclude matching URLs from the crawl.
-
-          ignore_query_parameters: Do not re-scrape the same path with different (or none) query parameters.
-
-          include_paths: URL pathname regex patterns that include matching URLs in the crawl.
-
-          limit: Maximum number of pages to crawl.
-
-          max_discovery_depth: Maximum depth to crawl based on discovery order.
-
-          name: Name of the crawl.
-
-          sitemap: Sitemap and other methods will be used together to find URLs.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self.post(
-            "/v1/crawl",
-            body=maybe_transform(
-                {
-                    "url": url,
-                    "allow_external_links": allow_external_links,
-                    "allow_subdomains": allow_subdomains,
-                    "callback": callback,
-                    "crawl_entire_domain": crawl_entire_domain,
-                    "exclude_paths": exclude_paths,
-                    "extract_options": extract_options,
-                    "ignore_query_parameters": ignore_query_parameters,
-                    "include_paths": include_paths,
-                    "limit": limit,
-                    "max_discovery_depth": max_discovery_depth,
-                    "name": name,
-                    "sitemap": sitemap,
-                },
-                client_crawl_params.ClientCrawlParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=CrawlResponse,
-        )
 
     def extract(
         self,
@@ -2363,133 +2234,6 @@ class AsyncNimble(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
-    async def agent(
-        self,
-        *,
-        agent: str,
-        params: Dict[str, object],
-        localization: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentResponse:
-        """
-        Execute WSA Realtime Endpoint
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self.post(
-            "/v1/agent",
-            body=await async_maybe_transform(
-                {
-                    "agent": agent,
-                    "params": params,
-                    "localization": localization,
-                },
-                client_agent_params.ClientAgentParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AgentResponse,
-        )
-
-    async def crawl(
-        self,
-        *,
-        url: str,
-        allow_external_links: bool | Omit = omit,
-        allow_subdomains: bool | Omit = omit,
-        callback: client_crawl_params.Callback | Omit = omit,
-        crawl_entire_domain: bool | Omit = omit,
-        exclude_paths: SequenceNotStr[str] | Omit = omit,
-        extract_options: client_crawl_params.ExtractOptions | Omit = omit,
-        ignore_query_parameters: bool | Omit = omit,
-        include_paths: SequenceNotStr[str] | Omit = omit,
-        limit: int | Omit = omit,
-        max_discovery_depth: int | Omit = omit,
-        name: str | Omit = omit,
-        sitemap: Literal["skip", "include", "only"] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CrawlResponse:
-        """
-        Create crawl task
-
-        Args:
-          url: Url to crawl.
-
-          allow_external_links: Allows the crawler to follow links to external websites.
-
-          allow_subdomains: Allows the crawler to follow links to subdomains of the main domain.
-
-          callback: Webhook configuration for receiving crawl results.
-
-          crawl_entire_domain: Allows the crawler to follow internal links to sibling or parent URLs, not just
-              child paths.
-
-          exclude_paths: URL pathname regex patterns that exclude matching URLs from the crawl.
-
-          ignore_query_parameters: Do not re-scrape the same path with different (or none) query parameters.
-
-          include_paths: URL pathname regex patterns that include matching URLs in the crawl.
-
-          limit: Maximum number of pages to crawl.
-
-          max_discovery_depth: Maximum depth to crawl based on discovery order.
-
-          name: Name of the crawl.
-
-          sitemap: Sitemap and other methods will be used together to find URLs.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self.post(
-            "/v1/crawl",
-            body=await async_maybe_transform(
-                {
-                    "url": url,
-                    "allow_external_links": allow_external_links,
-                    "allow_subdomains": allow_subdomains,
-                    "callback": callback,
-                    "crawl_entire_domain": crawl_entire_domain,
-                    "exclude_paths": exclude_paths,
-                    "extract_options": extract_options,
-                    "ignore_query_parameters": ignore_query_parameters,
-                    "include_paths": include_paths,
-                    "limit": limit,
-                    "max_discovery_depth": max_discovery_depth,
-                    "name": name,
-                    "sitemap": sitemap,
-                },
-                client_crawl_params.ClientCrawlParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=CrawlResponse,
-        )
-
     async def extract(
         self,
         *,
@@ -4366,12 +4110,6 @@ class NimbleWithRawResponse:
     def __init__(self, client: Nimble) -> None:
         self._client = client
 
-        self.agent = to_raw_response_wrapper(
-            client.agent,
-        )
-        self.crawl = to_raw_response_wrapper(
-            client.crawl,
-        )
         self.extract = to_raw_response_wrapper(
             client.extract,
         )
@@ -4398,12 +4136,6 @@ class AsyncNimbleWithRawResponse:
     def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
-        self.agent = async_to_raw_response_wrapper(
-            client.agent,
-        )
-        self.crawl = async_to_raw_response_wrapper(
-            client.crawl,
-        )
         self.extract = async_to_raw_response_wrapper(
             client.extract,
         )
@@ -4430,12 +4162,6 @@ class NimbleWithStreamedResponse:
     def __init__(self, client: Nimble) -> None:
         self._client = client
 
-        self.agent = to_streamed_response_wrapper(
-            client.agent,
-        )
-        self.crawl = to_streamed_response_wrapper(
-            client.crawl,
-        )
         self.extract = to_streamed_response_wrapper(
             client.extract,
         )
@@ -4462,12 +4188,6 @@ class AsyncNimbleWithStreamedResponse:
     def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
-        self.agent = async_to_streamed_response_wrapper(
-            client.agent,
-        )
-        self.crawl = async_to_streamed_response_wrapper(
-            client.crawl,
-        )
         self.extract = async_to_streamed_response_wrapper(
             client.extract,
         )
