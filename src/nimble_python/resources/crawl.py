@@ -49,9 +49,9 @@ class CrawlResource(SyncAPIResource):
     def list(
         self,
         *,
-        status: Literal["queued", "running", "succeeded", "failed", "canceled"],
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
+        status: Literal["queued", "running", "succeeded", "failed", "canceled", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,11 +63,11 @@ class CrawlResource(SyncAPIResource):
         Crawl by Filter
 
         Args:
-          status: Filter crawls by their status.
-
           cursor: Cursor for pagination.
 
           limit: Number of crawls to return per page.
+
+          status: Filter crawls by their status.
 
           extra_headers: Send extra headers
 
@@ -86,9 +86,9 @@ class CrawlResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "status": status,
                         "cursor": cursor,
                         "limit": limit,
+                        "status": status,
                     },
                     crawl_list_params.CrawlListParams,
                 ),
@@ -190,9 +190,9 @@ class AsyncCrawlResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        status: Literal["queued", "running", "succeeded", "failed", "canceled"],
         cursor: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
+        status: Literal["queued", "running", "succeeded", "failed", "canceled", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -204,11 +204,11 @@ class AsyncCrawlResource(AsyncAPIResource):
         Crawl by Filter
 
         Args:
-          status: Filter crawls by their status.
-
           cursor: Cursor for pagination.
 
           limit: Number of crawls to return per page.
+
+          status: Filter crawls by their status.
 
           extra_headers: Send extra headers
 
@@ -227,9 +227,9 @@ class AsyncCrawlResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "status": status,
                         "cursor": cursor,
                         "limit": limit,
+                        "status": status,
                     },
                     crawl_list_params.CrawlListParams,
                 ),
