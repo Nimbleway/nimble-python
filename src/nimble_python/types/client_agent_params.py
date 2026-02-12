@@ -2,26 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing import Dict
+from typing_extensions import Required, TypedDict
 
-__all__ = ["ClientAgentParams", "ExtractTemplateBody", "AgentBody"]
-
-
-class ExtractTemplateBody(TypedDict, total=False):
-    params: Required[Dict[str, object]]
-
-    template: Required[str]
-
-    localization: bool
+__all__ = ["ClientAgentParams"]
 
 
-class AgentBody(TypedDict, total=False):
+class ClientAgentParams(TypedDict, total=False):
     agent: Required[str]
 
     params: Required[Dict[str, object]]
 
     localization: bool
-
-
-ClientAgentParams: TypeAlias = Union[ExtractTemplateBody, AgentBody]

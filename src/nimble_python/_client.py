@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 from typing import TYPE_CHECKING, Any, Dict, Mapping
-from typing_extensions import Self, Literal, overload, override
+from typing_extensions import Self, Literal, override
 
 import httpx
 
@@ -27,7 +27,6 @@ from ._types import (
 )
 from ._utils import (
     is_given,
-    required_args,
     maybe_transform,
     get_async_library,
     async_maybe_transform,
@@ -227,35 +226,6 @@ class Nimble(SyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
-    @overload
-    def agent(
-        self,
-        *,
-        params: Dict[str, object],
-        template: str,
-        localization: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentResponse:
-        """
-        Execute WSA Realtime Endpoint
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
     def agent(
         self,
         *,
@@ -281,31 +251,13 @@ class Nimble(SyncAPIClient):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["params", "template"], ["agent", "params"])
-    def agent(
-        self,
-        *,
-        params: Dict[str, object],
-        template: str | Omit = omit,
-        localization: bool | Omit = omit,
-        agent: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentResponse:
         return self.post(
             "/v1/agent",
             body=maybe_transform(
                 {
-                    "params": params,
-                    "template": template,
-                    "localization": localization,
                     "agent": agent,
+                    "params": params,
+                    "localization": localization,
                 },
                 client_agent_params.ClientAgentParams,
             ),
@@ -1446,35 +1398,6 @@ class AsyncNimble(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
-    @overload
-    async def agent(
-        self,
-        *,
-        params: Dict[str, object],
-        template: str,
-        localization: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentResponse:
-        """
-        Execute WSA Realtime Endpoint
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
     async def agent(
         self,
         *,
@@ -1500,31 +1423,13 @@ class AsyncNimble(AsyncAPIClient):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["params", "template"], ["agent", "params"])
-    async def agent(
-        self,
-        *,
-        params: Dict[str, object],
-        template: str | Omit = omit,
-        localization: bool | Omit = omit,
-        agent: str | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentResponse:
         return await self.post(
             "/v1/agent",
             body=await async_maybe_transform(
                 {
-                    "params": params,
-                    "template": template,
-                    "localization": localization,
                     "agent": agent,
+                    "params": params,
+                    "localization": localization,
                 },
                 client_agent_params.ClientAgentParams,
             ),
