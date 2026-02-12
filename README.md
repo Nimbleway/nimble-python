@@ -195,9 +195,9 @@ client = Nimble()
 
 response = client.extract.extract(
     url="url",
-    metadata={},
+    session={},
 )
-print(response.metadata)
+print(response.session)
 ```
 
 ## Handling errors

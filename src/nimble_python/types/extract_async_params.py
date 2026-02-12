@@ -54,18 +54,9 @@ __all__ = [
     "BrowserActionWaitForNavigationActionWaitForNavigation",
     "BrowserActionWaitForNavigationActionWaitForNavigationUnionMember1",
     "CookiesUnionMember0",
-    "Metadata",
     "NetworkCapture",
     "NetworkCaptureURL",
-    "QueryTemplate",
-    "QueryTemplatePagination",
-    "QueryTemplatePaginationNextPageParams",
-    "QueryTemplatePaginationUnionMember1",
-    "RenderOptions",
-    "RenderOptionsHackiumConfiguration",
     "Session",
-    "Template",
-    "UserbrowserCreationTemplateRendered",
 ]
 
 
@@ -79,11 +70,11 @@ class ExtractAsyncParams(TypedDict, total=False):
     browser_actions: Iterable[BrowserAction]
     """Array of browser automation actions to execute sequentially"""
 
+    callback_url: str
+    """URL to call back when async operation completes"""
+
     city: str
     """City for geolocation"""
-
-    client_timeout: float
-    """Client-side timeout in milliseconds"""
 
     consent_header: bool
     """Whether to automatically handle cookie consent headers"""
@@ -349,9 +340,6 @@ class ExtractAsyncParams(TypedDict, total=False):
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
-    disable_ip_check: bool
-    """Whether to disable IP address validation"""
-
     driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"]
     """Browser driver to use"""
 
@@ -366,9 +354,6 @@ class ExtractAsyncParams(TypedDict, total=False):
 
     http2: bool
     """Whether to use HTTP/2 protocol"""
-
-    ip6: bool
-    """Whether to use IPv6 for the request"""
 
     is_xhr: bool
     """Whether to emulate XMLHttpRequest behavior"""
@@ -910,20 +895,11 @@ class ExtractAsyncParams(TypedDict, total=False):
     ]
     """Locale for browser language and region settings"""
 
-    metadata: Metadata
-    """Structured metadata about the request execution context"""
-
     method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
     """HTTP method for the request"""
 
-    native_mode: Literal["requester", "apm", "direct"]
-    """Native execution mode"""
-
     network_capture: Iterable[NetworkCapture]
     """Filters for capturing network traffic"""
-
-    no_userbrowser: bool
-    """Whether to disable browser-based rendering"""
 
     os: Literal["windows", "mac os", "linux", "android", "ios"]
     """Operating system to emulate"""
@@ -934,67 +910,19 @@ class ExtractAsyncParams(TypedDict, total=False):
     parser: Union[Dict[str, object], str]
     """Custom parser configuration as a key-value map"""
 
-    proxy_provider: Literal[
-        "brightdata",
-        "oxylabs",
-        "smartproxy",
-        "proxit",
-        "proxit_preprod",
-        "local",
-        "rayobyte",
-        "always",
-        "oculusproxies",
-        "froxy",
-        "packetstream",
-        "911proxy",
-        "direct911proxy",
-        "thesocialproxy",
-        "thesocialproxy2",
-        "nimble-isp",
-        "nimble-isp-mobile",
-        "proxit-linux",
-        "proxit-macos",
-        "proxit-windows",
-        "proxit-rental",
-        "ipfoxy",
-        "brightup",
-        "research",
-    ]
-    """Proxy provider to use for the request"""
-
-    proxy_providers: Dict[str, float]
-    """Weighted distribution of proxy providers"""
-
-    query_template: QueryTemplate
-    """Query template configuration for structured data extraction"""
-
-    raw_headers: bool
-    """Whether to return raw HTTP headers in response"""
-
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
 
     render: bool
     """Whether to render JavaScript content using a browser"""
 
-    render_flow: Iterable[Dict[str, object]]
-    """Array of actions to perform during browser rendering"""
-
-    render_options: RenderOptions
-
     request_timeout: float
     """Request timeout in milliseconds"""
-
-    save_userbrowser: bool
-    """Whether to save the userbrowser session for reuse"""
 
     session: Session
 
     skill: Union[str, SequenceNotStr[str]]
     """Skills or capabilities required for the request"""
-
-    skip_ubct: bool
-    """Whether to skip userbrowser creation template processing"""
 
     state: Literal[
         "AL",
@@ -1056,17 +984,20 @@ class ExtractAsyncParams(TypedDict, total=False):
     ]
     """US state for geolocation (only valid when country is US)"""
 
+    storage_compress: bool
+    """Whether to compress stored data"""
+
+    storage_object_name: str
+    """Custom name for the stored object"""
+
+    storage_type: str
+    """Type of storage to use for results"""
+
+    storage_url: str
+    """URL for storage location"""
+
     tag: str
     """User-defined tag for request identification"""
-
-    template: Template
-    """Userbrowser creation template configuration"""
-
-    type: str
-    """Type of query or scraping template"""
-
-    userbrowser_creation_template_rendered: UserbrowserCreationTemplateRendered
-    """Pre-rendered userbrowser creation template configuration"""
 
 
 class BrowserUnionMember1(TypedDict, total=False):
@@ -1975,54 +1906,6 @@ class CookiesUnionMember0Typed(TypedDict, total=False):
 CookiesUnionMember0: TypeAlias = Union[CookiesUnionMember0Typed, Dict[str, object]]
 
 
-class Metadata(TypedDict, total=False):
-    """Structured metadata about the request execution context"""
-
-    account_name: str
-
-    api_type: str
-
-    crawl_depth: int
-
-    crawl_id: str
-
-    definition_id: int
-
-    definition_name: str
-
-    endpoint: str
-
-    execution_id: str
-
-    flowit_task_id: str
-
-    input_id: str
-
-    is_public_wsa: bool
-
-    is_sitemap: bool
-
-    is_wsa: bool
-
-    parser_id: str
-
-    pipeline_execution_id: int
-
-    query_template_id: str
-
-    source: str
-
-    template_id: int
-
-    template_name: str
-
-    wsa_id: str
-
-    wsa_name: str
-
-    wsa_version: float
-
-
 class NetworkCaptureURL(TypedDict, total=False):
     value: Required[str]
 
@@ -2046,156 +1929,6 @@ class NetworkCapture(TypedDict, total=False):
     wait_for_requests_count_timeout: float
 
 
-class QueryTemplatePaginationNextPageParams(TypedDict, total=False):
-    next_page_params: Required[Dict[str, object]]
-
-
-class QueryTemplatePaginationUnionMember1(TypedDict, total=False):
-    next_page_params: Required[Dict[str, object]]
-
-
-QueryTemplatePagination: TypeAlias = Union[
-    QueryTemplatePaginationNextPageParams, Iterable[QueryTemplatePaginationUnionMember1]
-]
-
-
-class QueryTemplateTyped(TypedDict, total=False):
-    """Query template configuration for structured data extraction"""
-
-    id: Required[str]
-
-    api_type: Literal["WEB", "SERP", "SOCIAL"]
-
-    pagination: QueryTemplatePagination
-
-    params: Dict[str, object]
-
-
-QueryTemplate: TypeAlias = Union[QueryTemplateTyped, Dict[str, object]]
-
-
-class RenderOptionsHackiumConfiguration(TypedDict, total=False):
-    """Configuration for Hackium browser modifications"""
-
-    collect_logs: bool
-
-    do_not_fix_math_salt: bool
-
-    enable_document_element_spoof: bool
-
-    enable_document_has_focus: bool
-
-    enable_fake_navigation_history: bool
-
-    enable_key_ordering: bool
-
-    enable_sniffer: bool
-
-    enable_verbose_logs: bool
-
-
-class RenderOptions(TypedDict, total=False):
-    adblock: bool
-    """Whether to enable ad blocking"""
-
-    blocked_domains: SequenceNotStr[str]
-    """Domains to block from loading"""
-
-    browser_engine: Union[Literal["chrome", "hackium", "firefox", "hackfox"], Dict[str, float]]
-    """Browser engine to use, or weighted distribution of engines"""
-
-    cache: bool
-    """Whether to enable browser caching"""
-
-    connector_type: Literal["puppeteer", "puppeteer-cdp", "puppeteer-bidi", "webit-cdp", "playwright"]
-    """Type of browser connector to use"""
-
-    disabled_resources: List[
-        Literal[
-            "other",
-            "document",
-            "stylesheet",
-            "image",
-            "media",
-            "font",
-            "script",
-            "texttrack",
-            "xhr",
-            "fetch",
-            "eventsource",
-            "websocket",
-            "manifest",
-            "signedexchange",
-            "ping",
-            "cspviolationreport",
-            "prefetch",
-            "preflight",
-            "fedcm",
-        ]
-    ]
-    """Types of resources to block from loading"""
-
-    enable_2captcha: bool
-    """Whether to use 2Captcha service for solving captchas"""
-
-    extensions: SequenceNotStr[str]
-    """Browser extensions to load"""
-
-    fingerprint_id: str
-    """Fingerprint identifier for browser customization"""
-
-    hackium_configuration: RenderOptionsHackiumConfiguration
-    """Configuration for Hackium browser modifications"""
-
-    headless: bool
-    """Whether to run browser in headless mode"""
-
-    include_iframes: bool
-    """Whether to include iframe content in the result"""
-
-    load_local_storage: bool
-    """Whether to load previously stored localStorage data"""
-
-    local_storage_keys_to_load: SequenceNotStr[str]
-    """Specific localStorage keys to load"""
-
-    mouse_strategy: Literal["linear", "ghost-cursor", "windmouse"]
-    """Strategy for simulating mouse movements"""
-
-    no_accept_encoding: bool
-    """Disable content encoding to avoid cached responses"""
-
-    override_permissions: bool
-    """Whether to override default browser permissions"""
-
-    random_header_order: bool
-    """Whether to randomize HTTP header order"""
-
-    render_type: Literal["domcontentloaded", "load", "idle0", "networkidle0", "idle2", "networkidle2", "navigate"]
-    """Type of render completion to wait for"""
-
-    store_local_storage: bool
-    """Whether to store localStorage data for future sessions"""
-
-    timeout: float
-    """Maximum time in milliseconds to wait for page render"""
-
-    typing_interval: float
-    """Interval in milliseconds between key presses"""
-
-    typing_strategy: Literal["simple", "distribution"]
-    """Strategy for simulating keyboard typing"""
-
-    userbrowser: bool
-    """Whether to use a persistent browser session"""
-
-    wait_until: Literal["load", "domcontentloaded", "idle0", "idle2", "networkidle0", "networkidle2", "navigate"]
-    """Browser event to wait for before considering page loaded"""
-
-    with_performance_metrics: bool
-    """Whether to collect performance metrics during rendering"""
-
-
 class Session(TypedDict, total=False):
     id: str
 
@@ -2204,21 +1937,3 @@ class Session(TypedDict, total=False):
     retry: bool
 
     timeout: float
-
-
-class Template(TypedDict, total=False):
-    """Userbrowser creation template configuration"""
-
-    name: Required[str]
-
-    params: Dict[str, object]
-
-
-class UserbrowserCreationTemplateRendered(TypedDict, total=False):
-    """Pre-rendered userbrowser creation template configuration"""
-
-    id: Required[str]
-
-    allowed_parameter_names: Required[SequenceNotStr[str]]
-
-    render_flow_rendered: Required[Iterable[Dict[str, object]]]
