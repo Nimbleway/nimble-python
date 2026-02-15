@@ -41,7 +41,7 @@ client = Nimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.extract.run(
+response = client.extract(
     url="url",
 )
 print(response.task_id)
@@ -67,7 +67,7 @@ client = AsyncNimble(
 
 
 async def main() -> None:
-    response = await client.extract.run(
+    response = await client.extract(
         url="url",
     )
     print(response.task_id)
@@ -103,7 +103,7 @@ async def main() -> None:
         api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.extract.run(
+        response = await client.extract(
             url="url",
         )
         print(response.task_id)
@@ -130,7 +130,7 @@ from nimble_python import Nimble
 
 client = Nimble()
 
-response = client.extract.run(
+response = client.extract(
     url="url",
     session={},
 )
@@ -153,7 +153,7 @@ from nimble_python import Nimble
 client = Nimble()
 
 try:
-    client.extract.run(
+    client.extract(
         url="url",
     )
 except nimble_python.APIConnectionError as e:
@@ -198,7 +198,7 @@ client = Nimble(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).extract.run(
+client.with_options(max_retries=5).extract(
     url="url",
 )
 ```
@@ -223,7 +223,7 @@ client = Nimble(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).extract.run(
+client.with_options(timeout=5.0).extract(
     url="url",
 )
 ```
@@ -266,13 +266,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from nimble_python import Nimble
 
 client = Nimble()
-response = client.extract.with_raw_response.run(
+response = client.with_raw_response.extract(
     url="url",
 )
 print(response.headers.get('X-My-Header'))
 
-extract = response.parse()  # get the object that `extract.run()` would have returned
-print(extract.task_id)
+client = response.parse()  # get the object that `extract()` would have returned
+print(client.task_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/Nimbleway/nimble-python/tree/main/src/nimble_python/_response.py) object.
@@ -286,7 +286,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.extract.with_streaming_response.run(
+with client.with_streaming_response.extract(
     url="url",
 ) as response:
     print(response.headers.get("X-My-Header"))
