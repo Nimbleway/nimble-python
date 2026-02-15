@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING, Any, Dict, List, Union, Mapping, Iterable
+from typing import TYPE_CHECKING, Any, Dict, List, Union, Mapping, Iterable, Optional
 from typing_extensions import Self, Literal, override
 
 import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_map_params, client_extract_params
+from .types import client_map_params, client_search_params, client_extract_params
 from ._types import (
     Body,
     Omit,
@@ -48,6 +48,7 @@ from ._base_client import (
     make_request_options,
 )
 from .types.map_response import MapResponse
+from .types.search_response import SearchResponse
 from .types.extract_response import ExtractResponse
 
 if TYPE_CHECKING:
@@ -2045,6 +2046,110 @@ class Nimble(SyncAPIClient):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MapResponse,
+        )
+
+    def search(
+        self,
+        *,
+        query: str,
+        content_type: Optional[SequenceNotStr[str]] | Omit = omit,
+        country: str | Omit = omit,
+        deep_search: bool | Omit = omit,
+        end_date: Optional[str] | Omit = omit,
+        exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        include_answer: bool | Omit = omit,
+        include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        locale: str | Omit = omit,
+        max_subagents: int | Omit = omit,
+        num_results: int | Omit = omit,
+        parsing_type: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
+        search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]] | Omit = omit,
+        start_date: Optional[str] | Omit = omit,
+        time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
+        topic: Union[str, SequenceNotStr[str]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchResponse:
+        """
+        Search
+
+        Args:
+          query: Search query string
+
+          content_type: Filter by content type (only supported with focus=general). Supports semantic
+              groups ('documents', 'spreadsheets', 'presentations') and specific formats
+              ('pdf', 'docx', 'xlsx', etc.)
+
+          deep_search: If True, fetches and extracts full page content for each search result. If
+              False, returns only metadata (title, snippet, URL)
+
+          end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
+
+          exclude_domains: List of domains to exclude from search results. Maximum 50 domains.
+
+          include_answer: Generate LLM answer summary based on search result snippets (works with both
+              deep_search=True and False)
+
+          include_domains: List of domains to include in search results. Maximum 50 domains.
+
+          max_subagents: Maximum number of subagents to execute in parallel for WSA focus modes
+              (shopping, social, geo). Ignored for traditional SERP focus modes. Default: 3,
+              Range: 1-10.
+
+          num_results: Maximum number of results to return (actual count may be less)
+
+          parsing_type: Output format: plain_text, markdown, or simplified_html
+
+          search_engine: Enum representing the search engines supported by Nimble ⚠️ DEPRECATED: This
+              parameter is ignored. Use 'focus' parameter instead.
+
+          start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
+
+          time_range: Time range filters passed to Webit SERP API as 'time' parameter.
+
+          topic: Search focus/specialization. Can be a single focus mode (e.g., 'shopping',
+              'social') or a list of explicit subagent names (e.g., ['amazon_serp',
+              'target_serp'])
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v1/search",
+            body=maybe_transform(
+                {
+                    "query": query,
+                    "content_type": content_type,
+                    "country": country,
+                    "deep_search": deep_search,
+                    "end_date": end_date,
+                    "exclude_domains": exclude_domains,
+                    "include_answer": include_answer,
+                    "include_domains": include_domains,
+                    "locale": locale,
+                    "max_subagents": max_subagents,
+                    "num_results": num_results,
+                    "parsing_type": parsing_type,
+                    "search_engine": search_engine,
+                    "start_date": start_date,
+                    "time_range": time_range,
+                    "topic": topic,
+                },
+                client_search_params.ClientSearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchResponse,
         )
 
     @override
@@ -4070,6 +4175,110 @@ class AsyncNimble(AsyncAPIClient):
             cast_to=MapResponse,
         )
 
+    async def search(
+        self,
+        *,
+        query: str,
+        content_type: Optional[SequenceNotStr[str]] | Omit = omit,
+        country: str | Omit = omit,
+        deep_search: bool | Omit = omit,
+        end_date: Optional[str] | Omit = omit,
+        exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        include_answer: bool | Omit = omit,
+        include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        locale: str | Omit = omit,
+        max_subagents: int | Omit = omit,
+        num_results: int | Omit = omit,
+        parsing_type: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
+        search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]] | Omit = omit,
+        start_date: Optional[str] | Omit = omit,
+        time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
+        topic: Union[str, SequenceNotStr[str]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SearchResponse:
+        """
+        Search
+
+        Args:
+          query: Search query string
+
+          content_type: Filter by content type (only supported with focus=general). Supports semantic
+              groups ('documents', 'spreadsheets', 'presentations') and specific formats
+              ('pdf', 'docx', 'xlsx', etc.)
+
+          deep_search: If True, fetches and extracts full page content for each search result. If
+              False, returns only metadata (title, snippet, URL)
+
+          end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
+
+          exclude_domains: List of domains to exclude from search results. Maximum 50 domains.
+
+          include_answer: Generate LLM answer summary based on search result snippets (works with both
+              deep_search=True and False)
+
+          include_domains: List of domains to include in search results. Maximum 50 domains.
+
+          max_subagents: Maximum number of subagents to execute in parallel for WSA focus modes
+              (shopping, social, geo). Ignored for traditional SERP focus modes. Default: 3,
+              Range: 1-10.
+
+          num_results: Maximum number of results to return (actual count may be less)
+
+          parsing_type: Output format: plain_text, markdown, or simplified_html
+
+          search_engine: Enum representing the search engines supported by Nimble ⚠️ DEPRECATED: This
+              parameter is ignored. Use 'focus' parameter instead.
+
+          start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
+
+          time_range: Time range filters passed to Webit SERP API as 'time' parameter.
+
+          topic: Search focus/specialization. Can be a single focus mode (e.g., 'shopping',
+              'social') or a list of explicit subagent names (e.g., ['amazon_serp',
+              'target_serp'])
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v1/search",
+            body=await async_maybe_transform(
+                {
+                    "query": query,
+                    "content_type": content_type,
+                    "country": country,
+                    "deep_search": deep_search,
+                    "end_date": end_date,
+                    "exclude_domains": exclude_domains,
+                    "include_answer": include_answer,
+                    "include_domains": include_domains,
+                    "locale": locale,
+                    "max_subagents": max_subagents,
+                    "num_results": num_results,
+                    "parsing_type": parsing_type,
+                    "search_engine": search_engine,
+                    "start_date": start_date,
+                    "time_range": time_range,
+                    "topic": topic,
+                },
+                client_search_params.ClientSearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=SearchResponse,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -4116,6 +4325,9 @@ class NimbleWithRawResponse:
         self.map = to_raw_response_wrapper(
             client.map,
         )
+        self.search = to_raw_response_wrapper(
+            client.search,
+        )
 
     @cached_property
     def agents(self) -> agents.AgentsResourceWithRawResponse:
@@ -4141,6 +4353,9 @@ class AsyncNimbleWithRawResponse:
         )
         self.map = async_to_raw_response_wrapper(
             client.map,
+        )
+        self.search = async_to_raw_response_wrapper(
+            client.search,
         )
 
     @cached_property
@@ -4168,6 +4383,9 @@ class NimbleWithStreamedResponse:
         self.map = to_streamed_response_wrapper(
             client.map,
         )
+        self.search = to_streamed_response_wrapper(
+            client.search,
+        )
 
     @cached_property
     def agents(self) -> agents.AgentsResourceWithStreamingResponse:
@@ -4193,6 +4411,9 @@ class AsyncNimbleWithStreamedResponse:
         )
         self.map = async_to_streamed_response_wrapper(
             client.map,
+        )
+        self.search = async_to_streamed_response_wrapper(
+            client.search,
         )
 
     @cached_property
