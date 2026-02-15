@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.6.0 (2026-02-15)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/Nimbleway/nimble-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** manual updates ([a26613e](https://github.com/Nimbleway/nimble-python/commit/a26613e7fd71242e524a5a0b8e34b066cad16119))
+* **api:** manual updates ([6f547e1](https://github.com/Nimbleway/nimble-python/commit/6f547e1967faf0a3cd819882d5acc1259bd7a5bd))
+* **api:** manual updates ([65b6c51](https://github.com/Nimbleway/nimble-python/commit/65b6c51e5c34c7bed2904894e8881cda5dbc4ae8))
+
+
+### Chores
+
+* format all `api.md` files ([6d888ec](https://github.com/Nimbleway/nimble-python/commit/6d888ec6d27d748df0200e9205d14debfa4fb135))
+
 ## 0.5.0 (2026-02-12)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/Nimbleway/nimble-python/compare/v0.4.0...v0.5.0)
