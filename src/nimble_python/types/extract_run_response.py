@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 
 __all__ = [
-    "ExtractResponse",
+    "ExtractRunResponse",
     "Data",
     "DataBrowserActions",
     "DataBrowserActionsResult",
@@ -304,7 +304,7 @@ class PaginationUnionMember1(BaseModel):
 Pagination: TypeAlias = Union[PaginationNextPageParams, List[PaginationUnionMember1]]
 
 
-class ExtractResponse(BaseModel):
+class ExtractRunResponse(BaseModel):
     data: Data
 
     metadata: Metadata
