@@ -1,14 +1,14 @@
-# Nimble
+# Map
 
 Types:
 
 ```python
-from nimble_python.types import MapResponse
+from nimble_python.types import MapRunResponse
 ```
 
 Methods:
 
-- <code title="post /v1/map">client.<a href="./src/nimble_python/_client.py">map</a>(\*\*<a href="src/nimble_python/types/client_map_params.py">params</a>) -> <a href="./src/nimble_python/types/map_response.py">MapResponse</a></code>
+- <code title="post /v1/map">client.map.<a href="./src/nimble_python/resources/map.py">run</a>(\*\*<a href="src/nimble_python/types/map_run_params.py">params</a>) -> <a href="./src/nimble_python/types/map_run_response.py">MapRunResponse</a></code>
 
 # Extract
 

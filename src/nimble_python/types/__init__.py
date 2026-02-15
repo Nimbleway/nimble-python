@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from .map_response import MapResponse as MapResponse
+from .map_run_params import MapRunParams as MapRunParams
+from .map_run_response import MapRunResponse as MapRunResponse
 from .agent_list_params import AgentListParams as AgentListParams
-from .client_map_params import ClientMapParams as ClientMapParams
 from .crawl_list_params import CrawlListParams as CrawlListParams
 from .agent_get_response import AgentGetResponse as AgentGetResponse
 from .extract_run_params import ExtractRunParams as ExtractRunParams
