@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from .._models import BaseModel
 
-__all__ = ["MapRunResponse", "Link"]
+__all__ = ["MapResponse", "Link"]
 
 
 class Link(BaseModel):
@@ -15,7 +15,7 @@ class Link(BaseModel):
     title: Optional[str] = None
 
 
-class MapRunResponse(BaseModel):
+class MapResponse(BaseModel):
     """Response schema for map requests."""
 
     links: List[Link]

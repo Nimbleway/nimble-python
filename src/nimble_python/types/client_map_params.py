@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["MapRunParams"]
+__all__ = ["ClientMapParams"]
 
 
-class MapRunParams(TypedDict, total=False):
+class ClientMapParams(TypedDict, total=False):
     url: Required[str]
     """Url to map."""
 
