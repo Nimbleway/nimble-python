@@ -16,8 +16,22 @@ from .agents import (
     AgentsResourceWithStreamingResponse,
     AsyncAgentsResourceWithStreamingResponse,
 )
+from .extract import (
+    ExtractResource,
+    AsyncExtractResource,
+    ExtractResourceWithRawResponse,
+    AsyncExtractResourceWithRawResponse,
+    ExtractResourceWithStreamingResponse,
+    AsyncExtractResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "ExtractResource",
+    "AsyncExtractResource",
+    "ExtractResourceWithRawResponse",
+    "AsyncExtractResourceWithRawResponse",
+    "ExtractResourceWithStreamingResponse",
+    "AsyncExtractResourceWithStreamingResponse",
     "AgentsResource",
     "AsyncAgentsResource",
     "AgentsResourceWithRawResponse",
