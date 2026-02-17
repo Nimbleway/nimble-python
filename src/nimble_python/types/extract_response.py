@@ -253,7 +253,10 @@ class Data(BaseModel):
     """The list of redirects that occurred during the task."""
 
     screenshots: Optional[List[object]] = None
-    """The screenshots from browser actions taken during the task."""
+    """
+    Screenshots taken during the task, from browser actions, or the screenshot
+    format.
+    """
 
 
 class Metadata(BaseModel):
