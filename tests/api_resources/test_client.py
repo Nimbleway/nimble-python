@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestClient:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_extract(self, client: Nimble) -> None:
         client_ = client.extract(
@@ -29,7 +29,7 @@ class TestClient:
         )
         assert_matches_type(ExtractResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_extract_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract(
@@ -148,7 +148,7 @@ class TestClient:
         )
         assert_matches_type(ExtractResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_extract(self, client: Nimble) -> None:
         response = client.with_raw_response.extract(
@@ -160,7 +160,7 @@ class TestClient:
         client_ = response.parse()
         assert_matches_type(ExtractResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_extract(self, client: Nimble) -> None:
         with client.with_streaming_response.extract(
@@ -174,7 +174,7 @@ class TestClient:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_map(self, client: Nimble) -> None:
         client_ = client.map(
@@ -182,7 +182,7 @@ class TestClient:
         )
         assert_matches_type(MapResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_map_with_all_params(self, client: Nimble) -> None:
         client_ = client.map(
@@ -195,7 +195,7 @@ class TestClient:
         )
         assert_matches_type(MapResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_map(self, client: Nimble) -> None:
         response = client.with_raw_response.map(
@@ -207,7 +207,7 @@ class TestClient:
         client_ = response.parse()
         assert_matches_type(MapResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_map(self, client: Nimble) -> None:
         with client.with_streaming_response.map(
@@ -221,7 +221,7 @@ class TestClient:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_search(self, client: Nimble) -> None:
         client_ = client.search(
@@ -229,7 +229,7 @@ class TestClient:
         )
         assert_matches_type(SearchResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_search_with_all_params(self, client: Nimble) -> None:
         client_ = client.search(
@@ -252,7 +252,7 @@ class TestClient:
         )
         assert_matches_type(SearchResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_search(self, client: Nimble) -> None:
         response = client.with_raw_response.search(
@@ -264,7 +264,7 @@ class TestClient:
         client_ = response.parse()
         assert_matches_type(SearchResponse, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_search(self, client: Nimble) -> None:
         with client.with_streaming_response.search(
@@ -284,7 +284,7 @@ class TestAsyncClient:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_extract(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
@@ -292,7 +292,7 @@ class TestAsyncClient:
         )
         assert_matches_type(ExtractResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
@@ -411,7 +411,7 @@ class TestAsyncClient:
         )
         assert_matches_type(ExtractResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.extract(
@@ -423,7 +423,7 @@ class TestAsyncClient:
         client = await response.parse()
         assert_matches_type(ExtractResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.extract(
@@ -437,7 +437,7 @@ class TestAsyncClient:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_map(self, async_client: AsyncNimble) -> None:
         client = await async_client.map(
@@ -445,7 +445,7 @@ class TestAsyncClient:
         )
         assert_matches_type(MapResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_map_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.map(
@@ -458,7 +458,7 @@ class TestAsyncClient:
         )
         assert_matches_type(MapResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_map(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.map(
@@ -470,7 +470,7 @@ class TestAsyncClient:
         client = await response.parse()
         assert_matches_type(MapResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_map(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.map(
@@ -484,7 +484,7 @@ class TestAsyncClient:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_search(self, async_client: AsyncNimble) -> None:
         client = await async_client.search(
@@ -492,7 +492,7 @@ class TestAsyncClient:
         )
         assert_matches_type(SearchResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_search_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.search(
@@ -515,7 +515,7 @@ class TestAsyncClient:
         )
         assert_matches_type(SearchResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_search(self, async_client: AsyncNimble) -> None:
         response = await async_client.with_raw_response.search(
@@ -527,7 +527,7 @@ class TestAsyncClient:
         client = await response.parse()
         assert_matches_type(SearchResponse, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_search(self, async_client: AsyncNimble) -> None:
         async with async_client.with_streaming_response.search(
