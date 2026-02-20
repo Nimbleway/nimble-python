@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCrawl:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Nimble) -> None:
         crawl = client.crawl.list()
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Nimble) -> None:
         crawl = client.crawl.list(
@@ -33,7 +33,7 @@ class TestCrawl:
         )
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Nimble) -> None:
         response = client.crawl.with_raw_response.list()
@@ -43,7 +43,7 @@ class TestCrawl:
         crawl = response.parse()
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Nimble) -> None:
         with client.crawl.with_streaming_response.list() as response:
@@ -55,7 +55,7 @@ class TestCrawl:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_status(self, client: Nimble) -> None:
         crawl = client.crawl.status(
@@ -63,7 +63,7 @@ class TestCrawl:
         )
         assert_matches_type(CrawlStatusResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_status(self, client: Nimble) -> None:
         response = client.crawl.with_raw_response.status(
@@ -75,7 +75,7 @@ class TestCrawl:
         crawl = response.parse()
         assert_matches_type(CrawlStatusResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_status(self, client: Nimble) -> None:
         with client.crawl.with_streaming_response.status(
@@ -89,7 +89,7 @@ class TestCrawl:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_status(self, client: Nimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -97,7 +97,7 @@ class TestCrawl:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_terminate(self, client: Nimble) -> None:
         crawl = client.crawl.terminate(
@@ -105,7 +105,7 @@ class TestCrawl:
         )
         assert_matches_type(CrawlTerminateResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_terminate(self, client: Nimble) -> None:
         response = client.crawl.with_raw_response.terminate(
@@ -117,7 +117,7 @@ class TestCrawl:
         crawl = response.parse()
         assert_matches_type(CrawlTerminateResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_terminate(self, client: Nimble) -> None:
         with client.crawl.with_streaming_response.terminate(
@@ -131,7 +131,7 @@ class TestCrawl:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_terminate(self, client: Nimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -145,13 +145,13 @@ class TestAsyncCrawl:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.list()
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.list(
@@ -161,7 +161,7 @@ class TestAsyncCrawl:
         )
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncNimble) -> None:
         response = await async_client.crawl.with_raw_response.list()
@@ -171,7 +171,7 @@ class TestAsyncCrawl:
         crawl = await response.parse()
         assert_matches_type(CrawlListResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncNimble) -> None:
         async with async_client.crawl.with_streaming_response.list() as response:
@@ -183,7 +183,7 @@ class TestAsyncCrawl:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_status(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.status(
@@ -191,7 +191,7 @@ class TestAsyncCrawl:
         )
         assert_matches_type(CrawlStatusResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_status(self, async_client: AsyncNimble) -> None:
         response = await async_client.crawl.with_raw_response.status(
@@ -203,7 +203,7 @@ class TestAsyncCrawl:
         crawl = await response.parse()
         assert_matches_type(CrawlStatusResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_status(self, async_client: AsyncNimble) -> None:
         async with async_client.crawl.with_streaming_response.status(
@@ -217,7 +217,7 @@ class TestAsyncCrawl:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_status(self, async_client: AsyncNimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
@@ -225,7 +225,7 @@ class TestAsyncCrawl:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_terminate(self, async_client: AsyncNimble) -> None:
         crawl = await async_client.crawl.terminate(
@@ -233,7 +233,7 @@ class TestAsyncCrawl:
         )
         assert_matches_type(CrawlTerminateResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_terminate(self, async_client: AsyncNimble) -> None:
         response = await async_client.crawl.with_raw_response.terminate(
@@ -245,7 +245,7 @@ class TestAsyncCrawl:
         crawl = await response.parse()
         assert_matches_type(CrawlTerminateResponse, crawl, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_terminate(self, async_client: AsyncNimble) -> None:
         async with async_client.crawl.with_streaming_response.terminate(
@@ -259,7 +259,7 @@ class TestAsyncCrawl:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_terminate(self, async_client: AsyncNimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
