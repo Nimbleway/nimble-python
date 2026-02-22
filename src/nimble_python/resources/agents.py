@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -51,6 +51,7 @@ class AgentsResource(SyncAPIResource):
         self,
         *,
         limit: int | Omit = omit,
+        managed_by: Optional[Literal["nimble", "community"]] | Omit = omit,
         offset: int | Omit = omit,
         privacy: Literal["public", "private", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -65,6 +66,8 @@ class AgentsResource(SyncAPIResource):
 
         Args:
           limit: Number of results per page
+
+          managed_by: Filter public templates by attribution
 
           offset: Pagination offset
 
@@ -88,6 +91,7 @@ class AgentsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "limit": limit,
+                        "managed_by": managed_by,
                         "offset": offset,
                         "privacy": privacy,
                     },
@@ -257,6 +261,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         self,
         *,
         limit: int | Omit = omit,
+        managed_by: Optional[Literal["nimble", "community"]] | Omit = omit,
         offset: int | Omit = omit,
         privacy: Literal["public", "private", "all"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -271,6 +276,8 @@ class AsyncAgentsResource(AsyncAPIResource):
 
         Args:
           limit: Number of results per page
+
+          managed_by: Filter public templates by attribution
 
           offset: Pagination offset
 
@@ -294,6 +301,7 @@ class AsyncAgentsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "limit": limit,
+                        "managed_by": managed_by,
                         "offset": offset,
                         "privacy": privacy,
                     },

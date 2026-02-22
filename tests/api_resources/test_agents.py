@@ -33,6 +33,7 @@ class TestAgents:
     def test_method_list_with_all_params(self, client: Nimble) -> None:
         agent = client.agents.list(
             limit=1,
+            managed_by="nimble",
             offset=0,
             privacy="public",
         )
@@ -218,6 +219,7 @@ class TestAsyncAgents:
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
         agent = await async_client.agents.list(
             limit=1,
+            managed_by="nimble",
             offset=0,
             privacy="public",
         )
