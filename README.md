@@ -41,8 +41,8 @@ client = Nimble(
     api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.map(
-    url="url",
+response = client.extract.run(
+    url="https://exapmle.com",
 )
 print(response.task_id)
 ```
@@ -67,8 +67,8 @@ client = AsyncNimble(
 
 
 async def main() -> None:
-    response = await client.map(
-        url="url",
+    response = await client.extract.run(
+        url="https://exapmle.com",
     )
     print(response.task_id)
 
@@ -103,8 +103,8 @@ async def main() -> None:
         api_key=os.environ.get("NIMBLE_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.map(
-            url="url",
+        response = await client.extract.run(
+            url="https://exapmle.com",
         )
         print(response.task_id)
 
@@ -130,7 +130,7 @@ from nimble_python import Nimble
 
 client = Nimble()
 
-response = client.extract.async_(
+response = client.extract.run(
     url="url",
     session={},
 )
@@ -153,8 +153,8 @@ from nimble_python import Nimble
 client = Nimble()
 
 try:
-    client.map(
-        url="url",
+    client.extract.run(
+        url="https://exapmle.com",
     )
 except nimble_python.APIConnectionError as e:
     print("The server could not be reached")
@@ -198,8 +198,8 @@ client = Nimble(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).map(
-    url="url",
+client.with_options(max_retries=5).extract.run(
+    url="https://exapmle.com",
 )
 ```
 
@@ -223,8 +223,8 @@ client = Nimble(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).map(
-    url="url",
+client.with_options(timeout=5.0).extract.run(
+    url="https://exapmle.com",
 )
 ```
 
@@ -266,13 +266,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from nimble_python import Nimble
 
 client = Nimble()
-response = client.with_raw_response.map(
-    url="url",
+response = client.extract.with_raw_response.run(
+    url="https://exapmle.com",
 )
 print(response.headers.get('X-My-Header'))
 
-client = response.parse()  # get the object that `map()` would have returned
-print(client.task_id)
+extract = response.parse()  # get the object that `extract.run()` would have returned
+print(extract.task_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/Nimbleway/nimble-python/tree/main/src/nimble_python/_response.py) object.
@@ -286,8 +286,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.with_streaming_response.map(
-    url="url",
+with client.extract.with_streaming_response.run(
+    url="https://exapmle.com",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
