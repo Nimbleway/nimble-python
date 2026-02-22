@@ -10,7 +10,7 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_map_params, client_search_params, client_extract_params
+from .types import client_map_params, client_crawl_params, client_search_params, client_extract_params
 from ._types import (
     Body,
     Omit,
@@ -48,13 +48,15 @@ from ._base_client import (
     make_request_options,
 )
 from .types.map_response import MapResponse
+from .types.crawl_response import CrawlResponse
 from .types.search_response import SearchResponse
 from .types.extract_response import ExtractResponse
 
 if TYPE_CHECKING:
-    from .resources import crawl, agents
+    from .resources import crawl, agents, extract
     from .resources.crawl import CrawlResource, AsyncCrawlResource
     from .resources.agents import AgentsResource, AsyncAgentsResource
+    from .resources.extract import ExtractResource, AsyncExtractResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 
@@ -109,6 +111,12 @@ class Nimble(SyncAPIClient):
             custom_query=default_query,
             _strict_response_validation=_strict_response_validation,
         )
+
+    @cached_property
+    def extract(self) -> ExtractResource:
+        from .resources.extract import ExtractResource
+
+        return ExtractResource(self)
 
     @cached_property
     def agents(self) -> AgentsResource:
@@ -211,6 +219,92 @@ class Nimble(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    def crawl(
+        self,
+        *,
+        url: str,
+        allow_external_links: bool | Omit = omit,
+        allow_subdomains: bool | Omit = omit,
+        callback: client_crawl_params.Callback | Omit = omit,
+        crawl_entire_domain: bool | Omit = omit,
+        exclude_paths: SequenceNotStr[str] | Omit = omit,
+        extract_options: client_crawl_params.ExtractOptions | Omit = omit,
+        ignore_query_parameters: bool | Omit = omit,
+        include_paths: SequenceNotStr[str] | Omit = omit,
+        limit: int | Omit = omit,
+        max_discovery_depth: int | Omit = omit,
+        name: str | Omit = omit,
+        sitemap: Literal["skip", "include", "only"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CrawlResponse:
+        """
+        Create crawl task
+
+        Args:
+          url: Url to crawl.
+
+          allow_external_links: Allows the crawler to follow links to external websites.
+
+          allow_subdomains: Allows the crawler to follow links to subdomains of the main domain.
+
+          callback: Webhook configuration for receiving crawl results.
+
+          crawl_entire_domain: Allows the crawler to follow internal links to sibling or parent URLs, not just
+              child paths.
+
+          exclude_paths: URL pathname regex patterns that exclude matching URLs from the crawl.
+
+          ignore_query_parameters: Do not re-scrape the same path with different (or none) query parameters.
+
+          include_paths: URL pathname regex patterns that include matching URLs in the crawl.
+
+          limit: Maximum number of pages to crawl.
+
+          max_discovery_depth: Maximum depth to crawl based on discovery order.
+
+          name: Name of the crawl.
+
+          sitemap: Sitemap and other methods will be used together to find URLs.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v1/crawl",
+            body=maybe_transform(
+                {
+                    "url": url,
+                    "allow_external_links": allow_external_links,
+                    "allow_subdomains": allow_subdomains,
+                    "callback": callback,
+                    "crawl_entire_domain": crawl_entire_domain,
+                    "exclude_paths": exclude_paths,
+                    "extract_options": extract_options,
+                    "ignore_query_parameters": ignore_query_parameters,
+                    "include_paths": include_paths,
+                    "limit": limit,
+                    "max_discovery_depth": max_discovery_depth,
+                    "name": name,
+                    "sitemap": sitemap,
+                },
+                client_crawl_params.ClientCrawlParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CrawlResponse,
+        )
 
     def extract(
         self,
@@ -2238,6 +2332,12 @@ class AsyncNimble(AsyncAPIClient):
         )
 
     @cached_property
+    def extract(self) -> AsyncExtractResource:
+        from .resources.extract import AsyncExtractResource
+
+        return AsyncExtractResource(self)
+
+    @cached_property
     def agents(self) -> AsyncAgentsResource:
         from .resources.agents import AsyncAgentsResource
 
@@ -2338,6 +2438,92 @@ class AsyncNimble(AsyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    async def crawl(
+        self,
+        *,
+        url: str,
+        allow_external_links: bool | Omit = omit,
+        allow_subdomains: bool | Omit = omit,
+        callback: client_crawl_params.Callback | Omit = omit,
+        crawl_entire_domain: bool | Omit = omit,
+        exclude_paths: SequenceNotStr[str] | Omit = omit,
+        extract_options: client_crawl_params.ExtractOptions | Omit = omit,
+        ignore_query_parameters: bool | Omit = omit,
+        include_paths: SequenceNotStr[str] | Omit = omit,
+        limit: int | Omit = omit,
+        max_discovery_depth: int | Omit = omit,
+        name: str | Omit = omit,
+        sitemap: Literal["skip", "include", "only"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CrawlResponse:
+        """
+        Create crawl task
+
+        Args:
+          url: Url to crawl.
+
+          allow_external_links: Allows the crawler to follow links to external websites.
+
+          allow_subdomains: Allows the crawler to follow links to subdomains of the main domain.
+
+          callback: Webhook configuration for receiving crawl results.
+
+          crawl_entire_domain: Allows the crawler to follow internal links to sibling or parent URLs, not just
+              child paths.
+
+          exclude_paths: URL pathname regex patterns that exclude matching URLs from the crawl.
+
+          ignore_query_parameters: Do not re-scrape the same path with different (or none) query parameters.
+
+          include_paths: URL pathname regex patterns that include matching URLs in the crawl.
+
+          limit: Maximum number of pages to crawl.
+
+          max_discovery_depth: Maximum depth to crawl based on discovery order.
+
+          name: Name of the crawl.
+
+          sitemap: Sitemap and other methods will be used together to find URLs.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v1/crawl",
+            body=await async_maybe_transform(
+                {
+                    "url": url,
+                    "allow_external_links": allow_external_links,
+                    "allow_subdomains": allow_subdomains,
+                    "callback": callback,
+                    "crawl_entire_domain": crawl_entire_domain,
+                    "exclude_paths": exclude_paths,
+                    "extract_options": extract_options,
+                    "ignore_query_parameters": ignore_query_parameters,
+                    "include_paths": include_paths,
+                    "limit": limit,
+                    "max_discovery_depth": max_discovery_depth,
+                    "name": name,
+                    "sitemap": sitemap,
+                },
+                client_crawl_params.ClientCrawlParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CrawlResponse,
+        )
 
     async def extract(
         self,
@@ -4319,6 +4505,9 @@ class NimbleWithRawResponse:
     def __init__(self, client: Nimble) -> None:
         self._client = client
 
+        self.crawl = to_raw_response_wrapper(
+            client.crawl,
+        )
         self.extract = to_raw_response_wrapper(
             client.extract,
         )
@@ -4328,6 +4517,12 @@ class NimbleWithRawResponse:
         self.search = to_raw_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def extract(self) -> extract.ExtractResourceWithRawResponse:
+        from .resources.extract import ExtractResourceWithRawResponse
+
+        return ExtractResourceWithRawResponse(self._client.extract)
 
     @cached_property
     def agents(self) -> agents.AgentsResourceWithRawResponse:
@@ -4348,6 +4543,9 @@ class AsyncNimbleWithRawResponse:
     def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
+        self.crawl = async_to_raw_response_wrapper(
+            client.crawl,
+        )
         self.extract = async_to_raw_response_wrapper(
             client.extract,
         )
@@ -4357,6 +4555,12 @@ class AsyncNimbleWithRawResponse:
         self.search = async_to_raw_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def extract(self) -> extract.AsyncExtractResourceWithRawResponse:
+        from .resources.extract import AsyncExtractResourceWithRawResponse
+
+        return AsyncExtractResourceWithRawResponse(self._client.extract)
 
     @cached_property
     def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
@@ -4377,6 +4581,9 @@ class NimbleWithStreamedResponse:
     def __init__(self, client: Nimble) -> None:
         self._client = client
 
+        self.crawl = to_streamed_response_wrapper(
+            client.crawl,
+        )
         self.extract = to_streamed_response_wrapper(
             client.extract,
         )
@@ -4386,6 +4593,12 @@ class NimbleWithStreamedResponse:
         self.search = to_streamed_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def extract(self) -> extract.ExtractResourceWithStreamingResponse:
+        from .resources.extract import ExtractResourceWithStreamingResponse
+
+        return ExtractResourceWithStreamingResponse(self._client.extract)
 
     @cached_property
     def agents(self) -> agents.AgentsResourceWithStreamingResponse:
@@ -4406,6 +4619,9 @@ class AsyncNimbleWithStreamedResponse:
     def __init__(self, client: AsyncNimble) -> None:
         self._client = client
 
+        self.crawl = async_to_streamed_response_wrapper(
+            client.crawl,
+        )
         self.extract = async_to_streamed_response_wrapper(
             client.extract,
         )
@@ -4415,6 +4631,12 @@ class AsyncNimbleWithStreamedResponse:
         self.search = async_to_streamed_response_wrapper(
             client.search,
         )
+
+    @cached_property
+    def extract(self) -> extract.AsyncExtractResourceWithStreamingResponse:
+        from .resources.extract import AsyncExtractResourceWithStreamingResponse
+
+        return AsyncExtractResourceWithStreamingResponse(self._client.extract)
 
     @cached_property
     def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
