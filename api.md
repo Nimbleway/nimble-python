@@ -36,12 +36,13 @@ Methods:
 Types:
 
 ```python
-from nimble_python.types import ExtractAsyncResponse
+from nimble_python.types import ExtractAsyncResponse, ExtractRunResponse
 ```
 
 Methods:
 
 - <code title="post /v1/extract/async">client.extract.<a href="./src/nimble_python/resources/extract.py">async\_</a>(\*\*<a href="src/nimble_python/types/extract_async_params.py">params</a>) -> <a href="./src/nimble_python/types/extract_async_response.py">ExtractAsyncResponse</a></code>
+- <code title="post /v1/extract">client.extract.<a href="./src/nimble_python/resources/extract.py">run</a>(\*\*<a href="src/nimble_python/types/extract_run_params.py">params</a>) -> <a href="./src/nimble_python/types/extract_run_response.py">ExtractRunResponse</a></code>
 
 # Agents
 
@@ -68,11 +69,17 @@ Methods:
 Types:
 
 ```python
-from nimble_python.types import CrawlListResponse, CrawlStatusResponse, CrawlTerminateResponse
+from nimble_python.types import (
+    CrawlListResponse,
+    CrawlRunResponse,
+    CrawlStatusResponse,
+    CrawlTerminateResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /v1/crawl">client.crawl.<a href="./src/nimble_python/resources/crawl.py">list</a>(\*\*<a href="src/nimble_python/types/crawl_list_params.py">params</a>) -> <a href="./src/nimble_python/types/crawl_list_response.py">CrawlListResponse</a></code>
+- <code title="post /v1/crawl">client.crawl.<a href="./src/nimble_python/resources/crawl.py">run</a>(\*\*<a href="src/nimble_python/types/crawl_run_params.py">params</a>) -> <a href="./src/nimble_python/types/crawl_run_response.py">CrawlRunResponse</a></code>
 - <code title="get /v1/crawl/{id}">client.crawl.<a href="./src/nimble_python/resources/crawl.py">status</a>(id) -> <a href="./src/nimble_python/types/crawl_status_response.py">CrawlStatusResponse</a></code>
 - <code title="delete /v1/crawl/{id}">client.crawl.<a href="./src/nimble_python/resources/crawl.py">terminate</a>(id) -> <a href="./src/nimble_python/types/crawl_terminate_response.py">CrawlTerminateResponse</a></code>
