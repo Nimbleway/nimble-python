@@ -7,8 +7,8 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import crawl_list_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..types import crawl_run_params, crawl_list_params
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -19,6 +19,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.crawl_run_response import CrawlRunResponse
 from ..types.crawl_list_response import CrawlListResponse
 from ..types.crawl_status_response import CrawlStatusResponse
 from ..types.crawl_terminate_response import CrawlTerminateResponse
@@ -94,6 +95,92 @@ class CrawlResource(SyncAPIResource):
                 ),
             ),
             cast_to=CrawlListResponse,
+        )
+
+    def run(
+        self,
+        *,
+        url: str,
+        allow_external_links: bool | Omit = omit,
+        allow_subdomains: bool | Omit = omit,
+        callback: crawl_run_params.Callback | Omit = omit,
+        crawl_entire_domain: bool | Omit = omit,
+        exclude_paths: SequenceNotStr[str] | Omit = omit,
+        extract_options: crawl_run_params.ExtractOptions | Omit = omit,
+        ignore_query_parameters: bool | Omit = omit,
+        include_paths: SequenceNotStr[str] | Omit = omit,
+        limit: int | Omit = omit,
+        max_discovery_depth: int | Omit = omit,
+        name: str | Omit = omit,
+        sitemap: Literal["skip", "include", "only"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CrawlRunResponse:
+        """
+        Create crawl task
+
+        Args:
+          url: Url to crawl.
+
+          allow_external_links: Allows the crawler to follow links to external websites.
+
+          allow_subdomains: Allows the crawler to follow links to subdomains of the main domain.
+
+          callback: Webhook configuration for receiving crawl results.
+
+          crawl_entire_domain: Allows the crawler to follow internal links to sibling or parent URLs, not just
+              child paths.
+
+          exclude_paths: URL pathname regex patterns that exclude matching URLs from the crawl.
+
+          ignore_query_parameters: Do not re-scrape the same path with different (or none) query parameters.
+
+          include_paths: URL pathname regex patterns that include matching URLs in the crawl.
+
+          limit: Maximum number of pages to crawl.
+
+          max_discovery_depth: Maximum depth to crawl based on discovery order.
+
+          name: Name of the crawl.
+
+          sitemap: Sitemap and other methods will be used together to find URLs.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/crawl",
+            body=maybe_transform(
+                {
+                    "url": url,
+                    "allow_external_links": allow_external_links,
+                    "allow_subdomains": allow_subdomains,
+                    "callback": callback,
+                    "crawl_entire_domain": crawl_entire_domain,
+                    "exclude_paths": exclude_paths,
+                    "extract_options": extract_options,
+                    "ignore_query_parameters": ignore_query_parameters,
+                    "include_paths": include_paths,
+                    "limit": limit,
+                    "max_discovery_depth": max_discovery_depth,
+                    "name": name,
+                    "sitemap": sitemap,
+                },
+                crawl_run_params.CrawlRunParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CrawlRunResponse,
         )
 
     def status(
@@ -237,6 +324,92 @@ class AsyncCrawlResource(AsyncAPIResource):
             cast_to=CrawlListResponse,
         )
 
+    async def run(
+        self,
+        *,
+        url: str,
+        allow_external_links: bool | Omit = omit,
+        allow_subdomains: bool | Omit = omit,
+        callback: crawl_run_params.Callback | Omit = omit,
+        crawl_entire_domain: bool | Omit = omit,
+        exclude_paths: SequenceNotStr[str] | Omit = omit,
+        extract_options: crawl_run_params.ExtractOptions | Omit = omit,
+        ignore_query_parameters: bool | Omit = omit,
+        include_paths: SequenceNotStr[str] | Omit = omit,
+        limit: int | Omit = omit,
+        max_discovery_depth: int | Omit = omit,
+        name: str | Omit = omit,
+        sitemap: Literal["skip", "include", "only"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CrawlRunResponse:
+        """
+        Create crawl task
+
+        Args:
+          url: Url to crawl.
+
+          allow_external_links: Allows the crawler to follow links to external websites.
+
+          allow_subdomains: Allows the crawler to follow links to subdomains of the main domain.
+
+          callback: Webhook configuration for receiving crawl results.
+
+          crawl_entire_domain: Allows the crawler to follow internal links to sibling or parent URLs, not just
+              child paths.
+
+          exclude_paths: URL pathname regex patterns that exclude matching URLs from the crawl.
+
+          ignore_query_parameters: Do not re-scrape the same path with different (or none) query parameters.
+
+          include_paths: URL pathname regex patterns that include matching URLs in the crawl.
+
+          limit: Maximum number of pages to crawl.
+
+          max_discovery_depth: Maximum depth to crawl based on discovery order.
+
+          name: Name of the crawl.
+
+          sitemap: Sitemap and other methods will be used together to find URLs.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/crawl",
+            body=await async_maybe_transform(
+                {
+                    "url": url,
+                    "allow_external_links": allow_external_links,
+                    "allow_subdomains": allow_subdomains,
+                    "callback": callback,
+                    "crawl_entire_domain": crawl_entire_domain,
+                    "exclude_paths": exclude_paths,
+                    "extract_options": extract_options,
+                    "ignore_query_parameters": ignore_query_parameters,
+                    "include_paths": include_paths,
+                    "limit": limit,
+                    "max_discovery_depth": max_discovery_depth,
+                    "name": name,
+                    "sitemap": sitemap,
+                },
+                crawl_run_params.CrawlRunParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=CrawlRunResponse,
+        )
+
     async def status(
         self,
         id: str,
@@ -315,6 +488,9 @@ class CrawlResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             crawl.list,
         )
+        self.run = to_raw_response_wrapper(
+            crawl.run,
+        )
         self.status = to_raw_response_wrapper(
             crawl.status,
         )
@@ -329,6 +505,9 @@ class AsyncCrawlResourceWithRawResponse:
 
         self.list = async_to_raw_response_wrapper(
             crawl.list,
+        )
+        self.run = async_to_raw_response_wrapper(
+            crawl.run,
         )
         self.status = async_to_raw_response_wrapper(
             crawl.status,
@@ -345,6 +524,9 @@ class CrawlResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             crawl.list,
         )
+        self.run = to_streamed_response_wrapper(
+            crawl.run,
+        )
         self.status = to_streamed_response_wrapper(
             crawl.status,
         )
@@ -359,6 +541,9 @@ class AsyncCrawlResourceWithStreamingResponse:
 
         self.list = async_to_streamed_response_wrapper(
             crawl.list,
+        )
+        self.run = async_to_streamed_response_wrapper(
+            crawl.run,
         )
         self.status = async_to_streamed_response_wrapper(
             crawl.status,
