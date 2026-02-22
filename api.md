@@ -1,15 +1,33 @@
+# Shared Types
+
+```python
+from nimble_python.types import (
+    AutoScrollAction,
+    ClickAction,
+    EvalAction,
+    FetchAction,
+    FillAction,
+    GetCookiesAction,
+    GotoAction,
+    PressAction,
+    ScreenshotAction,
+    ScrollAction,
+    WaitAction,
+    WaitForElementAction,
+    WaitForNavigationAction,
+)
+```
+
 # Nimble
 
 Types:
 
 ```python
-from nimble_python.types import CrawlResponse, ExtractResponse, MapResponse, SearchResponse
+from nimble_python.types import MapResponse, SearchResponse
 ```
 
 Methods:
 
-- <code title="post /v1/crawl">client.<a href="./src/nimble_python/_client.py">crawl</a>(\*\*<a href="src/nimble_python/types/client_crawl_params.py">params</a>) -> <a href="./src/nimble_python/types/crawl_response.py">CrawlResponse</a></code>
-- <code title="post /v1/extract">client.<a href="./src/nimble_python/_client.py">extract</a>(\*\*<a href="src/nimble_python/types/client_extract_params.py">params</a>) -> <a href="./src/nimble_python/types/extract_response.py">ExtractResponse</a></code>
 - <code title="post /v1/map">client.<a href="./src/nimble_python/_client.py">map</a>(\*\*<a href="src/nimble_python/types/client_map_params.py">params</a>) -> <a href="./src/nimble_python/types/map_response.py">MapResponse</a></code>
 - <code title="post /v1/search">client.<a href="./src/nimble_python/_client.py">search</a>(\*\*<a href="src/nimble_python/types/client_search_params.py">params</a>) -> <a href="./src/nimble_python/types/search_response.py">SearchResponse</a></code>
 
