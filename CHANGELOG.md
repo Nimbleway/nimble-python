@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.1 (2026-02-22)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/Nimbleway/nimble-python/compare/v0.9.0...v0.9.1)
+
+### Chores
+
+* remove custom code ([1ddc742](https://github.com/Nimbleway/nimble-python/commit/1ddc74209b4d8032cf13955cec400f5a6ab84a97))
+
 ## 0.9.0 (2026-02-22)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/Nimbleway/nimble-python/compare/v0.8.0...v0.9.0)
