@@ -22,7 +22,7 @@ from .shared_params.wait_for_element_action import WaitForElementAction
 from .shared_params.wait_for_navigation_action import WaitForNavigationAction
 
 __all__ = [
-    "ExtractAsyncParams",
+    "ClientExtractAsyncParams",
     "Browser",
     "BrowserUnionMember1",
     "BrowserAction",
@@ -33,7 +33,7 @@ __all__ = [
 ]
 
 
-class ExtractAsyncParams(TypedDict, total=False):
+class ClientExtractAsyncParams(TypedDict, total=False):
     url: Required[str]
     """Target URL to scrape"""
 
