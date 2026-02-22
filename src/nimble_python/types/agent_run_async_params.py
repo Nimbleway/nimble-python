@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict
 from typing_extensions import Required, TypedDict
 
-__all__ = ["AgentAsyncParams"]
+__all__ = ["AgentRunAsyncParams"]
 
 
-class AgentAsyncParams(TypedDict, total=False):
+class AgentRunAsyncParams(TypedDict, total=False):
     agent: Required[str]
 
     params: Required[Dict[str, object]]
