@@ -1,6 +1,6 @@
 [project]
 name = "nimble_python"
-version = "0.8.0"
+version = "0.9.0"
 description = "The official Python library for the nimble API"
 dynamic = ["readme"]
 license = "Apache-2.0"

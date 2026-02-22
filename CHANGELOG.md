@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.9.0 (2026-02-22)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/Nimbleway/nimble-python/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** align `extract_async` ([ac6b389](https://github.com/Nimbleway/nimble-python/commit/ac6b389c6ed67b3e67b6b71dc74e049521541efe))
+* **api:** Align new endpoints ([d1e53f1](https://github.com/Nimbleway/nimble-python/commit/d1e53f1955caa3c2e27f5b41f2b626602b29cb42))
+* **api:** api update ([d99c196](https://github.com/Nimbleway/nimble-python/commit/d99c19697c3ed0bedddc900009a40b5da9a17297))
+* **api:** manual test ([02f4d0b](https://github.com/Nimbleway/nimble-python/commit/02f4d0b004e11537a52740ffc645331851628d6f))
+* **api:** manual updates ([78b99fb](https://github.com/Nimbleway/nimble-python/commit/78b99fbb76deb4d36c323af9893e4fa3c8bfb82c))
+* **api:** Move /agent to /agents/run ([1b5ad7b](https://github.com/Nimbleway/nimble-python/commit/1b5ad7bd6e119d641be13f4856f593e73504a578))
+* **api:** re-add extract ([739f8e2](https://github.com/Nimbleway/nimble-python/commit/739f8e25c84c80fc0831210cf9d63582fc18b406))
+
+
+### Chores
+
+* **internal:** remove mock server code ([7bb3c98](https://github.com/Nimbleway/nimble-python/commit/7bb3c98569bfbea5b274489f89377e0ca432e601))
+* update mock server docs ([0ff079b](https://github.com/Nimbleway/nimble-python/commit/0ff079b128f3d6e0f9506bb5427a000c0372c49f))
+
 ## 0.8.0 (2026-02-17)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/Nimbleway/nimble-python/compare/v0.7.0...v0.8.0)
