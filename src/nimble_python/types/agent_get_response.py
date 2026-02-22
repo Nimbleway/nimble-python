@@ -20,6 +20,8 @@ class InputProperty(BaseModel):
 
     examples: Optional[List[str]] = None
 
+    is_localization_param: Optional[bool] = None
+
     name: Optional[str] = None
 
     required: Optional[bool] = None
@@ -45,6 +47,8 @@ class AgentGetResponse(BaseModel):
     feature_flags: Optional[FeatureFlags] = None
 
     input_properties: Optional[List[InputProperty]] = None
+
+    managed_by: Optional[str] = None
 
     output_schema: Optional[Dict[str, object]] = None
 
