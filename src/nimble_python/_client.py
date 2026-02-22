@@ -52,9 +52,10 @@ from .types.search_response import SearchResponse
 from .types.extract_response import ExtractResponse
 
 if TYPE_CHECKING:
-    from .resources import crawl, agents, extract
+    from .resources import agent, crawl, tasks, extract
+    from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
-    from .resources.agents import AgentsResource, AsyncAgentsResource
+    from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.extract import ExtractResource, AsyncExtractResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
@@ -112,22 +113,28 @@ class Nimble(SyncAPIClient):
         )
 
     @cached_property
+    def agent(self) -> AgentResource:
+        from .resources.agent import AgentResource
+
+        return AgentResource(self)
+
+    @cached_property
     def extract(self) -> ExtractResource:
         from .resources.extract import ExtractResource
 
         return ExtractResource(self)
 
     @cached_property
-    def agents(self) -> AgentsResource:
-        from .resources.agents import AgentsResource
-
-        return AgentsResource(self)
-
-    @cached_property
     def crawl(self) -> CrawlResource:
         from .resources.crawl import CrawlResource
 
         return CrawlResource(self)
+
+    @cached_property
+    def tasks(self) -> TasksResource:
+        from .resources.tasks import TasksResource
+
+        return TasksResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimbleWithRawResponse:
@@ -2245,22 +2252,28 @@ class AsyncNimble(AsyncAPIClient):
         )
 
     @cached_property
+    def agent(self) -> AsyncAgentResource:
+        from .resources.agent import AsyncAgentResource
+
+        return AsyncAgentResource(self)
+
+    @cached_property
     def extract(self) -> AsyncExtractResource:
         from .resources.extract import AsyncExtractResource
 
         return AsyncExtractResource(self)
 
     @cached_property
-    def agents(self) -> AsyncAgentsResource:
-        from .resources.agents import AsyncAgentsResource
-
-        return AsyncAgentsResource(self)
-
-    @cached_property
     def crawl(self) -> AsyncCrawlResource:
         from .resources.crawl import AsyncCrawlResource
 
         return AsyncCrawlResource(self)
+
+    @cached_property
+    def tasks(self) -> AsyncTasksResource:
+        from .resources.tasks import AsyncTasksResource
+
+        return AsyncTasksResource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncNimbleWithRawResponse:
@@ -4343,22 +4356,28 @@ class NimbleWithRawResponse:
         )
 
     @cached_property
+    def agent(self) -> agent.AgentResourceWithRawResponse:
+        from .resources.agent import AgentResourceWithRawResponse
+
+        return AgentResourceWithRawResponse(self._client.agent)
+
+    @cached_property
     def extract(self) -> extract.ExtractResourceWithRawResponse:
         from .resources.extract import ExtractResourceWithRawResponse
 
         return ExtractResourceWithRawResponse(self._client.extract)
 
     @cached_property
-    def agents(self) -> agents.AgentsResourceWithRawResponse:
-        from .resources.agents import AgentsResourceWithRawResponse
-
-        return AgentsResourceWithRawResponse(self._client.agents)
-
-    @cached_property
     def crawl(self) -> crawl.CrawlResourceWithRawResponse:
         from .resources.crawl import CrawlResourceWithRawResponse
 
         return CrawlResourceWithRawResponse(self._client.crawl)
+
+    @cached_property
+    def tasks(self) -> tasks.TasksResourceWithRawResponse:
+        from .resources.tasks import TasksResourceWithRawResponse
+
+        return TasksResourceWithRawResponse(self._client.tasks)
 
 
 class AsyncNimbleWithRawResponse:
@@ -4378,22 +4397,28 @@ class AsyncNimbleWithRawResponse:
         )
 
     @cached_property
+    def agent(self) -> agent.AsyncAgentResourceWithRawResponse:
+        from .resources.agent import AsyncAgentResourceWithRawResponse
+
+        return AsyncAgentResourceWithRawResponse(self._client.agent)
+
+    @cached_property
     def extract(self) -> extract.AsyncExtractResourceWithRawResponse:
         from .resources.extract import AsyncExtractResourceWithRawResponse
 
         return AsyncExtractResourceWithRawResponse(self._client.extract)
 
     @cached_property
-    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
-        from .resources.agents import AsyncAgentsResourceWithRawResponse
-
-        return AsyncAgentsResourceWithRawResponse(self._client.agents)
-
-    @cached_property
     def crawl(self) -> crawl.AsyncCrawlResourceWithRawResponse:
         from .resources.crawl import AsyncCrawlResourceWithRawResponse
 
         return AsyncCrawlResourceWithRawResponse(self._client.crawl)
+
+    @cached_property
+    def tasks(self) -> tasks.AsyncTasksResourceWithRawResponse:
+        from .resources.tasks import AsyncTasksResourceWithRawResponse
+
+        return AsyncTasksResourceWithRawResponse(self._client.tasks)
 
 
 class NimbleWithStreamedResponse:
@@ -4413,22 +4438,28 @@ class NimbleWithStreamedResponse:
         )
 
     @cached_property
+    def agent(self) -> agent.AgentResourceWithStreamingResponse:
+        from .resources.agent import AgentResourceWithStreamingResponse
+
+        return AgentResourceWithStreamingResponse(self._client.agent)
+
+    @cached_property
     def extract(self) -> extract.ExtractResourceWithStreamingResponse:
         from .resources.extract import ExtractResourceWithStreamingResponse
 
         return ExtractResourceWithStreamingResponse(self._client.extract)
 
     @cached_property
-    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
-        from .resources.agents import AgentsResourceWithStreamingResponse
-
-        return AgentsResourceWithStreamingResponse(self._client.agents)
-
-    @cached_property
     def crawl(self) -> crawl.CrawlResourceWithStreamingResponse:
         from .resources.crawl import CrawlResourceWithStreamingResponse
 
         return CrawlResourceWithStreamingResponse(self._client.crawl)
+
+    @cached_property
+    def tasks(self) -> tasks.TasksResourceWithStreamingResponse:
+        from .resources.tasks import TasksResourceWithStreamingResponse
+
+        return TasksResourceWithStreamingResponse(self._client.tasks)
 
 
 class AsyncNimbleWithStreamedResponse:
@@ -4448,22 +4479,28 @@ class AsyncNimbleWithStreamedResponse:
         )
 
     @cached_property
+    def agent(self) -> agent.AsyncAgentResourceWithStreamingResponse:
+        from .resources.agent import AsyncAgentResourceWithStreamingResponse
+
+        return AsyncAgentResourceWithStreamingResponse(self._client.agent)
+
+    @cached_property
     def extract(self) -> extract.AsyncExtractResourceWithStreamingResponse:
         from .resources.extract import AsyncExtractResourceWithStreamingResponse
 
         return AsyncExtractResourceWithStreamingResponse(self._client.extract)
 
     @cached_property
-    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
-        from .resources.agents import AsyncAgentsResourceWithStreamingResponse
-
-        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
-
-    @cached_property
     def crawl(self) -> crawl.AsyncCrawlResourceWithStreamingResponse:
         from .resources.crawl import AsyncCrawlResourceWithStreamingResponse
 
         return AsyncCrawlResourceWithStreamingResponse(self._client.crawl)
+
+    @cached_property
+    def tasks(self) -> tasks.AsyncTasksResourceWithStreamingResponse:
+        from .resources.tasks import AsyncTasksResourceWithStreamingResponse
+
+        return AsyncTasksResourceWithStreamingResponse(self._client.tasks)
 
 
 Client = Nimble

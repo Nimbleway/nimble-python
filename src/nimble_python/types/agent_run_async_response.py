@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AgentAsyncResponse"]
+__all__ = ["AgentRunAsyncResponse"]
 
 
-class AgentAsyncResponse(BaseModel):
+class AgentRunAsyncResponse(BaseModel):
     status: Literal["success"]
 
     task: Dict[str, object]
