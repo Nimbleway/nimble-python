@@ -21,6 +21,8 @@ class AgentListResponseItem(BaseModel):
 
     entity_type: Optional[str] = None
 
+    managed_by: Optional[str] = None
+
     vertical: Optional[str] = None
 
 

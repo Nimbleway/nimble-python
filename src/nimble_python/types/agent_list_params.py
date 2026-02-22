@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Literal, TypedDict
 
 __all__ = ["AgentListParams"]
@@ -10,6 +11,9 @@ __all__ = ["AgentListParams"]
 class AgentListParams(TypedDict, total=False):
     limit: int
     """Number of results per page"""
+
+    managed_by: Optional[Literal["nimble", "community"]]
+    """Filter public templates by attribution"""
 
     offset: int
     """Pagination offset"""
