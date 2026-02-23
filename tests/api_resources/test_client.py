@@ -398,16 +398,15 @@ class TestClient:
             deep_search=True,
             end_date="end_date",
             exclude_domains=["string"],
+            focus="string",
             include_answer=True,
             include_domains=["string"],
             locale="locale",
+            max_results=1,
             max_subagents=1,
-            num_results=1,
-            parsing_type="plain_text",
-            search_engine="google_search",
+            output_format="plain_text",
             start_date="start_date",
             time_range="hour",
-            topic="string",
         )
         assert_matches_type(SearchResponse, client_, path=["response"])
 
@@ -819,16 +818,15 @@ class TestAsyncClient:
             deep_search=True,
             end_date="end_date",
             exclude_domains=["string"],
+            focus="string",
             include_answer=True,
             include_domains=["string"],
             locale="locale",
+            max_results=1,
             max_subagents=1,
-            num_results=1,
-            parsing_type="plain_text",
-            search_engine="google_search",
+            output_format="plain_text",
             start_date="start_date",
             time_range="hour",
-            topic="string",
         )
         assert_matches_type(SearchResponse, client, path=["response"])
 
