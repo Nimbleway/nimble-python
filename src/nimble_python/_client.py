@@ -3075,16 +3075,15 @@ class Nimble(SyncAPIClient):
         deep_search: bool | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        focus: Union[str, SequenceNotStr[str]] | Omit = omit,
         include_answer: bool | Omit = omit,
         include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         locale: str | Omit = omit,
+        max_results: int | Omit = omit,
         max_subagents: int | Omit = omit,
-        num_results: int | Omit = omit,
-        parsing_type: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
-        search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]] | Omit = omit,
+        output_format: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
-        topic: Union[str, SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -3102,36 +3101,36 @@ class Nimble(SyncAPIClient):
               groups ('documents', 'spreadsheets', 'presentations') and specific formats
               ('pdf', 'docx', 'xlsx', etc.)
 
-          deep_search: If True, fetches and extracts full page content for each search result. If
-              False, returns only metadata (title, snippet, URL)
+          country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
+
+          deep_search: Deep Mode (true, default): fetches full-page content for deeper analysis. Fast
+              Mode (false): returns metadata only (title, snippet, URL) for quick,
+              token-efficient results.
 
           end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
 
           exclude_domains: List of domains to exclude from search results. Maximum 50 domains.
 
-          include_answer: Generate LLM answer summary based on search result snippets (works with both
-              deep_search=True and False)
+          focus: Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
+              subagent names (e.g., ['amazon_serp', 'target_serp'])
+
+          include_answer: Generate an LLM-powered answer summary based on search result snippets.
 
           include_domains: List of domains to include in search results. Maximum 50 domains.
 
+          locale: Language/locale code (e.g., 'en', 'fr', 'de')
+
+          max_results: Maximum number of results to return. Actual count may be lower depending on
+              availability.
+
           max_subagents: Maximum number of subagents to execute in parallel for WSA focus modes
-              (shopping, social, geo). Ignored for traditional SERP focus modes. Default: 3,
-              Range: 1-10.
+              (shopping, social, geo). Ignored for SERP focus modes.
 
-          num_results: Maximum number of results to return (actual count may be less)
-
-          parsing_type: Output format: plain_text, markdown, or simplified_html
-
-          search_engine: Enum representing the search engines supported by Nimble ⚠️ DEPRECATED: This
-              parameter is ignored. Use 'focus' parameter instead.
+          output_format: Output format: plain_text, markdown, or simplified_html
 
           start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
 
           time_range: Time range filters passed to Webit SERP API as 'time' parameter.
-
-          topic: Search focus/specialization. Can be a single focus mode (e.g., 'shopping',
-              'social') or a list of explicit subagent names (e.g., ['amazon_serp',
-              'target_serp'])
 
           extra_headers: Send extra headers
 
@@ -3151,16 +3150,15 @@ class Nimble(SyncAPIClient):
                     "deep_search": deep_search,
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,
+                    "focus": focus,
                     "include_answer": include_answer,
                     "include_domains": include_domains,
                     "locale": locale,
+                    "max_results": max_results,
                     "max_subagents": max_subagents,
-                    "num_results": num_results,
-                    "parsing_type": parsing_type,
-                    "search_engine": search_engine,
+                    "output_format": output_format,
                     "start_date": start_date,
                     "time_range": time_range,
-                    "topic": topic,
                 },
                 client_search_params.ClientSearchParams,
             ),
@@ -6218,16 +6216,15 @@ class AsyncNimble(AsyncAPIClient):
         deep_search: bool | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
+        focus: Union[str, SequenceNotStr[str]] | Omit = omit,
         include_answer: bool | Omit = omit,
         include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         locale: str | Omit = omit,
+        max_results: int | Omit = omit,
         max_subagents: int | Omit = omit,
-        num_results: int | Omit = omit,
-        parsing_type: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
-        search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]] | Omit = omit,
+        output_format: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
-        topic: Union[str, SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -6245,36 +6242,36 @@ class AsyncNimble(AsyncAPIClient):
               groups ('documents', 'spreadsheets', 'presentations') and specific formats
               ('pdf', 'docx', 'xlsx', etc.)
 
-          deep_search: If True, fetches and extracts full page content for each search result. If
-              False, returns only metadata (title, snippet, URL)
+          country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
+
+          deep_search: Deep Mode (true, default): fetches full-page content for deeper analysis. Fast
+              Mode (false): returns metadata only (title, snippet, URL) for quick,
+              token-efficient results.
 
           end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
 
           exclude_domains: List of domains to exclude from search results. Maximum 50 domains.
 
-          include_answer: Generate LLM answer summary based on search result snippets (works with both
-              deep_search=True and False)
+          focus: Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
+              subagent names (e.g., ['amazon_serp', 'target_serp'])
+
+          include_answer: Generate an LLM-powered answer summary based on search result snippets.
 
           include_domains: List of domains to include in search results. Maximum 50 domains.
 
+          locale: Language/locale code (e.g., 'en', 'fr', 'de')
+
+          max_results: Maximum number of results to return. Actual count may be lower depending on
+              availability.
+
           max_subagents: Maximum number of subagents to execute in parallel for WSA focus modes
-              (shopping, social, geo). Ignored for traditional SERP focus modes. Default: 3,
-              Range: 1-10.
+              (shopping, social, geo). Ignored for SERP focus modes.
 
-          num_results: Maximum number of results to return (actual count may be less)
-
-          parsing_type: Output format: plain_text, markdown, or simplified_html
-
-          search_engine: Enum representing the search engines supported by Nimble ⚠️ DEPRECATED: This
-              parameter is ignored. Use 'focus' parameter instead.
+          output_format: Output format: plain_text, markdown, or simplified_html
 
           start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
 
           time_range: Time range filters passed to Webit SERP API as 'time' parameter.
-
-          topic: Search focus/specialization. Can be a single focus mode (e.g., 'shopping',
-              'social') or a list of explicit subagent names (e.g., ['amazon_serp',
-              'target_serp'])
 
           extra_headers: Send extra headers
 
@@ -6294,16 +6291,15 @@ class AsyncNimble(AsyncAPIClient):
                     "deep_search": deep_search,
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,
+                    "focus": focus,
                     "include_answer": include_answer,
                     "include_domains": include_domains,
                     "locale": locale,
+                    "max_results": max_results,
                     "max_subagents": max_subagents,
-                    "num_results": num_results,
-                    "parsing_type": parsing_type,
-                    "search_engine": search_engine,
+                    "output_format": output_format,
                     "start_date": start_date,
                     "time_range": time_range,
-                    "topic": topic,
                 },
                 client_search_params.ClientSearchParams,
             ),

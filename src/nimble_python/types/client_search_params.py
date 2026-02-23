@@ -22,11 +22,13 @@ class ClientSearchParams(TypedDict, total=False):
     """
 
     country: str
+    """Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')"""
 
     deep_search: bool
-    """If True, fetches and extracts full page content for each search result.
+    """Deep Mode (true, default): fetches full-page content for deeper analysis.
 
-    If False, returns only metadata (title, snippet, URL)
+    Fast Mode (false): returns metadata only (title, snippet, URL) for quick,
+    token-efficient results.
     """
 
     end_date: Optional[str]
@@ -35,45 +37,38 @@ class ClientSearchParams(TypedDict, total=False):
     exclude_domains: Optional[SequenceNotStr[str]]
     """List of domains to exclude from search results. Maximum 50 domains."""
 
+    focus: Union[str, SequenceNotStr[str]]
+    """
+    Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
+    subagent names (e.g., ['amazon_serp', 'target_serp'])
+    """
+
     include_answer: bool
-    """
-    Generate LLM answer summary based on search result snippets (works with both
-    deep_search=True and False)
-    """
+    """Generate an LLM-powered answer summary based on search result snippets."""
 
     include_domains: Optional[SequenceNotStr[str]]
     """List of domains to include in search results. Maximum 50 domains."""
 
     locale: str
+    """Language/locale code (e.g., 'en', 'fr', 'de')"""
+
+    max_results: int
+    """Maximum number of results to return.
+
+    Actual count may be lower depending on availability.
+    """
 
     max_subagents: int
     """
     Maximum number of subagents to execute in parallel for WSA focus modes
-    (shopping, social, geo). Ignored for traditional SERP focus modes. Default: 3,
-    Range: 1-10.
+    (shopping, social, geo). Ignored for SERP focus modes.
     """
 
-    num_results: int
-    """Maximum number of results to return (actual count may be less)"""
-
-    parsing_type: Literal["plain_text", "markdown", "simplified_html"]
+    output_format: Literal["plain_text", "markdown", "simplified_html"]
     """Output format: plain_text, markdown, or simplified_html"""
-
-    search_engine: Optional[Literal["google_search", "google_sge", "bing_search", "yandex_search"]]
-    """
-    Enum representing the search engines supported by Nimble ⚠️ DEPRECATED: This
-    parameter is ignored. Use 'focus' parameter instead.
-    """
 
     start_date: Optional[str]
     """Filter results after this date (format: YYYY-MM-DD or YYYY)"""
 
     time_range: Optional[Literal["hour", "day", "week", "month", "year"]]
     """Time range filters passed to Webit SERP API as 'time' parameter."""
-
-    topic: Union[str, SequenceNotStr[str]]
-    """Search focus/specialization.
-
-    Can be a single focus mode (e.g., 'shopping', 'social') or a list of explicit
-    subagent names (e.g., ['amazon_serp', 'target_serp'])
-    """
