@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.10.0 (2026-02-25)
+
+Full Changelog: [v0.9.1...v0.10.0](https://github.com/Nimbleway/nimble-python/compare/v0.9.1...v0.10.0)
+
+### Features
+
+* **api:** api update ([65920db](https://github.com/Nimbleway/nimble-python/commit/65920dbd45b01c4e1df31d4961c290a9a885d768))
+
+
+### Chores
+
+* **internal:** add request options to SSE classes ([4c227e5](https://github.com/Nimbleway/nimble-python/commit/4c227e566299f0e680c96d929582b929b04a7b6a))
+* **internal:** make `test_proxy_environment_variables` more resilient ([812a0bc](https://github.com/Nimbleway/nimble-python/commit/812a0bc7beee87efd2d4aadb7b6c9d2848bfc12b))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([87829ce](https://github.com/Nimbleway/nimble-python/commit/87829ce5f3c87c5d1385755034c9b5b48174e8c7))
+
 ## 0.9.1 (2026-02-22)
 
 Full Changelog: [v0.9.0...v0.9.1](https://github.com/Nimbleway/nimble-python/compare/v0.9.0...v0.9.1)
