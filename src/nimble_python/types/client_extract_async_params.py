@@ -999,7 +999,7 @@ BrowserAction: TypeAlias = Union[
 ]
 
 
-class CookiesUnionMember0Typed(TypedDict, total=False):
+class CookiesUnionMember0(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
     creation: Optional[str]
 
     domain: Optional[str]
@@ -1027,9 +1027,6 @@ class CookiesUnionMember0Typed(TypedDict, total=False):
     secure: bool
 
     value: str
-
-
-CookiesUnionMember0: TypeAlias = Union[CookiesUnionMember0Typed, Dict[str, object]]
 
 
 class NetworkCaptureURL(TypedDict, total=False):
