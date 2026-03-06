@@ -118,7 +118,7 @@ ExtractOptionsBrowserAction: TypeAlias = Union[
 ]
 
 
-class ExtractOptionsCookiesUnionMember0Typed(TypedDict, total=False):
+class ExtractOptionsCookiesUnionMember0(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
     creation: Optional[str]
 
     domain: Optional[str]
@@ -146,9 +146,6 @@ class ExtractOptionsCookiesUnionMember0Typed(TypedDict, total=False):
     secure: bool
 
     value: str
-
-
-ExtractOptionsCookiesUnionMember0: TypeAlias = Union[ExtractOptionsCookiesUnionMember0Typed, Dict[str, object]]
 
 
 class ExtractOptionsNetworkCaptureURL(TypedDict, total=False):

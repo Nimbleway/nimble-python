@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Union
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 __all__ = ["GetCookiesAction", "GetCookies", "GetCookiesUnionMember1"]
 
 
-class GetCookiesUnionMember1Typed(TypedDict, total=False):
+class GetCookiesUnionMember1(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
     required: Union[Literal["true", "false"], bool]
     """Whether this action is required.
 
@@ -22,8 +22,6 @@ class GetCookiesUnionMember1Typed(TypedDict, total=False):
     Accepts boolean or string "true"/"false". Default: false.
     """
 
-
-GetCookiesUnionMember1: TypeAlias = Union[GetCookiesUnionMember1Typed, Dict[str, object]]
 
 GetCookies: TypeAlias = Union[bool, GetCookiesUnionMember1]
 
