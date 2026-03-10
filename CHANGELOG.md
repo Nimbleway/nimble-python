@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.11.0 (2026-03-10)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/Nimbleway/nimble-python/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([5920fac](https://github.com/Nimbleway/nimble-python/commit/5920facd8a20c83c88ef893e7dafef6dea115239))
+* **api:** api update ([802ba25](https://github.com/Nimbleway/nimble-python/commit/802ba250e6e4681b18259305b7f9d9fac28569b6))
+
+
+### Chores
+
+* **ci:** bump uv version ([146ce46](https://github.com/Nimbleway/nimble-python/commit/146ce4600e65bd53d9dfaed8faa27483d0b13b2c))
+* **ci:** skip uploading artifacts on stainless-internal branches ([0367a98](https://github.com/Nimbleway/nimble-python/commit/0367a9816cb6178e9c769d09eff4b26bd4b8cd29))
+
+
+### Refactors
+
+* **types:** use `extra_items` from PEP 728 ([4c233b7](https://github.com/Nimbleway/nimble-python/commit/4c233b70e9763d97f5e03d196d28d951a37d1609))
+
 ## 0.10.0 (2026-02-25)
 
 Full Changelog: [v0.9.1...v0.10.0](https://github.com/Nimbleway/nimble-python/compare/v0.9.1...v0.10.0)
