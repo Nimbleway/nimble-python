@@ -3072,7 +3072,7 @@ class Nimble(SyncAPIClient):
         query: str,
         content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
-        deep_search: bool | Omit = omit,
+        deep_search: Optional[bool] | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         focus: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -3082,6 +3082,7 @@ class Nimble(SyncAPIClient):
         max_results: int | Omit = omit,
         max_subagents: int | Omit = omit,
         output_format: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
+        search_depth: Optional[Literal["lite", "fast", "deep"]] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -3103,9 +3104,7 @@ class Nimble(SyncAPIClient):
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
 
-          deep_search: Deep Mode (true, default): fetches full-page content for deeper analysis. Fast
-              Mode (false): returns metadata only (title, snippet, URL) for quick,
-              token-efficient results.
+          deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
 
           end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
 
@@ -3127,6 +3126,13 @@ class Nimble(SyncAPIClient):
               (shopping, social, geo). Ignored for SERP focus modes.
 
           output_format: Output format: plain_text, markdown, or simplified_html
+
+          search_depth: Controls content richness and latency of search results.
+
+              - lite: Token-efficient metadata for high-volume pipelines (title, URL,
+                description only)
+              - fast: Rich content (~2K chars) optimized for AI agents
+              - deep: Full page content via Webit scraping for comprehensive analysis
 
           start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
 
@@ -3157,6 +3163,7 @@ class Nimble(SyncAPIClient):
                     "max_results": max_results,
                     "max_subagents": max_subagents,
                     "output_format": output_format,
+                    "search_depth": search_depth,
                     "start_date": start_date,
                     "time_range": time_range,
                 },
@@ -6213,7 +6220,7 @@ class AsyncNimble(AsyncAPIClient):
         query: str,
         content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
-        deep_search: bool | Omit = omit,
+        deep_search: Optional[bool] | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         focus: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -6223,6 +6230,7 @@ class AsyncNimble(AsyncAPIClient):
         max_results: int | Omit = omit,
         max_subagents: int | Omit = omit,
         output_format: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
+        search_depth: Optional[Literal["lite", "fast", "deep"]] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -6244,9 +6252,7 @@ class AsyncNimble(AsyncAPIClient):
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
 
-          deep_search: Deep Mode (true, default): fetches full-page content for deeper analysis. Fast
-              Mode (false): returns metadata only (title, snippet, URL) for quick,
-              token-efficient results.
+          deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
 
           end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
 
@@ -6268,6 +6274,13 @@ class AsyncNimble(AsyncAPIClient):
               (shopping, social, geo). Ignored for SERP focus modes.
 
           output_format: Output format: plain_text, markdown, or simplified_html
+
+          search_depth: Controls content richness and latency of search results.
+
+              - lite: Token-efficient metadata for high-volume pipelines (title, URL,
+                description only)
+              - fast: Rich content (~2K chars) optimized for AI agents
+              - deep: Full page content via Webit scraping for comprehensive analysis
 
           start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
 
@@ -6298,6 +6311,7 @@ class AsyncNimble(AsyncAPIClient):
                     "max_results": max_results,
                     "max_subagents": max_subagents,
                     "output_format": output_format,
+                    "search_depth": search_depth,
                     "start_date": start_date,
                     "time_range": time_range,
                 },

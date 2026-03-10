@@ -51,9 +51,10 @@ class AgentResource(SyncAPIResource):
         self,
         *,
         limit: int | Omit = omit,
-        managed_by: Optional[Literal["nimble", "community"]] | Omit = omit,
+        managed_by: Optional[Literal["nimble", "community", "self_managed"]] | Omit = omit,
         offset: int | Omit = omit,
-        privacy: Literal["public", "private", "all"] | Omit = omit,
+        privacy: Optional[Literal["public", "private", "all"]] | Omit = omit,
+        search: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,11 +68,13 @@ class AgentResource(SyncAPIResource):
         Args:
           limit: Number of results per page
 
-          managed_by: Filter public templates by attribution
+          managed_by: Filter templates by attribution
 
           offset: Pagination offset
 
           privacy: Filter by privacy level
+
+          search: Search templates by name, domain, or vertical
 
           extra_headers: Send extra headers
 
@@ -94,6 +97,7 @@ class AgentResource(SyncAPIResource):
                         "managed_by": managed_by,
                         "offset": offset,
                         "privacy": privacy,
+                        "search": search,
                     },
                     agent_list_params.AgentListParams,
                 ),
@@ -261,9 +265,10 @@ class AsyncAgentResource(AsyncAPIResource):
         self,
         *,
         limit: int | Omit = omit,
-        managed_by: Optional[Literal["nimble", "community"]] | Omit = omit,
+        managed_by: Optional[Literal["nimble", "community", "self_managed"]] | Omit = omit,
         offset: int | Omit = omit,
-        privacy: Literal["public", "private", "all"] | Omit = omit,
+        privacy: Optional[Literal["public", "private", "all"]] | Omit = omit,
+        search: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -277,11 +282,13 @@ class AsyncAgentResource(AsyncAPIResource):
         Args:
           limit: Number of results per page
 
-          managed_by: Filter public templates by attribution
+          managed_by: Filter templates by attribution
 
           offset: Pagination offset
 
           privacy: Filter by privacy level
+
+          search: Search templates by name, domain, or vertical
 
           extra_headers: Send extra headers
 
@@ -304,6 +311,7 @@ class AsyncAgentResource(AsyncAPIResource):
                         "managed_by": managed_by,
                         "offset": offset,
                         "privacy": privacy,
+                        "search": search,
                     },
                     agent_list_params.AgentListParams,
                 ),
