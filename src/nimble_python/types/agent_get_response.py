@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 from .._models import BaseModel
 
@@ -50,6 +50,6 @@ class AgentGetResponse(BaseModel):
 
     managed_by: Optional[str] = None
 
-    output_schema: Optional[Dict[str, object]] = None
+    output_schema: Optional[object] = None
 
     vertical: Optional[str] = None

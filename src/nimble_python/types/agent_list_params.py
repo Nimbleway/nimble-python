@@ -12,11 +12,14 @@ class AgentListParams(TypedDict, total=False):
     limit: int
     """Number of results per page"""
 
-    managed_by: Optional[Literal["nimble", "community"]]
-    """Filter public templates by attribution"""
+    managed_by: Optional[Literal["nimble", "community", "self_managed"]]
+    """Filter templates by attribution"""
 
     offset: int
     """Pagination offset"""
 
-    privacy: Literal["public", "private", "all"]
+    privacy: Optional[Literal["public", "private", "all"]]
     """Filter by privacy level"""
+
+    search: Optional[str]
+    """Search templates by name, domain, or vertical"""

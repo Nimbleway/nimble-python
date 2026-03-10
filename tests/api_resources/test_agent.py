@@ -36,6 +36,7 @@ class TestAgent:
             managed_by="nimble",
             offset=0,
             privacy="public",
+            search="search",
         )
         assert_matches_type(AgentListResponse, agent, path=["response"])
 
@@ -222,6 +223,7 @@ class TestAsyncAgent:
             managed_by="nimble",
             offset=0,
             privacy="public",
+            search="search",
         )
         assert_matches_type(AgentListResponse, agent, path=["response"])
 

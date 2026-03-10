@@ -405,6 +405,7 @@ class TestClient:
             max_results=1,
             max_subagents=1,
             output_format="plain_text",
+            search_depth="lite",
             start_date="start_date",
             time_range="hour",
         )
@@ -825,6 +826,7 @@ class TestAsyncClient:
             max_results=1,
             max_subagents=1,
             output_format="plain_text",
+            search_depth="lite",
             start_date="start_date",
             time_range="hour",
         )
