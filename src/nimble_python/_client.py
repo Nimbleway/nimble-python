@@ -10,7 +10,13 @@ import httpx
 
 from . import _exceptions
 from ._qs import Querystring
-from .types import client_map_params, client_search_params, client_extract_params, client_extract_async_params
+from .types import (
+    client_map_params,
+    client_search_params,
+    client_extract_params,
+    client_extract_async_params,
+    client_extract_batch_params,
+)
 from ._types import (
     Body,
     Omit,
@@ -51,6 +57,7 @@ from .types.map_response import MapResponse
 from .types.search_response import SearchResponse
 from .types.extract_response import ExtractResponse
 from .types.extract_async_response import ExtractAsyncResponse
+from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
     from .resources import agent, crawl, tasks
@@ -2218,6 +2225,52 @@ class Nimble(SyncAPIClient):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ExtractAsyncResponse,
+        )
+
+    def extract_batch(
+        self,
+        *,
+        params: Iterable[client_extract_batch_params.Param],
+        shared_params: client_extract_batch_params.SharedParams | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExtractBatchResponse:
+        """Extract Batch Endpoint
+
+        Args:
+          params: Array of extraction requests.
+
+        Each object represents one extraction with its own
+              parameters.
+
+          shared_params: Shared parameters applied to the entire batch, such as storage and callback
+              configuration.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self.post(
+            "/v1/extract/batch",
+            body=maybe_transform(
+                {
+                    "params": params,
+                    "shared_params": shared_params,
+                },
+                client_extract_batch_params.ClientExtractBatchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExtractBatchResponse,
         )
 
     def map(
@@ -5368,6 +5421,52 @@ class AsyncNimble(AsyncAPIClient):
             cast_to=ExtractAsyncResponse,
         )
 
+    async def extract_batch(
+        self,
+        *,
+        params: Iterable[client_extract_batch_params.Param],
+        shared_params: client_extract_batch_params.SharedParams | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ExtractBatchResponse:
+        """Extract Batch Endpoint
+
+        Args:
+          params: Array of extraction requests.
+
+        Each object represents one extraction with its own
+              parameters.
+
+          shared_params: Shared parameters applied to the entire batch, such as storage and callback
+              configuration.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self.post(
+            "/v1/extract/batch",
+            body=await async_maybe_transform(
+                {
+                    "params": params,
+                    "shared_params": shared_params,
+                },
+                client_extract_batch_params.ClientExtractBatchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ExtractBatchResponse,
+        )
+
     async def map(
         self,
         *,
@@ -6369,6 +6468,9 @@ class NimbleWithRawResponse:
         self.extract_async = to_raw_response_wrapper(
             client.extract_async,
         )
+        self.extract_batch = to_raw_response_wrapper(
+            client.extract_batch,
+        )
         self.map = to_raw_response_wrapper(
             client.map,
         )
@@ -6406,6 +6508,9 @@ class AsyncNimbleWithRawResponse:
         )
         self.extract_async = async_to_raw_response_wrapper(
             client.extract_async,
+        )
+        self.extract_batch = async_to_raw_response_wrapper(
+            client.extract_batch,
         )
         self.map = async_to_raw_response_wrapper(
             client.map,
@@ -6445,6 +6550,9 @@ class NimbleWithStreamedResponse:
         self.extract_async = to_streamed_response_wrapper(
             client.extract_async,
         )
+        self.extract_batch = to_streamed_response_wrapper(
+            client.extract_batch,
+        )
         self.map = to_streamed_response_wrapper(
             client.map,
         )
@@ -6482,6 +6590,9 @@ class AsyncNimbleWithStreamedResponse:
         )
         self.extract_async = async_to_streamed_response_wrapper(
             client.extract_async,
+        )
+        self.extract_batch = async_to_streamed_response_wrapper(
+            client.extract_batch,
         )
         self.map = async_to_streamed_response_wrapper(
             client.map,
