@@ -23,13 +23,20 @@ from nimble_python.types import (
 Types:
 
 ```python
-from nimble_python.types import ExtractResponse, ExtractAsyncResponse, MapResponse, SearchResponse
+from nimble_python.types import (
+    ExtractResponse,
+    ExtractAsyncResponse,
+    ExtractBatchResponse,
+    MapResponse,
+    SearchResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /v1/extract">client.<a href="./src/nimble_python/_client.py">extract</a>(\*\*<a href="src/nimble_python/types/client_extract_params.py">params</a>) -> <a href="./src/nimble_python/types/extract_response.py">ExtractResponse</a></code>
 - <code title="post /v1/extract/async">client.<a href="./src/nimble_python/_client.py">extract_async</a>(\*\*<a href="src/nimble_python/types/client_extract_async_params.py">params</a>) -> <a href="./src/nimble_python/types/extract_async_response.py">ExtractAsyncResponse</a></code>
+- <code title="post /v1/extract/batch">client.<a href="./src/nimble_python/_client.py">extract_batch</a>(\*\*<a href="src/nimble_python/types/client_extract_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/extract_batch_response.py">ExtractBatchResponse</a></code>
 - <code title="post /v1/map">client.<a href="./src/nimble_python/_client.py">map</a>(\*\*<a href="src/nimble_python/types/client_map_params.py">params</a>) -> <a href="./src/nimble_python/types/map_response.py">MapResponse</a></code>
 - <code title="post /v1/search">client.<a href="./src/nimble_python/_client.py">search</a>(\*\*<a href="src/nimble_python/types/client_search_params.py">params</a>) -> <a href="./src/nimble_python/types/search_response.py">SearchResponse</a></code>
 
