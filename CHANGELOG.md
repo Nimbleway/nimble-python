@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.12.0 (2026-03-18)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/Nimbleway/nimble-python/compare/v0.11.0...v0.12.0)
+
+### Features
+
+* **api:** manual updates ([2ea15a2](https://github.com/Nimbleway/nimble-python/commit/2ea15a25dbbaecd0d19f81900c09b3cafc66aa56))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([05fce2b](https://github.com/Nimbleway/nimble-python/commit/05fce2b345c4758ec79c97b11f3ed92d53036b61))
+* **pydantic:** do not pass `by_alias` unless set ([1700093](https://github.com/Nimbleway/nimble-python/commit/170009336ff559e375736dbee881002fc4d5c0fe))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([8f134ca](https://github.com/Nimbleway/nimble-python/commit/8f134ca188d5af80631adf9865f5799ca8fe0f93))
+
 ## 0.11.0 (2026-03-10)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/Nimbleway/nimble-python/compare/v0.10.0...v0.11.0)
