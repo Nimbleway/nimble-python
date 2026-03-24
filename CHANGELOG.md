@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.13.0 (2026-03-24)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/Nimbleway/nimble-python/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** manual updates ([17e730d](https://github.com/Nimbleway/nimble-python/commit/17e730d1f09b8cead6fa11cb68af9d8105dc57df))
+
+
+### Bug Fixes
+
+* sanitize endpoint path params ([0c14c30](https://github.com/Nimbleway/nimble-python/commit/0c14c308e068da0c00affd197abb5ddd3b7f8ca2))
+
+
+### Chores
+
+* **internal:** update gitignore ([f19a4e6](https://github.com/Nimbleway/nimble-python/commit/f19a4e6cea6039638d95e8b5f8d136a34149c63d))
+
 ## 0.12.0 (2026-03-18)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/Nimbleway/nimble-python/compare/v0.11.0...v0.12.0)
