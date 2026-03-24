@@ -1,4 +1,4 @@
 configured_endpoints: 16
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/nimbleway%2Fnimbleway-17672d34d127f11655f1185a16dd607bf654650466c539cae4acc9c44e622b0f.yml
-openapi_spec_hash: 8621af804ac7b2bcb4a35aafbcc070e9
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/nimbleway%2Fnimbleway-49cd7a10eca5bb6328c16340c38810270d7aa86a6ca509468c531248ace04a73.yml
+openapi_spec_hash: 152c12a6f35b11fc62b01e2f2a2708c9
 config_hash: 2c668d145ebb76e223ba34b52130f2b9
