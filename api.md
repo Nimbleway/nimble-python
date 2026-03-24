@@ -93,3 +93,17 @@ Methods:
 - <code title="get /v1/tasks">client.tasks.<a href="./src/nimble_python/resources/tasks.py">list</a>(\*\*<a href="src/nimble_python/types/task_list_params.py">params</a>) -> <a href="./src/nimble_python/types/task_list_response.py">TaskListResponse</a></code>
 - <code title="get /v1/tasks/{task_id}">client.tasks.<a href="./src/nimble_python/resources/tasks.py">get</a>(task_id) -> <a href="./src/nimble_python/types/task_get_response.py">TaskGetResponse</a></code>
 - <code title="get /v1/tasks/{task_id}/results">client.tasks.<a href="./src/nimble_python/resources/tasks.py">results</a>(task_id) -> <a href="./src/nimble_python/types/task_results_response.py">TaskResultsResponse</a></code>
+
+# Batches
+
+Types:
+
+```python
+from nimble_python.types import BatchGetResponse, BatchProgressResponse
+```
+
+Methods:
+
+- <code title="get /v1/batches">client.batches.<a href="./src/nimble_python/resources/batches.py">list</a>() -> None</code>
+- <code title="get /v1/batches/{batch_id}">client.batches.<a href="./src/nimble_python/resources/batches.py">get</a>(batch_id) -> <a href="./src/nimble_python/types/batch_get_response.py">BatchGetResponse</a></code>
+- <code title="get /v1/batches/{batch_id}/progress">client.batches.<a href="./src/nimble_python/resources/batches.py">progress</a>(batch_id) -> <a href="./src/nimble_python/types/batch_progress_response.py">BatchProgressResponse</a></code>

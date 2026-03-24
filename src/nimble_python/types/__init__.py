@@ -29,6 +29,7 @@ from .crawl_list_params import CrawlListParams as CrawlListParams
 from .task_get_response import TaskGetResponse as TaskGetResponse
 from .agent_get_response import AgentGetResponse as AgentGetResponse
 from .agent_run_response import AgentRunResponse as AgentRunResponse
+from .batch_get_response import BatchGetResponse as BatchGetResponse
 from .crawl_run_response import CrawlRunResponse as CrawlRunResponse
 from .task_list_response import TaskListResponse as TaskListResponse
 from .agent_list_response import AgentListResponse as AgentListResponse
@@ -40,6 +41,7 @@ from .task_results_response import TaskResultsResponse as TaskResultsResponse
 from .agent_run_async_params import AgentRunAsyncParams as AgentRunAsyncParams
 from .extract_async_response import ExtractAsyncResponse as ExtractAsyncResponse
 from .extract_batch_response import ExtractBatchResponse as ExtractBatchResponse
+from .batch_progress_response import BatchProgressResponse as BatchProgressResponse
 from .agent_run_async_response import AgentRunAsyncResponse as AgentRunAsyncResponse
 from .crawl_terminate_response import CrawlTerminateResponse as CrawlTerminateResponse
 from .client_extract_async_params import ClientExtractAsyncParams as ClientExtractAsyncParams
