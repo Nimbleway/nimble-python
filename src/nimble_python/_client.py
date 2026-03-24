@@ -60,10 +60,11 @@ from .types.extract_async_response import ExtractAsyncResponse
 from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
-    from .resources import agent, crawl, tasks
+    from .resources import agent, crawl, tasks, batches
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
     from .resources.tasks import TasksResource, AsyncTasksResource
+    from .resources.batches import BatchesResource, AsyncBatchesResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 
@@ -136,6 +137,12 @@ class Nimble(SyncAPIClient):
         from .resources.tasks import TasksResource
 
         return TasksResource(self)
+
+    @cached_property
+    def batches(self) -> BatchesResource:
+        from .resources.batches import BatchesResource
+
+        return BatchesResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimbleWithRawResponse:
@@ -3332,6 +3339,12 @@ class AsyncNimble(AsyncAPIClient):
         return AsyncTasksResource(self)
 
     @cached_property
+    def batches(self) -> AsyncBatchesResource:
+        from .resources.batches import AsyncBatchesResource
+
+        return AsyncBatchesResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncNimbleWithRawResponse:
         return AsyncNimbleWithRawResponse(self)
 
@@ -6496,6 +6509,12 @@ class NimbleWithRawResponse:
 
         return TasksResourceWithRawResponse(self._client.tasks)
 
+    @cached_property
+    def batches(self) -> batches.BatchesResourceWithRawResponse:
+        from .resources.batches import BatchesResourceWithRawResponse
+
+        return BatchesResourceWithRawResponse(self._client.batches)
+
 
 class AsyncNimbleWithRawResponse:
     _client: AsyncNimble
@@ -6536,6 +6555,12 @@ class AsyncNimbleWithRawResponse:
         from .resources.tasks import AsyncTasksResourceWithRawResponse
 
         return AsyncTasksResourceWithRawResponse(self._client.tasks)
+
+    @cached_property
+    def batches(self) -> batches.AsyncBatchesResourceWithRawResponse:
+        from .resources.batches import AsyncBatchesResourceWithRawResponse
+
+        return AsyncBatchesResourceWithRawResponse(self._client.batches)
 
 
 class NimbleWithStreamedResponse:
@@ -6578,6 +6603,12 @@ class NimbleWithStreamedResponse:
 
         return TasksResourceWithStreamingResponse(self._client.tasks)
 
+    @cached_property
+    def batches(self) -> batches.BatchesResourceWithStreamingResponse:
+        from .resources.batches import BatchesResourceWithStreamingResponse
+
+        return BatchesResourceWithStreamingResponse(self._client.batches)
+
 
 class AsyncNimbleWithStreamedResponse:
     _client: AsyncNimble
@@ -6618,6 +6649,12 @@ class AsyncNimbleWithStreamedResponse:
         from .resources.tasks import AsyncTasksResourceWithStreamingResponse
 
         return AsyncTasksResourceWithStreamingResponse(self._client.tasks)
+
+    @cached_property
+    def batches(self) -> batches.AsyncBatchesResourceWithStreamingResponse:
+        from .resources.batches import AsyncBatchesResourceWithStreamingResponse
+
+        return AsyncBatchesResourceWithStreamingResponse(self._client.batches)
 
 
 Client = Nimble

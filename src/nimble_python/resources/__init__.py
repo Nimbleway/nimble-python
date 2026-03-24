@@ -24,6 +24,14 @@ from .tasks import (
     TasksResourceWithStreamingResponse,
     AsyncTasksResourceWithStreamingResponse,
 )
+from .batches import (
+    BatchesResource,
+    AsyncBatchesResource,
+    BatchesResourceWithRawResponse,
+    AsyncBatchesResourceWithRawResponse,
+    BatchesResourceWithStreamingResponse,
+    AsyncBatchesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "AgentResource",
@@ -44,4 +52,10 @@ __all__ = [
     "AsyncTasksResourceWithRawResponse",
     "TasksResourceWithStreamingResponse",
     "AsyncTasksResourceWithStreamingResponse",
+    "BatchesResource",
+    "AsyncBatchesResource",
+    "BatchesResourceWithRawResponse",
+    "AsyncBatchesResourceWithRawResponse",
+    "BatchesResourceWithStreamingResponse",
+    "AsyncBatchesResourceWithStreamingResponse",
 ]
