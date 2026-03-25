@@ -319,7 +319,7 @@ class ClientExtractAsyncParams(TypedDict, total=False):
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
 
-    formats: List[Literal["html", "markdown", "screenshot"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
     """List of acceptable response formats in order of preference"""
 
     headers: Dict[str, Union[str, SequenceNotStr[str], None]]

@@ -500,7 +500,7 @@ class Nimble(SyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -1491,7 +1491,7 @@ class Nimble(SyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -2237,8 +2237,8 @@ class Nimble(SyncAPIClient):
     def extract_batch(
         self,
         *,
-        params: Iterable[client_extract_batch_params.Param],
-        shared_params: client_extract_batch_params.SharedParams | Omit = omit,
+        inputs: Iterable[client_extract_batch_params.Input],
+        shared_inputs: client_extract_batch_params.SharedInputs | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -2249,13 +2249,13 @@ class Nimble(SyncAPIClient):
         """Extract Batch Endpoint
 
         Args:
-          params: Array of extraction requests.
+          inputs: Array of extraction requests.
 
-        Each object represents one extraction with its own
-              parameters.
+        Each object can include extraction parameters and
+              async/storage settings.
 
-          shared_params: Shared parameters applied to the entire batch, such as storage and callback
-              configuration.
+          shared_inputs: Shared parameters applied to the entire batch. Can include extraction parameters
+              and async/storage settings.
 
           extra_headers: Send extra headers
 
@@ -2269,8 +2269,8 @@ class Nimble(SyncAPIClient):
             "/v1/extract/batch",
             body=maybe_transform(
                 {
-                    "params": params,
-                    "shared_params": shared_params,
+                    "inputs": inputs,
+                    "shared_inputs": shared_inputs,
                 },
                 client_extract_batch_params.ClientExtractBatchParams,
             ),
@@ -3700,7 +3700,7 @@ class AsyncNimble(AsyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -4691,7 +4691,7 @@ class AsyncNimble(AsyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -5437,8 +5437,8 @@ class AsyncNimble(AsyncAPIClient):
     async def extract_batch(
         self,
         *,
-        params: Iterable[client_extract_batch_params.Param],
-        shared_params: client_extract_batch_params.SharedParams | Omit = omit,
+        inputs: Iterable[client_extract_batch_params.Input],
+        shared_inputs: client_extract_batch_params.SharedInputs | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -5449,13 +5449,13 @@ class AsyncNimble(AsyncAPIClient):
         """Extract Batch Endpoint
 
         Args:
-          params: Array of extraction requests.
+          inputs: Array of extraction requests.
 
-        Each object represents one extraction with its own
-              parameters.
+        Each object can include extraction parameters and
+              async/storage settings.
 
-          shared_params: Shared parameters applied to the entire batch, such as storage and callback
-              configuration.
+          shared_inputs: Shared parameters applied to the entire batch. Can include extraction parameters
+              and async/storage settings.
 
           extra_headers: Send extra headers
 
@@ -5469,8 +5469,8 @@ class AsyncNimble(AsyncAPIClient):
             "/v1/extract/batch",
             body=await async_maybe_transform(
                 {
-                    "params": params,
-                    "shared_params": shared_params,
+                    "inputs": inputs,
+                    "shared_inputs": shared_inputs,
                 },
                 client_extract_batch_params.ClientExtractBatchParams,
             ),
