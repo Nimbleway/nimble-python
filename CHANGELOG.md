@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.14.0 (2026-03-25)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/Nimbleway/nimble-python/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** api update ([821cfa1](https://github.com/Nimbleway/nimble-python/commit/821cfa15a5328f20cda1f76b1d7a284d3d53b23f))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([3e1d8f5](https://github.com/Nimbleway/nimble-python/commit/3e1d8f5838127cb3145a69876d993bca07bc4b8e))
+
 ## 0.13.0 (2026-03-24)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/Nimbleway/nimble-python/compare/v0.12.0...v0.13.0)
