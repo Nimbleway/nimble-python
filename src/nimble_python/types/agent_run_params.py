@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict
-from typing_extensions import Required, TypedDict
+from typing import Dict, List
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["AgentRunParams"]
 
@@ -12,5 +12,8 @@ class AgentRunParams(TypedDict, total=False):
     agent: Required[str]
 
     params: Required[Dict[str, object]]
+
+    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    """Response formats to include. All disabled by default."""
 
     localization: bool
