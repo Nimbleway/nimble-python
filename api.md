@@ -50,6 +50,7 @@ from nimble_python.types import (
     AgentGetResponse,
     AgentRunResponse,
     AgentRunAsyncResponse,
+    AgentRunBatchResponse,
 )
 ```
 
@@ -59,6 +60,7 @@ Methods:
 - <code title="get /v1/agents/{template_name}">client.agent.<a href="./src/nimble_python/resources/agent.py">get</a>(template_name) -> <a href="./src/nimble_python/types/agent_get_response.py">AgentGetResponse</a></code>
 - <code title="post /v1/agents/run">client.agent.<a href="./src/nimble_python/resources/agent.py">run</a>(\*\*<a href="src/nimble_python/types/agent_run_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_response.py">AgentRunResponse</a></code>
 - <code title="post /v1/agents/async">client.agent.<a href="./src/nimble_python/resources/agent.py">run_async</a>(\*\*<a href="src/nimble_python/types/agent_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_async_response.py">AgentRunAsyncResponse</a></code>
+- <code title="post /v1/agents/batch">client.agent.<a href="./src/nimble_python/resources/agent.py">run_batch</a>(\*\*<a href="src/nimble_python/types/agent_run_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_batch_response.py">AgentRunBatchResponse</a></code>
 
 # Crawl
 

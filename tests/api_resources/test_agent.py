@@ -14,6 +14,7 @@ from nimble_python.types import (
     AgentRunResponse,
     AgentListResponse,
     AgentRunAsyncResponse,
+    AgentRunBatchResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -205,6 +206,63 @@ class TestAgent:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_batch(self, client: Nimble) -> None:
+        agent = client.agent.run_batch(
+            inputs=[{}],
+            shared_inputs={"agent": "agent"},
+        )
+        assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_batch_with_all_params(self, client: Nimble) -> None:
+        agent = client.agent.run_batch(
+            inputs=[
+                {
+                    "formats": ["html", "markdown"],
+                    "localization": True,
+                    "params": {"foo": "bar"},
+                }
+            ],
+            shared_inputs={
+                "agent": "agent",
+                "formats": ["html", "markdown"],
+                "localization": True,
+                "params": {"foo": "bar"},
+            },
+        )
+        assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_run_batch(self, client: Nimble) -> None:
+        response = client.agent.with_raw_response.run_batch(
+            inputs=[{}],
+            shared_inputs={"agent": "agent"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_run_batch(self, client: Nimble) -> None:
+        with client.agent.with_streaming_response.run_batch(
+            inputs=[{}],
+            shared_inputs={"agent": "agent"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncAgent:
     parametrize = pytest.mark.parametrize(
@@ -391,5 +449,62 @@ class TestAsyncAgent:
 
             agent = await response.parse()
             assert_matches_type(AgentRunAsyncResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_batch(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agent.run_batch(
+            inputs=[{}],
+            shared_inputs={"agent": "agent"},
+        )
+        assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_batch_with_all_params(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agent.run_batch(
+            inputs=[
+                {
+                    "formats": ["html", "markdown"],
+                    "localization": True,
+                    "params": {"foo": "bar"},
+                }
+            ],
+            shared_inputs={
+                "agent": "agent",
+                "formats": ["html", "markdown"],
+                "localization": True,
+                "params": {"foo": "bar"},
+            },
+        )
+        assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_run_batch(self, async_client: AsyncNimble) -> None:
+        response = await async_client.agent.with_raw_response.run_batch(
+            inputs=[{}],
+            shared_inputs={"agent": "agent"},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_run_batch(self, async_client: AsyncNimble) -> None:
+        async with async_client.agent.with_streaming_response.run_batch(
+            inputs=[{}],
+            shared_inputs={"agent": "agent"},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentRunBatchResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
