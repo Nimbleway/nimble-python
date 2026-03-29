@@ -246,6 +246,9 @@ class Data(BaseModel):
     network_capture: Optional[List[DataNetworkCapture]] = None
     """The network capture data collected during the task."""
 
+    pages_html: Optional[List[str]] = None
+    """Individual HTML content of each pagination page, before merging."""
+
     parsing: Optional[DataParsing] = None
     """The parsing results extracted from the HTML & network content."""
 

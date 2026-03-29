@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -143,6 +143,7 @@ class AgentResource(SyncAPIResource):
         *,
         agent: str,
         params: Dict[str, object],
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         localization: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -151,10 +152,13 @@ class AgentResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AgentRunResponse:
-        """
-        Execute WSA Realtime Endpoint
+        """Execute WSA Realtime Endpoint
 
         Args:
+          formats: Response formats to include.
+
+        All disabled by default.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -169,6 +173,7 @@ class AgentResource(SyncAPIResource):
                 {
                     "agent": agent,
                     "params": params,
+                    "formats": formats,
                     "localization": localization,
                 },
                 agent_run_params.AgentRunParams,
@@ -185,6 +190,7 @@ class AgentResource(SyncAPIResource):
         agent: str,
         params: Dict[str, object],
         callback_url: str | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         localization: bool | Omit = omit,
         storage_compress: bool | Omit = omit,
         storage_object_name: str | Omit = omit,
@@ -202,6 +208,8 @@ class AgentResource(SyncAPIResource):
 
         Args:
           callback_url: URL to call back when async operation completes
+
+          formats: Response formats to include. All disabled by default.
 
           storage_compress: Whether to compress stored data
 
@@ -226,6 +234,7 @@ class AgentResource(SyncAPIResource):
                     "agent": agent,
                     "params": params,
                     "callback_url": callback_url,
+                    "formats": formats,
                     "localization": localization,
                     "storage_compress": storage_compress,
                     "storage_object_name": storage_object_name,
@@ -357,6 +366,7 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         agent: str,
         params: Dict[str, object],
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         localization: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -365,10 +375,13 @@ class AsyncAgentResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AgentRunResponse:
-        """
-        Execute WSA Realtime Endpoint
+        """Execute WSA Realtime Endpoint
 
         Args:
+          formats: Response formats to include.
+
+        All disabled by default.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -383,6 +396,7 @@ class AsyncAgentResource(AsyncAPIResource):
                 {
                     "agent": agent,
                     "params": params,
+                    "formats": formats,
                     "localization": localization,
                 },
                 agent_run_params.AgentRunParams,
@@ -399,6 +413,7 @@ class AsyncAgentResource(AsyncAPIResource):
         agent: str,
         params: Dict[str, object],
         callback_url: str | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         localization: bool | Omit = omit,
         storage_compress: bool | Omit = omit,
         storage_object_name: str | Omit = omit,
@@ -416,6 +431,8 @@ class AsyncAgentResource(AsyncAPIResource):
 
         Args:
           callback_url: URL to call back when async operation completes
+
+          formats: Response formats to include. All disabled by default.
 
           storage_compress: Whether to compress stored data
 
@@ -440,6 +457,7 @@ class AsyncAgentResource(AsyncAPIResource):
                     "agent": agent,
                     "params": params,
                     "callback_url": callback_url,
+                    "formats": formats,
                     "localization": localization,
                     "storage_compress": storage_compress,
                     "storage_object_name": storage_object_name,

@@ -119,6 +119,7 @@ class TestAgent:
         agent = client.agent.run(
             agent="agent",
             params={"foo": "bar"},
+            formats=["html", "markdown"],
             localization=True,
         )
         assert_matches_type(AgentRunResponse, agent, path=["response"])
@@ -167,6 +168,7 @@ class TestAgent:
             agent="agent",
             params={"foo": "bar"},
             callback_url="https://example.com/webhook/callback",
+            formats=["html", "markdown"],
             localization=True,
             storage_compress=True,
             storage_object_name="result-2024-01-15.json",
@@ -306,6 +308,7 @@ class TestAsyncAgent:
         agent = await async_client.agent.run(
             agent="agent",
             params={"foo": "bar"},
+            formats=["html", "markdown"],
             localization=True,
         )
         assert_matches_type(AgentRunResponse, agent, path=["response"])
@@ -354,6 +357,7 @@ class TestAsyncAgent:
             agent="agent",
             params={"foo": "bar"},
             callback_url="https://example.com/webhook/callback",
+            formats=["html", "markdown"],
             localization=True,
             storage_compress=True,
             storage_object_name="result-2024-01-15.json",
