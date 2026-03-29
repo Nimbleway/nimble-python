@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import agent_run_params, agent_list_params, agent_run_async_params
+from ..types import agent_run_params, agent_list_params, agent_run_async_params, agent_run_batch_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -23,6 +23,7 @@ from ..types.agent_get_response import AgentGetResponse
 from ..types.agent_run_response import AgentRunResponse
 from ..types.agent_list_response import AgentListResponse
 from ..types.agent_run_async_response import AgentRunAsyncResponse
+from ..types.agent_run_batch_response import AgentRunBatchResponse
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
@@ -249,6 +250,45 @@ class AgentResource(SyncAPIResource):
             cast_to=AgentRunAsyncResponse,
         )
 
+    def run_batch(
+        self,
+        *,
+        inputs: Iterable[agent_run_batch_params.Input],
+        shared_inputs: agent_run_batch_params.SharedInputs,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRunBatchResponse:
+        """
+        Execute WSA Batch Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/agents/batch",
+            body=maybe_transform(
+                {
+                    "inputs": inputs,
+                    "shared_inputs": shared_inputs,
+                },
+                agent_run_batch_params.AgentRunBatchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentRunBatchResponse,
+        )
+
 
 class AsyncAgentResource(AsyncAPIResource):
     @cached_property
@@ -472,6 +512,45 @@ class AsyncAgentResource(AsyncAPIResource):
             cast_to=AgentRunAsyncResponse,
         )
 
+    async def run_batch(
+        self,
+        *,
+        inputs: Iterable[agent_run_batch_params.Input],
+        shared_inputs: agent_run_batch_params.SharedInputs,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRunBatchResponse:
+        """
+        Execute WSA Batch Endpoint
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/agents/batch",
+            body=await async_maybe_transform(
+                {
+                    "inputs": inputs,
+                    "shared_inputs": shared_inputs,
+                },
+                agent_run_batch_params.AgentRunBatchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentRunBatchResponse,
+        )
+
 
 class AgentResourceWithRawResponse:
     def __init__(self, agent: AgentResource) -> None:
@@ -488,6 +567,9 @@ class AgentResourceWithRawResponse:
         )
         self.run_async = to_raw_response_wrapper(
             agent.run_async,
+        )
+        self.run_batch = to_raw_response_wrapper(
+            agent.run_batch,
         )
 
 
@@ -507,6 +589,9 @@ class AsyncAgentResourceWithRawResponse:
         self.run_async = async_to_raw_response_wrapper(
             agent.run_async,
         )
+        self.run_batch = async_to_raw_response_wrapper(
+            agent.run_batch,
+        )
 
 
 class AgentResourceWithStreamingResponse:
@@ -525,6 +610,9 @@ class AgentResourceWithStreamingResponse:
         self.run_async = to_streamed_response_wrapper(
             agent.run_async,
         )
+        self.run_batch = to_streamed_response_wrapper(
+            agent.run_batch,
+        )
 
 
 class AsyncAgentResourceWithStreamingResponse:
@@ -542,4 +630,7 @@ class AsyncAgentResourceWithStreamingResponse:
         )
         self.run_async = async_to_streamed_response_wrapper(
             agent.run_async,
+        )
+        self.run_batch = async_to_streamed_response_wrapper(
+            agent.run_batch,
         )

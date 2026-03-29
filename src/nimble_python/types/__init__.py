@@ -39,10 +39,12 @@ from .client_extract_params import ClientExtractParams as ClientExtractParams
 from .crawl_status_response import CrawlStatusResponse as CrawlStatusResponse
 from .task_results_response import TaskResultsResponse as TaskResultsResponse
 from .agent_run_async_params import AgentRunAsyncParams as AgentRunAsyncParams
+from .agent_run_batch_params import AgentRunBatchParams as AgentRunBatchParams
 from .extract_async_response import ExtractAsyncResponse as ExtractAsyncResponse
 from .extract_batch_response import ExtractBatchResponse as ExtractBatchResponse
 from .batch_progress_response import BatchProgressResponse as BatchProgressResponse
 from .agent_run_async_response import AgentRunAsyncResponse as AgentRunAsyncResponse
+from .agent_run_batch_response import AgentRunBatchResponse as AgentRunBatchResponse
 from .crawl_terminate_response import CrawlTerminateResponse as CrawlTerminateResponse
 from .client_extract_async_params import ClientExtractAsyncParams as ClientExtractAsyncParams
 from .client_extract_batch_params import ClientExtractBatchParams as ClientExtractBatchParams
