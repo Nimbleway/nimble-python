@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict
-from typing_extensions import Required, TypedDict
+from typing import Dict, List
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["AgentRunAsyncParams"]
 
@@ -15,6 +15,9 @@ class AgentRunAsyncParams(TypedDict, total=False):
 
     callback_url: str
     """URL to call back when async operation completes"""
+
+    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    """Response formats to include. All disabled by default."""
 
     localization: bool
 
