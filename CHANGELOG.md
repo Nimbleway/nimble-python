@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.15.0 (2026-03-29)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/Nimbleway/nimble-python/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* **api:** api update ([691eb61](https://github.com/Nimbleway/nimble-python/commit/691eb61893fadbc901e48eaf17077a229abc06f5))
+* **api:** manual updates ([99d2baf](https://github.com/Nimbleway/nimble-python/commit/99d2baff4c87c9402cf4f3615825d6c8b42e5d28))
+* **internal:** implement indices array format for query and form serialization ([e74fd0c](https://github.com/Nimbleway/nimble-python/commit/e74fd0c52e59349932a467177eb6f5f5b554f218))
+
 ## 0.14.0 (2026-03-25)
 
 Full Changelog: [v0.13.0...v0.14.0](https://github.com/Nimbleway/nimble-python/compare/v0.13.0...v0.14.0)
