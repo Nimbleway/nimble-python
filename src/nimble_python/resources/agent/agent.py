@@ -40,32 +40,32 @@ from ...types.agent_publish_response import AgentPublishResponse
 from ...types.agent_run_async_response import AgentRunAsyncResponse
 from ...types.agent_run_batch_response import AgentRunBatchResponse
 
-__all__ = ["AgentsResource", "AsyncAgentsResource"]
+__all__ = ["AgentResource", "AsyncAgentResource"]
 
 
-class AgentsResource(SyncAPIResource):
+class AgentResource(SyncAPIResource):
     @cached_property
     def generations(self) -> GenerationsResource:
         return GenerationsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AgentsResourceWithRawResponse:
+    def with_raw_response(self) -> AgentResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#accessing-raw-response-data-eg-headers
         """
-        return AgentsResourceWithRawResponse(self)
+        return AgentResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AgentsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AgentResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#with_streaming_response
         """
-        return AgentsResourceWithStreamingResponse(self)
+        return AgentResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -344,29 +344,29 @@ class AgentsResource(SyncAPIResource):
         )
 
 
-class AsyncAgentsResource(AsyncAPIResource):
+class AsyncAgentResource(AsyncAPIResource):
     @cached_property
     def generations(self) -> AsyncGenerationsResource:
         return AsyncGenerationsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncAgentsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncAgentResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncAgentsResourceWithRawResponse(self)
+        return AsyncAgentResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAgentsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncAgentResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/Nimbleway/nimble-python#with_streaming_response
         """
-        return AsyncAgentsResourceWithStreamingResponse(self)
+        return AsyncAgentResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -645,113 +645,113 @@ class AsyncAgentsResource(AsyncAPIResource):
         )
 
 
-class AgentsResourceWithRawResponse:
-    def __init__(self, agents: AgentsResource) -> None:
-        self._agents = agents
+class AgentResourceWithRawResponse:
+    def __init__(self, agent: AgentResource) -> None:
+        self._agent = agent
 
         self.list = to_raw_response_wrapper(
-            agents.list,
+            agent.list,
         )
         self.get = to_raw_response_wrapper(
-            agents.get,
+            agent.get,
         )
         self.publish = to_raw_response_wrapper(
-            agents.publish,
+            agent.publish,
         )
         self.run = to_raw_response_wrapper(
-            agents.run,
+            agent.run,
         )
         self.run_async = to_raw_response_wrapper(
-            agents.run_async,
+            agent.run_async,
         )
         self.run_batch = to_raw_response_wrapper(
-            agents.run_batch,
+            agent.run_batch,
         )
 
     @cached_property
     def generations(self) -> GenerationsResourceWithRawResponse:
-        return GenerationsResourceWithRawResponse(self._agents.generations)
+        return GenerationsResourceWithRawResponse(self._agent.generations)
 
 
-class AsyncAgentsResourceWithRawResponse:
-    def __init__(self, agents: AsyncAgentsResource) -> None:
-        self._agents = agents
+class AsyncAgentResourceWithRawResponse:
+    def __init__(self, agent: AsyncAgentResource) -> None:
+        self._agent = agent
 
         self.list = async_to_raw_response_wrapper(
-            agents.list,
+            agent.list,
         )
         self.get = async_to_raw_response_wrapper(
-            agents.get,
+            agent.get,
         )
         self.publish = async_to_raw_response_wrapper(
-            agents.publish,
+            agent.publish,
         )
         self.run = async_to_raw_response_wrapper(
-            agents.run,
+            agent.run,
         )
         self.run_async = async_to_raw_response_wrapper(
-            agents.run_async,
+            agent.run_async,
         )
         self.run_batch = async_to_raw_response_wrapper(
-            agents.run_batch,
+            agent.run_batch,
         )
 
     @cached_property
     def generations(self) -> AsyncGenerationsResourceWithRawResponse:
-        return AsyncGenerationsResourceWithRawResponse(self._agents.generations)
+        return AsyncGenerationsResourceWithRawResponse(self._agent.generations)
 
 
-class AgentsResourceWithStreamingResponse:
-    def __init__(self, agents: AgentsResource) -> None:
-        self._agents = agents
+class AgentResourceWithStreamingResponse:
+    def __init__(self, agent: AgentResource) -> None:
+        self._agent = agent
 
         self.list = to_streamed_response_wrapper(
-            agents.list,
+            agent.list,
         )
         self.get = to_streamed_response_wrapper(
-            agents.get,
+            agent.get,
         )
         self.publish = to_streamed_response_wrapper(
-            agents.publish,
+            agent.publish,
         )
         self.run = to_streamed_response_wrapper(
-            agents.run,
+            agent.run,
         )
         self.run_async = to_streamed_response_wrapper(
-            agents.run_async,
+            agent.run_async,
         )
         self.run_batch = to_streamed_response_wrapper(
-            agents.run_batch,
+            agent.run_batch,
         )
 
     @cached_property
     def generations(self) -> GenerationsResourceWithStreamingResponse:
-        return GenerationsResourceWithStreamingResponse(self._agents.generations)
+        return GenerationsResourceWithStreamingResponse(self._agent.generations)
 
 
-class AsyncAgentsResourceWithStreamingResponse:
-    def __init__(self, agents: AsyncAgentsResource) -> None:
-        self._agents = agents
+class AsyncAgentResourceWithStreamingResponse:
+    def __init__(self, agent: AsyncAgentResource) -> None:
+        self._agent = agent
 
         self.list = async_to_streamed_response_wrapper(
-            agents.list,
+            agent.list,
         )
         self.get = async_to_streamed_response_wrapper(
-            agents.get,
+            agent.get,
         )
         self.publish = async_to_streamed_response_wrapper(
-            agents.publish,
+            agent.publish,
         )
         self.run = async_to_streamed_response_wrapper(
-            agents.run,
+            agent.run,
         )
         self.run_async = async_to_streamed_response_wrapper(
-            agents.run_async,
+            agent.run_async,
         )
         self.run_batch = async_to_streamed_response_wrapper(
-            agents.run_batch,
+            agent.run_batch,
         )
 
     @cached_property
     def generations(self) -> AsyncGenerationsResourceWithStreamingResponse:
-        return AsyncGenerationsResourceWithStreamingResponse(self._agents.generations)
+        return AsyncGenerationsResourceWithStreamingResponse(self._agent.generations)
