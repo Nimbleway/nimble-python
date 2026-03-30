@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .agent import (
-    AgentResource,
-    AsyncAgentResource,
-    AgentResourceWithRawResponse,
-    AsyncAgentResourceWithRawResponse,
-    AgentResourceWithStreamingResponse,
-    AsyncAgentResourceWithStreamingResponse,
-)
 from .crawl import (
     CrawlResource,
     AsyncCrawlResource,
@@ -24,6 +16,14 @@ from .tasks import (
     TasksResourceWithStreamingResponse,
     AsyncTasksResourceWithStreamingResponse,
 )
+from .agents import (
+    AgentsResource,
+    AsyncAgentsResource,
+    AgentsResourceWithRawResponse,
+    AsyncAgentsResourceWithRawResponse,
+    AgentsResourceWithStreamingResponse,
+    AsyncAgentsResourceWithStreamingResponse,
+)
 from .batches import (
     BatchesResource,
     AsyncBatchesResource,
@@ -34,12 +34,12 @@ from .batches import (
 )
 
 __all__ = [
-    "AgentResource",
-    "AsyncAgentResource",
-    "AgentResourceWithRawResponse",
-    "AsyncAgentResourceWithRawResponse",
-    "AgentResourceWithStreamingResponse",
-    "AsyncAgentResourceWithStreamingResponse",
+    "AgentsResource",
+    "AsyncAgentsResource",
+    "AgentsResourceWithRawResponse",
+    "AsyncAgentsResourceWithRawResponse",
+    "AgentsResourceWithStreamingResponse",
+    "AsyncAgentsResourceWithStreamingResponse",
     "CrawlResource",
     "AsyncCrawlResource",
     "CrawlResourceWithRawResponse",

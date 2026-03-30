@@ -9,7 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from nimble_python import Nimble, AsyncNimble
-from nimble_python.types.agent import GenerationGetResponse, GenerationCreateResponse
+from nimble_python.types.agents import GenerationGetResponse, GenerationCreateResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -20,7 +20,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_overload_1(self, client: Nimble) -> None:
-        generation = client.agent.generations.create(
+        generation = client.agents.generations.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -30,7 +30,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Nimble) -> None:
-        generation = client.agent.generations.create(
+        generation = client.agents.generations.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -43,7 +43,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_overload_1(self, client: Nimble) -> None:
-        response = client.agent.generations.with_raw_response.create(
+        response = client.agents.generations.with_raw_response.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -57,7 +57,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Nimble) -> None:
-        with client.agent.generations.with_streaming_response.create(
+        with client.agents.generations.with_streaming_response.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -73,7 +73,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_overload_2(self, client: Nimble) -> None:
-        generation = client.agent.generations.create(
+        generation = client.agents.generations.create(
             from_agent="from_agent",
             prompt="prompt",
         )
@@ -82,7 +82,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_overload_2(self, client: Nimble) -> None:
-        response = client.agent.generations.with_raw_response.create(
+        response = client.agents.generations.with_raw_response.create(
             from_agent="from_agent",
             prompt="prompt",
         )
@@ -95,7 +95,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Nimble) -> None:
-        with client.agent.generations.with_streaming_response.create(
+        with client.agents.generations.with_streaming_response.create(
             from_agent="from_agent",
             prompt="prompt",
         ) as response:
@@ -110,7 +110,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: Nimble) -> None:
-        generation = client.agent.generations.get(
+        generation = client.agents.generations.get(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(GenerationGetResponse, generation, path=["response"])
@@ -118,7 +118,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: Nimble) -> None:
-        response = client.agent.generations.with_raw_response.get(
+        response = client.agents.generations.with_raw_response.get(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -130,7 +130,7 @@ class TestGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: Nimble) -> None:
-        with client.agent.generations.with_streaming_response.get(
+        with client.agents.generations.with_streaming_response.get(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -145,7 +145,7 @@ class TestGenerations:
     @parametrize
     def test_path_params_get(self, client: Nimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `generation_id` but received ''"):
-            client.agent.generations.with_raw_response.get(
+            client.agents.generations.with_raw_response.get(
                 "",
             )
 
@@ -158,7 +158,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncNimble) -> None:
-        generation = await async_client.agent.generations.create(
+        generation = await async_client.agents.generations.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -168,7 +168,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncNimble) -> None:
-        generation = await async_client.agent.generations.create(
+        generation = await async_client.agents.generations.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -181,7 +181,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agent.generations.with_raw_response.create(
+        response = await async_client.agents.generations.with_raw_response.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -195,7 +195,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncNimble) -> None:
-        async with async_client.agent.generations.with_streaming_response.create(
+        async with async_client.agents.generations.with_streaming_response.create(
             agent_name="agent_name",
             prompt="prompt",
             url="url",
@@ -211,7 +211,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncNimble) -> None:
-        generation = await async_client.agent.generations.create(
+        generation = await async_client.agents.generations.create(
             from_agent="from_agent",
             prompt="prompt",
         )
@@ -220,7 +220,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agent.generations.with_raw_response.create(
+        response = await async_client.agents.generations.with_raw_response.create(
             from_agent="from_agent",
             prompt="prompt",
         )
@@ -233,7 +233,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncNimble) -> None:
-        async with async_client.agent.generations.with_streaming_response.create(
+        async with async_client.agents.generations.with_streaming_response.create(
             from_agent="from_agent",
             prompt="prompt",
         ) as response:
@@ -248,7 +248,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncNimble) -> None:
-        generation = await async_client.agent.generations.get(
+        generation = await async_client.agents.generations.get(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(GenerationGetResponse, generation, path=["response"])
@@ -256,7 +256,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agent.generations.with_raw_response.get(
+        response = await async_client.agents.generations.with_raw_response.get(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
@@ -268,7 +268,7 @@ class TestAsyncGenerations:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncNimble) -> None:
-        async with async_client.agent.generations.with_streaming_response.get(
+        async with async_client.agents.generations.with_streaming_response.get(
             "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
@@ -283,6 +283,6 @@ class TestAsyncGenerations:
     @parametrize
     async def test_path_params_get(self, async_client: AsyncNimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `generation_id` but received ''"):
-            await async_client.agent.generations.with_raw_response.get(
+            await async_client.agents.generations.with_raw_response.get(
                 "",
             )
