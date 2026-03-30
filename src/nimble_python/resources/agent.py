@@ -3,51 +3,42 @@
 from __future__ import annotations
 
 from typing import Dict, List, Iterable, Optional
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
-from ...types import (
+from ..types import (
     agent_run_params,
     agent_list_params,
     agent_publish_params,
+    agent_generate_params,
     agent_run_async_params,
     agent_run_batch_params,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .._utils import path_template, required_args, maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .generations import (
-    GenerationsResource,
-    AsyncGenerationsResource,
-    GenerationsResourceWithRawResponse,
-    AsyncGenerationsResourceWithRawResponse,
-    GenerationsResourceWithStreamingResponse,
-    AsyncGenerationsResourceWithStreamingResponse,
-)
-from ..._base_client import make_request_options
-from ...types.agent_get_response import AgentGetResponse
-from ...types.agent_run_response import AgentRunResponse
-from ...types.agent_list_response import AgentListResponse
-from ...types.agent_publish_response import AgentPublishResponse
-from ...types.agent_run_async_response import AgentRunAsyncResponse
-from ...types.agent_run_batch_response import AgentRunBatchResponse
+from .._base_client import make_request_options
+from ..types.agent_get_response import AgentGetResponse
+from ..types.agent_run_response import AgentRunResponse
+from ..types.agent_list_response import AgentListResponse
+from ..types.agent_publish_response import AgentPublishResponse
+from ..types.agent_generate_response import AgentGenerateResponse
+from ..types.agent_run_async_response import AgentRunAsyncResponse
+from ..types.agent_run_batch_response import AgentRunBatchResponse
+from ..types.agent_get_generation_response import AgentGetGenerationResponse
 
 __all__ = ["AgentResource", "AsyncAgentResource"]
 
 
 class AgentResource(SyncAPIResource):
-    @cached_property
-    def generations(self) -> GenerationsResource:
-        return GenerationsResource(self._client)
-
     @cached_property
     def with_raw_response(self) -> AgentResourceWithRawResponse:
         """
@@ -125,6 +116,102 @@ class AgentResource(SyncAPIResource):
             cast_to=AgentListResponse,
         )
 
+    @overload
+    def generate(
+        self,
+        *,
+        agent_name: str,
+        prompt: str,
+        url: str,
+        input_schema: object | Omit = omit,
+        metadata: Optional[object] | Omit = omit,
+        output_schema: object | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGenerateResponse:
+        """
+        Create Agent Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def generate(
+        self,
+        *,
+        from_agent: str,
+        prompt: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGenerateResponse:
+        """
+        Create Agent Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["agent_name", "prompt", "url"], ["from_agent", "prompt"])
+    def generate(
+        self,
+        *,
+        agent_name: str | Omit = omit,
+        prompt: str,
+        url: str | Omit = omit,
+        input_schema: object | Omit = omit,
+        metadata: Optional[object] | Omit = omit,
+        output_schema: object | Omit = omit,
+        from_agent: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGenerateResponse:
+        return self._post(
+            "/v1/agents/generations",
+            body=maybe_transform(
+                {
+                    "agent_name": agent_name,
+                    "prompt": prompt,
+                    "url": url,
+                    "input_schema": input_schema,
+                    "metadata": metadata,
+                    "output_schema": output_schema,
+                    "from_agent": from_agent,
+                },
+                agent_generate_params.AgentGenerateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentGenerateResponse,
+        )
+
     def get(
         self,
         template_name: str,
@@ -156,6 +243,39 @@ class AgentResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AgentGetResponse,
+        )
+
+    def get_generation(
+        self,
+        generation_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGetGenerationResponse:
+        """
+        Get Agent Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not generation_id:
+            raise ValueError(f"Expected a non-empty value for `generation_id` but received {generation_id!r}")
+        return self._get(
+            path_template("/v1/agents/generations/{generation_id}", generation_id=generation_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentGetGenerationResponse,
         )
 
     def publish(
@@ -346,10 +466,6 @@ class AgentResource(SyncAPIResource):
 
 class AsyncAgentResource(AsyncAPIResource):
     @cached_property
-    def generations(self) -> AsyncGenerationsResource:
-        return AsyncGenerationsResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> AsyncAgentResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -426,6 +542,102 @@ class AsyncAgentResource(AsyncAPIResource):
             cast_to=AgentListResponse,
         )
 
+    @overload
+    async def generate(
+        self,
+        *,
+        agent_name: str,
+        prompt: str,
+        url: str,
+        input_schema: object | Omit = omit,
+        metadata: Optional[object] | Omit = omit,
+        output_schema: object | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGenerateResponse:
+        """
+        Create Agent Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def generate(
+        self,
+        *,
+        from_agent: str,
+        prompt: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGenerateResponse:
+        """
+        Create Agent Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["agent_name", "prompt", "url"], ["from_agent", "prompt"])
+    async def generate(
+        self,
+        *,
+        agent_name: str | Omit = omit,
+        prompt: str,
+        url: str | Omit = omit,
+        input_schema: object | Omit = omit,
+        metadata: Optional[object] | Omit = omit,
+        output_schema: object | Omit = omit,
+        from_agent: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGenerateResponse:
+        return await self._post(
+            "/v1/agents/generations",
+            body=await async_maybe_transform(
+                {
+                    "agent_name": agent_name,
+                    "prompt": prompt,
+                    "url": url,
+                    "input_schema": input_schema,
+                    "metadata": metadata,
+                    "output_schema": output_schema,
+                    "from_agent": from_agent,
+                },
+                agent_generate_params.AgentGenerateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentGenerateResponse,
+        )
+
     async def get(
         self,
         template_name: str,
@@ -457,6 +669,39 @@ class AsyncAgentResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AgentGetResponse,
+        )
+
+    async def get_generation(
+        self,
+        generation_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentGetGenerationResponse:
+        """
+        Get Agent Generation
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not generation_id:
+            raise ValueError(f"Expected a non-empty value for `generation_id` but received {generation_id!r}")
+        return await self._get(
+            path_template("/v1/agents/generations/{generation_id}", generation_id=generation_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentGetGenerationResponse,
         )
 
     async def publish(
@@ -652,8 +897,14 @@ class AgentResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             agent.list,
         )
+        self.generate = to_raw_response_wrapper(
+            agent.generate,
+        )
         self.get = to_raw_response_wrapper(
             agent.get,
+        )
+        self.get_generation = to_raw_response_wrapper(
+            agent.get_generation,
         )
         self.publish = to_raw_response_wrapper(
             agent.publish,
@@ -668,10 +919,6 @@ class AgentResourceWithRawResponse:
             agent.run_batch,
         )
 
-    @cached_property
-    def generations(self) -> GenerationsResourceWithRawResponse:
-        return GenerationsResourceWithRawResponse(self._agent.generations)
-
 
 class AsyncAgentResourceWithRawResponse:
     def __init__(self, agent: AsyncAgentResource) -> None:
@@ -680,8 +927,14 @@ class AsyncAgentResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             agent.list,
         )
+        self.generate = async_to_raw_response_wrapper(
+            agent.generate,
+        )
         self.get = async_to_raw_response_wrapper(
             agent.get,
+        )
+        self.get_generation = async_to_raw_response_wrapper(
+            agent.get_generation,
         )
         self.publish = async_to_raw_response_wrapper(
             agent.publish,
@@ -696,10 +949,6 @@ class AsyncAgentResourceWithRawResponse:
             agent.run_batch,
         )
 
-    @cached_property
-    def generations(self) -> AsyncGenerationsResourceWithRawResponse:
-        return AsyncGenerationsResourceWithRawResponse(self._agent.generations)
-
 
 class AgentResourceWithStreamingResponse:
     def __init__(self, agent: AgentResource) -> None:
@@ -708,8 +957,14 @@ class AgentResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             agent.list,
         )
+        self.generate = to_streamed_response_wrapper(
+            agent.generate,
+        )
         self.get = to_streamed_response_wrapper(
             agent.get,
+        )
+        self.get_generation = to_streamed_response_wrapper(
+            agent.get_generation,
         )
         self.publish = to_streamed_response_wrapper(
             agent.publish,
@@ -724,10 +979,6 @@ class AgentResourceWithStreamingResponse:
             agent.run_batch,
         )
 
-    @cached_property
-    def generations(self) -> GenerationsResourceWithStreamingResponse:
-        return GenerationsResourceWithStreamingResponse(self._agent.generations)
-
 
 class AsyncAgentResourceWithStreamingResponse:
     def __init__(self, agent: AsyncAgentResource) -> None:
@@ -736,8 +987,14 @@ class AsyncAgentResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             agent.list,
         )
+        self.generate = async_to_streamed_response_wrapper(
+            agent.generate,
+        )
         self.get = async_to_streamed_response_wrapper(
             agent.get,
+        )
+        self.get_generation = async_to_streamed_response_wrapper(
+            agent.get_generation,
         )
         self.publish = async_to_streamed_response_wrapper(
             agent.publish,
@@ -751,7 +1008,3 @@ class AsyncAgentResourceWithStreamingResponse:
         self.run_batch = async_to_streamed_response_wrapper(
             agent.run_batch,
         )
-
-    @cached_property
-    def generations(self) -> AsyncGenerationsResourceWithStreamingResponse:
-        return AsyncGenerationsResourceWithStreamingResponse(self._agent.generations)
