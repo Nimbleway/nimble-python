@@ -47,7 +47,9 @@ Types:
 ```python
 from nimble_python.types import (
     AgentListResponse,
+    AgentGenerateResponse,
     AgentGetResponse,
+    AgentGetGenerationResponse,
     AgentPublishResponse,
     AgentRunResponse,
     AgentRunAsyncResponse,
@@ -57,25 +59,14 @@ from nimble_python.types import (
 
 Methods:
 
-- <code title="get /v1/agents">client.agent.<a href="./src/nimble_python/resources/agent/agent.py">list</a>(\*\*<a href="src/nimble_python/types/agent_list_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_list_response.py">AgentListResponse</a></code>
-- <code title="get /v1/agents/{template_name}">client.agent.<a href="./src/nimble_python/resources/agent/agent.py">get</a>(template_name) -> <a href="./src/nimble_python/types/agent_get_response.py">AgentGetResponse</a></code>
-- <code title="post /v1/agents/{agent_name}/publish">client.agent.<a href="./src/nimble_python/resources/agent/agent.py">publish</a>(agent_name, \*\*<a href="src/nimble_python/types/agent_publish_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_publish_response.py">AgentPublishResponse</a></code>
-- <code title="post /v1/agents/run">client.agent.<a href="./src/nimble_python/resources/agent/agent.py">run</a>(\*\*<a href="src/nimble_python/types/agent_run_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_response.py">AgentRunResponse</a></code>
-- <code title="post /v1/agents/async">client.agent.<a href="./src/nimble_python/resources/agent/agent.py">run_async</a>(\*\*<a href="src/nimble_python/types/agent_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_async_response.py">AgentRunAsyncResponse</a></code>
-- <code title="post /v1/agents/batch">client.agent.<a href="./src/nimble_python/resources/agent/agent.py">run_batch</a>(\*\*<a href="src/nimble_python/types/agent_run_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_batch_response.py">AgentRunBatchResponse</a></code>
-
-## Generations
-
-Types:
-
-```python
-from nimble_python.types.agent import GenerationCreateResponse, GenerationGetResponse
-```
-
-Methods:
-
-- <code title="post /v1/agents/generations">client.agent.generations.<a href="./src/nimble_python/resources/agent/generations.py">create</a>(\*\*<a href="src/nimble_python/types/agent/generation_create_params.py">params</a>) -> <a href="./src/nimble_python/types/agent/generation_create_response.py">GenerationCreateResponse</a></code>
-- <code title="get /v1/agents/generations/{generation_id}">client.agent.generations.<a href="./src/nimble_python/resources/agent/generations.py">get</a>(generation_id) -> <a href="./src/nimble_python/types/agent/generation_get_response.py">GenerationGetResponse</a></code>
+- <code title="get /v1/agents">client.agent.<a href="./src/nimble_python/resources/agent.py">list</a>(\*\*<a href="src/nimble_python/types/agent_list_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_list_response.py">AgentListResponse</a></code>
+- <code title="post /v1/agents/generations">client.agent.<a href="./src/nimble_python/resources/agent.py">generate</a>(\*\*<a href="src/nimble_python/types/agent_generate_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_generate_response.py">AgentGenerateResponse</a></code>
+- <code title="get /v1/agents/{template_name}">client.agent.<a href="./src/nimble_python/resources/agent.py">get</a>(template_name) -> <a href="./src/nimble_python/types/agent_get_response.py">AgentGetResponse</a></code>
+- <code title="get /v1/agents/generations/{generation_id}">client.agent.<a href="./src/nimble_python/resources/agent.py">get_generation</a>(generation_id) -> <a href="./src/nimble_python/types/agent_get_generation_response.py">AgentGetGenerationResponse</a></code>
+- <code title="post /v1/agents/{agent_name}/publish">client.agent.<a href="./src/nimble_python/resources/agent.py">publish</a>(agent_name, \*\*<a href="src/nimble_python/types/agent_publish_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_publish_response.py">AgentPublishResponse</a></code>
+- <code title="post /v1/agents/run">client.agent.<a href="./src/nimble_python/resources/agent.py">run</a>(\*\*<a href="src/nimble_python/types/agent_run_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_response.py">AgentRunResponse</a></code>
+- <code title="post /v1/agents/async">client.agent.<a href="./src/nimble_python/resources/agent.py">run_async</a>(\*\*<a href="src/nimble_python/types/agent_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_async_response.py">AgentRunAsyncResponse</a></code>
+- <code title="post /v1/agents/batch">client.agent.<a href="./src/nimble_python/resources/agent.py">run_batch</a>(\*\*<a href="src/nimble_python/types/agent_run_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_batch_response.py">AgentRunBatchResponse</a></code>
 
 # Crawl
 

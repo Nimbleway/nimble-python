@@ -3,12 +3,12 @@
 from typing import Optional
 from datetime import datetime
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["GenerationGetResponse"]
+__all__ = ["AgentGenerateResponse"]
 
 
-class GenerationGetResponse(BaseModel):
+class AgentGenerateResponse(BaseModel):
     id: str
 
     status: str

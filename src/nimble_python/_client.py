@@ -61,10 +61,10 @@ from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
     from .resources import agent, crawl, tasks, batches
+    from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
     from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.batches import BatchesResource, AsyncBatchesResource
-    from .resources.agent.agent import AgentResource, AsyncAgentResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 

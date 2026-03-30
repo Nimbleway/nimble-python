@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 from typing_extensions import Required, TypeAlias, TypedDict
 
-__all__ = ["GenerationCreateParams", "CreateAgentGenerationRequest", "CreateAgentRefinementRequest"]
+__all__ = ["AgentGenerateParams", "CreateAgentGenerationRequest", "CreateAgentRefinementRequest"]
 
 
 class CreateAgentGenerationRequest(TypedDict, total=False):
@@ -28,4 +28,4 @@ class CreateAgentRefinementRequest(TypedDict, total=False):
     prompt: Required[str]
 
 
-GenerationCreateParams: TypeAlias = Union[CreateAgentGenerationRequest, CreateAgentRefinementRequest]
+AgentGenerateParams: TypeAlias = Union[CreateAgentGenerationRequest, CreateAgentRefinementRequest]
