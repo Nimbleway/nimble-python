@@ -21,19 +21,19 @@ from nimble_python.types import (
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestAgents:
+class TestAgent:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Nimble) -> None:
-        agent = client.agents.list()
+        agent = client.agent.list()
         assert_matches_type(AgentListResponse, agent, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Nimble) -> None:
-        agent = client.agents.list(
+        agent = client.agent.list(
             limit=1,
             managed_by="nimble",
             offset=0,
@@ -45,7 +45,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.list()
+        response = client.agent.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -55,7 +55,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.list() as response:
+        with client.agent.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -67,7 +67,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: Nimble) -> None:
-        agent = client.agents.get(
+        agent = client.agent.get(
             "template_name",
         )
         assert_matches_type(AgentGetResponse, agent, path=["response"])
@@ -75,7 +75,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.get(
+        response = client.agent.with_raw_response.get(
             "template_name",
         )
 
@@ -87,7 +87,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.get(
+        with client.agent.with_streaming_response.get(
             "template_name",
         ) as response:
             assert not response.is_closed
@@ -102,14 +102,14 @@ class TestAgents:
     @parametrize
     def test_path_params_get(self, client: Nimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_name` but received ''"):
-            client.agents.with_raw_response.get(
+            client.agent.with_raw_response.get(
                 "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_publish(self, client: Nimble) -> None:
-        agent = client.agents.publish(
+        agent = client.agent.publish(
             agent_name="agent_name",
             version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -118,7 +118,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_publish(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.publish(
+        response = client.agent.with_raw_response.publish(
             agent_name="agent_name",
             version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -131,7 +131,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_publish(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.publish(
+        with client.agent.with_streaming_response.publish(
             agent_name="agent_name",
             version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -147,7 +147,7 @@ class TestAgents:
     @parametrize
     def test_path_params_publish(self, client: Nimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_name` but received ''"):
-            client.agents.with_raw_response.publish(
+            client.agent.with_raw_response.publish(
                 agent_name="",
                 version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
@@ -155,7 +155,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run(self, client: Nimble) -> None:
-        agent = client.agents.run(
+        agent = client.agent.run(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -164,7 +164,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_with_all_params(self, client: Nimble) -> None:
-        agent = client.agents.run(
+        agent = client.agent.run(
             agent="agent",
             params={"foo": "bar"},
             formats=["html", "markdown"],
@@ -175,7 +175,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.run(
+        response = client.agent.with_raw_response.run(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -188,7 +188,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.run(
+        with client.agent.with_streaming_response.run(
             agent="agent",
             params={"foo": "bar"},
         ) as response:
@@ -203,7 +203,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_async(self, client: Nimble) -> None:
-        agent = client.agents.run_async(
+        agent = client.agent.run_async(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -212,7 +212,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_async_with_all_params(self, client: Nimble) -> None:
-        agent = client.agents.run_async(
+        agent = client.agent.run_async(
             agent="agent",
             params={"foo": "bar"},
             callback_url="https://example.com/webhook/callback",
@@ -228,7 +228,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_async(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.run_async(
+        response = client.agent.with_raw_response.run_async(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -241,7 +241,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_async(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.run_async(
+        with client.agent.with_streaming_response.run_async(
             agent="agent",
             params={"foo": "bar"},
         ) as response:
@@ -256,7 +256,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_batch(self, client: Nimble) -> None:
-        agent = client.agents.run_batch(
+        agent = client.agent.run_batch(
             inputs=[{}],
             shared_inputs={"agent": "agent"},
         )
@@ -265,7 +265,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_batch_with_all_params(self, client: Nimble) -> None:
-        agent = client.agents.run_batch(
+        agent = client.agent.run_batch(
             inputs=[
                 {
                     "formats": ["html", "markdown"],
@@ -285,7 +285,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_batch(self, client: Nimble) -> None:
-        response = client.agents.with_raw_response.run_batch(
+        response = client.agent.with_raw_response.run_batch(
             inputs=[{}],
             shared_inputs={"agent": "agent"},
         )
@@ -298,7 +298,7 @@ class TestAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_batch(self, client: Nimble) -> None:
-        with client.agents.with_streaming_response.run_batch(
+        with client.agent.with_streaming_response.run_batch(
             inputs=[{}],
             shared_inputs={"agent": "agent"},
         ) as response:
@@ -311,7 +311,7 @@ class TestAgents:
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncAgents:
+class TestAsyncAgent:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
@@ -319,13 +319,13 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.list()
+        agent = await async_client.agent.list()
         assert_matches_type(AgentListResponse, agent, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.list(
+        agent = await async_client.agent.list(
             limit=1,
             managed_by="nimble",
             offset=0,
@@ -337,7 +337,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.list()
+        response = await async_client.agent.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -347,7 +347,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.list() as response:
+        async with async_client.agent.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -359,7 +359,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.get(
+        agent = await async_client.agent.get(
             "template_name",
         )
         assert_matches_type(AgentGetResponse, agent, path=["response"])
@@ -367,7 +367,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.get(
+        response = await async_client.agent.with_raw_response.get(
             "template_name",
         )
 
@@ -379,7 +379,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.get(
+        async with async_client.agent.with_streaming_response.get(
             "template_name",
         ) as response:
             assert not response.is_closed
@@ -394,14 +394,14 @@ class TestAsyncAgents:
     @parametrize
     async def test_path_params_get(self, async_client: AsyncNimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_name` but received ''"):
-            await async_client.agents.with_raw_response.get(
+            await async_client.agent.with_raw_response.get(
                 "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_publish(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.publish(
+        agent = await async_client.agent.publish(
             agent_name="agent_name",
             version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -410,7 +410,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_publish(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.publish(
+        response = await async_client.agent.with_raw_response.publish(
             agent_name="agent_name",
             version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -423,7 +423,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_publish(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.publish(
+        async with async_client.agent.with_streaming_response.publish(
             agent_name="agent_name",
             version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
@@ -439,7 +439,7 @@ class TestAsyncAgents:
     @parametrize
     async def test_path_params_publish(self, async_client: AsyncNimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_name` but received ''"):
-            await async_client.agents.with_raw_response.publish(
+            await async_client.agent.with_raw_response.publish(
                 agent_name="",
                 version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
@@ -447,7 +447,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.run(
+        agent = await async_client.agent.run(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -456,7 +456,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_with_all_params(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.run(
+        agent = await async_client.agent.run(
             agent="agent",
             params={"foo": "bar"},
             formats=["html", "markdown"],
@@ -467,7 +467,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.run(
+        response = await async_client.agent.with_raw_response.run(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -480,7 +480,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.run(
+        async with async_client.agent.with_streaming_response.run(
             agent="agent",
             params={"foo": "bar"},
         ) as response:
@@ -495,7 +495,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_async(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.run_async(
+        agent = await async_client.agent.run_async(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -504,7 +504,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_async_with_all_params(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.run_async(
+        agent = await async_client.agent.run_async(
             agent="agent",
             params={"foo": "bar"},
             callback_url="https://example.com/webhook/callback",
@@ -520,7 +520,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_async(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.run_async(
+        response = await async_client.agent.with_raw_response.run_async(
             agent="agent",
             params={"foo": "bar"},
         )
@@ -533,7 +533,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_async(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.run_async(
+        async with async_client.agent.with_streaming_response.run_async(
             agent="agent",
             params={"foo": "bar"},
         ) as response:
@@ -548,7 +548,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_batch(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.run_batch(
+        agent = await async_client.agent.run_batch(
             inputs=[{}],
             shared_inputs={"agent": "agent"},
         )
@@ -557,7 +557,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_batch_with_all_params(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agents.run_batch(
+        agent = await async_client.agent.run_batch(
             inputs=[
                 {
                     "formats": ["html", "markdown"],
@@ -577,7 +577,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_batch(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agents.with_raw_response.run_batch(
+        response = await async_client.agent.with_raw_response.run_batch(
             inputs=[{}],
             shared_inputs={"agent": "agent"},
         )
@@ -590,7 +590,7 @@ class TestAsyncAgents:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_batch(self, async_client: AsyncNimble) -> None:
-        async with async_client.agents.with_streaming_response.run_batch(
+        async with async_client.agent.with_streaming_response.run_batch(
             inputs=[{}],
             shared_inputs={"agent": "agent"},
         ) as response:

@@ -17,10 +17,10 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ...types.agent import generation_create_params
 from ..._base_client import make_request_options
-from ...types.agents import generation_create_params
-from ...types.agents.generation_get_response import GenerationGetResponse
-from ...types.agents.generation_create_response import GenerationCreateResponse
+from ...types.agent.generation_get_response import GenerationGetResponse
+from ...types.agent.generation_create_response import GenerationCreateResponse
 
 __all__ = ["GenerationsResource", "AsyncGenerationsResource"]
 
