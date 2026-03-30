@@ -64,7 +64,7 @@ class AgentResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AgentListResponse:
         """
-        List Templates
+        List Agent Templates
 
         Args:
           limit: Number of results per page
@@ -118,7 +118,7 @@ class AgentResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AgentGetResponse:
         """
-        Get Template
+        Get Agent Template
 
         Args:
           extra_headers: Send extra headers
@@ -326,7 +326,7 @@ class AsyncAgentResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AgentListResponse:
         """
-        List Templates
+        List Agent Templates
 
         Args:
           limit: Number of results per page
@@ -380,7 +380,7 @@ class AsyncAgentResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AgentGetResponse:
         """
-        Get Template
+        Get Agent Template
 
         Args:
           extra_headers: Send extra headers
