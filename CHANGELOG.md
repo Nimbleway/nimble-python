@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.16.0 (2026-03-30)
+
+Full Changelog: [v0.15.0...v0.16.0](https://github.com/Nimbleway/nimble-python/compare/v0.15.0...v0.16.0)
+
+### Features
+
+* **api:** api update ([3eace9f](https://github.com/Nimbleway/nimble-python/commit/3eace9fa853d589ff0753ed4b4964484dfb7405a))
+* **api:** manual updates ([13646ce](https://github.com/Nimbleway/nimble-python/commit/13646ce53a4cc507d221f5d74d85a83727c2853a))
+* **api:** manual updates ([fa62b16](https://github.com/Nimbleway/nimble-python/commit/fa62b167efb6f2804bfa6d26f01af01d196e1f30))
+* **api:** manual updates ([0be811a](https://github.com/Nimbleway/nimble-python/commit/0be811afd90cf2325bd1e707081fc7a778b75aed))
+* **api:** rename agent resource -&gt; agents ([161e3fb](https://github.com/Nimbleway/nimble-python/commit/161e3fb98d9329b6c33f10c9eb0a9548130e00cd))
+
 ## 0.15.0 (2026-03-29)
 
 Full Changelog: [v0.14.0...v0.15.0](https://github.com/Nimbleway/nimble-python/compare/v0.14.0...v0.15.0)
