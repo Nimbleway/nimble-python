@@ -171,6 +171,7 @@ class TestCrawl:
                         "method": "GET",
                         "resource_type": "document",
                         "status_code": 100,
+                        "stop_on_render_flow_failure": True,
                         "url": {
                             "value": "value",
                             "type": "exact",
@@ -471,6 +472,7 @@ class TestAsyncCrawl:
                         "method": "GET",
                         "resource_type": "document",
                         "status_code": 100,
+                        "stop_on_render_flow_failure": True,
                         "url": {
                             "value": "value",
                             "type": "exact",

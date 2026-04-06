@@ -313,7 +313,7 @@ class ClientExtractAsyncParams(TypedDict, total=False):
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
-    driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"]
+    driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"]
     """Browser driver to use"""
 
     expected_status_codes: Iterable[int]
@@ -1042,6 +1042,8 @@ class NetworkCapture(TypedDict, total=False):
     """Resource type for network capture filtering"""
 
     status_code: Union[float, Iterable[float]]
+
+    stop_on_render_flow_failure: bool
 
     url: NetworkCaptureURL
 
