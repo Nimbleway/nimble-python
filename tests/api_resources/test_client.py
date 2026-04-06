@@ -123,6 +123,7 @@ class TestClient:
                     "method": "GET",
                     "resource_type": "document",
                     "status_code": 100,
+                    "stop_on_render_flow_failure": True,
                     "url": {
                         "value": "value",
                         "type": "exact",
@@ -277,6 +278,7 @@ class TestClient:
                     "method": "GET",
                     "resource_type": "document",
                     "status_code": 100,
+                    "stop_on_render_flow_failure": True,
                     "url": {
                         "value": "value",
                         "type": "exact",
@@ -436,6 +438,7 @@ class TestClient:
                             "method": "GET",
                             "resource_type": "document",
                             "status_code": 100,
+                            "stop_on_render_flow_failure": True,
                             "url": {
                                 "value": "value",
                                 "type": "exact",
@@ -556,6 +559,7 @@ class TestClient:
                         "method": "GET",
                         "resource_type": "document",
                         "status_code": 100,
+                        "stop_on_render_flow_failure": True,
                         "url": {
                             "value": "value",
                             "type": "exact",
@@ -825,6 +829,7 @@ class TestAsyncClient:
                     "method": "GET",
                     "resource_type": "document",
                     "status_code": 100,
+                    "stop_on_render_flow_failure": True,
                     "url": {
                         "value": "value",
                         "type": "exact",
@@ -979,6 +984,7 @@ class TestAsyncClient:
                     "method": "GET",
                     "resource_type": "document",
                     "status_code": 100,
+                    "stop_on_render_flow_failure": True,
                     "url": {
                         "value": "value",
                         "type": "exact",
@@ -1138,6 +1144,7 @@ class TestAsyncClient:
                             "method": "GET",
                             "resource_type": "document",
                             "status_code": 100,
+                            "stop_on_render_flow_failure": True,
                             "url": {
                                 "value": "value",
                                 "type": "exact",
@@ -1258,6 +1265,7 @@ class TestAsyncClient:
                         "method": "GET",
                         "resource_type": "document",
                         "status_code": 100,
+                        "stop_on_render_flow_failure": True,
                         "url": {
                             "value": "value",
                             "type": "exact",
