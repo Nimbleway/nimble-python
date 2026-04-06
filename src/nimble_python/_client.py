@@ -498,7 +498,7 @@ class Nimble(SyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
+        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -1489,7 +1489,7 @@ class Nimble(SyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
+        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -3698,7 +3698,7 @@ class AsyncNimble(AsyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
+        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -4689,7 +4689,7 @@ class AsyncNimble(AsyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro"] | Omit = omit,
+        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,

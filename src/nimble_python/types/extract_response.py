@@ -133,6 +133,8 @@ class DataNetworkCaptureFilter(BaseModel):
 
     status_code: Union[float, List[float], None] = None
 
+    stop_on_render_flow_failure: Optional[bool] = None
+
     url: Optional[DataNetworkCaptureFilterURL] = None
 
     wait_for_requests_count_timeout: Optional[float] = None
