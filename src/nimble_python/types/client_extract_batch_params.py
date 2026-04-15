@@ -430,7 +430,7 @@ class Input(TypedDict, total=False):
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
 
-    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]]
     """List of acceptable response formats in order of preference"""
 
     headers: Dict[str, Union[str, SequenceNotStr[str], None]]
@@ -978,6 +978,13 @@ class Input(TypedDict, total=False):
         "auto",
     ]
     """Locale for browser language and region settings"""
+
+    markdown_backend: Literal["full_page", "main_content"]
+    """Selects which markdown conversion strategy to use.
+
+    "full_page" converts the entire HTML page. "main_content" uses Mozilla
+    Readability to extract the main article content before converting.
+    """
 
     method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
     """HTTP method for the request"""
@@ -1466,7 +1473,7 @@ class SharedInputs(TypedDict, total=False):
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
 
-    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]]
     """List of acceptable response formats in order of preference"""
 
     headers: Dict[str, Union[str, SequenceNotStr[str], None]]
@@ -2014,6 +2021,13 @@ class SharedInputs(TypedDict, total=False):
         "auto",
     ]
     """Locale for browser language and region settings"""
+
+    markdown_backend: Literal["full_page", "main_content"]
+    """Selects which markdown conversion strategy to use.
+
+    "full_page" converts the entire HTML page. "main_content" uses Mozilla
+    Readability to extract the main article content before converting.
+    """
 
     method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
     """HTTP method for the request"""

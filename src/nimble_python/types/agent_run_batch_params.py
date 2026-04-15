@@ -15,7 +15,7 @@ class AgentRunBatchParams(TypedDict, total=False):
 
 
 class Input(TypedDict, total=False):
-    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]]
     """Response formats to include. All disabled by default."""
 
     localization: bool
@@ -26,7 +26,7 @@ class Input(TypedDict, total=False):
 class SharedInputs(TypedDict, total=False):
     agent: Required[str]
 
-    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]]
     """Response formats to include. All disabled by default."""
 
     localization: bool
