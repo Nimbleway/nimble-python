@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 
 from .._models import BaseModel
 
@@ -14,13 +14,15 @@ class FeatureFlags(BaseModel):
 
 
 class InputProperty(BaseModel):
-    default: Optional[str] = None
+    default: Union[str, bool, float, None] = None
 
     description: Optional[str] = None
 
-    examples: Optional[List[str]] = None
+    examples: Optional[List[object]] = None
 
     is_localization_param: Optional[bool] = None
+
+    is_pagination_param: Optional[bool] = None
 
     name: Optional[str] = None
 

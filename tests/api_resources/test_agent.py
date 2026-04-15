@@ -20,6 +20,8 @@ from nimble_python.types import (
     AgentGetGenerationResponse,
 )
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -70,7 +72,6 @@ class TestAgent:
     @parametrize
     def test_method_generate_overload_1(self, client: Nimble) -> None:
         agent = client.agent.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
         )
@@ -80,11 +81,15 @@ class TestAgent:
     @parametrize
     def test_method_generate_with_all_params_overload_1(self, client: Nimble) -> None:
         agent = client.agent.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
+            agent_name="agent_name",
             input_schema={},
-            metadata={},
+            metadata={
+                "description": "description",
+                "display_name": "display_name",
+                "tags": ["string"],
+            },
             output_schema={},
         )
         assert_matches_type(AgentGenerateResponse, agent, path=["response"])
@@ -93,7 +98,6 @@ class TestAgent:
     @parametrize
     def test_raw_response_generate_overload_1(self, client: Nimble) -> None:
         response = client.agent.with_raw_response.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
         )
@@ -107,7 +111,6 @@ class TestAgent:
     @parametrize
     def test_streaming_response_generate_overload_1(self, client: Nimble) -> None:
         with client.agent.with_streaming_response.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
         ) as response:
@@ -243,19 +246,22 @@ class TestAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_publish(self, client: Nimble) -> None:
-        agent = client.agent.publish(
-            agent_name="agent_name",
-            version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            agent = client.agent.publish(
+                agent_name="agent_name",
+                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(AgentPublishResponse, agent, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_publish(self, client: Nimble) -> None:
-        response = client.agent.with_raw_response.publish(
-            agent_name="agent_name",
-            version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.agent.with_raw_response.publish(
+                agent_name="agent_name",
+                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -265,26 +271,28 @@ class TestAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_publish(self, client: Nimble) -> None:
-        with client.agent.with_streaming_response.publish(
-            agent_name="agent_name",
-            version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.agent.with_streaming_response.publish(
+                agent_name="agent_name",
+                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            agent = response.parse()
-            assert_matches_type(AgentPublishResponse, agent, path=["response"])
+                agent = response.parse()
+                assert_matches_type(AgentPublishResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_publish(self, client: Nimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_name` but received ''"):
-            client.agent.with_raw_response.publish(
-                agent_name="",
-                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_name` but received ''"):
+                client.agent.with_raw_response.publish(
+                    agent_name="",
+                    version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -494,7 +502,6 @@ class TestAsyncAgent:
     @parametrize
     async def test_method_generate_overload_1(self, async_client: AsyncNimble) -> None:
         agent = await async_client.agent.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
         )
@@ -504,11 +511,15 @@ class TestAsyncAgent:
     @parametrize
     async def test_method_generate_with_all_params_overload_1(self, async_client: AsyncNimble) -> None:
         agent = await async_client.agent.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
+            agent_name="agent_name",
             input_schema={},
-            metadata={},
+            metadata={
+                "description": "description",
+                "display_name": "display_name",
+                "tags": ["string"],
+            },
             output_schema={},
         )
         assert_matches_type(AgentGenerateResponse, agent, path=["response"])
@@ -517,7 +528,6 @@ class TestAsyncAgent:
     @parametrize
     async def test_raw_response_generate_overload_1(self, async_client: AsyncNimble) -> None:
         response = await async_client.agent.with_raw_response.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
         )
@@ -531,7 +541,6 @@ class TestAsyncAgent:
     @parametrize
     async def test_streaming_response_generate_overload_1(self, async_client: AsyncNimble) -> None:
         async with async_client.agent.with_streaming_response.generate(
-            agent_name="agent_name",
             prompt="prompt",
             url="url",
         ) as response:
@@ -667,19 +676,22 @@ class TestAsyncAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_publish(self, async_client: AsyncNimble) -> None:
-        agent = await async_client.agent.publish(
-            agent_name="agent_name",
-            version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            agent = await async_client.agent.publish(
+                agent_name="agent_name",
+                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
+
         assert_matches_type(AgentPublishResponse, agent, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_publish(self, async_client: AsyncNimble) -> None:
-        response = await async_client.agent.with_raw_response.publish(
-            agent_name="agent_name",
-            version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.agent.with_raw_response.publish(
+                agent_name="agent_name",
+                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -689,26 +701,28 @@ class TestAsyncAgent:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_publish(self, async_client: AsyncNimble) -> None:
-        async with async_client.agent.with_streaming_response.publish(
-            agent_name="agent_name",
-            version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.agent.with_streaming_response.publish(
+                agent_name="agent_name",
+                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            agent = await response.parse()
-            assert_matches_type(AgentPublishResponse, agent, path=["response"])
+                agent = await response.parse()
+                assert_matches_type(AgentPublishResponse, agent, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_publish(self, async_client: AsyncNimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_name` but received ''"):
-            await async_client.agent.with_raw_response.publish(
-                agent_name="",
-                version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_name` but received ''"):
+                await async_client.agent.with_raw_response.publish(
+                    agent_name="",
+                    version_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize

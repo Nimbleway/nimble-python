@@ -16,7 +16,7 @@ class AgentRunAsyncParams(TypedDict, total=False):
     callback_url: str
     """URL to call back when async operation completes"""
 
-    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]]
     """Response formats to include. All disabled by default."""
 
     localization: bool
