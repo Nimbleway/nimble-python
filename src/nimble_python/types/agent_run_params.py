@@ -13,7 +13,7 @@ class AgentRunParams(TypedDict, total=False):
 
     params: Required[Dict[str, object]]
 
-    formats: List[Literal["html", "markdown", "screenshot", "headers"]]
+    formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]]
     """Response formats to include. All disabled by default."""
 
     localization: bool

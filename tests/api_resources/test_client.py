@@ -94,12 +94,13 @@ class TestClient:
             expected_status_codes=[200, 201],
             formats=["html"],
             headers={
-                "User-Agent": "CustomBot/1.0",
                 "Accept-Language": "en-US",
+                "User-Agent": "CustomBot/1.0",
             },
             http2=True,
             is_xhr=True,
             locale="en-US",
+            markdown_backend="full_page",
             method="GET",
             network_capture=[
                 {
@@ -232,12 +233,13 @@ class TestClient:
             expected_status_codes=[200, 201],
             formats=["html"],
             headers={
-                "User-Agent": "CustomBot/1.0",
                 "Accept-Language": "en-US",
+                "User-Agent": "CustomBot/1.0",
             },
             http2=True,
             is_xhr=True,
             locale="en-US",
+            markdown_backend="full_page",
             method="GET",
             network_capture=[
                 {
@@ -375,12 +377,13 @@ class TestClient:
                     "expected_status_codes": [200, 201],
                     "formats": ["html"],
                     "headers": {
-                        "User-Agent": "CustomBot/1.0",
                         "Accept-Language": "en-US",
+                        "User-Agent": "CustomBot/1.0",
                     },
                     "http2": True,
                     "is_xhr": True,
                     "locale": "en-US",
+                    "markdown_backend": "full_page",
                     "method": "GET",
                     "network_capture": [
                         {
@@ -479,12 +482,13 @@ class TestClient:
                 "expected_status_codes": [200, 201],
                 "formats": ["html"],
                 "headers": {
-                    "User-Agent": "CustomBot/1.0",
                     "Accept-Language": "en-US",
+                    "User-Agent": "CustomBot/1.0",
                 },
                 "http2": True,
                 "is_xhr": True,
                 "locale": "en-US",
+                "markdown_backend": "full_page",
                 "method": "GET",
                 "network_capture": [
                     {
@@ -732,12 +736,13 @@ class TestAsyncClient:
             expected_status_codes=[200, 201],
             formats=["html"],
             headers={
-                "User-Agent": "CustomBot/1.0",
                 "Accept-Language": "en-US",
+                "User-Agent": "CustomBot/1.0",
             },
             http2=True,
             is_xhr=True,
             locale="en-US",
+            markdown_backend="full_page",
             method="GET",
             network_capture=[
                 {
@@ -870,12 +875,13 @@ class TestAsyncClient:
             expected_status_codes=[200, 201],
             formats=["html"],
             headers={
-                "User-Agent": "CustomBot/1.0",
                 "Accept-Language": "en-US",
+                "User-Agent": "CustomBot/1.0",
             },
             http2=True,
             is_xhr=True,
             locale="en-US",
+            markdown_backend="full_page",
             method="GET",
             network_capture=[
                 {
@@ -1013,12 +1019,13 @@ class TestAsyncClient:
                     "expected_status_codes": [200, 201],
                     "formats": ["html"],
                     "headers": {
-                        "User-Agent": "CustomBot/1.0",
                         "Accept-Language": "en-US",
+                        "User-Agent": "CustomBot/1.0",
                     },
                     "http2": True,
                     "is_xhr": True,
                     "locale": "en-US",
+                    "markdown_backend": "full_page",
                     "method": "GET",
                     "network_capture": [
                         {
@@ -1117,12 +1124,13 @@ class TestAsyncClient:
                 "expected_status_codes": [200, 201],
                 "formats": ["html"],
                 "headers": {
-                    "User-Agent": "CustomBot/1.0",
                     "Accept-Language": "en-US",
+                    "User-Agent": "CustomBot/1.0",
                 },
                 "http2": True,
                 "is_xhr": True,
                 "locale": "en-US",
+                "markdown_backend": "full_page",
                 "method": "GET",
                 "network_capture": [
                     {

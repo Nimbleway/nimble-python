@@ -500,7 +500,7 @@ class Nimble(SyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -1040,6 +1040,7 @@ class Nimble(SyncAPIClient):
             "auto",
         ]
         | Omit = omit,
+        markdown_backend: Literal["full_page", "main_content"] | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         network_capture: Iterable[client_extract_params.NetworkCapture] | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
@@ -1154,6 +1155,10 @@ class Nimble(SyncAPIClient):
 
           locale: Locale for browser language and region settings
 
+          markdown_backend: Selects which markdown conversion strategy to use. "full_page" converts the
+              entire HTML page. "main_content" uses Mozilla Readability to extract the main
+              article content before converting.
+
           method: HTTP method for the request
 
           network_capture: Filters for capturing network traffic
@@ -1203,6 +1208,7 @@ class Nimble(SyncAPIClient):
                     "http2": http2,
                     "is_xhr": is_xhr,
                     "locale": locale,
+                    "markdown_backend": markdown_backend,
                     "method": method,
                     "network_capture": network_capture,
                     "os": os,
@@ -1491,7 +1497,7 @@ class Nimble(SyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -2031,6 +2037,7 @@ class Nimble(SyncAPIClient):
             "auto",
         ]
         | Omit = omit,
+        markdown_backend: Literal["full_page", "main_content"] | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         network_capture: Iterable[client_extract_async_params.NetworkCapture] | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
@@ -2151,6 +2158,10 @@ class Nimble(SyncAPIClient):
 
           locale: Locale for browser language and region settings
 
+          markdown_backend: Selects which markdown conversion strategy to use. "full_page" converts the
+              entire HTML page. "main_content" uses Mozilla Readability to extract the main
+              article content before converting.
+
           method: HTTP method for the request
 
           network_capture: Filters for capturing network traffic
@@ -2209,6 +2220,7 @@ class Nimble(SyncAPIClient):
                     "http2": http2,
                     "is_xhr": is_xhr,
                     "locale": locale,
+                    "markdown_backend": markdown_backend,
                     "method": method,
                     "network_capture": network_capture,
                     "os": os,
@@ -3700,7 +3712,7 @@ class AsyncNimble(AsyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -4240,6 +4252,7 @@ class AsyncNimble(AsyncAPIClient):
             "auto",
         ]
         | Omit = omit,
+        markdown_backend: Literal["full_page", "main_content"] | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         network_capture: Iterable[client_extract_params.NetworkCapture] | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
@@ -4354,6 +4367,10 @@ class AsyncNimble(AsyncAPIClient):
 
           locale: Locale for browser language and region settings
 
+          markdown_backend: Selects which markdown conversion strategy to use. "full_page" converts the
+              entire HTML page. "main_content" uses Mozilla Readability to extract the main
+              article content before converting.
+
           method: HTTP method for the request
 
           network_capture: Filters for capturing network traffic
@@ -4403,6 +4420,7 @@ class AsyncNimble(AsyncAPIClient):
                     "http2": http2,
                     "is_xhr": is_xhr,
                     "locale": locale,
+                    "markdown_backend": markdown_backend,
                     "method": method,
                     "network_capture": network_capture,
                     "os": os,
@@ -4691,7 +4709,7 @@ class AsyncNimble(AsyncAPIClient):
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
         driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
-        formats: List[Literal["html", "markdown", "screenshot", "headers"]] | Omit = omit,
+        formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
         http2: bool | Omit = omit,
         is_xhr: bool | Omit = omit,
@@ -5231,6 +5249,7 @@ class AsyncNimble(AsyncAPIClient):
             "auto",
         ]
         | Omit = omit,
+        markdown_backend: Literal["full_page", "main_content"] | Omit = omit,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"] | Omit = omit,
         network_capture: Iterable[client_extract_async_params.NetworkCapture] | Omit = omit,
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
@@ -5351,6 +5370,10 @@ class AsyncNimble(AsyncAPIClient):
 
           locale: Locale for browser language and region settings
 
+          markdown_backend: Selects which markdown conversion strategy to use. "full_page" converts the
+              entire HTML page. "main_content" uses Mozilla Readability to extract the main
+              article content before converting.
+
           method: HTTP method for the request
 
           network_capture: Filters for capturing network traffic
@@ -5409,6 +5432,7 @@ class AsyncNimble(AsyncAPIClient):
                     "http2": http2,
                     "is_xhr": is_xhr,
                     "locale": locale,
+                    "markdown_backend": markdown_backend,
                     "method": method,
                     "network_capture": network_capture,
                     "os": os,

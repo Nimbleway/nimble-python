@@ -242,6 +242,9 @@ class Data(BaseModel):
     html: Optional[str] = None
     """The HTML content of the page."""
 
+    links: Optional[List[str]] = None
+    """List of all unique URLs found on the page."""
+
     markdown: Optional[str] = None
     """The Markdown version of the HTML content."""
 
