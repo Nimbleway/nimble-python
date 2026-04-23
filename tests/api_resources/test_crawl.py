@@ -142,8 +142,8 @@ class TestCrawl:
                 "expected_status_codes": [200, 201],
                 "formats": ["html"],
                 "headers": {
-                    "Accept-Language": "en-US",
                     "User-Agent": "CustomBot/1.0",
+                    "Accept-Language": "en-US",
                 },
                 "http2": True,
                 "is_xhr": True,
@@ -155,7 +155,6 @@ class TestCrawl:
                         "method": "GET",
                         "resource_type": "document",
                         "status_code": 100,
-                        "stop_on_render_flow_failure": True,
                         "url": {
                             "value": "value",
                             "type": "exact",
@@ -427,8 +426,8 @@ class TestAsyncCrawl:
                 "expected_status_codes": [200, 201],
                 "formats": ["html"],
                 "headers": {
-                    "Accept-Language": "en-US",
                     "User-Agent": "CustomBot/1.0",
+                    "Accept-Language": "en-US",
                 },
                 "http2": True,
                 "is_xhr": True,
@@ -440,7 +439,6 @@ class TestAsyncCrawl:
                         "method": "GET",
                         "resource_type": "document",
                         "status_code": 100,
-                        "stop_on_render_flow_failure": True,
                         "url": {
                             "value": "value",
                             "type": "exact",

@@ -126,8 +126,6 @@ class InputNetworkCapture(TypedDict, total=False):
 
     status_code: Union[float, Iterable[float]]
 
-    stop_on_render_flow_failure: bool
-
     url: InputNetworkCaptureURL
 
     validation: bool
@@ -1163,8 +1161,6 @@ class SharedInputsNetworkCapture(TypedDict, total=False):
     """Resource type for network capture filtering"""
 
     status_code: Union[float, Iterable[float]]
-
-    stop_on_render_flow_failure: bool
 
     url: SharedInputsNetworkCaptureURL
 
