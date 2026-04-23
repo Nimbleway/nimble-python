@@ -162,8 +162,6 @@ class ExtractOptionsNetworkCapture(TypedDict, total=False):
 
     status_code: Union[float, Iterable[float]]
 
-    stop_on_render_flow_failure: bool
-
     url: ExtractOptionsNetworkCaptureURL
 
     validation: bool
