@@ -73,11 +73,13 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "
 class Nimble(SyncAPIClient):
     # client options
     api_key: str | None
+    client_source: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        client_source: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -99,11 +101,17 @@ class Nimble(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Nimble client instance.
 
-        This automatically infers the `api_key` argument from the `NIMBLE_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `api_key` from `NIMBLE_API_KEY`
+        - `client_source` from `CLIENT_SOURCE`
         """
         if api_key is None:
             api_key = os.environ.get("NIMBLE_API_KEY")
         self.api_key = api_key
+
+        if client_source is None:
+            client_source = os.environ.get("CLIENT_SOURCE") or "sdk"
+        self.client_source = client_source
 
         if base_url is None:
             base_url = os.environ.get("NIMBLE_BASE_URL")
@@ -181,6 +189,7 @@ class Nimble(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
+            "X-Client-Source": self.client_source if self.client_source is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -197,6 +206,7 @@ class Nimble(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        client_source: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -231,6 +241,7 @@ class Nimble(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            client_source=client_source or self.client_source,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -3294,11 +3305,13 @@ class Nimble(SyncAPIClient):
 class AsyncNimble(AsyncAPIClient):
     # client options
     api_key: str | None
+    client_source: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        client_source: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -3320,11 +3333,17 @@ class AsyncNimble(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncNimble client instance.
 
-        This automatically infers the `api_key` argument from the `NIMBLE_API_KEY` environment variable if it is not provided.
+        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
+        - `api_key` from `NIMBLE_API_KEY`
+        - `client_source` from `CLIENT_SOURCE`
         """
         if api_key is None:
             api_key = os.environ.get("NIMBLE_API_KEY")
         self.api_key = api_key
+
+        if client_source is None:
+            client_source = os.environ.get("CLIENT_SOURCE") or "sdk"
+        self.client_source = client_source
 
         if base_url is None:
             base_url = os.environ.get("NIMBLE_BASE_URL")
@@ -3402,6 +3421,7 @@ class AsyncNimble(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
+            "X-Client-Source": self.client_source if self.client_source is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -3418,6 +3438,7 @@ class AsyncNimble(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        client_source: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -3452,6 +3473,7 @@ class AsyncNimble(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            client_source=client_source or self.client_source,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
