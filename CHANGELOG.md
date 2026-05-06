@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.17.0 (2026-05-06)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/Nimbleway/nimble-python/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **api:** api update ([d859e62](https://github.com/Nimbleway/nimble-python/commit/d859e62068214303e9430d093a78028b25b854a2))
+* **api:** api update ([da41c63](https://github.com/Nimbleway/nimble-python/commit/da41c63037e82fde7af3a3e0da8cb3782a175bb8))
+* **api:** api update ([3460f38](https://github.com/Nimbleway/nimble-python/commit/3460f38ecdf277bbebf2fdc7104015d4a7fee810))
+* **api:** api update ([0809fc4](https://github.com/Nimbleway/nimble-python/commit/0809fc473463e746e5b1af30cfcadbfc87db7a5e))
+* **client:** add client_source parameter, update press_action types ([346cfe7](https://github.com/Nimbleway/nimble-python/commit/346cfe70ff7a237c9f0bd52ae699d2012cf5cec7))
+* support setting headers via env ([74b98e0](https://github.com/Nimbleway/nimble-python/commit/74b98e0af4a71cedc34d53f4b33efd6126b91439))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([c07dd33](https://github.com/Nimbleway/nimble-python/commit/c07dd33a98b0dc7a365153ebe13aa8e4f41035fc))
+* ensure file data are only sent as 1 parameter ([58d7d07](https://github.com/Nimbleway/nimble-python/commit/58d7d07475836f0d4ce1c4f68bba7e3631e68d34))
+* use correct field name format for multipart file arrays ([d33d6b7](https://github.com/Nimbleway/nimble-python/commit/d33d6b7599d29d0508fa14ba03a8e0eb7c756aad))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([77a1d14](https://github.com/Nimbleway/nimble-python/commit/77a1d14ebc143548bcca089d281babc094e01a7e))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([ea52394](https://github.com/Nimbleway/nimble-python/commit/ea52394a5adbf1ef83a2d0a5b378d7feb0e0a5f8))
+* **internal:** reformat pyproject.toml ([7d5cec6](https://github.com/Nimbleway/nimble-python/commit/7d5cec6274e237ab69a2b32e79f72a9baad78fff))
+
+
+### Documentation
+
+* improve examples ([a86f0ef](https://github.com/Nimbleway/nimble-python/commit/a86f0ef01987c3063ab465d4ab61bd04229a4911))
+
 ## 0.16.0 (2026-03-30)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/Nimbleway/nimble-python/compare/v0.15.0...v0.16.0)
