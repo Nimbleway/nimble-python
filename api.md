@@ -115,3 +115,42 @@ Methods:
 - <code title="get /v1/batches">client.batches.<a href="./src/nimble_python/resources/batches.py">list</a>() -> None</code>
 - <code title="get /v1/batches/{batch_id}">client.batches.<a href="./src/nimble_python/resources/batches.py">get</a>(batch_id) -> <a href="./src/nimble_python/types/batch_get_response.py">BatchGetResponse</a></code>
 - <code title="get /v1/batches/{batch_id}/progress">client.batches.<a href="./src/nimble_python/resources/batches.py">progress</a>(batch_id) -> <a href="./src/nimble_python/types/batch_progress_response.py">BatchProgressResponse</a></code>
+
+# DomainKnowledge
+
+Types:
+
+```python
+from nimble_python.types import DomainKnowledgeGetDriverResponse
+```
+
+Methods:
+
+- <code title="get /v1/domain-knowledge/driver">client.domain_knowledge.<a href="./src/nimble_python/resources/domain_knowledge.py">get_driver</a>(\*\*<a href="src/nimble_python/types/domain_knowledge_get_driver_params.py">params</a>) -> <a href="./src/nimble_python/types/domain_knowledge_get_driver_response.py">DomainKnowledgeGetDriverResponse</a></code>
+
+# Media
+
+Types:
+
+```python
+from nimble_python.types import MediaRunResponse, MediaRunAsyncResponse
+```
+
+Methods:
+
+- <code title="post /v1/media">client.media.<a href="./src/nimble_python/resources/media.py">run</a>(\*\*<a href="src/nimble_python/types/media_run_params.py">params</a>) -> <a href="./src/nimble_python/types/media_run_response.py">MediaRunResponse</a></code>
+- <code title="post /v1/media/async">client.media.<a href="./src/nimble_python/resources/media.py">run_async</a>(\*\*<a href="src/nimble_python/types/media_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/media_run_async_response.py">MediaRunAsyncResponse</a></code>
+
+# Serp
+
+Types:
+
+```python
+from nimble_python.types import SerpRunResponse, SerpRunAsyncResponse, SerpRunBatchResponse
+```
+
+Methods:
+
+- <code title="post /v1/serp">client.serp.<a href="./src/nimble_python/resources/serp.py">run</a>(\*\*<a href="src/nimble_python/types/serp_run_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_response.py">SerpRunResponse</a></code>
+- <code title="post /v1/serp/async">client.serp.<a href="./src/nimble_python/resources/serp.py">run_async</a>(\*\*<a href="src/nimble_python/types/serp_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_async_response.py">SerpRunAsyncResponse</a></code>
+- <code title="post /v1/serp/batch">client.serp.<a href="./src/nimble_python/resources/serp.py">run_batch</a>(\*\*<a href="src/nimble_python/types/serp_run_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_batch_response.py">SerpRunBatchResponse</a></code>

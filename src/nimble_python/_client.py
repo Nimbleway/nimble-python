@@ -61,11 +61,14 @@ from .types.extract_async_response import ExtractAsyncResponse
 from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
-    from .resources import agent, crawl, tasks, batches
+    from .resources import serp, agent, crawl, media, tasks, batches, domain_knowledge
+    from .resources.serp import SerpResource, AsyncSerpResource
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
+    from .resources.media import MediaResource, AsyncMediaResource
     from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.batches import BatchesResource, AsyncBatchesResource
+    from .resources.domain_knowledge import DomainKnowledgeResource, AsyncDomainKnowledgeResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 
@@ -161,6 +164,24 @@ class Nimble(SyncAPIClient):
         from .resources.batches import BatchesResource
 
         return BatchesResource(self)
+
+    @cached_property
+    def domain_knowledge(self) -> DomainKnowledgeResource:
+        from .resources.domain_knowledge import DomainKnowledgeResource
+
+        return DomainKnowledgeResource(self)
+
+    @cached_property
+    def media(self) -> MediaResource:
+        from .resources.media import MediaResource
+
+        return MediaResource(self)
+
+    @cached_property
+    def serp(self) -> SerpResource:
+        from .resources.serp import SerpResource
+
+        return SerpResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimbleWithRawResponse:
@@ -3395,6 +3416,24 @@ class AsyncNimble(AsyncAPIClient):
         return AsyncBatchesResource(self)
 
     @cached_property
+    def domain_knowledge(self) -> AsyncDomainKnowledgeResource:
+        from .resources.domain_knowledge import AsyncDomainKnowledgeResource
+
+        return AsyncDomainKnowledgeResource(self)
+
+    @cached_property
+    def media(self) -> AsyncMediaResource:
+        from .resources.media import AsyncMediaResource
+
+        return AsyncMediaResource(self)
+
+    @cached_property
+    def serp(self) -> AsyncSerpResource:
+        from .resources.serp import AsyncSerpResource
+
+        return AsyncSerpResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncNimbleWithRawResponse:
         return AsyncNimbleWithRawResponse(self)
 
@@ -6580,6 +6619,24 @@ class NimbleWithRawResponse:
 
         return BatchesResourceWithRawResponse(self._client.batches)
 
+    @cached_property
+    def domain_knowledge(self) -> domain_knowledge.DomainKnowledgeResourceWithRawResponse:
+        from .resources.domain_knowledge import DomainKnowledgeResourceWithRawResponse
+
+        return DomainKnowledgeResourceWithRawResponse(self._client.domain_knowledge)
+
+    @cached_property
+    def media(self) -> media.MediaResourceWithRawResponse:
+        from .resources.media import MediaResourceWithRawResponse
+
+        return MediaResourceWithRawResponse(self._client.media)
+
+    @cached_property
+    def serp(self) -> serp.SerpResourceWithRawResponse:
+        from .resources.serp import SerpResourceWithRawResponse
+
+        return SerpResourceWithRawResponse(self._client.serp)
+
 
 class AsyncNimbleWithRawResponse:
     _client: AsyncNimble
@@ -6626,6 +6683,24 @@ class AsyncNimbleWithRawResponse:
         from .resources.batches import AsyncBatchesResourceWithRawResponse
 
         return AsyncBatchesResourceWithRawResponse(self._client.batches)
+
+    @cached_property
+    def domain_knowledge(self) -> domain_knowledge.AsyncDomainKnowledgeResourceWithRawResponse:
+        from .resources.domain_knowledge import AsyncDomainKnowledgeResourceWithRawResponse
+
+        return AsyncDomainKnowledgeResourceWithRawResponse(self._client.domain_knowledge)
+
+    @cached_property
+    def media(self) -> media.AsyncMediaResourceWithRawResponse:
+        from .resources.media import AsyncMediaResourceWithRawResponse
+
+        return AsyncMediaResourceWithRawResponse(self._client.media)
+
+    @cached_property
+    def serp(self) -> serp.AsyncSerpResourceWithRawResponse:
+        from .resources.serp import AsyncSerpResourceWithRawResponse
+
+        return AsyncSerpResourceWithRawResponse(self._client.serp)
 
 
 class NimbleWithStreamedResponse:
@@ -6674,6 +6749,24 @@ class NimbleWithStreamedResponse:
 
         return BatchesResourceWithStreamingResponse(self._client.batches)
 
+    @cached_property
+    def domain_knowledge(self) -> domain_knowledge.DomainKnowledgeResourceWithStreamingResponse:
+        from .resources.domain_knowledge import DomainKnowledgeResourceWithStreamingResponse
+
+        return DomainKnowledgeResourceWithStreamingResponse(self._client.domain_knowledge)
+
+    @cached_property
+    def media(self) -> media.MediaResourceWithStreamingResponse:
+        from .resources.media import MediaResourceWithStreamingResponse
+
+        return MediaResourceWithStreamingResponse(self._client.media)
+
+    @cached_property
+    def serp(self) -> serp.SerpResourceWithStreamingResponse:
+        from .resources.serp import SerpResourceWithStreamingResponse
+
+        return SerpResourceWithStreamingResponse(self._client.serp)
+
 
 class AsyncNimbleWithStreamedResponse:
     _client: AsyncNimble
@@ -6720,6 +6813,24 @@ class AsyncNimbleWithStreamedResponse:
         from .resources.batches import AsyncBatchesResourceWithStreamingResponse
 
         return AsyncBatchesResourceWithStreamingResponse(self._client.batches)
+
+    @cached_property
+    def domain_knowledge(self) -> domain_knowledge.AsyncDomainKnowledgeResourceWithStreamingResponse:
+        from .resources.domain_knowledge import AsyncDomainKnowledgeResourceWithStreamingResponse
+
+        return AsyncDomainKnowledgeResourceWithStreamingResponse(self._client.domain_knowledge)
+
+    @cached_property
+    def media(self) -> media.AsyncMediaResourceWithStreamingResponse:
+        from .resources.media import AsyncMediaResourceWithStreamingResponse
+
+        return AsyncMediaResourceWithStreamingResponse(self._client.media)
+
+    @cached_property
+    def serp(self) -> serp.AsyncSerpResourceWithStreamingResponse:
+        from .resources.serp import AsyncSerpResourceWithStreamingResponse
+
+        return AsyncSerpResourceWithStreamingResponse(self._client.serp)
 
 
 Client = Nimble
