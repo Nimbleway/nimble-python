@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.18.0 (2026-05-10)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/Nimbleway/nimble-python/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** Add media, serp and domain_knowledge ([d1e33f1](https://github.com/Nimbleway/nimble-python/commit/d1e33f1e44507ba4a817532d58e25f109c58e776))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([972cbcd](https://github.com/Nimbleway/nimble-python/commit/972cbcd40b4e4091a7364288d3d0b6033983826c))
+
 ## 0.17.0 (2026-05-06)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/Nimbleway/nimble-python/compare/v0.16.0...v0.17.0)
