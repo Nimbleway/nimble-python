@@ -182,6 +182,9 @@ class ExtractOptionsSession(TypedDict, total=False):
 
 
 class ExtractOptions(TypedDict, total=False):
+    body: object
+    """Request body for POST, PUT, PATCH methods"""
+
     browser: ExtractOptionsBrowser
     """Browser type to emulate"""
 

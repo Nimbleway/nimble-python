@@ -280,6 +280,7 @@ class Nimble(SyncAPIClient):
         self,
         *,
         url: str,
+        body: object | Omit = omit,
         browser: client_extract_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_params.BrowserAction] | Omit = omit,
         city: str | Omit = omit,
@@ -1169,6 +1170,8 @@ class Nimble(SyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          body: Request body for POST, PUT, PATCH methods
+
           browser: Browser type to emulate
 
           browser_actions: Array of browser automation actions to execute sequentially
@@ -1236,6 +1239,7 @@ class Nimble(SyncAPIClient):
             body=maybe_transform(
                 {
                     "url": url,
+                    "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
                     "city": city,
@@ -1276,6 +1280,7 @@ class Nimble(SyncAPIClient):
         self,
         *,
         url: str,
+        body: object | Omit = omit,
         browser: client_extract_async_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_async_params.BrowserAction] | Omit = omit,
         callback_url: str | Omit = omit,
@@ -2170,6 +2175,8 @@ class Nimble(SyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          body: Request body for POST, PUT, PATCH methods
+
           browser: Browser type to emulate
 
           browser_actions: Array of browser automation actions to execute sequentially
@@ -2247,6 +2254,7 @@ class Nimble(SyncAPIClient):
             body=maybe_transform(
                 {
                     "url": url,
+                    "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
                     "callback_url": callback_url,
@@ -3186,6 +3194,7 @@ class Nimble(SyncAPIClient):
         query: str,
         content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
+        debug_params: Optional[Dict[str, object]] | Omit = omit,
         deep_search: Optional[bool] | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -3217,6 +3226,8 @@ class Nimble(SyncAPIClient):
               ('pdf', 'docx', 'xlsx', etc.)
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
+
+          debug_params: Internal-only. Gated to allowlisted accounts; ignored otherwise.
 
           deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
 
@@ -3267,6 +3278,7 @@ class Nimble(SyncAPIClient):
                     "query": query,
                     "content_type": content_type,
                     "country": country,
+                    "debug_params": debug_params,
                     "deep_search": deep_search,
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,
@@ -3530,6 +3542,7 @@ class AsyncNimble(AsyncAPIClient):
         self,
         *,
         url: str,
+        body: object | Omit = omit,
         browser: client_extract_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_params.BrowserAction] | Omit = omit,
         city: str | Omit = omit,
@@ -4419,6 +4432,8 @@ class AsyncNimble(AsyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          body: Request body for POST, PUT, PATCH methods
+
           browser: Browser type to emulate
 
           browser_actions: Array of browser automation actions to execute sequentially
@@ -4486,6 +4501,7 @@ class AsyncNimble(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
                     "city": city,
@@ -4526,6 +4542,7 @@ class AsyncNimble(AsyncAPIClient):
         self,
         *,
         url: str,
+        body: object | Omit = omit,
         browser: client_extract_async_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_async_params.BrowserAction] | Omit = omit,
         callback_url: str | Omit = omit,
@@ -5420,6 +5437,8 @@ class AsyncNimble(AsyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          body: Request body for POST, PUT, PATCH methods
+
           browser: Browser type to emulate
 
           browser_actions: Array of browser automation actions to execute sequentially
@@ -5497,6 +5516,7 @@ class AsyncNimble(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
                     "callback_url": callback_url,
@@ -6436,6 +6456,7 @@ class AsyncNimble(AsyncAPIClient):
         query: str,
         content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
+        debug_params: Optional[Dict[str, object]] | Omit = omit,
         deep_search: Optional[bool] | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -6467,6 +6488,8 @@ class AsyncNimble(AsyncAPIClient):
               ('pdf', 'docx', 'xlsx', etc.)
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
+
+          debug_params: Internal-only. Gated to allowlisted accounts; ignored otherwise.
 
           deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
 
@@ -6517,6 +6540,7 @@ class AsyncNimble(AsyncAPIClient):
                     "query": query,
                     "content_type": content_type,
                     "country": country,
+                    "debug_params": debug_params,
                     "deep_search": deep_search,
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,

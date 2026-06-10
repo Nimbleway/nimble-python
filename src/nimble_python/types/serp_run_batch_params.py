@@ -73,6 +73,12 @@ class Input(TypedDict, total=False):
     ]
     """The search engine to query."""
 
+    show_hidden_results: bool
+    """
+    When true, disables Google result filtering (filter=0) so omitted/duplicate and
+    highly similar pages are also returned. Applies to Google search engines.
+    """
+
     storage_compress: bool
     """Whether to compress stored data"""
 
@@ -141,6 +147,12 @@ class SharedInputs(TypedDict, total=False):
         "yandex_search",
     ]
     """The search engine to query."""
+
+    show_hidden_results: bool
+    """
+    When true, disables Google result filtering (filter=0) so omitted/duplicate and
+    highly similar pages are also returned. Applies to Google search engines.
+    """
 
     storage_compress: bool
     """Whether to compress stored data"""
