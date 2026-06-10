@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing_extensions
 from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal, overload
 
@@ -11,7 +10,6 @@ import httpx
 from ..types import (
     agent_run_params,
     agent_list_params,
-    agent_publish_params,
     agent_generate_params,
     agent_run_async_params,
     agent_run_batch_params,
@@ -30,7 +28,6 @@ from .._base_client import make_request_options
 from ..types.agent_get_response import AgentGetResponse
 from ..types.agent_run_response import AgentRunResponse
 from ..types.agent_list_response import AgentListResponse
-from ..types.agent_publish_response import AgentPublishResponse
 from ..types.agent_generate_response import AgentGenerateResponse
 from ..types.agent_run_async_response import AgentRunAsyncResponse
 from ..types.agent_run_batch_response import AgentRunBatchResponse
@@ -124,9 +121,9 @@ class AgentResource(SyncAPIResource):
         prompt: str,
         url: str,
         agent_name: Optional[str] | Omit = omit,
-        input_schema: object | Omit = omit,
+        input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
-        output_schema: object | Omit = omit,
+        output_schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -182,9 +179,9 @@ class AgentResource(SyncAPIResource):
         prompt: str,
         url: str | Omit = omit,
         agent_name: Optional[str] | Omit = omit,
-        input_schema: object | Omit = omit,
+        input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
-        output_schema: object | Omit = omit,
+        output_schema: Dict[str, object] | Omit = omit,
         from_agent: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -277,42 +274,6 @@ class AgentResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AgentGetGenerationResponse,
-        )
-
-    @typing_extensions.deprecated("deprecated")
-    def publish(
-        self,
-        agent_name: str,
-        *,
-        version_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentPublishResponse:
-        """
-        Publish Agent Version
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_name:
-            raise ValueError(f"Expected a non-empty value for `agent_name` but received {agent_name!r}")
-        return self._post(
-            path_template("/v1/agents/{agent_name}/publish", agent_name=agent_name),
-            body=maybe_transform({"version_id": version_id}, agent_publish_params.AgentPublishParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AgentPublishResponse,
         )
 
     def run(
@@ -551,9 +512,9 @@ class AsyncAgentResource(AsyncAPIResource):
         prompt: str,
         url: str,
         agent_name: Optional[str] | Omit = omit,
-        input_schema: object | Omit = omit,
+        input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
-        output_schema: object | Omit = omit,
+        output_schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -609,9 +570,9 @@ class AsyncAgentResource(AsyncAPIResource):
         prompt: str,
         url: str | Omit = omit,
         agent_name: Optional[str] | Omit = omit,
-        input_schema: object | Omit = omit,
+        input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
-        output_schema: object | Omit = omit,
+        output_schema: Dict[str, object] | Omit = omit,
         from_agent: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -704,42 +665,6 @@ class AsyncAgentResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AgentGetGenerationResponse,
-        )
-
-    @typing_extensions.deprecated("deprecated")
-    async def publish(
-        self,
-        agent_name: str,
-        *,
-        version_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AgentPublishResponse:
-        """
-        Publish Agent Version
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_name:
-            raise ValueError(f"Expected a non-empty value for `agent_name` but received {agent_name!r}")
-        return await self._post(
-            path_template("/v1/agents/{agent_name}/publish", agent_name=agent_name),
-            body=await async_maybe_transform({"version_id": version_id}, agent_publish_params.AgentPublishParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=AgentPublishResponse,
         )
 
     async def run(
@@ -909,11 +834,6 @@ class AgentResourceWithRawResponse:
         self.get_generation = to_raw_response_wrapper(
             agent.get_generation,
         )
-        self.publish = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                agent.publish,  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.run = to_raw_response_wrapper(
             agent.run,
         )
@@ -940,11 +860,6 @@ class AsyncAgentResourceWithRawResponse:
         )
         self.get_generation = async_to_raw_response_wrapper(
             agent.get_generation,
-        )
-        self.publish = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                agent.publish,  # pyright: ignore[reportDeprecated],
-            )
         )
         self.run = async_to_raw_response_wrapper(
             agent.run,
@@ -973,11 +888,6 @@ class AgentResourceWithStreamingResponse:
         self.get_generation = to_streamed_response_wrapper(
             agent.get_generation,
         )
-        self.publish = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                agent.publish,  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.run = to_streamed_response_wrapper(
             agent.run,
         )
@@ -1004,11 +914,6 @@ class AsyncAgentResourceWithStreamingResponse:
         )
         self.get_generation = async_to_streamed_response_wrapper(
             agent.get_generation,
-        )
-        self.publish = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                agent.publish,  # pyright: ignore[reportDeprecated],
-            )
         )
         self.run = async_to_streamed_response_wrapper(
             agent.run,

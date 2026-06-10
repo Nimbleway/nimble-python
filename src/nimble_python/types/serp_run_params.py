@@ -56,3 +56,9 @@ class SerpRunParams(TypedDict, total=False):
 
     render: bool
     """Whether to render the page in a browser before extracting."""
+
+    show_hidden_results: bool
+    """
+    When true, disables Google result filtering (filter=0) so omitted/duplicate and
+    highly similar pages are also returned. Applies to Google search engines.
+    """

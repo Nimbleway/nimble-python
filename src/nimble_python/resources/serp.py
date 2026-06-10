@@ -71,6 +71,7 @@ class SerpResource(SyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        show_hidden_results: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -105,6 +106,9 @@ class SerpResource(SyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
+              highly similar pages are also returned. Applies to Google search engines.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -128,6 +132,7 @@ class SerpResource(SyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "show_hidden_results": show_hidden_results,
                 },
                 serp_run_params.SerpRunParams,
             ),
@@ -163,6 +168,7 @@ class SerpResource(SyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        show_hidden_results: bool | Omit = omit,
         storage_compress: bool | Omit = omit,
         storage_object_name: str | Omit = omit,
         storage_type: str | Omit = omit,
@@ -203,6 +209,9 @@ class SerpResource(SyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
+              highly similar pages are also returned. Applies to Google search engines.
+
           storage_compress: Whether to compress stored data
 
           storage_object_name: Custom name for the stored object
@@ -235,6 +244,7 @@ class SerpResource(SyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "show_hidden_results": show_hidden_results,
                     "storage_compress": storage_compress,
                     "storage_object_name": storage_object_name,
                     "storage_type": storage_type,
@@ -340,6 +350,7 @@ class AsyncSerpResource(AsyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        show_hidden_results: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -374,6 +385,9 @@ class AsyncSerpResource(AsyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
+              highly similar pages are also returned. Applies to Google search engines.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -397,6 +411,7 @@ class AsyncSerpResource(AsyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "show_hidden_results": show_hidden_results,
                 },
                 serp_run_params.SerpRunParams,
             ),
@@ -432,6 +447,7 @@ class AsyncSerpResource(AsyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        show_hidden_results: bool | Omit = omit,
         storage_compress: bool | Omit = omit,
         storage_object_name: str | Omit = omit,
         storage_type: str | Omit = omit,
@@ -472,6 +488,9 @@ class AsyncSerpResource(AsyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
+              highly similar pages are also returned. Applies to Google search engines.
+
           storage_compress: Whether to compress stored data
 
           storage_object_name: Custom name for the stored object
@@ -504,6 +523,7 @@ class AsyncSerpResource(AsyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "show_hidden_results": show_hidden_results,
                     "storage_compress": storage_compress,
                     "storage_object_name": storage_object_name,
                     "storage_type": storage_type,

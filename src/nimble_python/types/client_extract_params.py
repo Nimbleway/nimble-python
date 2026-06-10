@@ -37,6 +37,9 @@ class ClientExtractParams(TypedDict, total=False):
     url: Required[str]
     """Target URL to scrape"""
 
+    body: object
+    """Request body for POST, PUT, PATCH methods"""
+
     browser: Browser
     """Browser type to emulate"""
 

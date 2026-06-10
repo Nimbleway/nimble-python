@@ -26,4 +26,4 @@ class Storage(TypedDict, total=False):
 
     object_name: str
 
-    type: Literal["s3", "gcs", "do"]
+    type: Literal["s3", "gcs", "do", "oci"]

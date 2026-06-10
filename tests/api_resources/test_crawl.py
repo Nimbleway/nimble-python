@@ -84,6 +84,7 @@ class TestCrawl:
             crawl_entire_domain=False,
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
+                "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [
                     {"goto": "https://example.com/login"},
@@ -368,6 +369,7 @@ class TestAsyncCrawl:
             crawl_entire_domain=False,
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
+                "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [
                     {"goto": "https://example.com/login"},
