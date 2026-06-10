@@ -44,6 +44,7 @@ class TestSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            show_hidden_results=False,
         )
         assert_matches_type(SerpRunResponse, serp, path=["response"])
 
@@ -97,6 +98,7 @@ class TestSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            show_hidden_results=False,
             storage_compress=True,
             storage_object_name="result-2024-01-15.json",
             storage_type="s3",
@@ -156,6 +158,7 @@ class TestSerp:
                     "query": "nimble web data",
                     "render": False,
                     "search_engine": "google_search",
+                    "show_hidden_results": False,
                     "storage_compress": True,
                     "storage_object_name": "result-2024-01-15.json",
                     "storage_type": "s3",
@@ -175,6 +178,7 @@ class TestSerp:
                 "query": "nimble web data",
                 "render": False,
                 "search_engine": "google_search",
+                "show_hidden_results": False,
                 "storage_compress": True,
                 "storage_object_name": "result-2024-01-15.json",
                 "storage_type": "s3",
@@ -238,6 +242,7 @@ class TestAsyncSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            show_hidden_results=False,
         )
         assert_matches_type(SerpRunResponse, serp, path=["response"])
 
@@ -291,6 +296,7 @@ class TestAsyncSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            show_hidden_results=False,
             storage_compress=True,
             storage_object_name="result-2024-01-15.json",
             storage_type="s3",
@@ -350,6 +356,7 @@ class TestAsyncSerp:
                     "query": "nimble web data",
                     "render": False,
                     "search_engine": "google_search",
+                    "show_hidden_results": False,
                     "storage_compress": True,
                     "storage_object_name": "result-2024-01-15.json",
                     "storage_type": "s3",
@@ -369,6 +376,7 @@ class TestAsyncSerp:
                 "query": "nimble web data",
                 "render": False,
                 "search_engine": "google_search",
+                "show_hidden_results": False,
                 "storage_compress": True,
                 "storage_object_name": "result-2024-01-15.json",
                 "storage_type": "s3",

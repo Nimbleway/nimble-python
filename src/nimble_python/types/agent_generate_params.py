@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import Dict, Union, Optional
 from typing_extensions import Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
@@ -22,11 +22,11 @@ class CreateAgentGenerationRequest(TypedDict, total=False):
 
     agent_name: Optional[str]
 
-    input_schema: object
+    input_schema: Dict[str, object]
 
     metadata: Optional[CreateAgentGenerationRequestMetadata]
 
-    output_schema: object
+    output_schema: Dict[str, object]
 
 
 class CreateAgentGenerationRequestMetadata(TypedDict, total=False):

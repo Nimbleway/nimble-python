@@ -31,7 +31,7 @@ class Data(BaseModel):
     account_name: Optional[str] = None
     """Account name that owns the task."""
 
-    api_type: Optional[Literal["web", "serp", "ecommerce", "social", "media", "agent", "extract"]] = None
+    api_type: Optional[Literal["web", "serp", "ecommerce", "social", "media", "agent", "extract", "fast-serp"]] = None
 
     batch_id: Optional[str] = None
     """Batch ID if this task is part of a batch."""

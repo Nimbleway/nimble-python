@@ -36,6 +36,7 @@ class TestClient:
     def test_method_extract_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract(
             url="url",
+            body={"key": "value"},
             browser="chrome",
             browser_actions=[
                 {"goto": "https://example.com/login"},
@@ -173,6 +174,7 @@ class TestClient:
     def test_method_extract_async_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract_async(
             url="url",
+            body={"key": "value"},
             browser="chrome",
             browser_actions=[
                 {"goto": "https://example.com/login"},
@@ -316,6 +318,7 @@ class TestClient:
         client_ = client.extract_batch(
             inputs=[
                 {
+                    "body": {"key": "value"},
                     "browser": "chrome",
                     "browser_actions": [
                         {"goto": "https://example.com/login"},
@@ -420,6 +423,7 @@ class TestClient:
                 }
             ],
             shared_inputs={
+                "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [
                     {"goto": "https://example.com/login"},
@@ -613,6 +617,7 @@ class TestClient:
             query="x",
             content_type=["string"],
             country="country",
+            debug_params={"foo": "bar"},
             deep_search=True,
             end_date="end_date",
             exclude_domains=["string"],
@@ -674,6 +679,7 @@ class TestAsyncClient:
     async def test_method_extract_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
             url="url",
+            body={"key": "value"},
             browser="chrome",
             browser_actions=[
                 {"goto": "https://example.com/login"},
@@ -811,6 +817,7 @@ class TestAsyncClient:
     async def test_method_extract_async_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract_async(
             url="url",
+            body={"key": "value"},
             browser="chrome",
             browser_actions=[
                 {"goto": "https://example.com/login"},
@@ -954,6 +961,7 @@ class TestAsyncClient:
         client = await async_client.extract_batch(
             inputs=[
                 {
+                    "body": {"key": "value"},
                     "browser": "chrome",
                     "browser_actions": [
                         {"goto": "https://example.com/login"},
@@ -1058,6 +1066,7 @@ class TestAsyncClient:
                 }
             ],
             shared_inputs={
+                "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [
                     {"goto": "https://example.com/login"},
@@ -1251,6 +1260,7 @@ class TestAsyncClient:
             query="x",
             content_type=["string"],
             country="country",
+            debug_params={"foo": "bar"},
             deep_search=True,
             end_date="end_date",
             exclude_domains=["string"],

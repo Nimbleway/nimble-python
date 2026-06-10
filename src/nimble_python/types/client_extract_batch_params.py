@@ -146,6 +146,9 @@ class InputSession(TypedDict, total=False):
 
 
 class Input(TypedDict, total=False):
+    body: object
+    """Request body for POST, PUT, PATCH methods"""
+
     browser: InputBrowser
     """Browser type to emulate"""
 
@@ -1186,6 +1189,9 @@ class SharedInputs(TypedDict, total=False):
 
     Can include extraction parameters and async/storage settings.
     """
+
+    body: object
+    """Request body for POST, PUT, PATCH methods"""
 
     browser: SharedInputsBrowser
     """Browser type to emulate"""

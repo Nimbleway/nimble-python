@@ -1,11 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["AgentGetGenerationResponse", "GeneratedVersion", "GeneratedVersionMetadata"]
+__all__ = ["AgentGetGenerationResponse", "GeneratedVersion", "GeneratedVersionMetadata", "GeneratedVersionSample"]
 
 
 class GeneratedVersionMetadata(BaseModel):
@@ -24,6 +24,12 @@ class GeneratedVersionMetadata(BaseModel):
     vertical: Optional[str] = None
 
 
+class GeneratedVersionSample(BaseModel):
+    input: Optional[object] = None
+
+    output: Optional[object] = None
+
+
 class GeneratedVersion(BaseModel):
     id: str
 
@@ -31,17 +37,15 @@ class GeneratedVersion(BaseModel):
 
     created_at: datetime
 
-    input_schema: object
+    input_schema: Dict[str, object]
 
     metadata: GeneratedVersionMetadata
 
-    output_schema: object
-
-    steps: List[object]
+    output_schema: Dict[str, object]
 
     version_number: int
 
-    output_sample_data: Optional[object] = None
+    samples: Optional[List[GeneratedVersionSample]] = None
 
 
 class AgentGetGenerationResponse(BaseModel):
