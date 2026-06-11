@@ -48,6 +48,14 @@ from .batches import (
     BatchesResourceWithStreamingResponse,
     AsyncBatchesResourceWithStreamingResponse,
 )
+from .task_agent import (
+    TaskAgentResource,
+    AsyncTaskAgentResource,
+    TaskAgentResourceWithRawResponse,
+    AsyncTaskAgentResourceWithRawResponse,
+    TaskAgentResourceWithStreamingResponse,
+    AsyncTaskAgentResourceWithStreamingResponse,
+)
 from .domain_knowledge import (
     DomainKnowledgeResource,
     AsyncDomainKnowledgeResource,
@@ -100,4 +108,10 @@ __all__ = [
     "AsyncSerpResourceWithRawResponse",
     "SerpResourceWithStreamingResponse",
     "AsyncSerpResourceWithStreamingResponse",
+    "TaskAgentResource",
+    "AsyncTaskAgentResource",
+    "TaskAgentResourceWithRawResponse",
+    "AsyncTaskAgentResourceWithRawResponse",
+    "TaskAgentResourceWithStreamingResponse",
+    "AsyncTaskAgentResourceWithStreamingResponse",
 ]
