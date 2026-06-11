@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.19.0 (2026-06-11)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/Nimbleway/nimble-python/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* **api:** manually update openapi ([790af21](https://github.com/Nimbleway/nimble-python/commit/790af21dc4e08b66c5d64e2aa01c0814d1cc2fc6))
+* **api:** Manually update OpenAPI spec ([cc790ea](https://github.com/Nimbleway/nimble-python/commit/cc790ea7a08ea9c84bb79397a6720d630a07eced))
+* **internal/types:** support eagerly validating pydantic iterators ([0e7f8a9](https://github.com/Nimbleway/nimble-python/commit/0e7f8a99fc9d2c80c5eed1891b0e6b37187afc78))
+
 ## 0.18.0 (2026-05-10)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/Nimbleway/nimble-python/compare/v0.17.0...v0.18.0)
