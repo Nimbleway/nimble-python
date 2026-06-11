@@ -152,3 +152,55 @@ Methods:
 - <code title="post /v1/serp">client.serp.<a href="./src/nimble_python/resources/serp.py">run</a>(\*\*<a href="src/nimble_python/types/serp_run_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_response.py">SerpRunResponse</a></code>
 - <code title="post /v1/serp/async">client.serp.<a href="./src/nimble_python/resources/serp.py">run_async</a>(\*\*<a href="src/nimble_python/types/serp_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_async_response.py">SerpRunAsyncResponse</a></code>
 - <code title="post /v1/serp/batch">client.serp.<a href="./src/nimble_python/resources/serp.py">run_batch</a>(\*\*<a href="src/nimble_python/types/serp_run_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_batch_response.py">SerpRunBatchResponse</a></code>
+
+# TaskAgent
+
+Types:
+
+```python
+from nimble_python.types import (
+    TaskAgentCreateResponse,
+    TaskAgentUpdateResponse,
+    TaskAgentListResponse,
+    TaskAgentGetResponse,
+    TaskAgentRunResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/task-agents">client.task_agent.<a href="./src/nimble_python/resources/task_agent/task_agent.py">create</a>(\*\*<a href="src/nimble_python/types/task_agent_create_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent_create_response.py">TaskAgentCreateResponse</a></code>
+- <code title="patch /v1/task-agents/{agent_id}">client.task_agent.<a href="./src/nimble_python/resources/task_agent/task_agent.py">update</a>(agent_id, \*\*<a href="src/nimble_python/types/task_agent_update_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent_update_response.py">TaskAgentUpdateResponse</a></code>
+- <code title="get /v1/task-agents">client.task_agent.<a href="./src/nimble_python/resources/task_agent/task_agent.py">list</a>(\*\*<a href="src/nimble_python/types/task_agent_list_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent_list_response.py">TaskAgentListResponse</a></code>
+- <code title="delete /v1/task-agents/{agent_id}">client.task_agent.<a href="./src/nimble_python/resources/task_agent/task_agent.py">deactivate</a>(agent_id) -> None</code>
+- <code title="get /v1/task-agents/{agent_id}">client.task_agent.<a href="./src/nimble_python/resources/task_agent/task_agent.py">get</a>(agent_id) -> <a href="./src/nimble_python/types/task_agent_get_response.py">TaskAgentGetResponse</a></code>
+- <code title="post /v1/task-agents/{agent_id}/runs">client.task_agent.<a href="./src/nimble_python/resources/task_agent/task_agent.py">run</a>(agent_id, \*\*<a href="src/nimble_python/types/task_agent_run_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent_run_response.py">TaskAgentRunResponse</a></code>
+
+## Templates
+
+Types:
+
+```python
+from nimble_python.types.task_agent import TemplateListResponse, TemplateGetResponse
+```
+
+Methods:
+
+- <code title="get /v1/task-agents/templates">client.task_agent.templates.<a href="./src/nimble_python/resources/task_agent/templates.py">list</a>(\*\*<a href="src/nimble_python/types/task_agent/template_list_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent/template_list_response.py">TemplateListResponse</a></code>
+- <code title="get /v1/task-agents/templates/{template_name}">client.task_agent.templates.<a href="./src/nimble_python/resources/task_agent/templates.py">get</a>(template_name) -> <a href="./src/nimble_python/types/task_agent/template_get_response.py">TemplateGetResponse</a></code>
+
+## Runs
+
+Types:
+
+```python
+from nimble_python.types.task_agent import RunListResponse, RunGetResponse, RunGetResultResponse
+```
+
+Methods:
+
+- <code title="get /v1/task-agents/{agent_id}/runs">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">list</a>(agent_id, \*\*<a href="src/nimble_python/types/task_agent/run_list_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent/run_list_response.py">RunListResponse</a></code>
+- <code title="post /v1/task-agents/{agent_id}/runs/{run_id}/cancel">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">cancel</a>(run_id, \*, agent_id) -> None</code>
+- <code title="get /v1/task-agents/{agent_id}/runs/{run_id}">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">get</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/task_agent/run_get_response.py">RunGetResponse</a></code>
+- <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/result">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">get_result</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/task_agent/run_get_result_response.py">RunGetResultResponse</a></code>
+- <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/events">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">stream_events</a>(run_id, \*, agent_id) -> object</code>

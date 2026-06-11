@@ -61,7 +61,7 @@ from .types.extract_async_response import ExtractAsyncResponse
 from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
-    from .resources import serp, agent, crawl, media, tasks, batches, domain_knowledge
+    from .resources import serp, agent, crawl, media, tasks, batches, task_agent, domain_knowledge
     from .resources.serp import SerpResource, AsyncSerpResource
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
@@ -69,6 +69,7 @@ if TYPE_CHECKING:
     from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.batches import BatchesResource, AsyncBatchesResource
     from .resources.domain_knowledge import DomainKnowledgeResource, AsyncDomainKnowledgeResource
+    from .resources.task_agent.task_agent import TaskAgentResource, AsyncTaskAgentResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Nimble", "AsyncNimble", "Client", "AsyncClient"]
 
@@ -182,6 +183,12 @@ class Nimble(SyncAPIClient):
         from .resources.serp import SerpResource
 
         return SerpResource(self)
+
+    @cached_property
+    def task_agent(self) -> TaskAgentResource:
+        from .resources.task_agent import TaskAgentResource
+
+        return TaskAgentResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimbleWithRawResponse:
@@ -3446,6 +3453,12 @@ class AsyncNimble(AsyncAPIClient):
         return AsyncSerpResource(self)
 
     @cached_property
+    def task_agent(self) -> AsyncTaskAgentResource:
+        from .resources.task_agent import AsyncTaskAgentResource
+
+        return AsyncTaskAgentResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncNimbleWithRawResponse:
         return AsyncNimbleWithRawResponse(self)
 
@@ -6661,6 +6674,12 @@ class NimbleWithRawResponse:
 
         return SerpResourceWithRawResponse(self._client.serp)
 
+    @cached_property
+    def task_agent(self) -> task_agent.TaskAgentResourceWithRawResponse:
+        from .resources.task_agent import TaskAgentResourceWithRawResponse
+
+        return TaskAgentResourceWithRawResponse(self._client.task_agent)
+
 
 class AsyncNimbleWithRawResponse:
     _client: AsyncNimble
@@ -6725,6 +6744,12 @@ class AsyncNimbleWithRawResponse:
         from .resources.serp import AsyncSerpResourceWithRawResponse
 
         return AsyncSerpResourceWithRawResponse(self._client.serp)
+
+    @cached_property
+    def task_agent(self) -> task_agent.AsyncTaskAgentResourceWithRawResponse:
+        from .resources.task_agent import AsyncTaskAgentResourceWithRawResponse
+
+        return AsyncTaskAgentResourceWithRawResponse(self._client.task_agent)
 
 
 class NimbleWithStreamedResponse:
@@ -6791,6 +6816,12 @@ class NimbleWithStreamedResponse:
 
         return SerpResourceWithStreamingResponse(self._client.serp)
 
+    @cached_property
+    def task_agent(self) -> task_agent.TaskAgentResourceWithStreamingResponse:
+        from .resources.task_agent import TaskAgentResourceWithStreamingResponse
+
+        return TaskAgentResourceWithStreamingResponse(self._client.task_agent)
+
 
 class AsyncNimbleWithStreamedResponse:
     _client: AsyncNimble
@@ -6855,6 +6886,12 @@ class AsyncNimbleWithStreamedResponse:
         from .resources.serp import AsyncSerpResourceWithStreamingResponse
 
         return AsyncSerpResourceWithStreamingResponse(self._client.serp)
+
+    @cached_property
+    def task_agent(self) -> task_agent.AsyncTaskAgentResourceWithStreamingResponse:
+        from .resources.task_agent import AsyncTaskAgentResourceWithStreamingResponse
+
+        return AsyncTaskAgentResourceWithStreamingResponse(self._client.task_agent)
 
 
 Client = Nimble
