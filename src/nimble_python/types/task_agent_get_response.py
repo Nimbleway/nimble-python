@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["TaskAgentGetResponse", "Goal", "Source", "SuggestedQuestion"]
+__all__ = ["TaskAgentGetResponse", "Goal", "Sources", "SourcesAllow", "SourcesBlock", "SuggestedQuestion"]
 
 
 class Goal(BaseModel):
@@ -17,7 +17,7 @@ class Goal(BaseModel):
     order: int
 
 
-class Source(BaseModel):
+class SourcesAllow(BaseModel):
     id: str
 
     domains: List[str]
@@ -25,6 +25,24 @@ class Source(BaseModel):
     order: int
 
     title: str
+
+
+class SourcesBlock(BaseModel):
+    domains: List[str]
+
+    title: str
+
+    order: Optional[int] = None
+
+
+class Sources(BaseModel):
+    allow: Optional[List[SourcesAllow]] = None
+
+    avoid: Optional[str] = None
+
+    block: Optional[List[SourcesBlock]] = None
+
+    prioritize: Optional[str] = None
 
 
 class SuggestedQuestion(BaseModel):
@@ -56,7 +74,7 @@ class TaskAgentGetResponse(BaseModel):
 
     output_schema: Optional[Dict[str, object]] = None
 
-    sources: List[Source]
+    sources: Sources
 
     suggested_questions: List[SuggestedQuestion]
 

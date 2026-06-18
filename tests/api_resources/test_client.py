@@ -404,7 +404,7 @@ class TestClient:
                     "parse": True,
                     "parser": {"myParser": "bar"},
                     "referrer_type": "random",
-                    "render": True,
+                    "render": False,
                     "request_timeout": 30000,
                     "session": {
                         "id": "id",
@@ -509,7 +509,7 @@ class TestClient:
                 "parse": True,
                 "parser": {"myParser": "bar"},
                 "referrer_type": "random",
-                "render": True,
+                "render": False,
                 "request_timeout": 30000,
                 "session": {
                     "id": "id",
@@ -1047,7 +1047,7 @@ class TestAsyncClient:
                     "parse": True,
                     "parser": {"myParser": "bar"},
                     "referrer_type": "random",
-                    "render": True,
+                    "render": False,
                     "request_timeout": 30000,
                     "session": {
                         "id": "id",
@@ -1152,7 +1152,7 @@ class TestAsyncClient:
                 "parse": True,
                 "parser": {"myParser": "bar"},
                 "referrer_type": "random",
-                "render": True,
+                "render": False,
                 "request_timeout": 30000,
                 "session": {
                     "id": "id",

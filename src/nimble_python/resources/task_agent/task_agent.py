@@ -84,7 +84,7 @@ class TaskAgentResource(SyncAPIResource):
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
-        sources: Iterable[task_agent_create_params.Source] | Omit = omit,
+        sources: task_agent_create_params.Sources | Omit = omit,
         suggested_questions: SequenceNotStr[str] | Omit = omit,
         template: Optional[str] | Omit = omit,
         use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
@@ -299,6 +299,7 @@ class TaskAgentResource(SyncAPIResource):
         input: str,
         enable_events: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
+        sources: Optional[task_agent_run_params.Sources] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -327,6 +328,7 @@ class TaskAgentResource(SyncAPIResource):
                     "input": input,
                     "enable_events": enable_events,
                     "output_schema": output_schema,
+                    "sources": sources,
                 },
                 task_agent_run_params.TaskAgentRunParams,
             ),
@@ -377,7 +379,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
-        sources: Iterable[task_agent_create_params.Source] | Omit = omit,
+        sources: task_agent_create_params.Sources | Omit = omit,
         suggested_questions: SequenceNotStr[str] | Omit = omit,
         template: Optional[str] | Omit = omit,
         use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
@@ -592,6 +594,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         input: str,
         enable_events: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
+        sources: Optional[task_agent_run_params.Sources] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -620,6 +623,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
                     "input": input,
                     "enable_events": enable_events,
                     "output_schema": output_schema,
+                    "sources": sources,
                 },
                 task_agent_run_params.TaskAgentRunParams,
             ),

@@ -893,7 +893,7 @@ class ClientExtractParams(TypedDict, total=False):
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
 
-    render: bool
+    render: Union[bool, Literal["auto"]]
     """Whether to render JavaScript content using a browser"""
 
     request_timeout: float
