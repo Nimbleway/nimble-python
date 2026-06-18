@@ -204,3 +204,60 @@ Methods:
 - <code title="get /v1/task-agents/{agent_id}/runs/{run_id}">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">get</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/task_agent/run_get_response.py">RunGetResponse</a></code>
 - <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/result">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">get_result</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/task_agent/run_get_result_response.py">RunGetResultResponse</a></code>
 - <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/events">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">stream_events</a>(run_id, \*, agent_id) -> object</code>
+
+# Jobs
+
+Types:
+
+```python
+from nimble_python.types import (
+    JobCreateResponse,
+    JobUpdateResponse,
+    JobListResponse,
+    JobGetResponse,
+    JobRunResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/jobs">client.jobs.<a href="./src/nimble_python/resources/jobs/jobs.py">create</a>(\*\*<a href="src/nimble_python/types/job_create_params.py">params</a>) -> <a href="./src/nimble_python/types/job_create_response.py">JobCreateResponse</a></code>
+- <code title="patch /v1/jobs/{job_id}">client.jobs.<a href="./src/nimble_python/resources/jobs/jobs.py">update</a>(job_id, \*\*<a href="src/nimble_python/types/job_update_params.py">params</a>) -> <a href="./src/nimble_python/types/job_update_response.py">JobUpdateResponse</a></code>
+- <code title="get /v1/jobs">client.jobs.<a href="./src/nimble_python/resources/jobs/jobs.py">list</a>(\*\*<a href="src/nimble_python/types/job_list_params.py">params</a>) -> <a href="./src/nimble_python/types/job_list_response.py">JobListResponse</a></code>
+- <code title="delete /v1/jobs/{job_id}">client.jobs.<a href="./src/nimble_python/resources/jobs/jobs.py">delete</a>(job_id) -> None</code>
+- <code title="get /v1/jobs/{job_id}">client.jobs.<a href="./src/nimble_python/resources/jobs/jobs.py">get</a>(job_id) -> <a href="./src/nimble_python/types/job_get_response.py">JobGetResponse</a></code>
+- <code title="post /v1/jobs/{job_id}/runs">client.jobs.<a href="./src/nimble_python/resources/jobs/jobs.py">run</a>(job_id) -> <a href="./src/nimble_python/types/job_run_response.py">JobRunResponse</a></code>
+
+## Runs
+
+Types:
+
+```python
+from nimble_python.types.jobs import RunListResponse, RunCancelResponse, RunGetResponse
+```
+
+Methods:
+
+- <code title="get /v1/jobs/{job_id}/runs">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">list</a>(job_id, \*\*<a href="src/nimble_python/types/jobs/run_list_params.py">params</a>) -> <a href="./src/nimble_python/types/jobs/run_list_response.py">RunListResponse</a></code>
+- <code title="post /v1/jobs/runs/{run_id}/cancel">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">cancel</a>(run_id) -> <a href="./src/nimble_python/types/jobs/run_cancel_response.py">RunCancelResponse</a></code>
+- <code title="get /v1/jobs/runs/{run_id}">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">get</a>(run_id) -> <a href="./src/nimble_python/types/jobs/run_get_response.py">RunGetResponse</a></code>
+
+### Artifacts
+
+Types:
+
+```python
+from nimble_python.types.jobs.runs import (
+    ArtifactListResponse,
+    ArtifactDownloadURLResponse,
+    ArtifactGetResponse,
+    ArtifactPreviewResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/jobs/runs/{run_id}/artifacts">client.jobs.runs.artifacts.<a href="./src/nimble_python/resources/jobs/runs/artifacts.py">list</a>(run_id) -> <a href="./src/nimble_python/types/jobs/runs/artifact_list_response.py">ArtifactListResponse</a></code>
+- <code title="get /v1/jobs/runs/{run_id}/artifacts/{artifact_id}/download-url">client.jobs.runs.artifacts.<a href="./src/nimble_python/resources/jobs/runs/artifacts.py">download_url</a>(artifact_id, \*, run_id) -> <a href="./src/nimble_python/types/jobs/runs/artifact_download_url_response.py">ArtifactDownloadURLResponse</a></code>
+- <code title="get /v1/jobs/runs/{run_id}/artifacts/{artifact_id}">client.jobs.runs.artifacts.<a href="./src/nimble_python/resources/jobs/runs/artifacts.py">get</a>(artifact_id, \*, run_id) -> <a href="./src/nimble_python/types/jobs/runs/artifact_get_response.py">ArtifactGetResponse</a></code>
+- <code title="get /v1/jobs/runs/{run_id}/artifacts/{artifact_id}/preview">client.jobs.runs.artifacts.<a href="./src/nimble_python/resources/jobs/runs/artifacts.py">preview</a>(artifact_id, \*, run_id) -> <a href="./src/nimble_python/types/jobs/runs/artifact_preview_response.py">ArtifactPreviewResponse</a></code>
