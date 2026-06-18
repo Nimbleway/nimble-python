@@ -18,16 +18,22 @@ from .shared import (
     WaitForNavigationAction as WaitForNavigationAction,
 )
 from .map_response import MapResponse as MapResponse
+from .job_list_params import JobListParams as JobListParams
 from .search_response import SearchResponse as SearchResponse
 from .serp_run_params import SerpRunParams as SerpRunParams
 from .agent_run_params import AgentRunParams as AgentRunParams
 from .crawl_run_params import CrawlRunParams as CrawlRunParams
 from .extract_response import ExtractResponse as ExtractResponse
+from .job_get_response import JobGetResponse as JobGetResponse
+from .job_run_response import JobRunResponse as JobRunResponse
 from .media_run_params import MediaRunParams as MediaRunParams
 from .task_list_params import TaskListParams as TaskListParams
 from .agent_list_params import AgentListParams as AgentListParams
 from .client_map_params import ClientMapParams as ClientMapParams
 from .crawl_list_params import CrawlListParams as CrawlListParams
+from .job_create_params import JobCreateParams as JobCreateParams
+from .job_list_response import JobListResponse as JobListResponse
+from .job_update_params import JobUpdateParams as JobUpdateParams
 from .serp_run_response import SerpRunResponse as SerpRunResponse
 from .task_get_response import TaskGetResponse as TaskGetResponse
 from .agent_get_response import AgentGetResponse as AgentGetResponse
@@ -38,6 +44,8 @@ from .media_run_response import MediaRunResponse as MediaRunResponse
 from .task_list_response import TaskListResponse as TaskListResponse
 from .agent_list_response import AgentListResponse as AgentListResponse
 from .crawl_list_response import CrawlListResponse as CrawlListResponse
+from .job_create_response import JobCreateResponse as JobCreateResponse
+from .job_update_response import JobUpdateResponse as JobUpdateResponse
 from .client_search_params import ClientSearchParams as ClientSearchParams
 from .agent_generate_params import AgentGenerateParams as AgentGenerateParams
 from .client_extract_params import ClientExtractParams as ClientExtractParams

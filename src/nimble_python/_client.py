@@ -61,13 +61,14 @@ from .types.extract_async_response import ExtractAsyncResponse
 from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
-    from .resources import serp, agent, crawl, media, tasks, batches, task_agent, domain_knowledge
+    from .resources import jobs, serp, agent, crawl, media, tasks, batches, task_agent, domain_knowledge
     from .resources.serp import SerpResource, AsyncSerpResource
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
     from .resources.media import MediaResource, AsyncMediaResource
     from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.batches import BatchesResource, AsyncBatchesResource
+    from .resources.jobs.jobs import JobsResource, AsyncJobsResource
     from .resources.domain_knowledge import DomainKnowledgeResource, AsyncDomainKnowledgeResource
     from .resources.task_agent.task_agent import TaskAgentResource, AsyncTaskAgentResource
 
@@ -189,6 +190,12 @@ class Nimble(SyncAPIClient):
         from .resources.task_agent import TaskAgentResource
 
         return TaskAgentResource(self)
+
+    @cached_property
+    def jobs(self) -> JobsResource:
+        from .resources.jobs import JobsResource
+
+        return JobsResource(self)
 
     @cached_property
     def with_raw_response(self) -> NimbleWithRawResponse:
@@ -3459,6 +3466,12 @@ class AsyncNimble(AsyncAPIClient):
         return AsyncTaskAgentResource(self)
 
     @cached_property
+    def jobs(self) -> AsyncJobsResource:
+        from .resources.jobs import AsyncJobsResource
+
+        return AsyncJobsResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncNimbleWithRawResponse:
         return AsyncNimbleWithRawResponse(self)
 
@@ -6680,6 +6693,12 @@ class NimbleWithRawResponse:
 
         return TaskAgentResourceWithRawResponse(self._client.task_agent)
 
+    @cached_property
+    def jobs(self) -> jobs.JobsResourceWithRawResponse:
+        from .resources.jobs import JobsResourceWithRawResponse
+
+        return JobsResourceWithRawResponse(self._client.jobs)
+
 
 class AsyncNimbleWithRawResponse:
     _client: AsyncNimble
@@ -6750,6 +6769,12 @@ class AsyncNimbleWithRawResponse:
         from .resources.task_agent import AsyncTaskAgentResourceWithRawResponse
 
         return AsyncTaskAgentResourceWithRawResponse(self._client.task_agent)
+
+    @cached_property
+    def jobs(self) -> jobs.AsyncJobsResourceWithRawResponse:
+        from .resources.jobs import AsyncJobsResourceWithRawResponse
+
+        return AsyncJobsResourceWithRawResponse(self._client.jobs)
 
 
 class NimbleWithStreamedResponse:
@@ -6822,6 +6847,12 @@ class NimbleWithStreamedResponse:
 
         return TaskAgentResourceWithStreamingResponse(self._client.task_agent)
 
+    @cached_property
+    def jobs(self) -> jobs.JobsResourceWithStreamingResponse:
+        from .resources.jobs import JobsResourceWithStreamingResponse
+
+        return JobsResourceWithStreamingResponse(self._client.jobs)
+
 
 class AsyncNimbleWithStreamedResponse:
     _client: AsyncNimble
@@ -6892,6 +6923,12 @@ class AsyncNimbleWithStreamedResponse:
         from .resources.task_agent import AsyncTaskAgentResourceWithStreamingResponse
 
         return AsyncTaskAgentResourceWithStreamingResponse(self._client.task_agent)
+
+    @cached_property
+    def jobs(self) -> jobs.AsyncJobsResourceWithStreamingResponse:
+        from .resources.jobs import AsyncJobsResourceWithStreamingResponse
+
+        return AsyncJobsResourceWithStreamingResponse(self._client.jobs)
 
 
 Client = Nimble
