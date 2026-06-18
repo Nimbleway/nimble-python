@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.20.0 (2026-06-18)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/Nimbleway/nimble-python/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** Add jobs api ([9065317](https://github.com/Nimbleway/nimble-python/commit/90653176f426f3566d6b596ab46573dfa5d6bf23))
+* **api:** api update ([0dd31cd](https://github.com/Nimbleway/nimble-python/commit/0dd31cd413a4f9803d95d087a17db47c7fd2cac1))
+
 ## 0.19.0 (2026-06-11)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/Nimbleway/nimble-python/compare/v0.18.0...v0.19.0)
