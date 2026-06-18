@@ -10,7 +10,9 @@ __all__ = [
     "TaskAgentListResponse",
     "TaskAgentListResponseItem",
     "TaskAgentListResponseItemGoal",
-    "TaskAgentListResponseItemSource",
+    "TaskAgentListResponseItemSources",
+    "TaskAgentListResponseItemSourcesAllow",
+    "TaskAgentListResponseItemSourcesBlock",
     "TaskAgentListResponseItemSuggestedQuestion",
 ]
 
@@ -23,7 +25,7 @@ class TaskAgentListResponseItemGoal(BaseModel):
     order: int
 
 
-class TaskAgentListResponseItemSource(BaseModel):
+class TaskAgentListResponseItemSourcesAllow(BaseModel):
     id: str
 
     domains: List[str]
@@ -31,6 +33,24 @@ class TaskAgentListResponseItemSource(BaseModel):
     order: int
 
     title: str
+
+
+class TaskAgentListResponseItemSourcesBlock(BaseModel):
+    domains: List[str]
+
+    title: str
+
+    order: Optional[int] = None
+
+
+class TaskAgentListResponseItemSources(BaseModel):
+    allow: Optional[List[TaskAgentListResponseItemSourcesAllow]] = None
+
+    avoid: Optional[str] = None
+
+    block: Optional[List[TaskAgentListResponseItemSourcesBlock]] = None
+
+    prioritize: Optional[str] = None
 
 
 class TaskAgentListResponseItemSuggestedQuestion(BaseModel):
@@ -62,7 +82,7 @@ class TaskAgentListResponseItem(BaseModel):
 
     output_schema: Optional[Dict[str, object]] = None
 
-    sources: List[TaskAgentListResponseItemSource]
+    sources: TaskAgentListResponseItemSources
 
     suggested_questions: List[TaskAgentListResponseItemSuggestedQuestion]
 

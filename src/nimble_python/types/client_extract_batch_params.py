@@ -1005,8 +1005,11 @@ class Input(TypedDict, total=False):
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
 
-    render: bool
-    """Whether to render JavaScript content using a browser"""
+    render: Union[bool, Literal["auto"]]
+    """Whether to render JavaScript content using a browser.
+
+    Use 'auto' to let the engine select the candidate config per domain.
+    """
 
     request_timeout: float
     """Request timeout in milliseconds"""
@@ -2049,8 +2052,11 @@ class SharedInputs(TypedDict, total=False):
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
 
-    render: bool
-    """Whether to render JavaScript content using a browser"""
+    render: Union[bool, Literal["auto"]]
+    """Whether to render JavaScript content using a browser.
+
+    Use 'auto' to let the engine select the candidate config per domain.
+    """
 
     request_timeout: float
     """Request timeout in milliseconds"""
