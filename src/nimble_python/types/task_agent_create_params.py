@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from .._types import SequenceNotStr
 
-__all__ = ["TaskAgentCreateParams", "Source"]
+__all__ = ["TaskAgentCreateParams", "Sources", "SourcesAllow", "SourcesBlock"]
 
 
 class TaskAgentCreateParams(TypedDict, total=False):
@@ -29,7 +29,7 @@ class TaskAgentCreateParams(TypedDict, total=False):
 
     output_schema: Optional[Dict[str, object]]
 
-    sources: Iterable[Source]
+    sources: Sources
 
     suggested_questions: SequenceNotStr[str]
 
@@ -44,9 +44,27 @@ class TaskAgentCreateParams(TypedDict, total=False):
     workspace_id: Optional[str]
 
 
-class Source(TypedDict, total=False):
+class SourcesAllow(TypedDict, total=False):
     domains: Required[SequenceNotStr[str]]
 
     title: Required[str]
 
     order: int
+
+
+class SourcesBlock(TypedDict, total=False):
+    domains: Required[SequenceNotStr[str]]
+
+    title: Required[str]
+
+    order: int
+
+
+class Sources(TypedDict, total=False):
+    allow: Iterable[SourcesAllow]
+
+    avoid: Optional[str]
+
+    block: Iterable[SourcesBlock]
+
+    prioritize: Optional[str]

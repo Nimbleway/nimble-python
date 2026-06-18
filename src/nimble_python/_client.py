@@ -1100,7 +1100,7 @@ class Nimble(SyncAPIClient):
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
-        render: bool | Omit = omit,
+        render: Union[bool, Literal["auto"]] | Omit = omit,
         request_timeout: float | Omit = omit,
         session: client_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -2101,7 +2101,7 @@ class Nimble(SyncAPIClient):
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
-        render: bool | Omit = omit,
+        render: Union[bool, Literal["auto"]] | Omit = omit,
         request_timeout: float | Omit = omit,
         session: client_extract_async_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -4368,7 +4368,7 @@ class AsyncNimble(AsyncAPIClient):
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
-        render: bool | Omit = omit,
+        render: Union[bool, Literal["auto"]] | Omit = omit,
         request_timeout: float | Omit = omit,
         session: client_extract_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,
@@ -5369,7 +5369,7 @@ class AsyncNimble(AsyncAPIClient):
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
         | Omit = omit,
-        render: bool | Omit = omit,
+        render: Union[bool, Literal["auto"]] | Omit = omit,
         request_timeout: float | Omit = omit,
         session: client_extract_async_params.Session | Omit = omit,
         skill: Union[str, SequenceNotStr[str]] | Omit = omit,

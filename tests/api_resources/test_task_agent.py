@@ -42,13 +42,24 @@ class TestTaskAgent:
             icon="icon",
             is_active=True,
             output_schema={"foo": "bar"},
-            sources=[
-                {
-                    "domains": ["string"],
-                    "title": "title",
-                    "order": 0,
-                }
-            ],
+            sources={
+                "allow": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "avoid": "avoid",
+                "block": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "prioritize": "prioritize",
+            },
             suggested_questions=["string"],
             template="template",
             use_case="research",
@@ -288,6 +299,24 @@ class TestTaskAgent:
             input="input",
             enable_events=True,
             output_schema={"foo": "bar"},
+            sources={
+                "allow": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "avoid": "avoid",
+                "block": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "prioritize": "prioritize",
+            },
         )
         assert_matches_type(TaskAgentRunResponse, task_agent, path=["response"])
 
@@ -353,13 +382,24 @@ class TestAsyncTaskAgent:
             icon="icon",
             is_active=True,
             output_schema={"foo": "bar"},
-            sources=[
-                {
-                    "domains": ["string"],
-                    "title": "title",
-                    "order": 0,
-                }
-            ],
+            sources={
+                "allow": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "avoid": "avoid",
+                "block": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "prioritize": "prioritize",
+            },
             suggested_questions=["string"],
             template="template",
             use_case="research",
@@ -599,6 +639,24 @@ class TestAsyncTaskAgent:
             input="input",
             enable_events=True,
             output_schema={"foo": "bar"},
+            sources={
+                "allow": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "avoid": "avoid",
+                "block": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "prioritize": "prioritize",
+            },
         )
         assert_matches_type(TaskAgentRunResponse, task_agent, path=["response"])
 
