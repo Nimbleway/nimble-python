@@ -56,6 +56,14 @@ from .batches import (
     BatchesResourceWithStreamingResponse,
     AsyncBatchesResourceWithStreamingResponse,
 )
+from .fast_serp import (
+    FastSerpResource,
+    AsyncFastSerpResource,
+    FastSerpResourceWithRawResponse,
+    AsyncFastSerpResourceWithRawResponse,
+    FastSerpResourceWithStreamingResponse,
+    AsyncFastSerpResourceWithStreamingResponse,
+)
 from .task_agent import (
     TaskAgentResource,
     AsyncTaskAgentResource,
@@ -116,6 +124,12 @@ __all__ = [
     "AsyncSerpResourceWithRawResponse",
     "SerpResourceWithStreamingResponse",
     "AsyncSerpResourceWithStreamingResponse",
+    "FastSerpResource",
+    "AsyncFastSerpResource",
+    "FastSerpResourceWithRawResponse",
+    "AsyncFastSerpResourceWithRawResponse",
+    "FastSerpResourceWithStreamingResponse",
+    "AsyncFastSerpResourceWithStreamingResponse",
     "TaskAgentResource",
     "AsyncTaskAgentResource",
     "TaskAgentResourceWithRawResponse",

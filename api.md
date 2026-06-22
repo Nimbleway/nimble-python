@@ -153,6 +153,18 @@ Methods:
 - <code title="post /v1/serp/async">client.serp.<a href="./src/nimble_python/resources/serp.py">run_async</a>(\*\*<a href="src/nimble_python/types/serp_run_async_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_async_response.py">SerpRunAsyncResponse</a></code>
 - <code title="post /v1/serp/batch">client.serp.<a href="./src/nimble_python/resources/serp.py">run_batch</a>(\*\*<a href="src/nimble_python/types/serp_run_batch_params.py">params</a>) -> <a href="./src/nimble_python/types/serp_run_batch_response.py">SerpRunBatchResponse</a></code>
 
+# FastSerp
+
+Types:
+
+```python
+from nimble_python.types import FastSerpRunResponse
+```
+
+Methods:
+
+- <code title="post /v1/fast-serp">client.fast_serp.<a href="./src/nimble_python/resources/fast_serp.py">run</a>(\*\*<a href="src/nimble_python/types/fast_serp_run_params.py">params</a>) -> <a href="./src/nimble_python/types/fast_serp_run_response.py">FastSerpRunResponse</a></code>
+
 # TaskAgent
 
 Types:
