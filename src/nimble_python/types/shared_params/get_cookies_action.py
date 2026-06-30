@@ -8,7 +8,11 @@ from typing_extensions import Literal, Required, TypeAlias, TypedDict
 __all__ = ["GetCookiesAction", "GetCookies", "GetCookiesUnionMember1"]
 
 
-class GetCookiesUnionMember1(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
+class GetCookiesUnionMember1(  # type: ignore[call-arg]
+    TypedDict,
+    total=False,
+    extra_items=object,  # pyright: ignore[reportGeneralTypeIssues]
+):
     required: Union[Literal["true", "false"], bool]
     """Whether this action is required.
 

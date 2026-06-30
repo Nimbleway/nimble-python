@@ -118,7 +118,11 @@ ExtractOptionsBrowserAction: TypeAlias = Union[
 ]
 
 
-class ExtractOptionsCookiesUnionMember0(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
+class ExtractOptionsCookiesUnionMember0(  # type: ignore[call-arg]
+    TypedDict,
+    total=False,
+    extra_items=object,  # pyright: ignore[reportGeneralTypeIssues]
+):
     creation: Optional[str]
 
     domain: Optional[str]
