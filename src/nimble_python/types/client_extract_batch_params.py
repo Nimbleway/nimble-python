@@ -82,7 +82,11 @@ InputBrowserAction: TypeAlias = Union[
 ]
 
 
-class InputCookiesUnionMember0(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
+class InputCookiesUnionMember0(  # type: ignore[call-arg]
+    TypedDict,
+    total=False,
+    extra_items=object,  # pyright: ignore[reportGeneralTypeIssues]
+):
     creation: Optional[str]
 
     domain: Optional[str]
@@ -1124,7 +1128,11 @@ SharedInputsBrowserAction: TypeAlias = Union[
 ]
 
 
-class SharedInputsCookiesUnionMember0(TypedDict, total=False, extra_items=object):  # type: ignore[call-arg]
+class SharedInputsCookiesUnionMember0(  # type: ignore[call-arg]
+    TypedDict,
+    total=False,
+    extra_items=object,  # pyright: ignore[reportGeneralTypeIssues]
+):
     creation: Optional[str]
 
     domain: Optional[str]
