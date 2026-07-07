@@ -20,11 +20,11 @@ class CreateAgentGenerationRequest(TypedDict, total=False):
 
     url: Required[str]
 
-    agent_name: Optional[str]
-
     input_schema: Dict[str, object]
 
     metadata: Optional[CreateAgentGenerationRequestMetadata]
+
+    name: Optional[str]
 
     output_schema: Dict[str, object]
 

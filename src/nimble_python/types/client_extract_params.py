@@ -37,6 +37,14 @@ class ClientExtractParams(TypedDict, total=False):
     url: Required[str]
     """Target URL to scrape"""
 
+    auto_driver_configuration: Dict[str, int]
+    """
+    Custom flow for the optimization engine: maps candidate names to the number of
+    attempts to spend on each candidate before advancing (0 skips it). Key order
+    defines the flow order. Providing it opts the request into 'auto' driver
+    selection.
+    """
+
     body: object
     """Request body for POST, PUT, PATCH methods"""
 
@@ -313,7 +321,7 @@ class ClientExtractParams(TypedDict, total=False):
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
-    driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"]
+    driver: Literal["auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"]
     """Browser driver to use"""
 
     expected_status_codes: Iterable[int]
