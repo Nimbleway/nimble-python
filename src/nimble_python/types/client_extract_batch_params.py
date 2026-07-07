@@ -150,6 +150,14 @@ class InputSession(TypedDict, total=False):
 
 
 class Input(TypedDict, total=False):
+    auto_driver_configuration: Dict[str, int]
+    """
+    Custom flow for the optimization engine: maps candidate names to the number of
+    attempts to spend on each candidate before advancing (0 skips it). Key order
+    defines the flow order. Providing it opts the request into 'auto' driver
+    selection.
+    """
+
     body: object
     """Request body for POST, PUT, PATCH methods"""
 
@@ -429,8 +437,11 @@ class Input(TypedDict, total=False):
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
-    driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"]
-    """Browser driver to use"""
+    driver: Literal["auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"]
+    """Browser driver to use.
+
+    Use 'auto' to let the engine select the candidate config per domain.
+    """
 
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""
@@ -1201,6 +1212,14 @@ class SharedInputs(TypedDict, total=False):
     Can include extraction parameters and async/storage settings.
     """
 
+    auto_driver_configuration: Dict[str, int]
+    """
+    Custom flow for the optimization engine: maps candidate names to the number of
+    attempts to spend on each candidate before advancing (0 skips it). Key order
+    defines the flow order. Providing it opts the request into 'auto' driver
+    selection.
+    """
+
     body: object
     """Request body for POST, PUT, PATCH methods"""
 
@@ -1480,8 +1499,11 @@ class SharedInputs(TypedDict, total=False):
     device: Literal["desktop", "mobile", "tablet"]
     """Device type for browser emulation"""
 
-    driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"]
-    """Browser driver to use"""
+    driver: Literal["auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"]
+    """Browser driver to use.
+
+    Use 'auto' to let the engine select the candidate config per domain.
+    """
 
     expected_status_codes: Iterable[int]
     """Expected HTTP status codes for successful requests"""

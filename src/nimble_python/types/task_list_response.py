@@ -22,7 +22,7 @@ class Data(BaseModel):
     input: object
     """Original input data for the task."""
 
-    state: Literal["pending", "success", "error"]
+    state: Literal["pending", "queued", "in_progress", "success", "error"]
     """Current state of the task."""
 
     status_url: str
@@ -31,7 +31,9 @@ class Data(BaseModel):
     account_name: Optional[str] = None
     """Account name that owns the task."""
 
-    api_type: Optional[Literal["web", "serp", "ecommerce", "social", "media", "agent", "extract", "fast-serp"]] = None
+    api_type: Optional[
+        Literal["web", "serp", "ecommerce", "social", "media", "agent", "extract", "fast-serp", "labs"]
+    ] = None
 
     batch_id: Optional[str] = None
     """Batch ID if this task is part of a batch."""
@@ -50,6 +52,9 @@ class Data(BaseModel):
 
     output_url: Optional[str] = None
     """Storage location of the output data."""
+
+    queue: Optional[str] = None
+    """Queue name the task was submitted to."""
 
     status_code: Optional[float] = None
     """HTTP status code from the task execution."""

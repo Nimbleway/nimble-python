@@ -84,6 +84,14 @@ class TestCrawl:
             crawl_entire_domain=False,
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
+                "auto_driver_configuration": {
+                    "vx10": 2,
+                    "vx10-pro": 0,
+                    "vx6-fast": 1,
+                    "vx6-stealth": 1,
+                    "vx8": 5,
+                    "vx8-pro": 5,
+                },
                 "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [
@@ -369,6 +377,14 @@ class TestAsyncCrawl:
             crawl_entire_domain=False,
             exclude_paths=["/exclude-this-path", "/and-this-path"],
             extract_options={
+                "auto_driver_configuration": {
+                    "vx10": 2,
+                    "vx10-pro": 0,
+                    "vx6-fast": 1,
+                    "vx6-stealth": 1,
+                    "vx8": 5,
+                    "vx8-pro": 5,
+                },
                 "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [

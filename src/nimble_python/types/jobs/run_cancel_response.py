@@ -8,6 +8,10 @@ __all__ = ["RunCancelResponse"]
 
 
 class RunCancelResponse(BaseModel):
+    """Result of cancelling a run."""
+
     id: str
+    """Identifier of the cancelled run."""
 
     status: Literal["PENDING", "RUNNING", "SUCCESS", "FAILED", "CANCELLED", "TIMEOUT", "WARNING"]
+    """Run status after cancellation."""

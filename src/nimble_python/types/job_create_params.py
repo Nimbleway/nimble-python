@@ -10,37 +10,63 @@ __all__ = ["JobCreateParams", "Destination", "Inputs", "Schedule"]
 
 class JobCreateParams(TypedDict, total=False):
     agent_name: Required[str]
+    """Name of the agent to run."""
 
     name: Required[str]
+    """Job name."""
 
     description: Optional[str]
 
     destination: Optional[Destination]
+    """Where a job writes its results."""
 
     display_name: Optional[str]
+    """Human-friendly job name shown in the UI."""
 
     inputs: Optional[Inputs]
+    """Configuration for the input data a job processes."""
 
     schedule: Optional[Schedule]
+    """Cron-based schedule controlling when a job runs automatically."""
 
 
 class Destination(TypedDict, total=False):
+    """Where a job writes its results."""
+
     path: Required[str]
+    """Destination path the output is written to."""
 
     type: Required[Literal["file", "s3"]]
+    """Destination kind: a local 'file' or an 's3' bucket."""
 
     format: Literal["jsonl", "csv", "parquet"]
+    """Output file format."""
 
 
 class Inputs(TypedDict, total=False):
+    """Configuration for the input data a job processes."""
+
     type: Required[Literal["s3", "inline", "file"]]
+    """
+    How inputs are supplied: an 's3' bucket, 'inline' records, or an uploaded
+    'file'.
+    """
 
     data: Optional[Iterable[Dict[str, object]]]
+    """Inline list of input records. Used when type is 'inline'."""
 
     file_path: Optional[str]
+    """Path to the input file; must start with 's3' or 'file\\__'.
+
+    Used for 's3'/'file' types.
+    """
 
 
 class Schedule(TypedDict, total=False):
+    """Cron-based schedule controlling when a job runs automatically."""
+
     cron: Required[str]
+    """Cron expression defining when the job runs."""
 
     enabled: Required[bool]
+    """Whether the schedule is currently active."""

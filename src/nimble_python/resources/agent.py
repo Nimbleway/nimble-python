@@ -120,9 +120,9 @@ class AgentResource(SyncAPIResource):
         *,
         prompt: str,
         url: str,
-        agent_name: Optional[str] | Omit = omit,
         input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -178,9 +178,9 @@ class AgentResource(SyncAPIResource):
         *,
         prompt: str,
         url: str | Omit = omit,
-        agent_name: Optional[str] | Omit = omit,
         input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         from_agent: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -196,9 +196,9 @@ class AgentResource(SyncAPIResource):
                 {
                     "prompt": prompt,
                     "url": url,
-                    "agent_name": agent_name,
                     "input_schema": input_schema,
                     "metadata": metadata,
+                    "name": name,
                     "output_schema": output_schema,
                     "from_agent": from_agent,
                 },
@@ -511,9 +511,9 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         prompt: str,
         url: str,
-        agent_name: Optional[str] | Omit = omit,
         input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -569,9 +569,9 @@ class AsyncAgentResource(AsyncAPIResource):
         *,
         prompt: str,
         url: str | Omit = omit,
-        agent_name: Optional[str] | Omit = omit,
         input_schema: Dict[str, object] | Omit = omit,
         metadata: Optional[agent_generate_params.CreateAgentGenerationRequestMetadata] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         from_agent: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -587,9 +587,9 @@ class AsyncAgentResource(AsyncAPIResource):
                 {
                     "prompt": prompt,
                     "url": url,
-                    "agent_name": agent_name,
                     "input_schema": input_schema,
                     "metadata": metadata,
+                    "name": name,
                     "output_schema": output_schema,
                     "from_agent": from_agent,
                 },

@@ -47,7 +47,6 @@ from .crawl_list_response import CrawlListResponse as CrawlListResponse
 from .job_create_response import JobCreateResponse as JobCreateResponse
 from .job_update_response import JobUpdateResponse as JobUpdateResponse
 from .client_search_params import ClientSearchParams as ClientSearchParams
-from .fast_serp_run_params import FastSerpRunParams as FastSerpRunParams
 from .agent_generate_params import AgentGenerateParams as AgentGenerateParams
 from .client_extract_params import ClientExtractParams as ClientExtractParams
 from .crawl_status_response import CrawlStatusResponse as CrawlStatusResponse
@@ -59,7 +58,6 @@ from .agent_run_async_params import AgentRunAsyncParams as AgentRunAsyncParams
 from .agent_run_batch_params import AgentRunBatchParams as AgentRunBatchParams
 from .extract_async_response import ExtractAsyncResponse as ExtractAsyncResponse
 from .extract_batch_response import ExtractBatchResponse as ExtractBatchResponse
-from .fast_serp_run_response import FastSerpRunResponse as FastSerpRunResponse
 from .media_run_async_params import MediaRunAsyncParams as MediaRunAsyncParams
 from .task_agent_list_params import TaskAgentListParams as TaskAgentListParams
 from .agent_generate_response import AgentGenerateResponse as AgentGenerateResponse
