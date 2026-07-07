@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.22.0 (2026-07-07)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/Nimbleway/nimble-python/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** api update ([b9d8f7e](https://github.com/Nimbleway/nimble-python/commit/b9d8f7e29a43a4a255acb37f2de95b23c26e5d98))
+
+
+### Bug Fixes
+
+* **types:** avoid type-checker errors on params with additional properties ([8d6acbb](https://github.com/Nimbleway/nimble-python/commit/8d6acbb1583852c2d6be660fa286c4beeb71aa9e))
+
 ## 0.21.0 (2026-06-22)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/Nimbleway/nimble-python/compare/v0.20.0...v0.21.0)
