@@ -80,6 +80,18 @@ class JobsResource(SyncAPIResource):
         Create Job
 
         Args:
+          agent_name: Name of the agent to run.
+
+          name: Job name.
+
+          destination: Where a job writes its results.
+
+          display_name: Human-friendly job name shown in the UI.
+
+          inputs: Configuration for the input data a job processes.
+
+          schedule: Cron-based schedule controlling when a job runs automatically.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -128,6 +140,14 @@ class JobsResource(SyncAPIResource):
         Update Job
 
         Args:
+          destination: Where a job writes its results.
+
+          display_name: New display name.
+
+          inputs: Configuration for the input data a job processes.
+
+          schedule: Cron-based schedule controlling when a job runs automatically.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -352,6 +372,18 @@ class AsyncJobsResource(AsyncAPIResource):
         Create Job
 
         Args:
+          agent_name: Name of the agent to run.
+
+          name: Job name.
+
+          destination: Where a job writes its results.
+
+          display_name: Human-friendly job name shown in the UI.
+
+          inputs: Configuration for the input data a job processes.
+
+          schedule: Cron-based schedule controlling when a job runs automatically.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -400,6 +432,14 @@ class AsyncJobsResource(AsyncAPIResource):
         Update Job
 
         Args:
+          destination: Where a job writes its results.
+
+          display_name: New display name.
+
+          inputs: Configuration for the input data a job processes.
+
+          schedule: Cron-based schedule controlling when a job runs automatically.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request

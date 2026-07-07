@@ -10,30 +10,47 @@ __all__ = ["RunListResponse", "Item"]
 
 
 class Item(BaseModel):
+    """A single execution of a job."""
+
     id: str
+    """Unique run identifier (run\\__<n>)."""
 
     created_at: datetime
+    """When the run was created."""
 
     job_id: str
+    """Identifier of the job this run belongs to."""
 
     status: Literal["PENDING", "RUNNING", "SUCCESS", "FAILED", "CANCELLED", "TIMEOUT", "WARNING"]
+    """Current run status."""
 
     triggered_by: Literal["schedule", "manual"]
+    """What triggered the run: 'schedule' or 'manual'."""
 
     finished_at: Optional[datetime] = None
+    """When the run finished."""
 
     input_count: Optional[int] = None
+    """Number of input records processed."""
 
     result_count: Optional[int] = None
+    """Number of result records produced."""
 
     started_at: Optional[datetime] = None
+    """When the run started executing."""
 
 
 class RunListResponse(BaseModel):
+    """A page of job runs."""
+
     items: List[Item]
+    """Runs on this page."""
 
     page: int
+    """Current page number."""
 
     per_page: int
+    """Number of items per page."""
 
     total: int
+    """Total number of runs matching the query."""

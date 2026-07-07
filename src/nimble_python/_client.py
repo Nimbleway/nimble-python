@@ -61,14 +61,13 @@ from .types.extract_async_response import ExtractAsyncResponse
 from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
-    from .resources import jobs, serp, agent, crawl, media, tasks, batches, fast_serp, task_agent, domain_knowledge
+    from .resources import jobs, serp, agent, crawl, media, tasks, batches, task_agent, domain_knowledge
     from .resources.serp import SerpResource, AsyncSerpResource
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
     from .resources.media import MediaResource, AsyncMediaResource
     from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.batches import BatchesResource, AsyncBatchesResource
-    from .resources.fast_serp import FastSerpResource, AsyncFastSerpResource
     from .resources.jobs.jobs import JobsResource, AsyncJobsResource
     from .resources.domain_knowledge import DomainKnowledgeResource, AsyncDomainKnowledgeResource
     from .resources.task_agent.task_agent import TaskAgentResource, AsyncTaskAgentResource
@@ -187,12 +186,6 @@ class Nimble(SyncAPIClient):
         return SerpResource(self)
 
     @cached_property
-    def fast_serp(self) -> FastSerpResource:
-        from .resources.fast_serp import FastSerpResource
-
-        return FastSerpResource(self)
-
-    @cached_property
     def task_agent(self) -> TaskAgentResource:
         from .resources.task_agent import TaskAgentResource
 
@@ -301,6 +294,7 @@ class Nimble(SyncAPIClient):
         self,
         *,
         url: str,
+        auto_driver_configuration: Dict[str, int] | Omit = omit,
         body: object | Omit = omit,
         browser: client_extract_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_params.BrowserAction] | Omit = omit,
@@ -562,7 +556,10 @@ class Nimble(SyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
+        driver: Literal[
+            "auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"
+        ]
+        | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -1191,6 +1188,11 @@ class Nimble(SyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          auto_driver_configuration: Custom flow for the optimization engine: maps candidate names to the number of
+              attempts to spend on each candidate before advancing (0 skips it). Key order
+              defines the flow order. Providing it opts the request into 'auto' driver
+              selection.
+
           body: Request body for POST, PUT, PATCH methods
 
           browser: Browser type to emulate
@@ -1260,6 +1262,7 @@ class Nimble(SyncAPIClient):
             body=maybe_transform(
                 {
                     "url": url,
+                    "auto_driver_configuration": auto_driver_configuration,
                     "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
@@ -1301,6 +1304,7 @@ class Nimble(SyncAPIClient):
         self,
         *,
         url: str,
+        auto_driver_configuration: Dict[str, int] | Omit = omit,
         body: object | Omit = omit,
         browser: client_extract_async_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_async_params.BrowserAction] | Omit = omit,
@@ -1563,7 +1567,10 @@ class Nimble(SyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
+        driver: Literal[
+            "auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"
+        ]
+        | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -2196,6 +2203,11 @@ class Nimble(SyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          auto_driver_configuration: Custom flow for the optimization engine: maps candidate names to the number of
+              attempts to spend on each candidate before advancing (0 skips it). Key order
+              defines the flow order. Providing it opts the request into 'auto' driver
+              selection.
+
           body: Request body for POST, PUT, PATCH methods
 
           browser: Browser type to emulate
@@ -2275,6 +2287,7 @@ class Nimble(SyncAPIClient):
             body=maybe_transform(
                 {
                     "url": url,
+                    "auto_driver_configuration": auto_driver_configuration,
                     "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
@@ -3467,12 +3480,6 @@ class AsyncNimble(AsyncAPIClient):
         return AsyncSerpResource(self)
 
     @cached_property
-    def fast_serp(self) -> AsyncFastSerpResource:
-        from .resources.fast_serp import AsyncFastSerpResource
-
-        return AsyncFastSerpResource(self)
-
-    @cached_property
     def task_agent(self) -> AsyncTaskAgentResource:
         from .resources.task_agent import AsyncTaskAgentResource
 
@@ -3581,6 +3588,7 @@ class AsyncNimble(AsyncAPIClient):
         self,
         *,
         url: str,
+        auto_driver_configuration: Dict[str, int] | Omit = omit,
         body: object | Omit = omit,
         browser: client_extract_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_params.BrowserAction] | Omit = omit,
@@ -3842,7 +3850,10 @@ class AsyncNimble(AsyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
+        driver: Literal[
+            "auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"
+        ]
+        | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -4471,6 +4482,11 @@ class AsyncNimble(AsyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          auto_driver_configuration: Custom flow for the optimization engine: maps candidate names to the number of
+              attempts to spend on each candidate before advancing (0 skips it). Key order
+              defines the flow order. Providing it opts the request into 'auto' driver
+              selection.
+
           body: Request body for POST, PUT, PATCH methods
 
           browser: Browser type to emulate
@@ -4540,6 +4556,7 @@ class AsyncNimble(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "auto_driver_configuration": auto_driver_configuration,
                     "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
@@ -4581,6 +4598,7 @@ class AsyncNimble(AsyncAPIClient):
         self,
         *,
         url: str,
+        auto_driver_configuration: Dict[str, int] | Omit = omit,
         body: object | Omit = omit,
         browser: client_extract_async_params.Browser | Omit = omit,
         browser_actions: Iterable[client_extract_async_params.BrowserAction] | Omit = omit,
@@ -4843,7 +4861,10 @@ class AsyncNimble(AsyncAPIClient):
         ]
         | Omit = omit,
         device: Literal["desktop", "mobile", "tablet"] | Omit = omit,
-        driver: Literal["vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6"] | Omit = omit,
+        driver: Literal[
+            "auto", "vx6", "vx8", "vx8-pro", "vx10", "vx10-pro", "vx12", "vx12-pro", "media-vx6", "fast-vx6"
+        ]
+        | Omit = omit,
         expected_status_codes: Iterable[int] | Omit = omit,
         formats: List[Literal["html", "markdown", "screenshot", "headers", "links"]] | Omit = omit,
         headers: Dict[str, Union[str, SequenceNotStr[str], None]] | Omit = omit,
@@ -5476,6 +5497,11 @@ class AsyncNimble(AsyncAPIClient):
         Args:
           url: Target URL to scrape
 
+          auto_driver_configuration: Custom flow for the optimization engine: maps candidate names to the number of
+              attempts to spend on each candidate before advancing (0 skips it). Key order
+              defines the flow order. Providing it opts the request into 'auto' driver
+              selection.
+
           body: Request body for POST, PUT, PATCH methods
 
           browser: Browser type to emulate
@@ -5555,6 +5581,7 @@ class AsyncNimble(AsyncAPIClient):
             body=await async_maybe_transform(
                 {
                     "url": url,
+                    "auto_driver_configuration": auto_driver_configuration,
                     "body": body,
                     "browser": browser,
                     "browser_actions": browser_actions,
@@ -6701,12 +6728,6 @@ class NimbleWithRawResponse:
         return SerpResourceWithRawResponse(self._client.serp)
 
     @cached_property
-    def fast_serp(self) -> fast_serp.FastSerpResourceWithRawResponse:
-        from .resources.fast_serp import FastSerpResourceWithRawResponse
-
-        return FastSerpResourceWithRawResponse(self._client.fast_serp)
-
-    @cached_property
     def task_agent(self) -> task_agent.TaskAgentResourceWithRawResponse:
         from .resources.task_agent import TaskAgentResourceWithRawResponse
 
@@ -6782,12 +6803,6 @@ class AsyncNimbleWithRawResponse:
         from .resources.serp import AsyncSerpResourceWithRawResponse
 
         return AsyncSerpResourceWithRawResponse(self._client.serp)
-
-    @cached_property
-    def fast_serp(self) -> fast_serp.AsyncFastSerpResourceWithRawResponse:
-        from .resources.fast_serp import AsyncFastSerpResourceWithRawResponse
-
-        return AsyncFastSerpResourceWithRawResponse(self._client.fast_serp)
 
     @cached_property
     def task_agent(self) -> task_agent.AsyncTaskAgentResourceWithRawResponse:
@@ -6867,12 +6882,6 @@ class NimbleWithStreamedResponse:
         return SerpResourceWithStreamingResponse(self._client.serp)
 
     @cached_property
-    def fast_serp(self) -> fast_serp.FastSerpResourceWithStreamingResponse:
-        from .resources.fast_serp import FastSerpResourceWithStreamingResponse
-
-        return FastSerpResourceWithStreamingResponse(self._client.fast_serp)
-
-    @cached_property
     def task_agent(self) -> task_agent.TaskAgentResourceWithStreamingResponse:
         from .resources.task_agent import TaskAgentResourceWithStreamingResponse
 
@@ -6948,12 +6957,6 @@ class AsyncNimbleWithStreamedResponse:
         from .resources.serp import AsyncSerpResourceWithStreamingResponse
 
         return AsyncSerpResourceWithStreamingResponse(self._client.serp)
-
-    @cached_property
-    def fast_serp(self) -> fast_serp.AsyncFastSerpResourceWithStreamingResponse:
-        from .resources.fast_serp import AsyncFastSerpResourceWithStreamingResponse
-
-        return AsyncFastSerpResourceWithStreamingResponse(self._client.fast_serp)
 
     @cached_property
     def task_agent(self) -> task_agent.AsyncTaskAgentResourceWithStreamingResponse:

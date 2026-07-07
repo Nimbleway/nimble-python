@@ -92,3 +92,9 @@ class SearchResponse(BaseModel):
 
     answer_citations: Optional[List[AnswerCitation]] = None
     """Citations mapping citation markers to result indices"""
+
+    serp_data: Optional[Dict[str, object]] = None
+    """Cleaned SERP entities (e.g.
+
+    KnowledgeGraph, TopStory, RelatedSearch). Only present for focus='serp'.
+    """

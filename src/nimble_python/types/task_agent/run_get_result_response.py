@@ -11,11 +11,17 @@ __all__ = [
     "AgentRunResult",
     "AgentRunResultOutput",
     "AgentRunResultOutputAgentRunTextOutput",
-    "AgentRunResultOutputAgentRunTextOutputBasi",
-    "AgentRunResultOutputAgentRunTextOutputBasiCitation",
+    "AgentRunResultOutputAgentRunTextOutputTrust",
+    "AgentRunResultOutputAgentRunTextOutputTrustClaim",
+    "AgentRunResultOutputAgentRunTextOutputTrustClaimCitation",
+    "AgentRunResultOutputAgentRunTextOutputTrustClaimSource",
+    "AgentRunResultOutputAgentRunTextOutputTrustSource",
     "AgentRunResultOutputAgentRunJsonOutput",
-    "AgentRunResultOutputAgentRunJsonOutputBasi",
-    "AgentRunResultOutputAgentRunJsonOutputBasiCitation",
+    "AgentRunResultOutputAgentRunJsonOutputTrust",
+    "AgentRunResultOutputAgentRunJsonOutputTrustClaim",
+    "AgentRunResultOutputAgentRunJsonOutputTrustClaimCitation",
+    "AgentRunResultOutputAgentRunJsonOutputTrustClaimSource",
+    "AgentRunResultOutputAgentRunJsonOutputTrustSource",
     "AgentRunResultRun",
     "AgentRunResultRunError",
     "AgentRunFailedResult",
@@ -25,63 +31,123 @@ __all__ = [
 ]
 
 
-class AgentRunResultOutputAgentRunTextOutputBasiCitation(BaseModel):
+class AgentRunResultOutputAgentRunTextOutputTrustClaimCitation(BaseModel):
     url: str
 
     excerpts: Optional[List[str]] = None
 
-    index: Optional[int] = None
+    extract_template_name: Optional[str] = None
 
     title: Optional[str] = None
 
-    web_search_agent: Optional[str] = None
+
+class AgentRunResultOutputAgentRunTextOutputTrustClaimSource(BaseModel):
+    type: Literal["primary", "secondary"]
+
+    url: str
+
+    extract_template_name: Optional[str] = None
+
+    title: Optional[str] = None
 
 
-class AgentRunResultOutputAgentRunTextOutputBasi(BaseModel):
-    field: str
+class AgentRunResultOutputAgentRunTextOutputTrustClaim(BaseModel):
+    callout: int
 
-    citations: Optional[List[AgentRunResultOutputAgentRunTextOutputBasiCitation]] = None
+    citations: List[AgentRunResultOutputAgentRunTextOutputTrustClaimCitation]
 
-    confidence: Optional[Literal["high", "medium", "low"]] = None
+    confidence: Literal["high", "medium", "low"]
 
-    reasoning: Optional[str] = None
+    reasoning: str
+
+    source: Optional[AgentRunResultOutputAgentRunTextOutputTrustClaimSource] = None
+
+
+class AgentRunResultOutputAgentRunTextOutputTrustSource(BaseModel):
+    type: Literal["primary", "secondary"]
+
+    url: str
+
+    extract_template_name: Optional[str] = None
+
+    title: Optional[str] = None
+
+
+class AgentRunResultOutputAgentRunTextOutputTrust(BaseModel):
+    claims: List[AgentRunResultOutputAgentRunTextOutputTrustClaim]
+
+    confidence: Literal["high", "medium", "low"]
+
+    reasoning: str
+
+    sources: List[AgentRunResultOutputAgentRunTextOutputTrustSource]
 
 
 class AgentRunResultOutputAgentRunTextOutput(BaseModel):
     content: str
     """The final prose answer."""
 
-    basis: Optional[List[AgentRunResultOutputAgentRunTextOutputBasi]] = None
+    trust: AgentRunResultOutputAgentRunTextOutputTrust
 
     type: Optional[Literal["text"]] = None
 
 
-class AgentRunResultOutputAgentRunJsonOutputBasiCitation(BaseModel):
+class AgentRunResultOutputAgentRunJsonOutputTrustClaimCitation(BaseModel):
     url: str
 
     excerpts: Optional[List[str]] = None
 
-    index: Optional[int] = None
+    extract_template_name: Optional[str] = None
 
     title: Optional[str] = None
 
-    web_search_agent: Optional[str] = None
+
+class AgentRunResultOutputAgentRunJsonOutputTrustClaimSource(BaseModel):
+    type: Literal["primary", "secondary"]
+
+    url: str
+
+    extract_template_name: Optional[str] = None
+
+    title: Optional[str] = None
 
 
-class AgentRunResultOutputAgentRunJsonOutputBasi(BaseModel):
-    field: str
+class AgentRunResultOutputAgentRunJsonOutputTrustClaim(BaseModel):
+    citations: List[AgentRunResultOutputAgentRunJsonOutputTrustClaimCitation]
 
-    citations: Optional[List[AgentRunResultOutputAgentRunJsonOutputBasiCitation]] = None
+    confidence: Literal["high", "medium", "low"]
 
-    confidence: Optional[Literal["high", "medium", "low"]] = None
+    path: str
 
-    reasoning: Optional[str] = None
+    reasoning: str
+
+    source: Optional[AgentRunResultOutputAgentRunJsonOutputTrustClaimSource] = None
+
+
+class AgentRunResultOutputAgentRunJsonOutputTrustSource(BaseModel):
+    type: Literal["primary", "secondary"]
+
+    url: str
+
+    extract_template_name: Optional[str] = None
+
+    title: Optional[str] = None
+
+
+class AgentRunResultOutputAgentRunJsonOutputTrust(BaseModel):
+    claims: List[AgentRunResultOutputAgentRunJsonOutputTrustClaim]
+
+    confidence: Literal["high", "medium", "low"]
+
+    reasoning: str
+
+    sources: List[AgentRunResultOutputAgentRunJsonOutputTrustSource]
 
 
 class AgentRunResultOutputAgentRunJsonOutput(BaseModel):
     content: Union[Dict[str, object], List[object]]
 
-    basis: Optional[List[AgentRunResultOutputAgentRunJsonOutputBasi]] = None
+    trust: AgentRunResultOutputAgentRunJsonOutputTrust
 
     type: Optional[Literal["json"]] = None
 

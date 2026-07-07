@@ -36,6 +36,14 @@ class TestClient:
     def test_method_extract_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract(
             url="url",
+            auto_driver_configuration={
+                "vx10": 2,
+                "vx10-pro": 0,
+                "vx6-fast": 1,
+                "vx6-stealth": 1,
+                "vx8": 5,
+                "vx8-pro": 5,
+            },
             body={"key": "value"},
             browser="chrome",
             browser_actions=[
@@ -174,6 +182,14 @@ class TestClient:
     def test_method_extract_async_with_all_params(self, client: Nimble) -> None:
         client_ = client.extract_async(
             url="url",
+            auto_driver_configuration={
+                "vx10": 2,
+                "vx10-pro": 0,
+                "vx6-fast": 1,
+                "vx6-stealth": 1,
+                "vx8": 5,
+                "vx8-pro": 5,
+            },
             body={"key": "value"},
             browser="chrome",
             browser_actions=[
@@ -318,6 +334,14 @@ class TestClient:
         client_ = client.extract_batch(
             inputs=[
                 {
+                    "auto_driver_configuration": {
+                        "vx10": 2,
+                        "vx10-pro": 0,
+                        "vx6-fast": 1,
+                        "vx6-stealth": 1,
+                        "vx8": 5,
+                        "vx8-pro": 5,
+                    },
                     "body": {"key": "value"},
                     "browser": "chrome",
                     "browser_actions": [
@@ -423,6 +447,14 @@ class TestClient:
                 }
             ],
             shared_inputs={
+                "auto_driver_configuration": {
+                    "vx10": 2,
+                    "vx10-pro": 0,
+                    "vx6-fast": 1,
+                    "vx6-stealth": 1,
+                    "vx8": 5,
+                    "vx8-pro": 5,
+                },
                 "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [
@@ -679,6 +711,14 @@ class TestAsyncClient:
     async def test_method_extract_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract(
             url="url",
+            auto_driver_configuration={
+                "vx10": 2,
+                "vx10-pro": 0,
+                "vx6-fast": 1,
+                "vx6-stealth": 1,
+                "vx8": 5,
+                "vx8-pro": 5,
+            },
             body={"key": "value"},
             browser="chrome",
             browser_actions=[
@@ -817,6 +857,14 @@ class TestAsyncClient:
     async def test_method_extract_async_with_all_params(self, async_client: AsyncNimble) -> None:
         client = await async_client.extract_async(
             url="url",
+            auto_driver_configuration={
+                "vx10": 2,
+                "vx10-pro": 0,
+                "vx6-fast": 1,
+                "vx6-stealth": 1,
+                "vx8": 5,
+                "vx8-pro": 5,
+            },
             body={"key": "value"},
             browser="chrome",
             browser_actions=[
@@ -961,6 +1009,14 @@ class TestAsyncClient:
         client = await async_client.extract_batch(
             inputs=[
                 {
+                    "auto_driver_configuration": {
+                        "vx10": 2,
+                        "vx10-pro": 0,
+                        "vx6-fast": 1,
+                        "vx6-stealth": 1,
+                        "vx8": 5,
+                        "vx8-pro": 5,
+                    },
                     "body": {"key": "value"},
                     "browser": "chrome",
                     "browser_actions": [
@@ -1066,6 +1122,14 @@ class TestAsyncClient:
                 }
             ],
             shared_inputs={
+                "auto_driver_configuration": {
+                    "vx10": 2,
+                    "vx10-pro": 0,
+                    "vx6-fast": 1,
+                    "vx6-stealth": 1,
+                    "vx8": 5,
+                    "vx8-pro": 5,
+                },
                 "body": {"key": "value"},
                 "browser": "chrome",
                 "browser_actions": [

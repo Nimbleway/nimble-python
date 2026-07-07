@@ -8,6 +8,10 @@ __all__ = ["ArtifactDownloadURLResponse"]
 
 
 class ArtifactDownloadURLResponse(BaseModel):
+    """A pre-signed URL for downloading an artifact."""
+
     expires_at: datetime
+    """When the download URL expires."""
 
     url: str
+    """Pre-signed URL to download the artifact."""

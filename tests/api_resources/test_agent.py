@@ -80,13 +80,13 @@ class TestAgent:
         agent = client.agent.generate(
             prompt="prompt",
             url="url",
-            agent_name="agent_name",
             input_schema={"foo": "bar"},
             metadata={
                 "description": "description",
                 "display_name": "display_name",
                 "tags": ["string"],
             },
+            name="name",
             output_schema={"foo": "bar"},
         )
         assert_matches_type(AgentGenerateResponse, agent, path=["response"])
@@ -459,13 +459,13 @@ class TestAsyncAgent:
         agent = await async_client.agent.generate(
             prompt="prompt",
             url="url",
-            agent_name="agent_name",
             input_schema={"foo": "bar"},
             metadata={
                 "description": "description",
                 "display_name": "display_name",
                 "tags": ["string"],
             },
+            name="name",
             output_schema={"foo": "bar"},
         )
         assert_matches_type(AgentGenerateResponse, agent, path=["response"])
