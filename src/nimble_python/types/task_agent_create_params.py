@@ -19,7 +19,8 @@ class TaskAgentCreateParams(TypedDict, total=False):
 
     domain_expertise: Optional[str]
 
-    effort: str
+    effort: Literal["low", "medium", "high", "x-high", "max"]
+    """Canonical effort tier names for the research graph."""
 
     goals: SequenceNotStr[str]
 
@@ -30,13 +31,14 @@ class TaskAgentCreateParams(TypedDict, total=False):
     output_schema: Optional[Dict[str, object]]
 
     sources: Sources
+    """Source preferences for a web search agent instance."""
 
     suggested_questions: SequenceNotStr[str]
 
     template: Optional[str]
-    """Template name to materialise this instance from.
+    """Template name to materialize this instance from.
 
-    When set, scalar fields and child rows are copied from the template.
+    When set, the scalar fields and child rows are copied from the template.
     """
 
     use_case: Optional[Literal["research", "enrichment", "dataset_building"]]
@@ -61,6 +63,8 @@ class SourcesBlock(TypedDict, total=False):
 
 
 class Sources(TypedDict, total=False):
+    """Source preferences for a web search agent instance."""
+
     allow: Iterable[SourcesAllow]
 
     avoid: Optional[str]

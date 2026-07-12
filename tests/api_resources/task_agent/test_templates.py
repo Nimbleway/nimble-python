@@ -27,10 +27,10 @@ class TestTemplates:
     @parametrize
     def test_method_list_with_all_params(self, client: Nimble) -> None:
         template = client.task_agent.templates.list(
-            effort="effort",
-            limit=1,
+            filter_effort="low",
+            filter_use_case="research",
+            limit=0,
             offset=0,
-            use_case="use_case",
         )
         assert_matches_type(TemplateListResponse, template, path=["response"])
 
@@ -114,10 +114,10 @@ class TestAsyncTemplates:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
         template = await async_client.task_agent.templates.list(
-            effort="effort",
-            limit=1,
+            filter_effort="low",
+            filter_use_case="research",
+            limit=0,
             offset=0,
-            use_case="use_case",
         )
         assert_matches_type(TemplateListResponse, template, path=["response"])
 

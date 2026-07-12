@@ -67,6 +67,7 @@ class JobCreateResponse(BaseModel):
     """When the job was created."""
 
     description: Optional[str] = None
+    """Free-text description of the job."""
 
     destination: Optional[Destination] = None
     """Where a job writes its results."""

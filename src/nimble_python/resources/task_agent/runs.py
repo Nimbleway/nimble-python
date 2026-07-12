@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
+from typing import Any, Optional, cast
 
 import httpx
 
@@ -51,6 +51,8 @@ class RunsResource(SyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        q: Optional[str] | Omit = omit,
+        status: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,7 +61,10 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunListResponse:
         """
-        List task runs for the caller's workspace and the given agent, newest first.
+        List runs for this instance.
+
+        `status` accepts a lowercase `TaskRunStatusValue` (e.g. "completed") or a
+        comma-separated list of them (e.g. "queued,running").
 
         Args:
           extra_headers: Send extra headers
@@ -83,6 +88,8 @@ class RunsResource(SyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
+                        "q": q,
+                        "status": status,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -104,6 +111,9 @@ class RunsResource(SyncAPIResource):
     ) -> None:
         """
         Cancel an in-progress or queued run.
+
+        Verb is POST + `/cancel` action segment per the AGENTS-1666 spec (replaces the
+        old `DELETE …/runs/{run_id}`).
 
         Args:
           extra_headers: Send extra headers
@@ -139,9 +149,12 @@ class RunsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetResponse:
-        """Poll run status.
+        """
+        Fetch a run by id, scoped to the instance.
 
-        Repeat until status is 'completed', 'failed', or 'cancelled'.
+        A run resolves only when (run_id, agent_id) match — otherwise 404. This means a
+        stale URL with a swapped agent_id won't leak runs across instances even if the
+        run_id is real.
 
         Args:
           extra_headers: Send extra headers
@@ -176,10 +189,15 @@ class RunsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetResultResponse:
-        """Fetch the result for a terminal run.
+        """
+        Fetch the result for a terminal run on this instance.
 
-        Returns 408 if still active, 422 with
-        `AgentRunFailedResult` if failed.
+        Mirrors the previous flat `GET /tasks/runs/:run_id/result` semantics:
+
+        - 404 when the run doesn't belong to the agent.
+        - 408 when the run is still active.
+        - 422 (with TaskRunFailedResult body) when the run failed or was cancelled.
+        - 200 (with TaskRunResult body) on success.
 
         Args:
           extra_headers: Send extra headers
@@ -219,10 +237,8 @@ class RunsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
-        """Server-Sent Events stream of real-time progress events for a run.
-
-        The run must
-        have been created with `enable_events=true`.
+        """
+        SSE stream of real-time progress events for a run on this instance.
 
         Args:
           extra_headers: Send extra headers
@@ -272,6 +288,8 @@ class AsyncRunsResource(AsyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
+        q: Optional[str] | Omit = omit,
+        status: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -280,7 +298,10 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunListResponse:
         """
-        List task runs for the caller's workspace and the given agent, newest first.
+        List runs for this instance.
+
+        `status` accepts a lowercase `TaskRunStatusValue` (e.g. "completed") or a
+        comma-separated list of them (e.g. "queued,running").
 
         Args:
           extra_headers: Send extra headers
@@ -304,6 +325,8 @@ class AsyncRunsResource(AsyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
+                        "q": q,
+                        "status": status,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -325,6 +348,9 @@ class AsyncRunsResource(AsyncAPIResource):
     ) -> None:
         """
         Cancel an in-progress or queued run.
+
+        Verb is POST + `/cancel` action segment per the AGENTS-1666 spec (replaces the
+        old `DELETE …/runs/{run_id}`).
 
         Args:
           extra_headers: Send extra headers
@@ -360,9 +386,12 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetResponse:
-        """Poll run status.
+        """
+        Fetch a run by id, scoped to the instance.
 
-        Repeat until status is 'completed', 'failed', or 'cancelled'.
+        A run resolves only when (run_id, agent_id) match — otherwise 404. This means a
+        stale URL with a swapped agent_id won't leak runs across instances even if the
+        run_id is real.
 
         Args:
           extra_headers: Send extra headers
@@ -397,10 +426,15 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetResultResponse:
-        """Fetch the result for a terminal run.
+        """
+        Fetch the result for a terminal run on this instance.
 
-        Returns 408 if still active, 422 with
-        `AgentRunFailedResult` if failed.
+        Mirrors the previous flat `GET /tasks/runs/:run_id/result` semantics:
+
+        - 404 when the run doesn't belong to the agent.
+        - 408 when the run is still active.
+        - 422 (with TaskRunFailedResult body) when the run failed or was cancelled.
+        - 200 (with TaskRunResult body) on success.
 
         Args:
           extra_headers: Send extra headers
@@ -440,10 +474,8 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
-        """Server-Sent Events stream of real-time progress events for a run.
-
-        The run must
-        have been created with `enable_events=true`.
+        """
+        SSE stream of real-time progress events for a run on this instance.
 
         Args:
           extra_headers: Send extra headers

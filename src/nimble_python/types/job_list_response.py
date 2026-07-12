@@ -67,6 +67,7 @@ class Item(BaseModel):
     """When the job was created."""
 
     description: Optional[str] = None
+    """Free-text description of the job."""
 
     destination: Optional[ItemDestination] = None
     """Where a job writes its results."""

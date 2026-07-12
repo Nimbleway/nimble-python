@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from .._types import SequenceNotStr
 
@@ -13,11 +13,17 @@ __all__ = ["TaskAgentRunParams", "Sources", "SourcesAllow", "SourcesBlock"]
 class TaskAgentRunParams(TypedDict, total=False):
     input: Required[str]
 
+    effort: Optional[Literal["low", "medium", "high", "x-high", "max"]]
+    """Canonical effort tier names for the research graph."""
+
     enable_events: bool
 
     output_schema: Optional[Dict[str, object]]
 
+    previous_interaction_id: Optional[str]
+
     sources: Optional[Sources]
+    """Source preferences for a web search agent instance."""
 
 
 class SourcesAllow(TypedDict, total=False):
@@ -37,6 +43,8 @@ class SourcesBlock(TypedDict, total=False):
 
 
 class Sources(TypedDict, total=False):
+    """Source preferences for a web search agent instance."""
+
     allow: Iterable[SourcesAllow]
 
     avoid: Optional[str]

@@ -1079,6 +1079,8 @@ class Session(TypedDict, total=False):
 
     prefetch_userbrowser: bool
 
+    renew_on_blocked: bool
+
     retry: bool
 
     timeout: float
