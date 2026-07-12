@@ -28,14 +28,18 @@ class SourcesAllow(BaseModel):
 
 
 class SourcesBlock(BaseModel):
+    """Lenient response shape — domains are plain strings (no re-validation)."""
+
     domains: List[str]
+
+    order: int
 
     title: str
 
-    order: Optional[int] = None
-
 
 class Sources(BaseModel):
+    """Response variant of AgentSources — preserves per-row id on allow rows."""
+
     allow: Optional[List[SourcesAllow]] = None
 
     avoid: Optional[str] = None
@@ -64,7 +68,8 @@ class TaskAgentGetResponse(BaseModel):
 
     domain_expertise: str
 
-    effort: str
+    effort: Literal["low", "medium", "high", "x-high", "max"]
+    """Canonical effort tier names for the research graph."""
 
     goals: List[Goal]
 
@@ -75,6 +80,7 @@ class TaskAgentGetResponse(BaseModel):
     output_schema: Optional[Dict[str, object]] = None
 
     sources: Sources
+    """Response variant of AgentSources — preserves per-row id on allow rows."""
 
     suggested_questions: List[SuggestedQuestion]
 
@@ -87,5 +93,3 @@ class TaskAgentGetResponse(BaseModel):
     agent_name: Optional[str] = None
 
     workspace_id: Optional[str] = None
-
-    workspace_name: Optional[str] = None

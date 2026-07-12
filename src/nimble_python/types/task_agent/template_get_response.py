@@ -46,7 +46,8 @@ class TemplateGetResponse(BaseModel):
 
     domain_expertise: str
 
-    effort: str
+    effort: Literal["low", "medium", "high", "x-high", "max"]
+    """Canonical effort tier names for the research graph."""
 
     goals: List[Goal]
 

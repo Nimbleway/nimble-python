@@ -24,6 +24,7 @@ class Item(BaseModel):
     """When the artifact was created."""
 
     description: str
+    """Human-readable artifact description."""
 
     type: str
     """Artifact type."""

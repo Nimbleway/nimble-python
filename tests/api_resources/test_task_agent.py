@@ -37,7 +37,7 @@ class TestTaskAgent:
             description="description",
             display_name="display_name",
             domain_expertise="domain_expertise",
-            effort="effort",
+            effort="low",
             goals=["string"],
             icon="icon",
             is_active=True,
@@ -93,12 +93,11 @@ class TestTaskAgent:
     @parametrize
     def test_method_update(self, client: Nimble) -> None:
         task_agent = client.task_agent.update(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             body=[
                 {
-                    "op": "replace",
+                    "op": "add",
                     "path": "path",
-                    "value": {},
                 }
             ],
         )
@@ -108,12 +107,11 @@ class TestTaskAgent:
     @parametrize
     def test_raw_response_update(self, client: Nimble) -> None:
         response = client.task_agent.with_raw_response.update(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             body=[
                 {
-                    "op": "replace",
+                    "op": "add",
                     "path": "path",
-                    "value": {},
                 }
             ],
         )
@@ -127,12 +125,11 @@ class TestTaskAgent:
     @parametrize
     def test_streaming_response_update(self, client: Nimble) -> None:
         with client.task_agent.with_streaming_response.update(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             body=[
                 {
-                    "op": "replace",
+                    "op": "add",
                     "path": "path",
-                    "value": {},
                 }
             ],
         ) as response:
@@ -152,9 +149,8 @@ class TestTaskAgent:
                 agent_id="",
                 body=[
                     {
-                        "op": "replace",
+                        "op": "add",
                         "path": "path",
-                        "value": {},
                     }
                 ],
             )
@@ -169,10 +165,11 @@ class TestTaskAgent:
     @parametrize
     def test_method_list_with_all_params(self, client: Nimble) -> None:
         task_agent = client.task_agent.list(
-            effort="effort",
-            limit=1,
+            filter_effort="low",
+            filter_use_case="research",
+            limit=0,
             offset=0,
-            use_case="use_case",
+            workspace_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(TaskAgentListResponse, task_agent, path=["response"])
 
@@ -202,7 +199,7 @@ class TestTaskAgent:
     @parametrize
     def test_method_deactivate(self, client: Nimble) -> None:
         task_agent = client.task_agent.deactivate(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert task_agent is None
 
@@ -210,7 +207,7 @@ class TestTaskAgent:
     @parametrize
     def test_raw_response_deactivate(self, client: Nimble) -> None:
         response = client.task_agent.with_raw_response.deactivate(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -222,7 +219,7 @@ class TestTaskAgent:
     @parametrize
     def test_streaming_response_deactivate(self, client: Nimble) -> None:
         with client.task_agent.with_streaming_response.deactivate(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -244,7 +241,7 @@ class TestTaskAgent:
     @parametrize
     def test_method_get(self, client: Nimble) -> None:
         task_agent = client.task_agent.get(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(TaskAgentGetResponse, task_agent, path=["response"])
 
@@ -252,7 +249,7 @@ class TestTaskAgent:
     @parametrize
     def test_raw_response_get(self, client: Nimble) -> None:
         response = client.task_agent.with_raw_response.get(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -264,7 +261,7 @@ class TestTaskAgent:
     @parametrize
     def test_streaming_response_get(self, client: Nimble) -> None:
         with client.task_agent.with_streaming_response.get(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -286,7 +283,7 @@ class TestTaskAgent:
     @parametrize
     def test_method_run(self, client: Nimble) -> None:
         task_agent = client.task_agent.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
         )
         assert_matches_type(TaskAgentRunResponse, task_agent, path=["response"])
@@ -295,10 +292,12 @@ class TestTaskAgent:
     @parametrize
     def test_method_run_with_all_params(self, client: Nimble) -> None:
         task_agent = client.task_agent.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
+            effort="low",
             enable_events=True,
             output_schema={"foo": "bar"},
+            previous_interaction_id="previous_interaction_id",
             sources={
                 "allow": [
                     {
@@ -324,7 +323,7 @@ class TestTaskAgent:
     @parametrize
     def test_raw_response_run(self, client: Nimble) -> None:
         response = client.task_agent.with_raw_response.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
         )
 
@@ -337,7 +336,7 @@ class TestTaskAgent:
     @parametrize
     def test_streaming_response_run(self, client: Nimble) -> None:
         with client.task_agent.with_streaming_response.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
         ) as response:
             assert not response.is_closed
@@ -377,7 +376,7 @@ class TestAsyncTaskAgent:
             description="description",
             display_name="display_name",
             domain_expertise="domain_expertise",
-            effort="effort",
+            effort="low",
             goals=["string"],
             icon="icon",
             is_active=True,
@@ -433,12 +432,11 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_method_update(self, async_client: AsyncNimble) -> None:
         task_agent = await async_client.task_agent.update(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             body=[
                 {
-                    "op": "replace",
+                    "op": "add",
                     "path": "path",
-                    "value": {},
                 }
             ],
         )
@@ -448,12 +446,11 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncNimble) -> None:
         response = await async_client.task_agent.with_raw_response.update(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             body=[
                 {
-                    "op": "replace",
+                    "op": "add",
                     "path": "path",
-                    "value": {},
                 }
             ],
         )
@@ -467,12 +464,11 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncNimble) -> None:
         async with async_client.task_agent.with_streaming_response.update(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             body=[
                 {
-                    "op": "replace",
+                    "op": "add",
                     "path": "path",
-                    "value": {},
                 }
             ],
         ) as response:
@@ -492,9 +488,8 @@ class TestAsyncTaskAgent:
                 agent_id="",
                 body=[
                     {
-                        "op": "replace",
+                        "op": "add",
                         "path": "path",
-                        "value": {},
                     }
                 ],
             )
@@ -509,10 +504,11 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
         task_agent = await async_client.task_agent.list(
-            effort="effort",
-            limit=1,
+            filter_effort="low",
+            filter_use_case="research",
+            limit=0,
             offset=0,
-            use_case="use_case",
+            workspace_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(TaskAgentListResponse, task_agent, path=["response"])
 
@@ -542,7 +538,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_method_deactivate(self, async_client: AsyncNimble) -> None:
         task_agent = await async_client.task_agent.deactivate(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert task_agent is None
 
@@ -550,7 +546,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_raw_response_deactivate(self, async_client: AsyncNimble) -> None:
         response = await async_client.task_agent.with_raw_response.deactivate(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -562,7 +558,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_streaming_response_deactivate(self, async_client: AsyncNimble) -> None:
         async with async_client.task_agent.with_streaming_response.deactivate(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -584,7 +580,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_method_get(self, async_client: AsyncNimble) -> None:
         task_agent = await async_client.task_agent.get(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(TaskAgentGetResponse, task_agent, path=["response"])
 
@@ -592,7 +588,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncNimble) -> None:
         response = await async_client.task_agent.with_raw_response.get(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
         assert response.is_closed is True
@@ -604,7 +600,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncNimble) -> None:
         async with async_client.task_agent.with_streaming_response.get(
-            "agent_id",
+            "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -626,7 +622,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_method_run(self, async_client: AsyncNimble) -> None:
         task_agent = await async_client.task_agent.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
         )
         assert_matches_type(TaskAgentRunResponse, task_agent, path=["response"])
@@ -635,10 +631,12 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_method_run_with_all_params(self, async_client: AsyncNimble) -> None:
         task_agent = await async_client.task_agent.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
+            effort="low",
             enable_events=True,
             output_schema={"foo": "bar"},
+            previous_interaction_id="previous_interaction_id",
             sources={
                 "allow": [
                     {
@@ -664,7 +662,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_raw_response_run(self, async_client: AsyncNimble) -> None:
         response = await async_client.task_agent.with_raw_response.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
         )
 
@@ -677,7 +675,7 @@ class TestAsyncTaskAgent:
     @parametrize
     async def test_streaming_response_run(self, async_client: AsyncNimble) -> None:
         async with async_client.task_agent.with_streaming_response.run(
-            agent_id="agent_id",
+            agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
         ) as response:
             assert not response.is_closed

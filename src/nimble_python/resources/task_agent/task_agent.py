@@ -79,7 +79,7 @@ class TaskAgentResource(SyncAPIResource):
         description: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
         domain_expertise: Optional[str] | Omit = omit,
-        effort: str | Omit = omit,
+        effort: Literal["low", "medium", "high", "x-high", "max"] | Omit = omit,
         goals: SequenceNotStr[str] | Omit = omit,
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
@@ -96,13 +96,17 @@ class TaskAgentResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentCreateResponse:
-        """Create a new workspace-scoped Web Search Agent.
+        """
+        Create a Web Search Agent instance.
 
-        Pass `template` to clone from a
-        named template.
+        `account_id` is JWT-derived and never read from the request body.
 
         Args:
-          template: Template name to materialise this instance from. When set, scalar fields and
+          effort: Canonical effort tier names for the research graph.
+
+          sources: Source preferences for a web search agent instance.
+
+          template: Template name to materialize this instance from. When set, the scalar fields and
               child rows are copied from the template.
 
           extra_headers: Send extra headers
@@ -153,10 +157,11 @@ class TaskAgentResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentUpdateResponse:
         """
-        Apply a JSON Patch document (`application/json-patch+json`) to an agent you own.
-        Each operation must be a `replace` with path `/field_name`.
+        Update Agent
 
         Args:
+          body: A JSON Patch document per RFC 6902 — a JSON array of patch operations.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -179,10 +184,11 @@ class TaskAgentResource(SyncAPIResource):
     def list(
         self,
         *,
-        effort: Optional[str] | Omit = omit,
+        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        use_case: Optional[str] | Omit = omit,
+        workspace_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,12 +196,15 @@ class TaskAgentResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentListResponse:
-        """List active Web Search Agents visible to the caller.
+        """
+        List Web Search Agent instances.
 
-        Includes agents scoped to
-        the caller's workspace.
+        Callers are strictly scoped to their (account, workspace). If `workspace_id` is
+        omitted, the user's default workspace is used.
 
         Args:
+          filter_effort: Canonical effort tier names for the research graph.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -213,10 +222,11 @@ class TaskAgentResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "effort": effort,
+                        "filter_effort": filter_effort,
+                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
-                        "use_case": use_case,
+                        "workspace_id": workspace_id,
                     },
                     task_agent_list_params.TaskAgentListParams,
                 ),
@@ -235,9 +245,8 @@ class TaskAgentResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Deactivate an agent you own.
-
-        The agent is marked inactive but not deleted.
+        """
+        Deactivate Agent
 
         Args:
           extra_headers: Send extra headers
@@ -271,7 +280,7 @@ class TaskAgentResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentGetResponse:
         """
-        Fetch a single Web Search Agent by id.
+        Get Agent
 
         Args:
           extra_headers: Send extra headers
@@ -297,8 +306,10 @@ class TaskAgentResource(SyncAPIResource):
         agent_id: str,
         *,
         input: str,
+        effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
+        previous_interaction_id: Optional[str] | Omit = omit,
         sources: Optional[task_agent_run_params.Sources] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -308,9 +319,13 @@ class TaskAgentResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentRunResponse:
         """
-        Create and enqueue a research run for a Web Search Agent.
+        Create a research run for a Web Search Agent instance.
 
         Args:
+          effort: Canonical effort tier names for the research graph.
+
+          sources: Source preferences for a web search agent instance.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -326,8 +341,10 @@ class TaskAgentResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "input": input,
+                    "effort": effort,
                     "enable_events": enable_events,
                     "output_schema": output_schema,
+                    "previous_interaction_id": previous_interaction_id,
                     "sources": sources,
                 },
                 task_agent_run_params.TaskAgentRunParams,
@@ -374,7 +391,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         description: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
         domain_expertise: Optional[str] | Omit = omit,
-        effort: str | Omit = omit,
+        effort: Literal["low", "medium", "high", "x-high", "max"] | Omit = omit,
         goals: SequenceNotStr[str] | Omit = omit,
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
@@ -391,13 +408,17 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentCreateResponse:
-        """Create a new workspace-scoped Web Search Agent.
+        """
+        Create a Web Search Agent instance.
 
-        Pass `template` to clone from a
-        named template.
+        `account_id` is JWT-derived and never read from the request body.
 
         Args:
-          template: Template name to materialise this instance from. When set, scalar fields and
+          effort: Canonical effort tier names for the research graph.
+
+          sources: Source preferences for a web search agent instance.
+
+          template: Template name to materialize this instance from. When set, the scalar fields and
               child rows are copied from the template.
 
           extra_headers: Send extra headers
@@ -448,10 +469,11 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentUpdateResponse:
         """
-        Apply a JSON Patch document (`application/json-patch+json`) to an agent you own.
-        Each operation must be a `replace` with path `/field_name`.
+        Update Agent
 
         Args:
+          body: A JSON Patch document per RFC 6902 — a JSON array of patch operations.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -474,10 +496,11 @@ class AsyncTaskAgentResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        effort: Optional[str] | Omit = omit,
+        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        use_case: Optional[str] | Omit = omit,
+        workspace_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -485,12 +508,15 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentListResponse:
-        """List active Web Search Agents visible to the caller.
+        """
+        List Web Search Agent instances.
 
-        Includes agents scoped to
-        the caller's workspace.
+        Callers are strictly scoped to their (account, workspace). If `workspace_id` is
+        omitted, the user's default workspace is used.
 
         Args:
+          filter_effort: Canonical effort tier names for the research graph.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -508,10 +534,11 @@ class AsyncTaskAgentResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "effort": effort,
+                        "filter_effort": filter_effort,
+                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
-                        "use_case": use_case,
+                        "workspace_id": workspace_id,
                     },
                     task_agent_list_params.TaskAgentListParams,
                 ),
@@ -530,9 +557,8 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Deactivate an agent you own.
-
-        The agent is marked inactive but not deleted.
+        """
+        Deactivate Agent
 
         Args:
           extra_headers: Send extra headers
@@ -566,7 +592,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentGetResponse:
         """
-        Fetch a single Web Search Agent by id.
+        Get Agent
 
         Args:
           extra_headers: Send extra headers
@@ -592,8 +618,10 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         agent_id: str,
         *,
         input: str,
+        effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
+        previous_interaction_id: Optional[str] | Omit = omit,
         sources: Optional[task_agent_run_params.Sources] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -603,9 +631,13 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskAgentRunResponse:
         """
-        Create and enqueue a research run for a Web Search Agent.
+        Create a research run for a Web Search Agent instance.
 
         Args:
+          effort: Canonical effort tier names for the research graph.
+
+          sources: Source preferences for a web search agent instance.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -621,8 +653,10 @@ class AsyncTaskAgentResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "input": input,
+                    "effort": effort,
                     "enable_events": enable_events,
                     "output_schema": output_schema,
+                    "previous_interaction_id": previous_interaction_id,
                     "sources": sources,
                 },
                 task_agent_run_params.TaskAgentRunParams,

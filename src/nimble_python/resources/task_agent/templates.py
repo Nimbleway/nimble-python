@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -47,10 +48,10 @@ class TemplatesResource(SyncAPIResource):
     def list(
         self,
         *,
-        effort: Optional[str] | Omit = omit,
+        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        use_case: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,9 +60,11 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TemplateListResponse:
         """
-        List all available Web Search Agent templates.
+        List Templates
 
         Args:
+          filter_effort: Canonical effort tier names for the research graph.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -79,10 +82,10 @@ class TemplatesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "effort": effort,
+                        "filter_effort": filter_effort,
+                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
-                        "use_case": use_case,
                     },
                     template_list_params.TemplateListParams,
                 ),
@@ -102,7 +105,7 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TemplateGetResponse:
         """
-        Fetch a single Web Search Agent template by name.
+        Get Template
 
         Args:
           extra_headers: Send extra headers
@@ -147,10 +150,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        effort: Optional[str] | Omit = omit,
+        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        use_case: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -159,9 +162,11 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TemplateListResponse:
         """
-        List all available Web Search Agent templates.
+        List Templates
 
         Args:
+          filter_effort: Canonical effort tier names for the research graph.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -179,10 +184,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "effort": effort,
+                        "filter_effort": filter_effort,
+                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
-                        "use_case": use_case,
                     },
                     template_list_params.TemplateListParams,
                 ),
@@ -202,7 +207,7 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TemplateGetResponse:
         """
-        Fetch a single Web Search Agent template by name.
+        Get Template
 
         Args:
           extra_headers: Send extra headers
