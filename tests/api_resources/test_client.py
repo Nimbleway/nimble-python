@@ -134,6 +134,7 @@ class TestClient:
             session={
                 "id": "id",
                 "prefetch_userbrowser": True,
+                "renew_on_blocked": True,
                 "retry": True,
                 "timeout": 1,
             },
@@ -281,6 +282,7 @@ class TestClient:
             session={
                 "id": "id",
                 "prefetch_userbrowser": True,
+                "renew_on_blocked": True,
                 "retry": True,
                 "timeout": 1,
             },
@@ -433,6 +435,7 @@ class TestClient:
                     "session": {
                         "id": "id",
                         "prefetch_userbrowser": True,
+                        "renew_on_blocked": True,
                         "retry": True,
                         "timeout": 1,
                     },
@@ -546,6 +549,7 @@ class TestClient:
                 "session": {
                     "id": "id",
                     "prefetch_userbrowser": True,
+                    "renew_on_blocked": True,
                     "retry": True,
                     "timeout": 1,
                 },
@@ -809,6 +813,7 @@ class TestAsyncClient:
             session={
                 "id": "id",
                 "prefetch_userbrowser": True,
+                "renew_on_blocked": True,
                 "retry": True,
                 "timeout": 1,
             },
@@ -956,6 +961,7 @@ class TestAsyncClient:
             session={
                 "id": "id",
                 "prefetch_userbrowser": True,
+                "renew_on_blocked": True,
                 "retry": True,
                 "timeout": 1,
             },
@@ -1108,6 +1114,7 @@ class TestAsyncClient:
                     "session": {
                         "id": "id",
                         "prefetch_userbrowser": True,
+                        "renew_on_blocked": True,
                         "retry": True,
                         "timeout": 1,
                     },
@@ -1221,6 +1228,7 @@ class TestAsyncClient:
                 "session": {
                     "id": "id",
                     "prefetch_userbrowser": True,
+                    "renew_on_blocked": True,
                     "retry": True,
                     "timeout": 1,
                 },

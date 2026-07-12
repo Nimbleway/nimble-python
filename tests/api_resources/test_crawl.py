@@ -182,6 +182,7 @@ class TestCrawl:
                 "session": {
                     "id": "id",
                     "prefetch_userbrowser": True,
+                    "renew_on_blocked": True,
                     "retry": True,
                     "timeout": 1,
                 },
@@ -475,6 +476,7 @@ class TestAsyncCrawl:
                 "session": {
                     "id": "id",
                     "prefetch_userbrowser": True,
+                    "renew_on_blocked": True,
                     "retry": True,
                     "timeout": 1,
                 },

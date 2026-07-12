@@ -144,6 +144,8 @@ class InputSession(TypedDict, total=False):
 
     prefetch_userbrowser: bool
 
+    renew_on_blocked: bool
+
     retry: bool
 
     timeout: float
@@ -1200,6 +1202,8 @@ class SharedInputsSession(TypedDict, total=False):
     id: str
 
     prefetch_userbrowser: bool
+
+    renew_on_blocked: bool
 
     retry: bool
 

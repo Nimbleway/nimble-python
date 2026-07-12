@@ -16,6 +16,7 @@ class JobCreateParams(TypedDict, total=False):
     """Job name."""
 
     description: Optional[str]
+    """Free-text description of the job."""
 
     destination: Optional[Destination]
     """Where a job writes its results."""

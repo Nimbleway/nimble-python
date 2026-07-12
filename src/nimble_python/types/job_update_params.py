@@ -10,6 +10,7 @@ __all__ = ["JobUpdateParams", "Destination", "Inputs", "Schedule"]
 
 class JobUpdateParams(TypedDict, total=False):
     description: Optional[str]
+    """New description."""
 
     destination: Optional[Destination]
     """Where a job writes its results."""

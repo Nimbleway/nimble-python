@@ -84,6 +84,8 @@ class JobsResource(SyncAPIResource):
 
           name: Job name.
 
+          description: Free-text description of the job.
+
           destination: Where a job writes its results.
 
           display_name: Human-friendly job name shown in the UI.
@@ -140,6 +142,8 @@ class JobsResource(SyncAPIResource):
         Update Job
 
         Args:
+          description: New description.
+
           destination: Where a job writes its results.
 
           display_name: New display name.
@@ -376,6 +380,8 @@ class AsyncJobsResource(AsyncAPIResource):
 
           name: Job name.
 
+          description: Free-text description of the job.
+
           destination: Where a job writes its results.
 
           display_name: Human-friendly job name shown in the UI.
@@ -432,6 +438,8 @@ class AsyncJobsResource(AsyncAPIResource):
         Update Job
 
         Args:
+          description: New description.
+
           destination: Where a job writes its results.
 
           display_name: New display name.

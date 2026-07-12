@@ -2,14 +2,16 @@
 
 from typing import List, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["RunListResponse", "RunListResponseItem", "RunListResponseItemError"]
+__all__ = ["RunListResponse", "Item", "ItemError"]
 
 
-class RunListResponseItemError(BaseModel):
+class ItemError(BaseModel):
+    """Error detail for a failed run."""
+
     message: str
     """Human-readable error description."""
 
@@ -17,13 +19,16 @@ class RunListResponseItemError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class RunListResponseItem(BaseModel):
+class Item(BaseModel):
+    """Task run status returned by list/create/get endpoints."""
+
     id: str
-    """Run identifier."""
+    """Run identifier, format "task*run*{uuid}"."""
 
     created_at: datetime
 
-    effort: Literal["quickest", "quick", "research", "pro", "max"]
+    effort: Literal["low", "medium", "high", "x-high", "max"]
+    """Canonical effort tier names for the research graph."""
 
     interaction_id: str
     """Interaction ID — pass as previous_interaction_id to reuse context."""
@@ -32,19 +37,38 @@ class RunListResponseItem(BaseModel):
     """True while status is 'queued' or 'running'."""
 
     status: Literal["queued", "running", "completed", "failed", "cancelled"]
+    """
+    Lowercase status values used in API responses (distinct from the DB-level
+    TaskRunStatus enum).
+    """
+
+    web_search_agent_id: str
+    """Web Search Agent instance this run belongs to.
+
+    Every task run is agent-bound (see AGENTS-1666). Use this to build the nested
+    URL /api/v2/web-search-agents/{web_search_agent_id}/runs/{id}.
+    """
 
     completed_at: Optional[datetime] = None
 
-    error: Optional[RunListResponseItemError] = None
+    error: Optional[ItemError] = None
+    """Error detail for a failed run."""
 
     prompt: Optional[str] = None
+    """Original user prompt before enrichment. Populated for Web Search Agent runs."""
 
     started_at: Optional[datetime] = None
-
-    web_search_agent_id: Optional[str] = None
-    """Web Search Agent instance this run belongs to."""
 
     workspace_id: Optional[str] = None
 
 
-RunListResponse: TypeAlias = List[RunListResponseItem]
+class RunListResponse(BaseModel):
+    """Paginated list of task runs for GET /tasks/runs."""
+
+    items: List[Item]
+
+    total: int
+
+    limit: Optional[int] = None
+
+    offset: Optional[int] = None
