@@ -61,13 +61,14 @@ from .types.extract_async_response import ExtractAsyncResponse
 from .types.extract_batch_response import ExtractBatchResponse
 
 if TYPE_CHECKING:
-    from .resources import jobs, serp, agent, crawl, media, tasks, batches, task_agent, domain_knowledge
+    from .resources import jobs, serp, agent, crawl, media, tasks, batches, fast_serp, task_agent, domain_knowledge
     from .resources.serp import SerpResource, AsyncSerpResource
     from .resources.agent import AgentResource, AsyncAgentResource
     from .resources.crawl import CrawlResource, AsyncCrawlResource
     from .resources.media import MediaResource, AsyncMediaResource
     from .resources.tasks import TasksResource, AsyncTasksResource
     from .resources.batches import BatchesResource, AsyncBatchesResource
+    from .resources.fast_serp import FastSerpResource, AsyncFastSerpResource
     from .resources.jobs.jobs import JobsResource, AsyncJobsResource
     from .resources.domain_knowledge import DomainKnowledgeResource, AsyncDomainKnowledgeResource
     from .resources.task_agent.task_agent import TaskAgentResource, AsyncTaskAgentResource
@@ -184,6 +185,12 @@ class Nimble(SyncAPIClient):
         from .resources.serp import SerpResource
 
         return SerpResource(self)
+
+    @cached_property
+    def fast_serp(self) -> FastSerpResource:
+        from .resources.fast_serp import FastSerpResource
+
+        return FastSerpResource(self)
 
     @cached_property
     def task_agent(self) -> TaskAgentResource:
@@ -3480,6 +3487,12 @@ class AsyncNimble(AsyncAPIClient):
         return AsyncSerpResource(self)
 
     @cached_property
+    def fast_serp(self) -> AsyncFastSerpResource:
+        from .resources.fast_serp import AsyncFastSerpResource
+
+        return AsyncFastSerpResource(self)
+
+    @cached_property
     def task_agent(self) -> AsyncTaskAgentResource:
         from .resources.task_agent import AsyncTaskAgentResource
 
@@ -6728,6 +6741,12 @@ class NimbleWithRawResponse:
         return SerpResourceWithRawResponse(self._client.serp)
 
     @cached_property
+    def fast_serp(self) -> fast_serp.FastSerpResourceWithRawResponse:
+        from .resources.fast_serp import FastSerpResourceWithRawResponse
+
+        return FastSerpResourceWithRawResponse(self._client.fast_serp)
+
+    @cached_property
     def task_agent(self) -> task_agent.TaskAgentResourceWithRawResponse:
         from .resources.task_agent import TaskAgentResourceWithRawResponse
 
@@ -6803,6 +6822,12 @@ class AsyncNimbleWithRawResponse:
         from .resources.serp import AsyncSerpResourceWithRawResponse
 
         return AsyncSerpResourceWithRawResponse(self._client.serp)
+
+    @cached_property
+    def fast_serp(self) -> fast_serp.AsyncFastSerpResourceWithRawResponse:
+        from .resources.fast_serp import AsyncFastSerpResourceWithRawResponse
+
+        return AsyncFastSerpResourceWithRawResponse(self._client.fast_serp)
 
     @cached_property
     def task_agent(self) -> task_agent.AsyncTaskAgentResourceWithRawResponse:
@@ -6882,6 +6907,12 @@ class NimbleWithStreamedResponse:
         return SerpResourceWithStreamingResponse(self._client.serp)
 
     @cached_property
+    def fast_serp(self) -> fast_serp.FastSerpResourceWithStreamingResponse:
+        from .resources.fast_serp import FastSerpResourceWithStreamingResponse
+
+        return FastSerpResourceWithStreamingResponse(self._client.fast_serp)
+
+    @cached_property
     def task_agent(self) -> task_agent.TaskAgentResourceWithStreamingResponse:
         from .resources.task_agent import TaskAgentResourceWithStreamingResponse
 
@@ -6957,6 +6988,12 @@ class AsyncNimbleWithStreamedResponse:
         from .resources.serp import AsyncSerpResourceWithStreamingResponse
 
         return AsyncSerpResourceWithStreamingResponse(self._client.serp)
+
+    @cached_property
+    def fast_serp(self) -> fast_serp.AsyncFastSerpResourceWithStreamingResponse:
+        from .resources.fast_serp import AsyncFastSerpResourceWithStreamingResponse
+
+        return AsyncFastSerpResourceWithStreamingResponse(self._client.fast_serp)
 
     @cached_property
     def task_agent(self) -> task_agent.AsyncTaskAgentResourceWithStreamingResponse:
