@@ -12,28 +12,37 @@ __all__ = ["TaskAgentCreateParams", "Sources", "SourcesAllow", "SourcesBlock"]
 
 class TaskAgentCreateParams(TypedDict, total=False):
     agent_name: Optional[str]
+    """Stable agent name."""
 
     description: Optional[str]
+    """Agent description shown to users."""
 
     display_name: Optional[str]
+    """Human-friendly agent name shown to users."""
 
     domain_expertise: Optional[str]
+    """Domain expertise or operating context for the agent."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Default effort level for this agent's runs."""
 
     goals: SequenceNotStr[str]
+    """Ordered goals for the agent to follow."""
 
     icon: Optional[str]
+    """Icon identifier used when presenting the agent."""
 
     is_active: bool
+    """Whether the agent can be used to start new runs."""
 
     output_schema: Optional[Dict[str, object]]
+    """JSON schema describing the structured output the agent should produce."""
 
     sources: Sources
-    """Source preferences for a web search agent instance."""
+    """Source guidance for the agent."""
 
     suggested_questions: SequenceNotStr[str]
+    """Suggested prompts users can run with this agent."""
 
     template: Optional[str]
     """Template name to materialize this instance from.
@@ -42,33 +51,45 @@ class TaskAgentCreateParams(TypedDict, total=False):
     """
 
     use_case: Optional[Literal["research", "enrichment", "dataset_building"]]
+    """Primary use case supported by the agent."""
 
     workspace_id: Optional[str]
+    """Workspace identifier to associate with the agent."""
 
 
 class SourcesAllow(TypedDict, total=False):
     domains: Required[SequenceNotStr[str]]
+    """Domains included in this source group."""
 
     title: Required[str]
+    """Source group title."""
 
     order: int
+    """Zero-based source group position."""
 
 
 class SourcesBlock(TypedDict, total=False):
     domains: Required[SequenceNotStr[str]]
+    """Domains included in this source group."""
 
     title: Required[str]
+    """Source group title."""
 
     order: int
+    """Zero-based source group position."""
 
 
 class Sources(TypedDict, total=False):
-    """Source preferences for a web search agent instance."""
+    """Source guidance for the agent."""
 
     allow: Iterable[SourcesAllow]
+    """Source groups the agent is allowed to use."""
 
     avoid: Optional[str]
+    """Free-text guidance describing sources or domains to avoid."""
 
     block: Iterable[SourcesBlock]
+    """Source groups the agent should not use."""
 
     prioritize: Optional[str]
+    """Free-text guidance describing sources or domains to prioritize."""

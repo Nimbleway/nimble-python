@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
 
 __all__ = ["RunListParams"]
@@ -12,7 +11,3 @@ class RunListParams(TypedDict, total=False):
     limit: int
 
     offset: int
-
-    q: Optional[str]
-
-    status: Optional[str]

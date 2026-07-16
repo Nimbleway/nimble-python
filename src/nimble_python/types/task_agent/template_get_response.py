@@ -11,56 +11,79 @@ __all__ = ["TemplateGetResponse", "Goal", "Source", "SuggestedQuestion"]
 
 class Goal(BaseModel):
     id: str
+    """Unique goal identifier (wsag\\__<uuid>)."""
 
     goal: str
+    """Goal text."""
 
     order: int
+    """Zero-based goal position."""
 
 
 class Source(BaseModel):
     id: str
+    """Unique source group identifier (wsas\\__<uuid>)."""
 
     domains: List[str]
+    """Domains included in this source group."""
 
     order: int
+    """Zero-based source group position."""
 
     title: str
+    """Source group title."""
 
 
 class SuggestedQuestion(BaseModel):
     id: str
+    """Unique suggested question identifier (wsasq\\__<uuid>)."""
 
     order: int
+    """Zero-based suggested question position."""
 
     question: str
+    """Suggested prompt text."""
 
 
 class TemplateGetResponse(BaseModel):
     id: str
+    """Unique template identifier (wsat\\__<uuid>)."""
 
     created_at: datetime
+    """When the template was created."""
 
     description: str
+    """Template description shown to users."""
 
     display_name: str
+    """Human-friendly template name shown to users."""
 
     domain_expertise: str
+    """Domain expertise or operating context for the template."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Default effort level for runs created from this template."""
 
     goals: List[Goal]
+    """Ordered goals for the template."""
 
     icon: str
+    """Icon identifier used when presenting the template."""
 
     output_schema: Optional[Dict[str, object]] = None
+    """JSON schema describing the structured output the agent should produce."""
 
     sources: List[Source]
+    """Ordered source groups for the template."""
 
     suggested_questions: List[SuggestedQuestion]
+    """Suggested prompts for the template."""
 
     template_name: str
+    """Stable template name used to create agent instances."""
 
     updated_at: datetime
+    """When the template was last updated."""
 
     use_case: Literal["research", "enrichment", "dataset_building"]
+    """Primary use case supported by the template."""

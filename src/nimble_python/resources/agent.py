@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Dict, List, Iterable, Optional
 from typing_extensions import Literal, overload
 
@@ -56,6 +57,7 @@ class AgentResource(SyncAPIResource):
         """
         return AgentResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
@@ -114,6 +116,7 @@ class AgentResource(SyncAPIResource):
             cast_to=AgentListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     def generate(
         self,
@@ -121,7 +124,7 @@ class AgentResource(SyncAPIResource):
         prompt: str,
         url: str,
         input_schema: Dict[str, object] | Omit = omit,
-        metadata: Optional[agent_generate_params.CrustCreateAgentGenerationRequestMetadata] | Omit = omit,
+        metadata: Optional[agent_generate_params.CreateTemplateGenerationRequestPublicV1Metadata] | Omit = omit,
         name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -145,6 +148,7 @@ class AgentResource(SyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     def generate(
         self,
@@ -172,6 +176,7 @@ class AgentResource(SyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @required_args(["prompt", "url"], ["from_agent", "prompt"])
     def generate(
         self,
@@ -179,7 +184,7 @@ class AgentResource(SyncAPIResource):
         prompt: str,
         url: str | Omit = omit,
         input_schema: Dict[str, object] | Omit = omit,
-        metadata: Optional[agent_generate_params.CrustCreateAgentGenerationRequestMetadata] | Omit = omit,
+        metadata: Optional[agent_generate_params.CreateTemplateGenerationRequestPublicV1Metadata] | Omit = omit,
         name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         from_agent: str | Omit = omit,
@@ -210,6 +215,7 @@ class AgentResource(SyncAPIResource):
             cast_to=AgentGenerateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         template_name: str,
@@ -243,6 +249,7 @@ class AgentResource(SyncAPIResource):
             cast_to=AgentGetResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def get_generation(
         self,
         generation_id: str,
@@ -447,6 +454,7 @@ class AsyncAgentResource(AsyncAPIResource):
         """
         return AsyncAgentResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         *,
@@ -505,6 +513,7 @@ class AsyncAgentResource(AsyncAPIResource):
             cast_to=AgentListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     async def generate(
         self,
@@ -512,7 +521,7 @@ class AsyncAgentResource(AsyncAPIResource):
         prompt: str,
         url: str,
         input_schema: Dict[str, object] | Omit = omit,
-        metadata: Optional[agent_generate_params.CrustCreateAgentGenerationRequestMetadata] | Omit = omit,
+        metadata: Optional[agent_generate_params.CreateTemplateGenerationRequestPublicV1Metadata] | Omit = omit,
         name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -536,6 +545,7 @@ class AsyncAgentResource(AsyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @overload
     async def generate(
         self,
@@ -563,6 +573,7 @@ class AsyncAgentResource(AsyncAPIResource):
         """
         ...
 
+    @typing_extensions.deprecated("deprecated")
     @required_args(["prompt", "url"], ["from_agent", "prompt"])
     async def generate(
         self,
@@ -570,7 +581,7 @@ class AsyncAgentResource(AsyncAPIResource):
         prompt: str,
         url: str | Omit = omit,
         input_schema: Dict[str, object] | Omit = omit,
-        metadata: Optional[agent_generate_params.CrustCreateAgentGenerationRequestMetadata] | Omit = omit,
+        metadata: Optional[agent_generate_params.CreateTemplateGenerationRequestPublicV1Metadata] | Omit = omit,
         name: Optional[str] | Omit = omit,
         output_schema: Dict[str, object] | Omit = omit,
         from_agent: str | Omit = omit,
@@ -601,6 +612,7 @@ class AsyncAgentResource(AsyncAPIResource):
             cast_to=AgentGenerateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         template_name: str,
@@ -634,6 +646,7 @@ class AsyncAgentResource(AsyncAPIResource):
             cast_to=AgentGetResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def get_generation(
         self,
         generation_id: str,
@@ -822,17 +835,25 @@ class AgentResourceWithRawResponse:
     def __init__(self, agent: AgentResource) -> None:
         self._agent = agent
 
-        self.list = to_raw_response_wrapper(
-            agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.generate = to_raw_response_wrapper(
-            agent.generate,
+        self.generate = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                agent.generate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_raw_response_wrapper(
-            agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_generation = to_raw_response_wrapper(
-            agent.get_generation,
+        self.get_generation = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                agent.get_generation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.run = to_raw_response_wrapper(
             agent.run,
@@ -849,17 +870,25 @@ class AsyncAgentResourceWithRawResponse:
     def __init__(self, agent: AsyncAgentResource) -> None:
         self._agent = agent
 
-        self.list = async_to_raw_response_wrapper(
-            agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.generate = async_to_raw_response_wrapper(
-            agent.generate,
+        self.generate = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                agent.generate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_raw_response_wrapper(
-            agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_generation = async_to_raw_response_wrapper(
-            agent.get_generation,
+        self.get_generation = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                agent.get_generation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.run = async_to_raw_response_wrapper(
             agent.run,
@@ -876,17 +905,25 @@ class AgentResourceWithStreamingResponse:
     def __init__(self, agent: AgentResource) -> None:
         self._agent = agent
 
-        self.list = to_streamed_response_wrapper(
-            agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.generate = to_streamed_response_wrapper(
-            agent.generate,
+        self.generate = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                agent.generate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_streamed_response_wrapper(
-            agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_generation = to_streamed_response_wrapper(
-            agent.get_generation,
+        self.get_generation = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                agent.get_generation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.run = to_streamed_response_wrapper(
             agent.run,
@@ -903,17 +940,25 @@ class AsyncAgentResourceWithStreamingResponse:
     def __init__(self, agent: AsyncAgentResource) -> None:
         self._agent = agent
 
-        self.list = async_to_streamed_response_wrapper(
-            agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.generate = async_to_streamed_response_wrapper(
-            agent.generate,
+        self.generate = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                agent.generate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_streamed_response_wrapper(
-            agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_generation = async_to_streamed_response_wrapper(
-            agent.get_generation,
+        self.get_generation = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                agent.get_generation,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.run = async_to_streamed_response_wrapper(
             agent.run,
