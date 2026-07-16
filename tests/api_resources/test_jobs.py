@@ -17,6 +17,8 @@ from nimble_python.types import (
     JobUpdateResponse,
 )
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -26,44 +28,49 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Nimble) -> None:
-        job = client.jobs.create(
-            agent_name="agent_name",
-            name="name",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.create(
+                agent_name="agent_name",
+                name="name",
+            )
+
         assert_matches_type(JobCreateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Nimble) -> None:
-        job = client.jobs.create(
-            agent_name="agent_name",
-            name="name",
-            description="description",
-            destination={
-                "path": "path",
-                "type": "file",
-                "format": "jsonl",
-            },
-            display_name="display_name",
-            inputs={
-                "type": "s3",
-                "data": [{"foo": "bar"}],
-                "file_path": "file_path",
-            },
-            schedule={
-                "cron": "cron",
-                "enabled": True,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.create(
+                agent_name="agent_name",
+                name="name",
+                description="description",
+                destination={
+                    "path": "path",
+                    "type": "file",
+                    "format": "jsonl",
+                },
+                display_name="display_name",
+                inputs={
+                    "type": "s3",
+                    "data": [{"foo": "bar"}],
+                    "file_path": "file_path",
+                },
+                schedule={
+                    "cron": "cron",
+                    "enabled": True,
+                },
+            )
+
         assert_matches_type(JobCreateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Nimble) -> None:
-        response = client.jobs.with_raw_response.create(
-            agent_name="agent_name",
-            name="name",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.with_raw_response.create(
+                agent_name="agent_name",
+                name="name",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -73,56 +80,62 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Nimble) -> None:
-        with client.jobs.with_streaming_response.create(
-            agent_name="agent_name",
-            name="name",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.with_streaming_response.create(
+                agent_name="agent_name",
+                name="name",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = response.parse()
-            assert_matches_type(JobCreateResponse, job, path=["response"])
+                job = response.parse()
+                assert_matches_type(JobCreateResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Nimble) -> None:
-        job = client.jobs.update(
-            job_id="job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.update(
+                job_id="job_id",
+            )
+
         assert_matches_type(JobUpdateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Nimble) -> None:
-        job = client.jobs.update(
-            job_id="job_id",
-            description="description",
-            destination={
-                "path": "path",
-                "type": "file",
-                "format": "jsonl",
-            },
-            display_name="display_name",
-            inputs={
-                "type": "s3",
-                "data": [{"foo": "bar"}],
-                "file_path": "file_path",
-            },
-            schedule={
-                "cron": "cron",
-                "enabled": True,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.update(
+                job_id="job_id",
+                description="description",
+                destination={
+                    "path": "path",
+                    "type": "file",
+                    "format": "jsonl",
+                },
+                display_name="display_name",
+                inputs={
+                    "type": "s3",
+                    "data": [{"foo": "bar"}],
+                    "file_path": "file_path",
+                },
+                schedule={
+                    "cron": "cron",
+                    "enabled": True,
+                },
+            )
+
         assert_matches_type(JobUpdateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Nimble) -> None:
-        response = client.jobs.with_raw_response.update(
-            job_id="job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.with_raw_response.update(
+                job_id="job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -132,46 +145,53 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Nimble) -> None:
-        with client.jobs.with_streaming_response.update(
-            job_id="job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.with_streaming_response.update(
+                job_id="job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = response.parse()
-            assert_matches_type(JobUpdateResponse, job, path=["response"])
+                job = response.parse()
+                assert_matches_type(JobUpdateResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Nimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.jobs.with_raw_response.update(
-                job_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                client.jobs.with_raw_response.update(
+                    job_id="",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Nimble) -> None:
-        job = client.jobs.list()
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.list()
+
         assert_matches_type(JobListResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Nimble) -> None:
-        job = client.jobs.list(
-            agent_name="agent_name",
-            page=1,
-            per_page=1,
-            q="q",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.list(
+                agent_name="agent_name",
+                page=1,
+                per_page=1,
+                q="q",
+            )
+
         assert_matches_type(JobListResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Nimble) -> None:
-        response = client.jobs.with_raw_response.list()
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -181,29 +201,33 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Nimble) -> None:
-        with client.jobs.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.with_streaming_response.list() as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = response.parse()
-            assert_matches_type(JobListResponse, job, path=["response"])
+                job = response.parse()
+                assert_matches_type(JobListResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Nimble) -> None:
-        job = client.jobs.delete(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.delete(
+                "job_id",
+            )
+
         assert job is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Nimble) -> None:
-        response = client.jobs.with_raw_response.delete(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.with_raw_response.delete(
+                "job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -213,39 +237,44 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Nimble) -> None:
-        with client.jobs.with_streaming_response.delete(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.with_streaming_response.delete(
+                "job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = response.parse()
-            assert job is None
+                job = response.parse()
+                assert job is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Nimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.jobs.with_raw_response.delete(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                client.jobs.with_raw_response.delete(
+                    "",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: Nimble) -> None:
-        job = client.jobs.get(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.get(
+                "job_id",
+            )
+
         assert_matches_type(JobGetResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: Nimble) -> None:
-        response = client.jobs.with_raw_response.get(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.with_raw_response.get(
+                "job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -255,39 +284,44 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: Nimble) -> None:
-        with client.jobs.with_streaming_response.get(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.with_streaming_response.get(
+                "job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = response.parse()
-            assert_matches_type(JobGetResponse, job, path=["response"])
+                job = response.parse()
+                assert_matches_type(JobGetResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get(self, client: Nimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.jobs.with_raw_response.get(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                client.jobs.with_raw_response.get(
+                    "",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run(self, client: Nimble) -> None:
-        job = client.jobs.run(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = client.jobs.run(
+                "job_id",
+            )
+
         assert_matches_type(JobRunResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run(self, client: Nimble) -> None:
-        response = client.jobs.with_raw_response.run(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.jobs.with_raw_response.run(
+                "job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -297,24 +331,26 @@ class TestJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run(self, client: Nimble) -> None:
-        with client.jobs.with_streaming_response.run(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.jobs.with_streaming_response.run(
+                "job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = response.parse()
-            assert_matches_type(JobRunResponse, job, path=["response"])
+                job = response.parse()
+                assert_matches_type(JobRunResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_run(self, client: Nimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            client.jobs.with_raw_response.run(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                client.jobs.with_raw_response.run(
+                    "",
+                )
 
 
 class TestAsyncJobs:
@@ -325,44 +361,49 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.create(
-            agent_name="agent_name",
-            name="name",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.create(
+                agent_name="agent_name",
+                name="name",
+            )
+
         assert_matches_type(JobCreateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.create(
-            agent_name="agent_name",
-            name="name",
-            description="description",
-            destination={
-                "path": "path",
-                "type": "file",
-                "format": "jsonl",
-            },
-            display_name="display_name",
-            inputs={
-                "type": "s3",
-                "data": [{"foo": "bar"}],
-                "file_path": "file_path",
-            },
-            schedule={
-                "cron": "cron",
-                "enabled": True,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.create(
+                agent_name="agent_name",
+                name="name",
+                description="description",
+                destination={
+                    "path": "path",
+                    "type": "file",
+                    "format": "jsonl",
+                },
+                display_name="display_name",
+                inputs={
+                    "type": "s3",
+                    "data": [{"foo": "bar"}],
+                    "file_path": "file_path",
+                },
+                schedule={
+                    "cron": "cron",
+                    "enabled": True,
+                },
+            )
+
         assert_matches_type(JobCreateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncNimble) -> None:
-        response = await async_client.jobs.with_raw_response.create(
-            agent_name="agent_name",
-            name="name",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.with_raw_response.create(
+                agent_name="agent_name",
+                name="name",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -372,56 +413,62 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncNimble) -> None:
-        async with async_client.jobs.with_streaming_response.create(
-            agent_name="agent_name",
-            name="name",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.with_streaming_response.create(
+                agent_name="agent_name",
+                name="name",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = await response.parse()
-            assert_matches_type(JobCreateResponse, job, path=["response"])
+                job = await response.parse()
+                assert_matches_type(JobCreateResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.update(
-            job_id="job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.update(
+                job_id="job_id",
+            )
+
         assert_matches_type(JobUpdateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.update(
-            job_id="job_id",
-            description="description",
-            destination={
-                "path": "path",
-                "type": "file",
-                "format": "jsonl",
-            },
-            display_name="display_name",
-            inputs={
-                "type": "s3",
-                "data": [{"foo": "bar"}],
-                "file_path": "file_path",
-            },
-            schedule={
-                "cron": "cron",
-                "enabled": True,
-            },
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.update(
+                job_id="job_id",
+                description="description",
+                destination={
+                    "path": "path",
+                    "type": "file",
+                    "format": "jsonl",
+                },
+                display_name="display_name",
+                inputs={
+                    "type": "s3",
+                    "data": [{"foo": "bar"}],
+                    "file_path": "file_path",
+                },
+                schedule={
+                    "cron": "cron",
+                    "enabled": True,
+                },
+            )
+
         assert_matches_type(JobUpdateResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncNimble) -> None:
-        response = await async_client.jobs.with_raw_response.update(
-            job_id="job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.with_raw_response.update(
+                job_id="job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -431,46 +478,53 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncNimble) -> None:
-        async with async_client.jobs.with_streaming_response.update(
-            job_id="job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.with_streaming_response.update(
+                job_id="job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = await response.parse()
-            assert_matches_type(JobUpdateResponse, job, path=["response"])
+                job = await response.parse()
+                assert_matches_type(JobUpdateResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncNimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.jobs.with_raw_response.update(
-                job_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                await async_client.jobs.with_raw_response.update(
+                    job_id="",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.list()
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.list()
+
         assert_matches_type(JobListResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.list(
-            agent_name="agent_name",
-            page=1,
-            per_page=1,
-            q="q",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.list(
+                agent_name="agent_name",
+                page=1,
+                per_page=1,
+                q="q",
+            )
+
         assert_matches_type(JobListResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncNimble) -> None:
-        response = await async_client.jobs.with_raw_response.list()
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -480,29 +534,33 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncNimble) -> None:
-        async with async_client.jobs.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.with_streaming_response.list() as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = await response.parse()
-            assert_matches_type(JobListResponse, job, path=["response"])
+                job = await response.parse()
+                assert_matches_type(JobListResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.delete(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.delete(
+                "job_id",
+            )
+
         assert job is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncNimble) -> None:
-        response = await async_client.jobs.with_raw_response.delete(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.with_raw_response.delete(
+                "job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -512,39 +570,44 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncNimble) -> None:
-        async with async_client.jobs.with_streaming_response.delete(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.with_streaming_response.delete(
+                "job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = await response.parse()
-            assert job is None
+                job = await response.parse()
+                assert job is None
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncNimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.jobs.with_raw_response.delete(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                await async_client.jobs.with_raw_response.delete(
+                    "",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.get(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.get(
+                "job_id",
+            )
+
         assert_matches_type(JobGetResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncNimble) -> None:
-        response = await async_client.jobs.with_raw_response.get(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.with_raw_response.get(
+                "job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -554,39 +617,44 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncNimble) -> None:
-        async with async_client.jobs.with_streaming_response.get(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.with_streaming_response.get(
+                "job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = await response.parse()
-            assert_matches_type(JobGetResponse, job, path=["response"])
+                job = await response.parse()
+                assert_matches_type(JobGetResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get(self, async_client: AsyncNimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.jobs.with_raw_response.get(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                await async_client.jobs.with_raw_response.get(
+                    "",
+                )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run(self, async_client: AsyncNimble) -> None:
-        job = await async_client.jobs.run(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            job = await async_client.jobs.run(
+                "job_id",
+            )
+
         assert_matches_type(JobRunResponse, job, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run(self, async_client: AsyncNimble) -> None:
-        response = await async_client.jobs.with_raw_response.run(
-            "job_id",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.jobs.with_raw_response.run(
+                "job_id",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -596,21 +664,23 @@ class TestAsyncJobs:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run(self, async_client: AsyncNimble) -> None:
-        async with async_client.jobs.with_streaming_response.run(
-            "job_id",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.jobs.with_streaming_response.run(
+                "job_id",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            job = await response.parse()
-            assert_matches_type(JobRunResponse, job, path=["response"])
+                job = await response.parse()
+                assert_matches_type(JobRunResponse, job, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_run(self, async_client: AsyncNimble) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
-            await async_client.jobs.with_raw_response.run(
-                "",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
+                await async_client.jobs.with_raw_response.run(
+                    "",
+                )

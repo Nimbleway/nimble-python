@@ -10,7 +10,7 @@ __all__ = ["RunListResponse", "Item", "ItemError"]
 
 
 class ItemError(BaseModel):
-    """Error detail for a failed run."""
+    """Error details when the run failed."""
 
     message: str
     """Human-readable error description."""
@@ -20,55 +20,52 @@ class ItemError(BaseModel):
 
 
 class Item(BaseModel):
-    """Task run status returned by list/create/get endpoints."""
-
     id: str
     """Run identifier, format "task*run*{uuid}"."""
 
     created_at: datetime
+    """When the run was created."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Effort level used for the run."""
 
     interaction_id: str
-    """Interaction ID — pass as previous_interaction_id to reuse context."""
+    """Interaction ID."""
 
     is_active: bool
     """True while status is 'queued' or 'running'."""
 
     status: Literal["queued", "running", "completed", "failed", "cancelled"]
-    """
-    Lowercase status values used in API responses (distinct from the DB-level
-    TaskRunStatus enum).
-    """
+    """Current run status."""
 
     web_search_agent_id: str
-    """Web Search Agent instance this run belongs to.
-
-    Every task run is agent-bound (see AGENTS-1666). Use this to build the nested
-    URL /api/v2/web-search-agents/{web_search_agent_id}/runs/{id}.
-    """
+    """Web Search Agent instance this run belongs to."""
 
     completed_at: Optional[datetime] = None
+    """When the run completed."""
 
     error: Optional[ItemError] = None
-    """Error detail for a failed run."""
+    """Error details when the run failed."""
 
     prompt: Optional[str] = None
-    """Original user prompt before enrichment. Populated for Web Search Agent runs."""
+    """Prompt submitted for the run."""
 
     started_at: Optional[datetime] = None
+    """When the run started executing."""
 
     workspace_id: Optional[str] = None
+    """Workspace identifier associated with the run."""
 
 
 class RunListResponse(BaseModel):
-    """Paginated list of task runs for GET /tasks/runs."""
-
     items: List[Item]
+    """Items returned in this page."""
+
+    limit: int
+    """Maximum number of items returned."""
+
+    offset: int
+    """Number of items skipped before this page."""
 
     total: int
-
-    limit: Optional[int] = None
-
-    offset: Optional[int] = None
+    """Total number of items matching the query."""

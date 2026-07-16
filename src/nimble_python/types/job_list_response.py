@@ -99,11 +99,11 @@ class JobListResponse(BaseModel):
     items: List[Item]
     """Jobs on this page."""
 
-    page: int
-    """Current page number."""
-
-    per_page: int
-    """Number of items per page."""
-
     total: int
     """Total number of jobs matching the query."""
+
+    page: Optional[int] = None
+    """Current page number."""
+
+    per_page: Optional[int] = None
+    """Number of items per page."""

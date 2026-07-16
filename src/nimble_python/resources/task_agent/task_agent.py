@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+import typing_extensions
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -72,6 +73,7 @@ class TaskAgentResource(SyncAPIResource):
         """
         return TaskAgentResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def create(
         self,
         *,
@@ -102,12 +104,34 @@ class TaskAgentResource(SyncAPIResource):
         `account_id` is JWT-derived and never read from the request body.
 
         Args:
-          effort: Canonical effort tier names for the research graph.
+          agent_name: Stable agent name.
 
-          sources: Source preferences for a web search agent instance.
+          description: Agent description shown to users.
+
+          display_name: Human-friendly agent name shown to users.
+
+          domain_expertise: Domain expertise or operating context for the agent.
+
+          effort: Default effort level for this agent's runs.
+
+          goals: Ordered goals for the agent to follow.
+
+          icon: Icon identifier used when presenting the agent.
+
+          is_active: Whether the agent can be used to start new runs.
+
+          output_schema: JSON schema describing the structured output the agent should produce.
+
+          sources: Source guidance for the agent.
+
+          suggested_questions: Suggested prompts users can run with this agent.
 
           template: Template name to materialize this instance from. When set, the scalar fields and
               child rows are copied from the template.
+
+          use_case: Primary use case supported by the agent.
+
+          workspace_id: Workspace identifier to associate with the agent.
 
           extra_headers: Send extra headers
 
@@ -144,6 +168,7 @@ class TaskAgentResource(SyncAPIResource):
             cast_to=TaskAgentCreateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def update(
         self,
         agent_id: str,
@@ -181,11 +206,10 @@ class TaskAgentResource(SyncAPIResource):
             cast_to=TaskAgentUpdateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
-        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
-        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         workspace_id: Optional[str] | Omit = omit,
@@ -203,8 +227,6 @@ class TaskAgentResource(SyncAPIResource):
         omitted, the user's default workspace is used.
 
         Args:
-          filter_effort: Canonical effort tier names for the research graph.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -222,8 +244,6 @@ class TaskAgentResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "filter_effort": filter_effort,
-                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
                         "workspace_id": workspace_id,
@@ -234,6 +254,7 @@ class TaskAgentResource(SyncAPIResource):
             cast_to=TaskAgentListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def deactivate(
         self,
         agent_id: str,
@@ -268,6 +289,7 @@ class TaskAgentResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         agent_id: str,
@@ -301,6 +323,7 @@ class TaskAgentResource(SyncAPIResource):
             cast_to=TaskAgentGetResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def run(
         self,
         agent_id: str,
@@ -308,6 +331,7 @@ class TaskAgentResource(SyncAPIResource):
         input: str,
         effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
+        input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
         previous_interaction_id: Optional[str] | Omit = omit,
         sources: Optional[task_agent_run_params.Sources] | Omit = omit,
@@ -322,9 +346,20 @@ class TaskAgentResource(SyncAPIResource):
         Create a research run for a Web Search Agent instance.
 
         Args:
+          input: User prompt or task instructions for the run.
+
           effort: Canonical effort tier names for the research graph.
 
-          sources: Source preferences for a web search agent instance.
+          enable_events: Whether to stream run events when supported.
+
+          input_data: Existing records to ENRICH: a list of partial rows, or a single object,
+              mirroring output_schema's shape.
+
+          output_schema: JSON schema overriding the agent's default structured output for this run.
+
+          previous_interaction_id: Previous interaction identifier used to continue a conversation.
+
+          sources: Source guidance overriding the agent default.
 
           extra_headers: Send extra headers
 
@@ -343,6 +378,7 @@ class TaskAgentResource(SyncAPIResource):
                     "input": input,
                     "effort": effort,
                     "enable_events": enable_events,
+                    "input_data": input_data,
                     "output_schema": output_schema,
                     "previous_interaction_id": previous_interaction_id,
                     "sources": sources,
@@ -384,6 +420,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         """
         return AsyncTaskAgentResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def create(
         self,
         *,
@@ -414,12 +451,34 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         `account_id` is JWT-derived and never read from the request body.
 
         Args:
-          effort: Canonical effort tier names for the research graph.
+          agent_name: Stable agent name.
 
-          sources: Source preferences for a web search agent instance.
+          description: Agent description shown to users.
+
+          display_name: Human-friendly agent name shown to users.
+
+          domain_expertise: Domain expertise or operating context for the agent.
+
+          effort: Default effort level for this agent's runs.
+
+          goals: Ordered goals for the agent to follow.
+
+          icon: Icon identifier used when presenting the agent.
+
+          is_active: Whether the agent can be used to start new runs.
+
+          output_schema: JSON schema describing the structured output the agent should produce.
+
+          sources: Source guidance for the agent.
+
+          suggested_questions: Suggested prompts users can run with this agent.
 
           template: Template name to materialize this instance from. When set, the scalar fields and
               child rows are copied from the template.
+
+          use_case: Primary use case supported by the agent.
+
+          workspace_id: Workspace identifier to associate with the agent.
 
           extra_headers: Send extra headers
 
@@ -456,6 +515,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
             cast_to=TaskAgentCreateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def update(
         self,
         agent_id: str,
@@ -493,11 +553,10 @@ class AsyncTaskAgentResource(AsyncAPIResource):
             cast_to=TaskAgentUpdateResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         *,
-        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
-        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         workspace_id: Optional[str] | Omit = omit,
@@ -515,8 +574,6 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         omitted, the user's default workspace is used.
 
         Args:
-          filter_effort: Canonical effort tier names for the research graph.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -534,8 +591,6 @@ class AsyncTaskAgentResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "filter_effort": filter_effort,
-                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
                         "workspace_id": workspace_id,
@@ -546,6 +601,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
             cast_to=TaskAgentListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def deactivate(
         self,
         agent_id: str,
@@ -580,6 +636,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         agent_id: str,
@@ -613,6 +670,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
             cast_to=TaskAgentGetResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def run(
         self,
         agent_id: str,
@@ -620,6 +678,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         input: str,
         effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
+        input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
         previous_interaction_id: Optional[str] | Omit = omit,
         sources: Optional[task_agent_run_params.Sources] | Omit = omit,
@@ -634,9 +693,20 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         Create a research run for a Web Search Agent instance.
 
         Args:
+          input: User prompt or task instructions for the run.
+
           effort: Canonical effort tier names for the research graph.
 
-          sources: Source preferences for a web search agent instance.
+          enable_events: Whether to stream run events when supported.
+
+          input_data: Existing records to ENRICH: a list of partial rows, or a single object,
+              mirroring output_schema's shape.
+
+          output_schema: JSON schema overriding the agent's default structured output for this run.
+
+          previous_interaction_id: Previous interaction identifier used to continue a conversation.
+
+          sources: Source guidance overriding the agent default.
 
           extra_headers: Send extra headers
 
@@ -655,6 +725,7 @@ class AsyncTaskAgentResource(AsyncAPIResource):
                     "input": input,
                     "effort": effort,
                     "enable_events": enable_events,
+                    "input_data": input_data,
                     "output_schema": output_schema,
                     "previous_interaction_id": previous_interaction_id,
                     "sources": sources,
@@ -672,23 +743,35 @@ class TaskAgentResourceWithRawResponse:
     def __init__(self, task_agent: TaskAgentResource) -> None:
         self._task_agent = task_agent
 
-        self.create = to_raw_response_wrapper(
-            task_agent.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                task_agent.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.update = to_raw_response_wrapper(
-            task_agent.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                task_agent.update,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_raw_response_wrapper(
-            task_agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                task_agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.deactivate = to_raw_response_wrapper(
-            task_agent.deactivate,
+        self.deactivate = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                task_agent.deactivate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_raw_response_wrapper(
-            task_agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                task_agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.run = to_raw_response_wrapper(
-            task_agent.run,
+        self.run = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                task_agent.run,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -704,23 +787,35 @@ class AsyncTaskAgentResourceWithRawResponse:
     def __init__(self, task_agent: AsyncTaskAgentResource) -> None:
         self._task_agent = task_agent
 
-        self.create = async_to_raw_response_wrapper(
-            task_agent.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                task_agent.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.update = async_to_raw_response_wrapper(
-            task_agent.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                task_agent.update,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_raw_response_wrapper(
-            task_agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                task_agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.deactivate = async_to_raw_response_wrapper(
-            task_agent.deactivate,
+        self.deactivate = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                task_agent.deactivate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_raw_response_wrapper(
-            task_agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                task_agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.run = async_to_raw_response_wrapper(
-            task_agent.run,
+        self.run = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                task_agent.run,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -736,23 +831,35 @@ class TaskAgentResourceWithStreamingResponse:
     def __init__(self, task_agent: TaskAgentResource) -> None:
         self._task_agent = task_agent
 
-        self.create = to_streamed_response_wrapper(
-            task_agent.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                task_agent.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.update = to_streamed_response_wrapper(
-            task_agent.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                task_agent.update,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = to_streamed_response_wrapper(
-            task_agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                task_agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.deactivate = to_streamed_response_wrapper(
-            task_agent.deactivate,
+        self.deactivate = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                task_agent.deactivate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_streamed_response_wrapper(
-            task_agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                task_agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.run = to_streamed_response_wrapper(
-            task_agent.run,
+        self.run = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                task_agent.run,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property
@@ -768,23 +875,35 @@ class AsyncTaskAgentResourceWithStreamingResponse:
     def __init__(self, task_agent: AsyncTaskAgentResource) -> None:
         self._task_agent = task_agent
 
-        self.create = async_to_streamed_response_wrapper(
-            task_agent.create,
+        self.create = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                task_agent.create,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.update = async_to_streamed_response_wrapper(
-            task_agent.update,
+        self.update = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                task_agent.update,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.list = async_to_streamed_response_wrapper(
-            task_agent.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                task_agent.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.deactivate = async_to_streamed_response_wrapper(
-            task_agent.deactivate,
+        self.deactivate = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                task_agent.deactivate,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_streamed_response_wrapper(
-            task_agent.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                task_agent.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.run = async_to_streamed_response_wrapper(
-            task_agent.run,
+        self.run = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                task_agent.run,  # pyright: ignore[reportDeprecated],
+            )
         )
 
     @cached_property

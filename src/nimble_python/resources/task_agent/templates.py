@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal
+import typing_extensions
 
 import httpx
 
@@ -45,11 +44,10 @@ class TemplatesResource(SyncAPIResource):
         """
         return TemplatesResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
-        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
-        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -63,8 +61,6 @@ class TemplatesResource(SyncAPIResource):
         List Templates
 
         Args:
-          filter_effort: Canonical effort tier names for the research graph.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -82,8 +78,6 @@ class TemplatesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "filter_effort": filter_effort,
-                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -93,6 +87,7 @@ class TemplatesResource(SyncAPIResource):
             cast_to=TemplateListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         template_name: str,
@@ -147,11 +142,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         """
         return AsyncTemplatesResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         *,
-        filter_effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
-        filter_use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -165,8 +159,6 @@ class AsyncTemplatesResource(AsyncAPIResource):
         List Templates
 
         Args:
-          filter_effort: Canonical effort tier names for the research graph.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -184,8 +176,6 @@ class AsyncTemplatesResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "filter_effort": filter_effort,
-                        "filter_use_case": filter_use_case,
                         "limit": limit,
                         "offset": offset,
                     },
@@ -195,6 +185,7 @@ class AsyncTemplatesResource(AsyncAPIResource):
             cast_to=TemplateListResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         template_name: str,
@@ -233,11 +224,15 @@ class TemplatesResourceWithRawResponse:
     def __init__(self, templates: TemplatesResource) -> None:
         self._templates = templates
 
-        self.list = to_raw_response_wrapper(
-            templates.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                templates.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_raw_response_wrapper(
-            templates.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                templates.get,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -245,11 +240,15 @@ class AsyncTemplatesResourceWithRawResponse:
     def __init__(self, templates: AsyncTemplatesResource) -> None:
         self._templates = templates
 
-        self.list = async_to_raw_response_wrapper(
-            templates.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                templates.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_raw_response_wrapper(
-            templates.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                templates.get,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -257,11 +256,15 @@ class TemplatesResourceWithStreamingResponse:
     def __init__(self, templates: TemplatesResource) -> None:
         self._templates = templates
 
-        self.list = to_streamed_response_wrapper(
-            templates.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                templates.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_streamed_response_wrapper(
-            templates.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                templates.get,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -269,9 +272,13 @@ class AsyncTemplatesResourceWithStreamingResponse:
     def __init__(self, templates: AsyncTemplatesResource) -> None:
         self._templates = templates
 
-        self.list = async_to_streamed_response_wrapper(
-            templates.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                templates.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_streamed_response_wrapper(
-            templates.get,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                templates.get,  # pyright: ignore[reportDeprecated],
+            )
         )

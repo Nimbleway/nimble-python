@@ -8,239 +8,48 @@ from ..._models import BaseModel
 
 __all__ = [
     "RunGetResultResponse",
-    "TaskRunResult",
-    "TaskRunResultOutput",
-    "TaskRunResultOutputTaskRunTextOutput",
-    "TaskRunResultOutputTaskRunTextOutputTrust",
-    "TaskRunResultOutputTaskRunTextOutputTrustClaim",
-    "TaskRunResultOutputTaskRunTextOutputTrustClaimCitation",
-    "TaskRunResultOutputTaskRunTextOutputTrustSource",
-    "TaskRunResultOutputTaskRunJsonOutput",
-    "TaskRunResultOutputTaskRunJsonOutputTrust",
-    "TaskRunResultOutputTaskRunJsonOutputTrustClaim",
-    "TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation",
-    "TaskRunResultOutputTaskRunJsonOutputTrustSource",
-    "TaskRunResultRun",
-    "TaskRunResultRunError",
-    "TaskRunFailedResult",
-    "TaskRunFailedResultError",
-    "TaskRunFailedResultRun",
-    "TaskRunFailedResultRunError",
+    "TaskRunResultPublicV1",
+    "TaskRunResultPublicV1Output",
+    "TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1",
+    "TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1",
+    "TaskRunResultPublicV1Run",
+    "TaskRunResultPublicV1RunError",
+    "TaskRunFailedResultPublicV1",
+    "TaskRunFailedResultPublicV1Error",
+    "TaskRunFailedResultPublicV1Run",
+    "TaskRunFailedResultPublicV1RunError",
 ]
 
 
-class TaskRunResultOutputTaskRunTextOutputTrustClaimCitation(BaseModel):
-    url: str
-
-    excerpts: Optional[List[str]] = None
-
-    extract_template_name: Optional[str] = None
-
-    source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    source_intent: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    source_type: Optional[Literal["primary", "secondary"]] = None
-
-    title: Optional[str] = None
-
-
-class TaskRunResultOutputTaskRunTextOutputTrustClaim(BaseModel):
-    callout: int
-
-    citations: List[TaskRunResultOutputTaskRunTextOutputTrustClaimCitation]
-
-    confidence: Literal["high", "medium", "low"]
-
-    reasoning: str
-
-
-class TaskRunResultOutputTaskRunTextOutputTrustSource(BaseModel):
-    type: Literal["primary", "secondary"]
-
-    url: str
-
-    extract_template_name: Optional[str] = None
-
-    source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    source_intent: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    title: Optional[str] = None
-
-
-class TaskRunResultOutputTaskRunTextOutputTrust(BaseModel):
-    claims: List[TaskRunResultOutputTaskRunTextOutputTrustClaim]
-
-    confidence: Literal["high", "medium", "low"]
-
-    reasoning: str
-
-    sources: List[TaskRunResultOutputTaskRunTextOutputTrustSource]
-
-
-class TaskRunResultOutputTaskRunTextOutput(BaseModel):
-    """Text output from a completed task."""
-
+class TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1(BaseModel):
     content: str
     """The final prose answer."""
 
-    trust: TaskRunResultOutputTaskRunTextOutputTrust
+    trust: Dict[str, object]
+    """Trust and citation metadata for the output."""
 
     type: Optional[Literal["text"]] = None
+    """Output content type."""
 
 
-class TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation(BaseModel):
-    url: str
-
-    excerpts: Optional[List[str]] = None
-
-    extract_template_name: Optional[str] = None
-
-    source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    source_intent: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    source_type: Optional[Literal["primary", "secondary"]] = None
-
-    title: Optional[str] = None
-
-
-class TaskRunResultOutputTaskRunJsonOutputTrustClaim(BaseModel):
-    citations: List[TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation]
-
-    confidence: Literal["high", "medium", "low"]
-
-    path: str
-
-    reasoning: str
-
-
-class TaskRunResultOutputTaskRunJsonOutputTrustSource(BaseModel):
-    type: Literal["primary", "secondary"]
-
-    url: str
-
-    extract_template_name: Optional[str] = None
-
-    source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    source_intent: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
-    """
-    What _kind_ of source this is (classified by the compress LLM), independent of
-    TrustSourceType (how authoritative it is for a specific claim). Deliberately
-    uses "official" rather than "primary" so the two axes can never collide.
-
-    Also doubles as the sub-question's `source_intent` (what kind of source a
-    question _needs_) — the two concepts overlap enough that a single enum lets
-    `classify_source_importance` compare "what we got" against "what we asked for"
-    directly.
-    """
-
-    title: Optional[str] = None
-
-
-class TaskRunResultOutputTaskRunJsonOutputTrust(BaseModel):
-    claims: List[TaskRunResultOutputTaskRunJsonOutputTrustClaim]
-
-    confidence: Literal["high", "medium", "low"]
-
-    reasoning: str
-
-    sources: List[TaskRunResultOutputTaskRunJsonOutputTrustSource]
-
-
-class TaskRunResultOutputTaskRunJsonOutput(BaseModel):
-    """
-    Structured JSON output from a completed task, produced when task_spec.output_schema.type is 'json'.
-    """
-
+class TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1(BaseModel):
     content: Union[Dict[str, object], List[object]]
-    """Data conforming to the caller-supplied JSON schema.
+    """The final structured output."""
 
-    A dict for object schemas; a list for array schemas.
-    """
-
-    trust: TaskRunResultOutputTaskRunJsonOutputTrust
+    trust: Dict[str, object]
+    """Trust and citation metadata for the output."""
 
     type: Optional[Literal["json"]] = None
+    """Output content type."""
 
 
-TaskRunResultOutput: TypeAlias = Union[TaskRunResultOutputTaskRunTextOutput, TaskRunResultOutputTaskRunJsonOutput]
+TaskRunResultPublicV1Output: TypeAlias = Union[
+    TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1, TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1
+]
 
 
-class TaskRunResultRunError(BaseModel):
-    """Error detail for a failed run."""
+class TaskRunResultPublicV1RunError(BaseModel):
+    """Error details when the run failed."""
 
     message: str
     """Human-readable error description."""
@@ -249,60 +58,55 @@ class TaskRunResultRunError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class TaskRunResultRun(BaseModel):
+class TaskRunResultPublicV1Run(BaseModel):
     """Task run object with status 'completed'."""
 
     id: str
     """Run identifier, format "task*run*{uuid}"."""
 
     created_at: datetime
+    """When the run was created."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Effort level used for the run."""
 
     interaction_id: str
-    """Interaction ID — pass as previous_interaction_id to reuse context."""
+    """Interaction ID."""
 
     is_active: bool
     """True while status is 'queued' or 'running'."""
 
     status: Literal["queued", "running", "completed", "failed", "cancelled"]
-    """
-    Lowercase status values used in API responses (distinct from the DB-level
-    TaskRunStatus enum).
-    """
+    """Current run status."""
 
     web_search_agent_id: str
-    """Web Search Agent instance this run belongs to.
-
-    Every task run is agent-bound (see AGENTS-1666). Use this to build the nested
-    URL /api/v2/web-search-agents/{web_search_agent_id}/runs/{id}.
-    """
+    """Web Search Agent instance this run belongs to."""
 
     completed_at: Optional[datetime] = None
+    """When the run completed."""
 
-    error: Optional[TaskRunResultRunError] = None
-    """Error detail for a failed run."""
+    error: Optional[TaskRunResultPublicV1RunError] = None
+    """Error details when the run failed."""
 
     prompt: Optional[str] = None
-    """Original user prompt before enrichment. Populated for Web Search Agent runs."""
+    """Prompt submitted for the run."""
 
     started_at: Optional[datetime] = None
+    """When the run started executing."""
 
     workspace_id: Optional[str] = None
+    """Workspace identifier associated with the run."""
 
 
-class TaskRunResult(BaseModel):
-    """Response for GET /tasks/runs/{run_id}/result — status 'completed'."""
-
-    output: TaskRunResultOutput
+class TaskRunResultPublicV1(BaseModel):
+    output: TaskRunResultPublicV1Output
     """Output from the completed task."""
 
-    run: TaskRunResultRun
+    run: TaskRunResultPublicV1Run
     """Task run object with status 'completed'."""
 
 
-class TaskRunFailedResultError(BaseModel):
+class TaskRunFailedResultPublicV1Error(BaseModel):
     """Structured error detail."""
 
     message: str
@@ -312,8 +116,8 @@ class TaskRunFailedResultError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class TaskRunFailedResultRunError(BaseModel):
-    """Error detail for a failed run."""
+class TaskRunFailedResultPublicV1RunError(BaseModel):
+    """Error details when the run failed."""
 
     message: str
     """Human-readable error description."""
@@ -322,61 +126,52 @@ class TaskRunFailedResultRunError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class TaskRunFailedResultRun(BaseModel):
+class TaskRunFailedResultPublicV1Run(BaseModel):
     """Task run object with status 'failed'."""
 
     id: str
     """Run identifier, format "task*run*{uuid}"."""
 
     created_at: datetime
+    """When the run was created."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Effort level used for the run."""
 
     interaction_id: str
-    """Interaction ID — pass as previous_interaction_id to reuse context."""
+    """Interaction ID."""
 
     is_active: bool
     """True while status is 'queued' or 'running'."""
 
     status: Literal["queued", "running", "completed", "failed", "cancelled"]
-    """
-    Lowercase status values used in API responses (distinct from the DB-level
-    TaskRunStatus enum).
-    """
+    """Current run status."""
 
     web_search_agent_id: str
-    """Web Search Agent instance this run belongs to.
-
-    Every task run is agent-bound (see AGENTS-1666). Use this to build the nested
-    URL /api/v2/web-search-agents/{web_search_agent_id}/runs/{id}.
-    """
+    """Web Search Agent instance this run belongs to."""
 
     completed_at: Optional[datetime] = None
+    """When the run completed."""
 
-    error: Optional[TaskRunFailedResultRunError] = None
-    """Error detail for a failed run."""
+    error: Optional[TaskRunFailedResultPublicV1RunError] = None
+    """Error details when the run failed."""
 
     prompt: Optional[str] = None
-    """Original user prompt before enrichment. Populated for Web Search Agent runs."""
+    """Prompt submitted for the run."""
 
     started_at: Optional[datetime] = None
+    """When the run started executing."""
 
     workspace_id: Optional[str] = None
+    """Workspace identifier associated with the run."""
 
 
-class TaskRunFailedResult(BaseModel):
-    """Response for GET /tasks/runs/{run_id}/result when the run failed.
-
-    Returned with HTTP 422 so callers can distinguish a failed run from a
-    missing one (404) or an active one (408).
-    """
-
-    error: TaskRunFailedResultError
+class TaskRunFailedResultPublicV1(BaseModel):
+    error: TaskRunFailedResultPublicV1Error
     """Structured error detail."""
 
-    run: TaskRunFailedResultRun
+    run: TaskRunFailedResultPublicV1Run
     """Task run object with status 'failed'."""
 
 
-RunGetResultResponse: TypeAlias = Union[TaskRunResult, TaskRunFailedResult]
+RunGetResultResponse: TypeAlias = Union[TaskRunResultPublicV1, TaskRunFailedResultPublicV1]
