@@ -258,7 +258,7 @@ class TestRuns:
                 agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-        assert_matches_type(object, run, path=["response"])
+        assert run is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -272,7 +272,7 @@ class TestRuns:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         run = response.parse()
-        assert_matches_type(object, run, path=["response"])
+        assert run is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -286,7 +286,7 @@ class TestRuns:
                 assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
                 run = response.parse()
-                assert_matches_type(object, run, path=["response"])
+                assert run is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -551,7 +551,7 @@ class TestAsyncRuns:
                 agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
-        assert_matches_type(object, run, path=["response"])
+        assert run is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -565,7 +565,7 @@ class TestAsyncRuns:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         run = await response.parse()
-        assert_matches_type(object, run, path=["response"])
+        assert run is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -579,7 +579,7 @@ class TestAsyncRuns:
                 assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
                 run = await response.parse()
-                assert_matches_type(object, run, path=["response"])
+                assert run is None
 
         assert cast(Any, response.is_closed) is True
 
