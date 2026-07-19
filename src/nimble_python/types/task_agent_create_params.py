@@ -53,9 +53,6 @@ class TaskAgentCreateParams(TypedDict, total=False):
     use_case: Optional[Literal["research", "enrichment", "dataset_building"]]
     """Primary use case supported by the agent."""
 
-    workspace_id: Optional[str]
-    """Workspace identifier to associate with the agent."""
-
 
 class SourcesAllow(TypedDict, total=False):
     domains: Required[SequenceNotStr[str]]

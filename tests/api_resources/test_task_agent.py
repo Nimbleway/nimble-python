@@ -68,7 +68,6 @@ class TestTaskAgent:
                 suggested_questions=["string"],
                 template="template",
                 use_case="research",
-                workspace_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
         assert_matches_type(TaskAgentCreateResponse, task_agent, path=["response"])
@@ -440,7 +439,6 @@ class TestAsyncTaskAgent:
                 suggested_questions=["string"],
                 template="template",
                 use_case="research",
-                workspace_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             )
 
         assert_matches_type(TaskAgentCreateResponse, task_agent, path=["response"])

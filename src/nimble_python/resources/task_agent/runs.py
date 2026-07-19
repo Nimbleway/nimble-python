@@ -96,47 +96,6 @@ class RunsResource(SyncAPIResource):
         )
 
     @typing_extensions.deprecated("deprecated")
-    def cancel(
-        self,
-        run_id: str,
-        *,
-        agent_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """
-        Cancel an in-progress or queued run.
-
-        Verb is POST + `/cancel` action segment per the AGENTS-1666 spec (replaces the
-        old `DELETE …/runs/{run_id}`).
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_id:
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._post(
-            path_template("/v1/task-agents/{agent_id}/runs/{run_id}/cancel", agent_id=agent_id, run_id=run_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         run_id: str,
@@ -335,47 +294,6 @@ class AsyncRunsResource(AsyncAPIResource):
         )
 
     @typing_extensions.deprecated("deprecated")
-    async def cancel(
-        self,
-        run_id: str,
-        *,
-        agent_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """
-        Cancel an in-progress or queued run.
-
-        Verb is POST + `/cancel` action segment per the AGENTS-1666 spec (replaces the
-        old `DELETE …/runs/{run_id}`).
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_id:
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._post(
-            path_template("/v1/task-agents/{agent_id}/runs/{run_id}/cancel", agent_id=agent_id, run_id=run_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         run_id: str,
@@ -513,11 +431,6 @@ class RunsResourceWithRawResponse:
                 runs.list,  # pyright: ignore[reportDeprecated],
             )
         )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.get = (  # pyright: ignore[reportDeprecated]
             to_raw_response_wrapper(
                 runs.get,  # pyright: ignore[reportDeprecated],
@@ -542,11 +455,6 @@ class AsyncRunsResourceWithRawResponse:
         self.list = (  # pyright: ignore[reportDeprecated]
             async_to_raw_response_wrapper(
                 runs.list,  # pyright: ignore[reportDeprecated],
-            )
-        )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
             )
         )
         self.get = (  # pyright: ignore[reportDeprecated]
@@ -575,11 +483,6 @@ class RunsResourceWithStreamingResponse:
                 runs.list,  # pyright: ignore[reportDeprecated],
             )
         )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
-            )
-        )
         self.get = (  # pyright: ignore[reportDeprecated]
             to_streamed_response_wrapper(
                 runs.get,  # pyright: ignore[reportDeprecated],
@@ -604,11 +507,6 @@ class AsyncRunsResourceWithStreamingResponse:
         self.list = (  # pyright: ignore[reportDeprecated]
             async_to_streamed_response_wrapper(
                 runs.list,  # pyright: ignore[reportDeprecated],
-            )
-        )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
             )
         )
         self.get = (  # pyright: ignore[reportDeprecated]
