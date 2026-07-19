@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.24.0 (2026-07-19)
+
+Full Changelog: [v0.23.0...v0.24.0](https://github.com/Nimbleway/nimble-python/compare/v0.23.0...v0.24.0)
+
+### Features
+
+* **api:** api update ([27121de](https://github.com/Nimbleway/nimble-python/commit/27121de406e5be1d76975780b8689d48aecebbf5))
+* **api:** api update ([f1585c5](https://github.com/Nimbleway/nimble-python/commit/f1585c5fae73225539e26a86d33d6ee5c4b8ab5d))
+* **api:** api update ([145d461](https://github.com/Nimbleway/nimble-python/commit/145d46130aa4bf0dae2526b5173c76ef3cd9e832))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([1ba64bc](https://github.com/Nimbleway/nimble-python/commit/1ba64bcfba91ef0dcc170122382e00af7b3f1d8d))
+
+
+### Bug Fixes
+
+* **internal:** resolve build failures ([be103a1](https://github.com/Nimbleway/nimble-python/commit/be103a12056631ed49ad660acdd68aa24025e87c))
+
 ## 0.23.0 (2026-07-13)
 
 Full Changelog: [v0.22.0...v0.23.0](https://github.com/Nimbleway/nimble-python/compare/v0.22.0...v0.23.0)
