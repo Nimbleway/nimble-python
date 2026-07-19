@@ -35,6 +35,9 @@ class SourcesAllow(BaseModel):
 
 
 class SourcesBlock(BaseModel):
+    id: str
+    """Unique source group identifier (wsas\\__<uuid>)."""
+
     domains: List[str]
     """Domains included in this source group."""
 
@@ -115,11 +118,5 @@ class TaskAgentGetResponse(BaseModel):
     use_case: Literal["research", "enrichment", "dataset_building"]
     """Primary use case supported by the agent."""
 
-    account_id: Optional[str] = None
-    """Account identifier associated with the agent."""
-
     agent_name: Optional[str] = None
     """Stable agent name."""
-
-    workspace_id: Optional[str] = None
-    """Workspace identifier associated with the agent."""

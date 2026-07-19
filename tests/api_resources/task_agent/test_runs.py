@@ -80,63 +80,6 @@ class TestRuns:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_cancel(self, client: Nimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            run = client.task_agent.runs.cancel(
-                run_id="run_id",
-                agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert run is None
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_cancel(self, client: Nimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            response = client.task_agent.runs.with_raw_response.cancel(
-                run_id="run_id",
-                agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        run = response.parse()
-        assert run is None
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_cancel(self, client: Nimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            with client.task_agent.runs.with_streaming_response.cancel(
-                run_id="run_id",
-                agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ) as response:
-                assert not response.is_closed
-                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-                run = response.parse()
-                assert run is None
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_cancel(self, client: Nimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
-                client.task_agent.runs.with_raw_response.cancel(
-                    run_id="run_id",
-                    agent_id="",
-                )
-
-            with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
-                client.task_agent.runs.with_raw_response.cancel(
-                    run_id="",
-                    agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
     def test_method_get(self, client: Nimble) -> None:
         with pytest.warns(DeprecationWarning):
             run = client.task_agent.runs.get(
@@ -369,63 +312,6 @@ class TestAsyncRuns:
             with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
                 await async_client.task_agent.runs.with_raw_response.list(
                     agent_id="",
-                )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_cancel(self, async_client: AsyncNimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            run = await async_client.task_agent.runs.cancel(
-                run_id="run_id",
-                agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert run is None
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_cancel(self, async_client: AsyncNimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            response = await async_client.task_agent.runs.with_raw_response.cancel(
-                run_id="run_id",
-                agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        run = await response.parse()
-        assert run is None
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_cancel(self, async_client: AsyncNimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            async with async_client.task_agent.runs.with_streaming_response.cancel(
-                run_id="run_id",
-                agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ) as response:
-                assert not response.is_closed
-                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-                run = await response.parse()
-                assert run is None
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_cancel(self, async_client: AsyncNimble) -> None:
-        with pytest.warns(DeprecationWarning):
-            with pytest.raises(ValueError, match=r"Expected a non-empty value for `agent_id` but received ''"):
-                await async_client.task_agent.runs.with_raw_response.cancel(
-                    run_id="run_id",
-                    agent_id="",
-                )
-
-            with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
-                await async_client.task_agent.runs.with_raw_response.cancel(
-                    run_id="",
-                    agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

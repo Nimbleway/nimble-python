@@ -90,7 +90,6 @@ class TaskAgentResource(SyncAPIResource):
         suggested_questions: SequenceNotStr[str] | Omit = omit,
         template: Optional[str] | Omit = omit,
         use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
-        workspace_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,8 +130,6 @@ class TaskAgentResource(SyncAPIResource):
 
           use_case: Primary use case supported by the agent.
 
-          workspace_id: Workspace identifier to associate with the agent.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -158,7 +155,6 @@ class TaskAgentResource(SyncAPIResource):
                     "suggested_questions": suggested_questions,
                     "template": template,
                     "use_case": use_case,
-                    "workspace_id": workspace_id,
                 },
                 task_agent_create_params.TaskAgentCreateParams,
             ),
@@ -437,7 +433,6 @@ class AsyncTaskAgentResource(AsyncAPIResource):
         suggested_questions: SequenceNotStr[str] | Omit = omit,
         template: Optional[str] | Omit = omit,
         use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
-        workspace_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -478,8 +473,6 @@ class AsyncTaskAgentResource(AsyncAPIResource):
 
           use_case: Primary use case supported by the agent.
 
-          workspace_id: Workspace identifier to associate with the agent.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -505,7 +498,6 @@ class AsyncTaskAgentResource(AsyncAPIResource):
                     "suggested_questions": suggested_questions,
                     "template": template,
                     "use_case": use_case,
-                    "workspace_id": workspace_id,
                 },
                 task_agent_create_params.TaskAgentCreateParams,
             ),

@@ -53,9 +53,6 @@ class Item(BaseModel):
     started_at: Optional[datetime] = None
     """When the run started executing."""
 
-    workspace_id: Optional[str] = None
-    """Workspace identifier associated with the run."""
-
 
 class RunListResponse(BaseModel):
     items: List[Item]
