@@ -9,27 +9,27 @@ from .._types import SequenceNotStr
 
 __all__ = [
     "AgentGenerateParams",
-    "CrustCreateAgentGenerationRequest",
-    "CrustCreateAgentGenerationRequestMetadata",
-    "CrustCreateAgentRefinementRequest",
+    "CreateTemplateGenerationRequestPublicV1",
+    "CreateTemplateGenerationRequestPublicV1Metadata",
+    "CreateTemplateRefinementRequestPublicV1",
 ]
 
 
-class CrustCreateAgentGenerationRequest(TypedDict, total=False):
+class CreateTemplateGenerationRequestPublicV1(TypedDict, total=False):
     prompt: Required[str]
 
     url: Required[str]
 
     input_schema: Dict[str, object]
 
-    metadata: Optional[CrustCreateAgentGenerationRequestMetadata]
+    metadata: Optional[CreateTemplateGenerationRequestPublicV1Metadata]
 
     name: Optional[str]
 
     output_schema: Dict[str, object]
 
 
-class CrustCreateAgentGenerationRequestMetadata(TypedDict, total=False):
+class CreateTemplateGenerationRequestPublicV1Metadata(TypedDict, total=False):
     description: Optional[str]
 
     display_name: Optional[str]
@@ -37,10 +37,10 @@ class CrustCreateAgentGenerationRequestMetadata(TypedDict, total=False):
     tags: SequenceNotStr[str]
 
 
-class CrustCreateAgentRefinementRequest(TypedDict, total=False):
+class CreateTemplateRefinementRequestPublicV1(TypedDict, total=False):
     from_agent: Required[str]
 
     prompt: Required[str]
 
 
-AgentGenerateParams: TypeAlias = Union[CrustCreateAgentGenerationRequest, CrustCreateAgentRefinementRequest]
+AgentGenerateParams: TypeAlias = Union[CreateTemplateGenerationRequestPublicV1, CreateTemplateRefinementRequestPublicV1]

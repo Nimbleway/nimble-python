@@ -8,33 +8,38 @@ from ..._models import BaseModel
 
 __all__ = [
     "RunGetResultResponse",
-    "TaskRunResult",
-    "TaskRunResultOutput",
-    "TaskRunResultOutputTaskRunTextOutput",
-    "TaskRunResultOutputTaskRunTextOutputTrust",
-    "TaskRunResultOutputTaskRunTextOutputTrustClaim",
-    "TaskRunResultOutputTaskRunTextOutputTrustClaimCitation",
-    "TaskRunResultOutputTaskRunTextOutputTrustSource",
-    "TaskRunResultOutputTaskRunJsonOutput",
-    "TaskRunResultOutputTaskRunJsonOutputTrust",
-    "TaskRunResultOutputTaskRunJsonOutputTrustClaim",
-    "TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation",
-    "TaskRunResultOutputTaskRunJsonOutputTrustSource",
-    "TaskRunResultRun",
-    "TaskRunResultRunError",
-    "TaskRunFailedResult",
-    "TaskRunFailedResultError",
-    "TaskRunFailedResultRun",
-    "TaskRunFailedResultRunError",
+    "TaskRunResultPublicV1",
+    "TaskRunResultPublicV1Output",
+    "TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1",
+    "TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1Trust",
+    "TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustClaim",
+    "TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustClaimCitation",
+    "TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustSource",
+    "TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1",
+    "TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1Trust",
+    "TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustClaim",
+    "TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustClaimCitation",
+    "TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustSource",
+    "TaskRunResultPublicV1Run",
+    "TaskRunResultPublicV1RunError",
+    "TaskRunFailedResultPublicV1",
+    "TaskRunFailedResultPublicV1Error",
+    "TaskRunFailedResultPublicV1Run",
+    "TaskRunFailedResultPublicV1RunError",
 ]
 
 
-class TaskRunResultOutputTaskRunTextOutputTrustClaimCitation(BaseModel):
+class TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustClaimCitation(BaseModel):
+    """A citation backing a specific claim in the answer."""
+
     url: str
+    """URL of the cited page."""
 
     excerpts: Optional[List[str]] = None
+    """Verbatim excerpts supporting the claim."""
 
     extract_template_name: Optional[str] = None
+    """Extract template used to read the source, when one was used."""
 
     source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
     """
@@ -61,26 +66,39 @@ class TaskRunResultOutputTaskRunTextOutputTrustClaimCitation(BaseModel):
     """
 
     source_type: Optional[Literal["primary", "secondary"]] = None
+    """How authoritative the source is: 'primary' or 'secondary'."""
 
     title: Optional[str] = None
+    """Title of the cited page."""
 
 
-class TaskRunResultOutputTaskRunTextOutputTrustClaim(BaseModel):
+class TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustClaim(BaseModel):
+    """Trust metadata for one claim in a prose answer, keyed by callout marker."""
+
     callout: int
+    """Callout marker number referencing this claim in the answer text."""
 
-    citations: List[TaskRunResultOutputTaskRunTextOutputTrustClaimCitation]
+    citations: List[TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustClaimCitation]
+    """Citations backing this claim."""
 
-    confidence: Literal["high", "medium", "low"]
+    confidence: Literal["high", "medium", "low", "pre_existing"]
+    """Confidence in this claim."""
 
     reasoning: str
+    """Why this confidence level was assigned."""
 
 
-class TaskRunResultOutputTaskRunTextOutputTrustSource(BaseModel):
+class TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustSource(BaseModel):
+    """A source consulted while producing the answer."""
+
     type: Literal["primary", "secondary"]
+    """How authoritative the source is: 'primary' or 'secondary'."""
 
     url: str
+    """URL of the source page."""
 
     extract_template_name: Optional[str] = None
+    """Extract template used to read the source, when one was used."""
 
     source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
     """
@@ -107,35 +125,47 @@ class TaskRunResultOutputTaskRunTextOutputTrustSource(BaseModel):
     """
 
     title: Optional[str] = None
+    """Title of the source page."""
 
 
-class TaskRunResultOutputTaskRunTextOutputTrust(BaseModel):
-    claims: List[TaskRunResultOutputTaskRunTextOutputTrustClaim]
+class TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1Trust(BaseModel):
+    """Trust and citation metadata for the output."""
 
-    confidence: Literal["high", "medium", "low"]
+    claims: List[TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustClaim]
+    """Per-claim trust, keyed by callout markers in the answer text."""
+
+    confidence: Literal["high", "medium", "low", "pre_existing"]
+    """Overall confidence in the answer."""
 
     reasoning: str
+    """Why this confidence level was assigned."""
 
-    sources: List[TaskRunResultOutputTaskRunTextOutputTrustSource]
+    sources: List[TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1TrustSource]
+    """Sources consulted while producing the answer."""
 
 
-class TaskRunResultOutputTaskRunTextOutput(BaseModel):
-    """Text output from a completed task."""
-
+class TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1(BaseModel):
     content: str
     """The final prose answer."""
 
-    trust: TaskRunResultOutputTaskRunTextOutputTrust
+    trust: TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1Trust
+    """Trust and citation metadata for the output."""
 
     type: Optional[Literal["text"]] = None
+    """Output content type."""
 
 
-class TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation(BaseModel):
+class TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustClaimCitation(BaseModel):
+    """A citation backing a specific claim in the answer."""
+
     url: str
+    """URL of the cited page."""
 
     excerpts: Optional[List[str]] = None
+    """Verbatim excerpts supporting the claim."""
 
     extract_template_name: Optional[str] = None
+    """Extract template used to read the source, when one was used."""
 
     source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
     """
@@ -162,26 +192,39 @@ class TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation(BaseModel):
     """
 
     source_type: Optional[Literal["primary", "secondary"]] = None
+    """How authoritative the source is: 'primary' or 'secondary'."""
 
     title: Optional[str] = None
+    """Title of the cited page."""
 
 
-class TaskRunResultOutputTaskRunJsonOutputTrustClaim(BaseModel):
-    citations: List[TaskRunResultOutputTaskRunJsonOutputTrustClaimCitation]
+class TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustClaim(BaseModel):
+    """Trust metadata for one value in a structured (JSON) answer, keyed by JSON path."""
 
-    confidence: Literal["high", "medium", "low"]
+    citations: List[TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustClaimCitation]
+    """Citations backing this value."""
+
+    confidence: Literal["high", "medium", "low", "pre_existing"]
+    """Confidence in this value."""
 
     path: str
+    """JSON path of the value in the structured output this claim refers to."""
 
     reasoning: str
+    """Why this confidence level was assigned."""
 
 
-class TaskRunResultOutputTaskRunJsonOutputTrustSource(BaseModel):
+class TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustSource(BaseModel):
+    """A source consulted while producing the answer."""
+
     type: Literal["primary", "secondary"]
+    """How authoritative the source is: 'primary' or 'secondary'."""
 
     url: str
+    """URL of the source page."""
 
     extract_template_name: Optional[str] = None
+    """Extract template used to read the source, when one was used."""
 
     source_category: Optional[Literal["official", "news", "social", "academic", "aggregator", "other"]] = None
     """
@@ -208,39 +251,43 @@ class TaskRunResultOutputTaskRunJsonOutputTrustSource(BaseModel):
     """
 
     title: Optional[str] = None
+    """Title of the source page."""
 
 
-class TaskRunResultOutputTaskRunJsonOutputTrust(BaseModel):
-    claims: List[TaskRunResultOutputTaskRunJsonOutputTrustClaim]
+class TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1Trust(BaseModel):
+    """Trust and citation metadata for the output."""
 
-    confidence: Literal["high", "medium", "low"]
+    claims: List[TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustClaim]
+    """Per-value trust, keyed by JSON path in the structured output."""
+
+    confidence: Literal["high", "medium", "low", "pre_existing"]
+    """Overall confidence in the answer."""
 
     reasoning: str
+    """Why this confidence level was assigned."""
 
-    sources: List[TaskRunResultOutputTaskRunJsonOutputTrustSource]
+    sources: List[TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1TrustSource]
+    """Sources consulted while producing the answer."""
 
 
-class TaskRunResultOutputTaskRunJsonOutput(BaseModel):
-    """
-    Structured JSON output from a completed task, produced when task_spec.output_schema.type is 'json'.
-    """
-
+class TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1(BaseModel):
     content: Union[Dict[str, object], List[object]]
-    """Data conforming to the caller-supplied JSON schema.
+    """The final structured output."""
 
-    A dict for object schemas; a list for array schemas.
-    """
-
-    trust: TaskRunResultOutputTaskRunJsonOutputTrust
+    trust: TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1Trust
+    """Trust and citation metadata for the output."""
 
     type: Optional[Literal["json"]] = None
+    """Output content type."""
 
 
-TaskRunResultOutput: TypeAlias = Union[TaskRunResultOutputTaskRunTextOutput, TaskRunResultOutputTaskRunJsonOutput]
+TaskRunResultPublicV1Output: TypeAlias = Union[
+    TaskRunResultPublicV1OutputTaskRunTextOutputPublicV1, TaskRunResultPublicV1OutputTaskRunJsonOutputPublicV1
+]
 
 
-class TaskRunResultRunError(BaseModel):
-    """Error detail for a failed run."""
+class TaskRunResultPublicV1RunError(BaseModel):
+    """Error details when the run failed."""
 
     message: str
     """Human-readable error description."""
@@ -249,60 +296,52 @@ class TaskRunResultRunError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class TaskRunResultRun(BaseModel):
+class TaskRunResultPublicV1Run(BaseModel):
     """Task run object with status 'completed'."""
 
     id: str
     """Run identifier, format "task*run*{uuid}"."""
 
     created_at: datetime
+    """When the run was created."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Effort level used for the run."""
 
     interaction_id: str
-    """Interaction ID — pass as previous_interaction_id to reuse context."""
+    """Interaction ID."""
 
     is_active: bool
     """True while status is 'queued' or 'running'."""
 
     status: Literal["queued", "running", "completed", "failed", "cancelled"]
-    """
-    Lowercase status values used in API responses (distinct from the DB-level
-    TaskRunStatus enum).
-    """
+    """Current run status."""
 
     web_search_agent_id: str
-    """Web Search Agent instance this run belongs to.
-
-    Every task run is agent-bound (see AGENTS-1666). Use this to build the nested
-    URL /api/v2/web-search-agents/{web_search_agent_id}/runs/{id}.
-    """
+    """Web Search Agent instance this run belongs to."""
 
     completed_at: Optional[datetime] = None
+    """When the run completed."""
 
-    error: Optional[TaskRunResultRunError] = None
-    """Error detail for a failed run."""
+    error: Optional[TaskRunResultPublicV1RunError] = None
+    """Error details when the run failed."""
 
     prompt: Optional[str] = None
-    """Original user prompt before enrichment. Populated for Web Search Agent runs."""
+    """Prompt submitted for the run."""
 
     started_at: Optional[datetime] = None
+    """When the run started executing."""
 
-    workspace_id: Optional[str] = None
 
-
-class TaskRunResult(BaseModel):
-    """Response for GET /tasks/runs/{run_id}/result — status 'completed'."""
-
-    output: TaskRunResultOutput
+class TaskRunResultPublicV1(BaseModel):
+    output: TaskRunResultPublicV1Output
     """Output from the completed task."""
 
-    run: TaskRunResultRun
+    run: TaskRunResultPublicV1Run
     """Task run object with status 'completed'."""
 
 
-class TaskRunFailedResultError(BaseModel):
+class TaskRunFailedResultPublicV1Error(BaseModel):
     """Structured error detail."""
 
     message: str
@@ -312,8 +351,8 @@ class TaskRunFailedResultError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class TaskRunFailedResultRunError(BaseModel):
-    """Error detail for a failed run."""
+class TaskRunFailedResultPublicV1RunError(BaseModel):
+    """Error details when the run failed."""
 
     message: str
     """Human-readable error description."""
@@ -322,61 +361,49 @@ class TaskRunFailedResultRunError(BaseModel):
     """Reference ID (equals the run id)."""
 
 
-class TaskRunFailedResultRun(BaseModel):
+class TaskRunFailedResultPublicV1Run(BaseModel):
     """Task run object with status 'failed'."""
 
     id: str
     """Run identifier, format "task*run*{uuid}"."""
 
     created_at: datetime
+    """When the run was created."""
 
     effort: Literal["low", "medium", "high", "x-high", "max"]
-    """Canonical effort tier names for the research graph."""
+    """Effort level used for the run."""
 
     interaction_id: str
-    """Interaction ID — pass as previous_interaction_id to reuse context."""
+    """Interaction ID."""
 
     is_active: bool
     """True while status is 'queued' or 'running'."""
 
     status: Literal["queued", "running", "completed", "failed", "cancelled"]
-    """
-    Lowercase status values used in API responses (distinct from the DB-level
-    TaskRunStatus enum).
-    """
+    """Current run status."""
 
     web_search_agent_id: str
-    """Web Search Agent instance this run belongs to.
-
-    Every task run is agent-bound (see AGENTS-1666). Use this to build the nested
-    URL /api/v2/web-search-agents/{web_search_agent_id}/runs/{id}.
-    """
+    """Web Search Agent instance this run belongs to."""
 
     completed_at: Optional[datetime] = None
+    """When the run completed."""
 
-    error: Optional[TaskRunFailedResultRunError] = None
-    """Error detail for a failed run."""
+    error: Optional[TaskRunFailedResultPublicV1RunError] = None
+    """Error details when the run failed."""
 
     prompt: Optional[str] = None
-    """Original user prompt before enrichment. Populated for Web Search Agent runs."""
+    """Prompt submitted for the run."""
 
     started_at: Optional[datetime] = None
+    """When the run started executing."""
 
-    workspace_id: Optional[str] = None
 
-
-class TaskRunFailedResult(BaseModel):
-    """Response for GET /tasks/runs/{run_id}/result when the run failed.
-
-    Returned with HTTP 422 so callers can distinguish a failed run from a
-    missing one (404) or an active one (408).
-    """
-
-    error: TaskRunFailedResultError
+class TaskRunFailedResultPublicV1(BaseModel):
+    error: TaskRunFailedResultPublicV1Error
     """Structured error detail."""
 
-    run: TaskRunFailedResultRun
+    run: TaskRunFailedResultPublicV1Run
     """Task run object with status 'failed'."""
 
 
-RunGetResultResponse: TypeAlias = Union[TaskRunResult, TaskRunFailedResult]
+RunGetResultResponse: TypeAlias = Union[TaskRunResultPublicV1, TaskRunFailedResultPublicV1]

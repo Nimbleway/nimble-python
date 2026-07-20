@@ -212,10 +212,9 @@ from nimble_python.types.task_agent import RunListResponse, RunGetResponse, RunG
 Methods:
 
 - <code title="get /v1/task-agents/{agent_id}/runs">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">list</a>(agent_id, \*\*<a href="src/nimble_python/types/task_agent/run_list_params.py">params</a>) -> <a href="./src/nimble_python/types/task_agent/run_list_response.py">RunListResponse</a></code>
-- <code title="post /v1/task-agents/{agent_id}/runs/{run_id}/cancel">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">cancel</a>(run_id, \*, agent_id) -> None</code>
 - <code title="get /v1/task-agents/{agent_id}/runs/{run_id}">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">get</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/task_agent/run_get_response.py">RunGetResponse</a></code>
 - <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/result">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">get_result</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/task_agent/run_get_result_response.py">RunGetResultResponse</a></code>
-- <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/events">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">stream_events</a>(run_id, \*, agent_id) -> object</code>
+- <code title="get /v1/task-agents/{agent_id}/runs/{run_id}/events">client.task_agent.runs.<a href="./src/nimble_python/resources/task_agent/runs.py">stream_events</a>(run_id, \*, agent_id) -> None</code>
 
 # Jobs
 

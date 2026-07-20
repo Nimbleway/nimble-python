@@ -3235,7 +3235,6 @@ class Nimble(SyncAPIClient):
         query: str,
         content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
-        debug_params: Optional[Dict[str, object]] | Omit = omit,
         deep_search: Optional[bool] | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -3267,8 +3266,6 @@ class Nimble(SyncAPIClient):
               ('pdf', 'docx', 'xlsx', etc.)
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
-
-          debug_params: Internal-only. Gated to allowlisted accounts; ignored otherwise.
 
           deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
 
@@ -3319,7 +3316,6 @@ class Nimble(SyncAPIClient):
                     "query": query,
                     "content_type": content_type,
                     "country": country,
-                    "debug_params": debug_params,
                     "deep_search": deep_search,
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,
@@ -6535,7 +6531,6 @@ class AsyncNimble(AsyncAPIClient):
         query: str,
         content_type: Optional[SequenceNotStr[str]] | Omit = omit,
         country: str | Omit = omit,
-        debug_params: Optional[Dict[str, object]] | Omit = omit,
         deep_search: Optional[bool] | Omit = omit,
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -6567,8 +6562,6 @@ class AsyncNimble(AsyncAPIClient):
               ('pdf', 'docx', 'xlsx', etc.)
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
-
-          debug_params: Internal-only. Gated to allowlisted accounts; ignored otherwise.
 
           deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
 
@@ -6619,7 +6612,6 @@ class AsyncNimble(AsyncAPIClient):
                     "query": query,
                     "content_type": content_type,
                     "country": country,
-                    "debug_params": debug_params,
                     "deep_search": deep_search,
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,

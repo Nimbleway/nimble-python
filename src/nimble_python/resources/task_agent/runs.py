@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
+import typing_extensions
+from typing import Any, cast
 
 import httpx
 
@@ -45,14 +46,13 @@ class RunsResource(SyncAPIResource):
         """
         return RunsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         agent_id: str,
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        q: Optional[str] | Omit = omit,
-        status: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -88,8 +88,6 @@ class RunsResource(SyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
-                        "q": q,
-                        "status": status,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -97,46 +95,7 @@ class RunsResource(SyncAPIResource):
             cast_to=RunListResponse,
         )
 
-    def cancel(
-        self,
-        run_id: str,
-        *,
-        agent_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """
-        Cancel an in-progress or queued run.
-
-        Verb is POST + `/cancel` action segment per the AGENTS-1666 spec (replaces the
-        old `DELETE …/runs/{run_id}`).
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_id:
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._post(
-            path_template("/v1/task-agents/{agent_id}/runs/{run_id}/cancel", agent_id=agent_id, run_id=run_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
+    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         run_id: str,
@@ -177,6 +136,7 @@ class RunsResource(SyncAPIResource):
             cast_to=RunGetResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def get_result(
         self,
         run_id: str,
@@ -225,6 +185,7 @@ class RunsResource(SyncAPIResource):
             ),
         )
 
+    @typing_extensions.deprecated("deprecated")
     def stream_events(
         self,
         run_id: str,
@@ -236,7 +197,7 @@ class RunsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> None:
         """
         SSE stream of real-time progress events for a run on this instance.
 
@@ -253,12 +214,13 @@ class RunsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             path_template("/v1/task-agents/{agent_id}/runs/{run_id}/events", agent_id=agent_id, run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=NoneType,
         )
 
 
@@ -282,14 +244,13 @@ class AsyncRunsResource(AsyncAPIResource):
         """
         return AsyncRunsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         agent_id: str,
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        q: Optional[str] | Omit = omit,
-        status: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -325,8 +286,6 @@ class AsyncRunsResource(AsyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
-                        "q": q,
-                        "status": status,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -334,46 +293,7 @@ class AsyncRunsResource(AsyncAPIResource):
             cast_to=RunListResponse,
         )
 
-    async def cancel(
-        self,
-        run_id: str,
-        *,
-        agent_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """
-        Cancel an in-progress or queued run.
-
-        Verb is POST + `/cancel` action segment per the AGENTS-1666 spec (replaces the
-        old `DELETE …/runs/{run_id}`).
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not agent_id:
-            raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
-        if not run_id:
-            raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._post(
-            path_template("/v1/task-agents/{agent_id}/runs/{run_id}/cancel", agent_id=agent_id, run_id=run_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
+    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         run_id: str,
@@ -414,6 +334,7 @@ class AsyncRunsResource(AsyncAPIResource):
             cast_to=RunGetResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def get_result(
         self,
         run_id: str,
@@ -462,6 +383,7 @@ class AsyncRunsResource(AsyncAPIResource):
             ),
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def stream_events(
         self,
         run_id: str,
@@ -473,7 +395,7 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> None:
         """
         SSE stream of real-time progress events for a run on this instance.
 
@@ -490,12 +412,13 @@ class AsyncRunsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             path_template("/v1/task-agents/{agent_id}/runs/{run_id}/events", agent_id=agent_id, run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=NoneType,
         )
 
 
@@ -503,20 +426,25 @@ class RunsResourceWithRawResponse:
     def __init__(self, runs: RunsResource) -> None:
         self._runs = runs
 
-        self.list = to_raw_response_wrapper(
-            runs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                runs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = to_raw_response_wrapper(
-            runs.cancel,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                runs.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_raw_response_wrapper(
-            runs.get,
+        self.get_result = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                runs.get_result,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_result = to_raw_response_wrapper(
-            runs.get_result,
-        )
-        self.stream_events = to_raw_response_wrapper(
-            runs.stream_events,
+        self.stream_events = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                runs.stream_events,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -524,20 +452,25 @@ class AsyncRunsResourceWithRawResponse:
     def __init__(self, runs: AsyncRunsResource) -> None:
         self._runs = runs
 
-        self.list = async_to_raw_response_wrapper(
-            runs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                runs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = async_to_raw_response_wrapper(
-            runs.cancel,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                runs.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_raw_response_wrapper(
-            runs.get,
+        self.get_result = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                runs.get_result,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_result = async_to_raw_response_wrapper(
-            runs.get_result,
-        )
-        self.stream_events = async_to_raw_response_wrapper(
-            runs.stream_events,
+        self.stream_events = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                runs.stream_events,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -545,20 +478,25 @@ class RunsResourceWithStreamingResponse:
     def __init__(self, runs: RunsResource) -> None:
         self._runs = runs
 
-        self.list = to_streamed_response_wrapper(
-            runs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                runs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = to_streamed_response_wrapper(
-            runs.cancel,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                runs.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = to_streamed_response_wrapper(
-            runs.get,
+        self.get_result = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                runs.get_result,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_result = to_streamed_response_wrapper(
-            runs.get_result,
-        )
-        self.stream_events = to_streamed_response_wrapper(
-            runs.stream_events,
+        self.stream_events = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                runs.stream_events,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -566,18 +504,23 @@ class AsyncRunsResourceWithStreamingResponse:
     def __init__(self, runs: AsyncRunsResource) -> None:
         self._runs = runs
 
-        self.list = async_to_streamed_response_wrapper(
-            runs.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                runs.list,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.cancel = async_to_streamed_response_wrapper(
-            runs.cancel,
+        self.get = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                runs.get,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get = async_to_streamed_response_wrapper(
-            runs.get,
+        self.get_result = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                runs.get_result,  # pyright: ignore[reportDeprecated],
+            )
         )
-        self.get_result = async_to_streamed_response_wrapper(
-            runs.get_result,
-        )
-        self.stream_events = async_to_streamed_response_wrapper(
-            runs.stream_events,
+        self.stream_events = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                runs.stream_events,  # pyright: ignore[reportDeprecated],
+            )
         )

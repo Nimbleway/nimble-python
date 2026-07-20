@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Union, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from .._types import SequenceNotStr
@@ -23,9 +23,6 @@ class ClientSearchParams(TypedDict, total=False):
 
     country: str
     """Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')"""
-
-    debug_params: Optional[Dict[str, object]]
-    """Internal-only. Gated to allowlisted accounts; ignored otherwise."""
 
     deep_search: Optional[bool]
     """Deprecated.
