@@ -60,9 +60,6 @@ class JobUpdateResponse(BaseModel):
     name: str
     """Job name."""
 
-    agent_name: Optional[str] = None
-    """Name of the agent this job runs."""
-
     created_at: Optional[datetime] = None
     """When the job was created."""
 
@@ -74,6 +71,9 @@ class JobUpdateResponse(BaseModel):
 
     display_name: Optional[str] = None
     """Human-friendly job name shown in the UI."""
+
+    extract_template_name: Optional[str] = None
+    """Name of the extract template this job runs."""
 
     inputs: Optional[Inputs] = None
     """Configuration for the input data a job processes."""

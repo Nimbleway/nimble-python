@@ -9,8 +9,8 @@ __all__ = ["JobCreateParams", "Destination", "Inputs", "Schedule"]
 
 
 class JobCreateParams(TypedDict, total=False):
-    agent_name: Required[str]
-    """Name of the agent to run."""
+    extract_template_name: Required[str]
+    """Name of the extract template to run."""
 
     name: Required[str]
     """Job name."""

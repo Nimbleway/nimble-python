@@ -61,7 +61,7 @@ class JobsResource(SyncAPIResource):
     def create(
         self,
         *,
-        agent_name: str,
+        extract_template_name: str,
         name: str,
         description: Optional[str] | Omit = omit,
         destination: Optional[job_create_params.Destination] | Omit = omit,
@@ -79,7 +79,7 @@ class JobsResource(SyncAPIResource):
         Create Job Public V2
 
         Args:
-          agent_name: Name of the agent to run.
+          extract_template_name: Name of the extract template to run.
 
           name: Job name.
 
@@ -105,7 +105,7 @@ class JobsResource(SyncAPIResource):
             "/v2/jobs",
             body=maybe_transform(
                 {
-                    "agent_name": agent_name,
+                    "extract_template_name": extract_template_name,
                     "name": name,
                     "description": description,
                     "destination": destination,
@@ -316,7 +316,7 @@ class AsyncJobsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        agent_name: str,
+        extract_template_name: str,
         name: str,
         description: Optional[str] | Omit = omit,
         destination: Optional[job_create_params.Destination] | Omit = omit,
@@ -334,7 +334,7 @@ class AsyncJobsResource(AsyncAPIResource):
         Create Job Public V2
 
         Args:
-          agent_name: Name of the agent to run.
+          extract_template_name: Name of the extract template to run.
 
           name: Job name.
 
@@ -360,7 +360,7 @@ class AsyncJobsResource(AsyncAPIResource):
             "/v2/jobs",
             body=await async_maybe_transform(
                 {
-                    "agent_name": agent_name,
+                    "extract_template_name": extract_template_name,
                     "name": name,
                     "description": description,
                     "destination": destination,
