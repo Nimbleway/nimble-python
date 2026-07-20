@@ -72,7 +72,7 @@ class TasksResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/v1/tasks",
+            "/v2/tasks",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -117,7 +117,7 @@ class TasksResource(SyncAPIResource):
         if not task_id:
             raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return self._get(
-            path_template("/v1/tasks/{task_id}", task_id=task_id),
+            path_template("/v2/tasks/{task_id}", task_id=task_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -152,7 +152,7 @@ class TasksResource(SyncAPIResource):
         if not task_id:
             raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return self._get(
-            path_template("/v1/tasks/{task_id}/results", task_id=task_id),
+            path_template("/v2/tasks/{task_id}/results", task_id=task_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -209,7 +209,7 @@ class AsyncTasksResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/v1/tasks",
+            "/v2/tasks",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -254,7 +254,7 @@ class AsyncTasksResource(AsyncAPIResource):
         if not task_id:
             raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return await self._get(
-            path_template("/v1/tasks/{task_id}", task_id=task_id),
+            path_template("/v2/tasks/{task_id}", task_id=task_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -289,7 +289,7 @@ class AsyncTasksResource(AsyncAPIResource):
         if not task_id:
             raise ValueError(f"Expected a non-empty value for `task_id` but received {task_id!r}")
         return await self._get(
-            path_template("/v1/tasks/{task_id}/results", task_id=task_id),
+            path_template("/v2/tasks/{task_id}/results", task_id=task_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

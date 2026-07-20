@@ -54,7 +54,7 @@ class BatchesResource(SyncAPIResource):
         """Retrieve a paginated list of batches for the authenticated account."""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
-            "/v1/batches",
+            "/v2/batches",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -89,7 +89,7 @@ class BatchesResource(SyncAPIResource):
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
         return self._get(
-            path_template("/v1/batches/{batch_id}", batch_id=batch_id),
+            path_template("/v2/batches/{batch_id}", batch_id=batch_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -125,7 +125,7 @@ class BatchesResource(SyncAPIResource):
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
         return self._get(
-            path_template("/v1/batches/{batch_id}/progress", batch_id=batch_id),
+            path_template("/v2/batches/{batch_id}/progress", batch_id=batch_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -166,7 +166,7 @@ class AsyncBatchesResource(AsyncAPIResource):
         """Retrieve a paginated list of batches for the authenticated account."""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
-            "/v1/batches",
+            "/v2/batches",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -201,7 +201,7 @@ class AsyncBatchesResource(AsyncAPIResource):
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
         return await self._get(
-            path_template("/v1/batches/{batch_id}", batch_id=batch_id),
+            path_template("/v2/batches/{batch_id}", batch_id=batch_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -237,7 +237,7 @@ class AsyncBatchesResource(AsyncAPIResource):
         if not batch_id:
             raise ValueError(f"Expected a non-empty value for `batch_id` but received {batch_id!r}")
         return await self._get(
-            path_template("/v1/batches/{batch_id}/progress", batch_id=batch_id),
+            path_template("/v2/batches/{batch_id}/progress", batch_id=batch_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

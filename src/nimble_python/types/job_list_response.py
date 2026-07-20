@@ -94,16 +94,14 @@ class Item(BaseModel):
 
 
 class JobListResponse(BaseModel):
-    """A page of jobs."""
-
     items: List[Item]
-    """Jobs on this page."""
+    """Items returned in this page."""
+
+    limit: int
+    """Maximum number of items returned."""
+
+    offset: int
+    """Number of items skipped before this page."""
 
     total: int
-    """Total number of jobs matching the query."""
-
-    page: Optional[int] = None
-    """Current page number."""
-
-    per_page: Optional[int] = None
-    """Number of items per page."""
+    """Total number of items matching the query."""

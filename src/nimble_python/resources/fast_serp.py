@@ -115,7 +115,7 @@ class FastSerpResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/fast-serp",
+            "/v2/fast-serp",
             body=maybe_transform(
                 {
                     "search_engine": search_engine,
@@ -232,7 +232,7 @@ class AsyncFastSerpResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/fast-serp",
+            "/v2/fast-serp",
             body=await async_maybe_transform(
                 {
                     "search_engine": search_engine,
