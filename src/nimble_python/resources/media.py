@@ -71,7 +71,7 @@ class MediaResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/media",
+            "/v2/media",
             body=maybe_transform(
                 {
                     "url": url,
@@ -132,7 +132,7 @@ class MediaResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/media/async",
+            "/v2/media/async",
             body=maybe_transform(
                 {
                     "url": url,
@@ -204,7 +204,7 @@ class AsyncMediaResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/media",
+            "/v2/media",
             body=await async_maybe_transform(
                 {
                     "url": url,
@@ -265,7 +265,7 @@ class AsyncMediaResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/media/async",
+            "/v2/media/async",
             body=await async_maybe_transform(
                 {
                     "url": url,

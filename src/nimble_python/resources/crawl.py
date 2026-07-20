@@ -79,7 +79,7 @@ class CrawlResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/v1/crawl",
+            "/v2/crawl",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -158,7 +158,7 @@ class CrawlResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/crawl",
+            "/v2/crawl",
             body=maybe_transform(
                 {
                     "url": url,
@@ -211,7 +211,7 @@ class CrawlResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._get(
-            path_template("/v1/crawl/{id}", id=id),
+            path_template("/v2/crawl/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -246,7 +246,7 @@ class CrawlResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._delete(
-            path_template("/v1/crawl/{id}", id=id),
+            path_template("/v2/crawl/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -306,7 +306,7 @@ class AsyncCrawlResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/v1/crawl",
+            "/v2/crawl",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -385,7 +385,7 @@ class AsyncCrawlResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/crawl",
+            "/v2/crawl",
             body=await async_maybe_transform(
                 {
                     "url": url,
@@ -438,7 +438,7 @@ class AsyncCrawlResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._get(
-            path_template("/v1/crawl/{id}", id=id),
+            path_template("/v2/crawl/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -473,7 +473,7 @@ class AsyncCrawlResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._delete(
-            path_template("/v1/crawl/{id}", id=id),
+            path_template("/v2/crawl/{id}", id=id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
