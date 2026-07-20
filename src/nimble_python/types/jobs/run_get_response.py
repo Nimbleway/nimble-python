@@ -28,11 +28,11 @@ class Job(BaseModel):
     name: str
     """Internal job name."""
 
-    agent_name: Optional[str] = None
-    """Name of the agent this job runs."""
-
     display_name: Optional[str] = None
     """Human-friendly job name shown in the UI."""
+
+    extract_template_name: Optional[str] = None
+    """Name of the extract template this job runs."""
 
     schedule: Optional[JobSchedule] = None
     """Cron-based schedule controlling when a job runs automatically."""
