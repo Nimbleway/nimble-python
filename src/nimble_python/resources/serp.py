@@ -118,7 +118,7 @@ class SerpResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/serp",
+            "/v2/serp",
             body=maybe_transform(
                 {
                     "search_engine": search_engine,
@@ -229,7 +229,7 @@ class SerpResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/serp/async",
+            "/v2/serp/async",
             body=maybe_transform(
                 {
                     "search_engine": search_engine,
@@ -290,7 +290,7 @@ class SerpResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/serp/batch",
+            "/v2/serp/batch",
             body=maybe_transform(
                 {
                     "inputs": inputs,
@@ -397,7 +397,7 @@ class AsyncSerpResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/serp",
+            "/v2/serp",
             body=await async_maybe_transform(
                 {
                     "search_engine": search_engine,
@@ -508,7 +508,7 @@ class AsyncSerpResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/serp/async",
+            "/v2/serp/async",
             body=await async_maybe_transform(
                 {
                     "search_engine": search_engine,
@@ -569,7 +569,7 @@ class AsyncSerpResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/serp/batch",
+            "/v2/serp/batch",
             body=await async_maybe_transform(
                 {
                     "inputs": inputs,

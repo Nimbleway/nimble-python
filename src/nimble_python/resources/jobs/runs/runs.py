@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-import typing_extensions
-from typing import Optional
-
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -30,6 +27,7 @@ from ...._base_client import make_request_options
 from ....types.jobs.run_get_response import RunGetResponse
 from ....types.jobs.run_list_response import RunListResponse
 from ....types.jobs.run_cancel_response import RunCancelResponse
+from ....types.jobs.run_create_response import RunCreateResponse
 
 __all__ = ["RunsResource", "AsyncRunsResource"]
 
@@ -58,14 +56,45 @@ class RunsResource(SyncAPIResource):
         """
         return RunsResourceWithStreamingResponse(self)
 
-    @typing_extensions.deprecated("deprecated")
+    def create(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunCreateResponse:
+        """
+        Trigger Job Run Public V2
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return self._post(
+            path_template("/v2/jobs/{job_id}/runs", job_id=job_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunCreateResponse,
+        )
+
     def list(
         self,
         job_id: str,
         *,
-        page: int | Omit = omit,
-        per_page: int | Omit = omit,
-        status: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -74,11 +103,9 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunListResponse:
         """
-        List Runs for Job
+        List Job Runs Public V2
 
         Args:
-          status: Filter by status
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -90,7 +117,7 @@ class RunsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            path_template("/v1/jobs/{job_id}/runs", job_id=job_id),
+            path_template("/v2/jobs/{job_id}/runs", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -98,9 +125,8 @@ class RunsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "page": page,
-                        "per_page": per_page,
-                        "status": status,
+                        "limit": limit,
+                        "offset": offset,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -108,7 +134,6 @@ class RunsResource(SyncAPIResource):
             cast_to=RunListResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def cancel(
         self,
         run_id: str,
@@ -121,7 +146,7 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunCancelResponse:
         """
-        Cancel Run
+        Cancel Run Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -135,14 +160,13 @@ class RunsResource(SyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._post(
-            path_template("/v1/jobs/runs/{run_id}/cancel", run_id=run_id),
+            path_template("/v2/jobs/runs/{run_id}/cancel", run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunCancelResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         run_id: str,
@@ -155,7 +179,7 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetResponse:
         """
-        Get Run
+        Get Run Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -169,7 +193,7 @@ class RunsResource(SyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._get(
-            path_template("/v1/jobs/runs/{run_id}", run_id=run_id),
+            path_template("/v2/jobs/runs/{run_id}", run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -201,14 +225,45 @@ class AsyncRunsResource(AsyncAPIResource):
         """
         return AsyncRunsResourceWithStreamingResponse(self)
 
-    @typing_extensions.deprecated("deprecated")
+    async def create(
+        self,
+        job_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunCreateResponse:
+        """
+        Trigger Job Run Public V2
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not job_id:
+            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
+        return await self._post(
+            path_template("/v2/jobs/{job_id}/runs", job_id=job_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunCreateResponse,
+        )
+
     async def list(
         self,
         job_id: str,
         *,
-        page: int | Omit = omit,
-        per_page: int | Omit = omit,
-        status: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -217,11 +272,9 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunListResponse:
         """
-        List Runs for Job
+        List Job Runs Public V2
 
         Args:
-          status: Filter by status
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -233,7 +286,7 @@ class AsyncRunsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            path_template("/v1/jobs/{job_id}/runs", job_id=job_id),
+            path_template("/v2/jobs/{job_id}/runs", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -241,9 +294,8 @@ class AsyncRunsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "page": page,
-                        "per_page": per_page,
-                        "status": status,
+                        "limit": limit,
+                        "offset": offset,
                     },
                     run_list_params.RunListParams,
                 ),
@@ -251,7 +303,6 @@ class AsyncRunsResource(AsyncAPIResource):
             cast_to=RunListResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def cancel(
         self,
         run_id: str,
@@ -264,7 +315,7 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunCancelResponse:
         """
-        Cancel Run
+        Cancel Run Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -278,14 +329,13 @@ class AsyncRunsResource(AsyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._post(
-            path_template("/v1/jobs/runs/{run_id}/cancel", run_id=run_id),
+            path_template("/v2/jobs/runs/{run_id}/cancel", run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunCancelResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         run_id: str,
@@ -298,7 +348,7 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetResponse:
         """
-        Get Run
+        Get Run Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -312,7 +362,7 @@ class AsyncRunsResource(AsyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._get(
-            path_template("/v1/jobs/runs/{run_id}", run_id=run_id),
+            path_template("/v2/jobs/runs/{run_id}", run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -324,20 +374,17 @@ class RunsResourceWithRawResponse:
     def __init__(self, runs: RunsResource) -> None:
         self._runs = runs
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                runs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = to_raw_response_wrapper(
+            runs.create,
         )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = to_raw_response_wrapper(
+            runs.list,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                runs.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.cancel = to_raw_response_wrapper(
+            runs.cancel,
+        )
+        self.get = to_raw_response_wrapper(
+            runs.get,
         )
 
     @cached_property
@@ -349,20 +396,17 @@ class AsyncRunsResourceWithRawResponse:
     def __init__(self, runs: AsyncRunsResource) -> None:
         self._runs = runs
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                runs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = async_to_raw_response_wrapper(
+            runs.create,
         )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = async_to_raw_response_wrapper(
+            runs.list,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                runs.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.cancel = async_to_raw_response_wrapper(
+            runs.cancel,
+        )
+        self.get = async_to_raw_response_wrapper(
+            runs.get,
         )
 
     @cached_property
@@ -374,20 +418,17 @@ class RunsResourceWithStreamingResponse:
     def __init__(self, runs: RunsResource) -> None:
         self._runs = runs
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                runs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = to_streamed_response_wrapper(
+            runs.create,
         )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = to_streamed_response_wrapper(
+            runs.list,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                runs.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.cancel = to_streamed_response_wrapper(
+            runs.cancel,
+        )
+        self.get = to_streamed_response_wrapper(
+            runs.get,
         )
 
     @cached_property
@@ -399,20 +440,17 @@ class AsyncRunsResourceWithStreamingResponse:
     def __init__(self, runs: AsyncRunsResource) -> None:
         self._runs = runs
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                runs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = async_to_streamed_response_wrapper(
+            runs.create,
         )
-        self.cancel = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                runs.cancel,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = async_to_streamed_response_wrapper(
+            runs.list,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                runs.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.cancel = async_to_streamed_response_wrapper(
+            runs.cancel,
+        )
+        self.get = async_to_streamed_response_wrapper(
+            runs.get,
         )
 
     @cached_property

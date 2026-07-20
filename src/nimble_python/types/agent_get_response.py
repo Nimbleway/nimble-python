@@ -1,57 +1,122 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Union, Optional
+from typing import Dict, List, Optional
+from datetime import datetime
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AgentGetResponse", "FeatureFlags", "InputProperty"]
+__all__ = ["AgentGetResponse", "Goal", "Sources", "SourcesAllow", "SourcesBlock", "SuggestedQuestion"]
 
 
-class FeatureFlags(BaseModel):
-    is_localization_supported: Optional[bool] = None
+class Goal(BaseModel):
+    id: str
+    """Unique goal identifier (wsag\\__<uuid>)."""
 
-    is_pagination_supported: Optional[bool] = None
+    goal: str
+    """Goal text."""
+
+    order: int
+    """Zero-based goal position."""
 
 
-class InputProperty(BaseModel):
-    default: Union[str, bool, float, None] = None
+class SourcesAllow(BaseModel):
+    id: str
+    """Unique source group identifier (wsas\\__<uuid>)."""
 
-    description: Optional[str] = None
+    domains: List[str]
+    """Domains included in this source group."""
 
-    examples: Optional[List[object]] = None
+    order: int
+    """Zero-based source group position."""
 
-    is_localization_param: Optional[bool] = None
+    title: str
+    """Source group title."""
 
-    is_pagination_param: Optional[bool] = None
 
-    name: Optional[str] = None
+class SourcesBlock(BaseModel):
+    id: str
+    """Unique source group identifier (wsas\\__<uuid>)."""
 
-    required: Optional[bool] = None
+    domains: List[str]
+    """Domains included in this source group."""
 
-    rules: Optional[List[str]] = None
+    order: int
+    """Zero-based source group position."""
 
-    type: Optional[str] = None
+    title: str
+    """Source group title."""
+
+
+class Sources(BaseModel):
+    """Source guidance for the agent."""
+
+    allow: Optional[List[SourcesAllow]] = None
+    """Source groups the agent is allowed to use."""
+
+    avoid: Optional[str] = None
+    """Free-text guidance describing sources or domains to avoid."""
+
+    block: Optional[List[SourcesBlock]] = None
+    """Source groups the agent should not use."""
+
+    prioritize: Optional[str] = None
+    """Free-text guidance describing sources or domains to prioritize."""
+
+
+class SuggestedQuestion(BaseModel):
+    id: str
+    """Unique suggested question identifier (wsasq\\__<uuid>)."""
+
+    order: int
+    """Zero-based suggested question position."""
+
+    question: str
+    """Suggested prompt text."""
 
 
 class AgentGetResponse(BaseModel):
+    id: str
+    """Unique web search agent identifier (wsa\\__<uuid>)."""
+
+    created_at: datetime
+    """When the agent was created."""
+
+    description: str
+    """Agent description shown to users."""
+
     display_name: str
+    """Human-friendly agent name shown to users."""
 
-    is_public: bool
+    domain_expertise: str
+    """Domain expertise or operating context for the agent."""
 
-    name: str
+    effort: Literal["low", "medium", "high", "x-high", "max"]
+    """Default effort level for this agent's runs."""
 
-    description: Optional[str] = None
+    goals: List[Goal]
+    """Ordered goals for the agent to follow."""
 
-    domain: Optional[str] = None
+    icon: str
+    """Icon identifier used when presenting the agent."""
 
-    entity_type: Optional[str] = None
-
-    feature_flags: Optional[FeatureFlags] = None
-
-    input_properties: Optional[List[InputProperty]] = None
-
-    managed_by: Optional[str] = None
+    is_active: bool
+    """Whether the agent can be used to start new runs."""
 
     output_schema: Optional[Dict[str, object]] = None
+    """JSON schema describing the structured output the agent should produce."""
 
-    vertical: Optional[str] = None
+    sources: Sources
+    """Source guidance for the agent."""
+
+    suggested_questions: List[SuggestedQuestion]
+    """Suggested prompts users can run with this agent."""
+
+    updated_at: datetime
+    """When the agent was last updated."""
+
+    use_case: Literal["research", "enrichment", "dataset_building"]
+    """Primary use case supported by the agent."""
+
+    agent_name: Optional[str] = None
+    """Stable agent name."""

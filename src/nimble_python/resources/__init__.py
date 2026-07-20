@@ -16,14 +16,6 @@ from .serp import (
     SerpResourceWithStreamingResponse,
     AsyncSerpResourceWithStreamingResponse,
 )
-from .agent import (
-    AgentResource,
-    AsyncAgentResource,
-    AgentResourceWithRawResponse,
-    AsyncAgentResourceWithRawResponse,
-    AgentResourceWithStreamingResponse,
-    AsyncAgentResourceWithStreamingResponse,
-)
 from .crawl import (
     CrawlResource,
     AsyncCrawlResource,
@@ -48,6 +40,14 @@ from .tasks import (
     TasksResourceWithStreamingResponse,
     AsyncTasksResourceWithStreamingResponse,
 )
+from .agents import (
+    AgentsResource,
+    AsyncAgentsResource,
+    AgentsResourceWithRawResponse,
+    AsyncAgentsResourceWithRawResponse,
+    AgentsResourceWithStreamingResponse,
+    AsyncAgentsResourceWithStreamingResponse,
+)
 from .batches import (
     BatchesResource,
     AsyncBatchesResource,
@@ -56,6 +56,14 @@ from .batches import (
     BatchesResourceWithStreamingResponse,
     AsyncBatchesResourceWithStreamingResponse,
 )
+from .extract import (
+    ExtractResource,
+    AsyncExtractResource,
+    ExtractResourceWithRawResponse,
+    AsyncExtractResourceWithRawResponse,
+    ExtractResourceWithStreamingResponse,
+    AsyncExtractResourceWithStreamingResponse,
+)
 from .fast_serp import (
     FastSerpResource,
     AsyncFastSerpResource,
@@ -63,14 +71,6 @@ from .fast_serp import (
     AsyncFastSerpResourceWithRawResponse,
     FastSerpResourceWithStreamingResponse,
     AsyncFastSerpResourceWithStreamingResponse,
-)
-from .task_agent import (
-    TaskAgentResource,
-    AsyncTaskAgentResource,
-    TaskAgentResourceWithRawResponse,
-    AsyncTaskAgentResourceWithRawResponse,
-    TaskAgentResourceWithStreamingResponse,
-    AsyncTaskAgentResourceWithStreamingResponse,
 )
 from .domain_knowledge import (
     DomainKnowledgeResource,
@@ -82,12 +82,18 @@ from .domain_knowledge import (
 )
 
 __all__ = [
-    "AgentResource",
-    "AsyncAgentResource",
-    "AgentResourceWithRawResponse",
-    "AsyncAgentResourceWithRawResponse",
-    "AgentResourceWithStreamingResponse",
-    "AsyncAgentResourceWithStreamingResponse",
+    "ExtractResource",
+    "AsyncExtractResource",
+    "ExtractResourceWithRawResponse",
+    "AsyncExtractResourceWithRawResponse",
+    "ExtractResourceWithStreamingResponse",
+    "AsyncExtractResourceWithStreamingResponse",
+    "AgentsResource",
+    "AsyncAgentsResource",
+    "AgentsResourceWithRawResponse",
+    "AsyncAgentsResourceWithRawResponse",
+    "AgentsResourceWithStreamingResponse",
+    "AsyncAgentsResourceWithStreamingResponse",
     "CrawlResource",
     "AsyncCrawlResource",
     "CrawlResourceWithRawResponse",
@@ -130,12 +136,6 @@ __all__ = [
     "AsyncFastSerpResourceWithRawResponse",
     "FastSerpResourceWithStreamingResponse",
     "AsyncFastSerpResourceWithStreamingResponse",
-    "TaskAgentResource",
-    "AsyncTaskAgentResource",
-    "TaskAgentResourceWithRawResponse",
-    "AsyncTaskAgentResourceWithRawResponse",
-    "TaskAgentResourceWithStreamingResponse",
-    "AsyncTaskAgentResourceWithStreamingResponse",
     "JobsResource",
     "AsyncJobsResource",
     "JobsResourceWithRawResponse",

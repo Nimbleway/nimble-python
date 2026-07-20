@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
 
 __all__ = ["RunListParams"]
 
 
 class RunListParams(TypedDict, total=False):
-    page: int
+    limit: int
 
-    per_page: int
-
-    status: Optional[str]
-    """Filter by status"""
+    offset: int

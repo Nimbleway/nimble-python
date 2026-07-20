@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import typing_extensions
 from typing import Optional
 
 import httpx
@@ -28,7 +27,6 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.job_get_response import JobGetResponse
-from ...types.job_run_response import JobRunResponse
 from ...types.job_list_response import JobListResponse
 from ...types.job_create_response import JobCreateResponse
 from ...types.job_update_response import JobUpdateResponse
@@ -60,7 +58,6 @@ class JobsResource(SyncAPIResource):
         """
         return JobsResourceWithStreamingResponse(self)
 
-    @typing_extensions.deprecated("deprecated")
     def create(
         self,
         *,
@@ -79,7 +76,7 @@ class JobsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobCreateResponse:
         """
-        Create Job
+        Create Job Public V2
 
         Args:
           agent_name: Name of the agent to run.
@@ -105,7 +102,7 @@ class JobsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/v1/jobs",
+            "/v2/jobs",
             body=maybe_transform(
                 {
                     "agent_name": agent_name,
@@ -124,7 +121,6 @@ class JobsResource(SyncAPIResource):
             cast_to=JobCreateResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def update(
         self,
         job_id: str,
@@ -142,7 +138,7 @@ class JobsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobUpdateResponse:
         """
-        Update Job
+        Update Job Public V2
 
         Args:
           description: New description.
@@ -166,7 +162,7 @@ class JobsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._patch(
-            path_template("/v1/jobs/{job_id}", job_id=job_id),
+            path_template("/v2/jobs/{job_id}", job_id=job_id),
             body=maybe_transform(
                 {
                     "description": description,
@@ -183,14 +179,11 @@ class JobsResource(SyncAPIResource):
             cast_to=JobUpdateResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         *,
-        agent_name: Optional[str] | Omit = omit,
-        page: int | Omit = omit,
-        per_page: int | Omit = omit,
-        q: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -199,13 +192,9 @@ class JobsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobListResponse:
         """
-        List Jobs
+        List Jobs Public V2
 
         Args:
-          agent_name: Filter by agent name
-
-          q: Search by name or display name
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -215,7 +204,7 @@ class JobsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/v1/jobs",
+            "/v2/jobs",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -223,10 +212,8 @@ class JobsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "agent_name": agent_name,
-                        "page": page,
-                        "per_page": per_page,
-                        "q": q,
+                        "limit": limit,
+                        "offset": offset,
                     },
                     job_list_params.JobListParams,
                 ),
@@ -234,7 +221,6 @@ class JobsResource(SyncAPIResource):
             cast_to=JobListResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def delete(
         self,
         job_id: str,
@@ -247,7 +233,7 @@ class JobsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete Job
+        Delete Job Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -262,14 +248,13 @@ class JobsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template("/v1/jobs/{job_id}", job_id=job_id),
+            path_template("/v2/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         job_id: str,
@@ -282,7 +267,7 @@ class JobsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobGetResponse:
         """
-        Get Job
+        Get Job Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -296,45 +281,11 @@ class JobsResource(SyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._get(
-            path_template("/v1/jobs/{job_id}", job_id=job_id),
+            path_template("/v2/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=JobGetResponse,
-        )
-
-    @typing_extensions.deprecated("deprecated")
-    def run(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobRunResponse:
-        """
-        Trigger Run
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return self._post(
-            path_template("/v1/jobs/{job_id}/runs", job_id=job_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=JobRunResponse,
         )
 
 
@@ -362,7 +313,6 @@ class AsyncJobsResource(AsyncAPIResource):
         """
         return AsyncJobsResourceWithStreamingResponse(self)
 
-    @typing_extensions.deprecated("deprecated")
     async def create(
         self,
         *,
@@ -381,7 +331,7 @@ class AsyncJobsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobCreateResponse:
         """
-        Create Job
+        Create Job Public V2
 
         Args:
           agent_name: Name of the agent to run.
@@ -407,7 +357,7 @@ class AsyncJobsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/v1/jobs",
+            "/v2/jobs",
             body=await async_maybe_transform(
                 {
                     "agent_name": agent_name,
@@ -426,7 +376,6 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=JobCreateResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def update(
         self,
         job_id: str,
@@ -444,7 +393,7 @@ class AsyncJobsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobUpdateResponse:
         """
-        Update Job
+        Update Job Public V2
 
         Args:
           description: New description.
@@ -468,7 +417,7 @@ class AsyncJobsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._patch(
-            path_template("/v1/jobs/{job_id}", job_id=job_id),
+            path_template("/v2/jobs/{job_id}", job_id=job_id),
             body=await async_maybe_transform(
                 {
                     "description": description,
@@ -485,14 +434,11 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=JobUpdateResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         *,
-        agent_name: Optional[str] | Omit = omit,
-        page: int | Omit = omit,
-        per_page: int | Omit = omit,
-        q: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        offset: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -501,13 +447,9 @@ class AsyncJobsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobListResponse:
         """
-        List Jobs
+        List Jobs Public V2
 
         Args:
-          agent_name: Filter by agent name
-
-          q: Search by name or display name
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -517,7 +459,7 @@ class AsyncJobsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/v1/jobs",
+            "/v2/jobs",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -525,10 +467,8 @@ class AsyncJobsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "agent_name": agent_name,
-                        "page": page,
-                        "per_page": per_page,
-                        "q": q,
+                        "limit": limit,
+                        "offset": offset,
                     },
                     job_list_params.JobListParams,
                 ),
@@ -536,7 +476,6 @@ class AsyncJobsResource(AsyncAPIResource):
             cast_to=JobListResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def delete(
         self,
         job_id: str,
@@ -549,7 +488,7 @@ class AsyncJobsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Delete Job
+        Delete Job Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -564,14 +503,13 @@ class AsyncJobsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template("/v1/jobs/{job_id}", job_id=job_id),
+            path_template("/v2/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         job_id: str,
@@ -584,7 +522,7 @@ class AsyncJobsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JobGetResponse:
         """
-        Get Job
+        Get Job Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -598,45 +536,11 @@ class AsyncJobsResource(AsyncAPIResource):
         if not job_id:
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._get(
-            path_template("/v1/jobs/{job_id}", job_id=job_id),
+            path_template("/v2/jobs/{job_id}", job_id=job_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=JobGetResponse,
-        )
-
-    @typing_extensions.deprecated("deprecated")
-    async def run(
-        self,
-        job_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> JobRunResponse:
-        """
-        Trigger Run
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not job_id:
-            raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
-        return await self._post(
-            path_template("/v1/jobs/{job_id}/runs", job_id=job_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=JobRunResponse,
         )
 
 
@@ -644,35 +548,20 @@ class JobsResourceWithRawResponse:
     def __init__(self, jobs: JobsResource) -> None:
         self._jobs = jobs
 
-        self.create = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                jobs.create,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = to_raw_response_wrapper(
+            jobs.create,
         )
-        self.update = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                jobs.update,  # pyright: ignore[reportDeprecated],
-            )
+        self.update = to_raw_response_wrapper(
+            jobs.update,
         )
-        self.list = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                jobs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = to_raw_response_wrapper(
+            jobs.list,
         )
-        self.delete = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                jobs.delete,  # pyright: ignore[reportDeprecated],
-            )
+        self.delete = to_raw_response_wrapper(
+            jobs.delete,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                jobs.get,  # pyright: ignore[reportDeprecated],
-            )
-        )
-        self.run = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                jobs.run,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = to_raw_response_wrapper(
+            jobs.get,
         )
 
     @cached_property
@@ -684,35 +573,20 @@ class AsyncJobsResourceWithRawResponse:
     def __init__(self, jobs: AsyncJobsResource) -> None:
         self._jobs = jobs
 
-        self.create = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                jobs.create,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = async_to_raw_response_wrapper(
+            jobs.create,
         )
-        self.update = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                jobs.update,  # pyright: ignore[reportDeprecated],
-            )
+        self.update = async_to_raw_response_wrapper(
+            jobs.update,
         )
-        self.list = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                jobs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = async_to_raw_response_wrapper(
+            jobs.list,
         )
-        self.delete = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                jobs.delete,  # pyright: ignore[reportDeprecated],
-            )
+        self.delete = async_to_raw_response_wrapper(
+            jobs.delete,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                jobs.get,  # pyright: ignore[reportDeprecated],
-            )
-        )
-        self.run = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                jobs.run,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = async_to_raw_response_wrapper(
+            jobs.get,
         )
 
     @cached_property
@@ -724,35 +598,20 @@ class JobsResourceWithStreamingResponse:
     def __init__(self, jobs: JobsResource) -> None:
         self._jobs = jobs
 
-        self.create = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                jobs.create,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = to_streamed_response_wrapper(
+            jobs.create,
         )
-        self.update = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                jobs.update,  # pyright: ignore[reportDeprecated],
-            )
+        self.update = to_streamed_response_wrapper(
+            jobs.update,
         )
-        self.list = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                jobs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = to_streamed_response_wrapper(
+            jobs.list,
         )
-        self.delete = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                jobs.delete,  # pyright: ignore[reportDeprecated],
-            )
+        self.delete = to_streamed_response_wrapper(
+            jobs.delete,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                jobs.get,  # pyright: ignore[reportDeprecated],
-            )
-        )
-        self.run = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                jobs.run,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = to_streamed_response_wrapper(
+            jobs.get,
         )
 
     @cached_property
@@ -764,35 +623,20 @@ class AsyncJobsResourceWithStreamingResponse:
     def __init__(self, jobs: AsyncJobsResource) -> None:
         self._jobs = jobs
 
-        self.create = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                jobs.create,  # pyright: ignore[reportDeprecated],
-            )
+        self.create = async_to_streamed_response_wrapper(
+            jobs.create,
         )
-        self.update = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                jobs.update,  # pyright: ignore[reportDeprecated],
-            )
+        self.update = async_to_streamed_response_wrapper(
+            jobs.update,
         )
-        self.list = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                jobs.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = async_to_streamed_response_wrapper(
+            jobs.list,
         )
-        self.delete = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                jobs.delete,  # pyright: ignore[reportDeprecated],
-            )
+        self.delete = async_to_streamed_response_wrapper(
+            jobs.delete,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                jobs.get,  # pyright: ignore[reportDeprecated],
-            )
-        )
-        self.run = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                jobs.run,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = async_to_streamed_response_wrapper(
+            jobs.get,
         )
 
     @cached_property

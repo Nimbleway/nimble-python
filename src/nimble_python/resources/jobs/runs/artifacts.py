@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import typing_extensions
-
 import httpx
 
 from ...._types import Body, Query, Headers, NotGiven, not_given
@@ -45,7 +43,6 @@ class ArtifactsResource(SyncAPIResource):
         """
         return ArtifactsResourceWithStreamingResponse(self)
 
-    @typing_extensions.deprecated("deprecated")
     def list(
         self,
         run_id: str,
@@ -58,7 +55,7 @@ class ArtifactsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactListResponse:
         """
-        List Run Artifacts
+        List Run Artifacts Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -72,14 +69,13 @@ class ArtifactsResource(SyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._get(
-            path_template("/v1/jobs/runs/{run_id}/artifacts", run_id=run_id),
+            path_template("/v2/jobs/runs/{run_id}/artifacts", run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ArtifactListResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def download_url(
         self,
         artifact_id: int,
@@ -93,7 +89,7 @@ class ArtifactsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactDownloadURLResponse:
         """
-        Get Run Artifact Download URL
+        Get Run Artifact Download Url Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -108,7 +104,7 @@ class ArtifactsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._get(
             path_template(
-                "/v1/jobs/runs/{run_id}/artifacts/{artifact_id}/download-url", run_id=run_id, artifact_id=artifact_id
+                "/v2/jobs/runs/{run_id}/artifacts/{artifact_id}/download-url", run_id=run_id, artifact_id=artifact_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -116,7 +112,6 @@ class ArtifactsResource(SyncAPIResource):
             cast_to=ArtifactDownloadURLResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def get(
         self,
         artifact_id: int,
@@ -130,7 +125,7 @@ class ArtifactsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactGetResponse:
         """
-        Get Run Artifact
+        Get Run Artifact Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -144,14 +139,13 @@ class ArtifactsResource(SyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._get(
-            path_template("/v1/jobs/runs/{run_id}/artifacts/{artifact_id}", run_id=run_id, artifact_id=artifact_id),
+            path_template("/v2/jobs/runs/{run_id}/artifacts/{artifact_id}", run_id=run_id, artifact_id=artifact_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ArtifactGetResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     def preview(
         self,
         artifact_id: int,
@@ -165,7 +159,7 @@ class ArtifactsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactPreviewResponse:
         """
-        Preview Run Artifact
+        Preview Run Artifact Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -180,7 +174,7 @@ class ArtifactsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return self._get(
             path_template(
-                "/v1/jobs/runs/{run_id}/artifacts/{artifact_id}/preview", run_id=run_id, artifact_id=artifact_id
+                "/v2/jobs/runs/{run_id}/artifacts/{artifact_id}/preview", run_id=run_id, artifact_id=artifact_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -209,7 +203,6 @@ class AsyncArtifactsResource(AsyncAPIResource):
         """
         return AsyncArtifactsResourceWithStreamingResponse(self)
 
-    @typing_extensions.deprecated("deprecated")
     async def list(
         self,
         run_id: str,
@@ -222,7 +215,7 @@ class AsyncArtifactsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactListResponse:
         """
-        List Run Artifacts
+        List Run Artifacts Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -236,14 +229,13 @@ class AsyncArtifactsResource(AsyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._get(
-            path_template("/v1/jobs/runs/{run_id}/artifacts", run_id=run_id),
+            path_template("/v2/jobs/runs/{run_id}/artifacts", run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ArtifactListResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def download_url(
         self,
         artifact_id: int,
@@ -257,7 +249,7 @@ class AsyncArtifactsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactDownloadURLResponse:
         """
-        Get Run Artifact Download URL
+        Get Run Artifact Download Url Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -272,7 +264,7 @@ class AsyncArtifactsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._get(
             path_template(
-                "/v1/jobs/runs/{run_id}/artifacts/{artifact_id}/download-url", run_id=run_id, artifact_id=artifact_id
+                "/v2/jobs/runs/{run_id}/artifacts/{artifact_id}/download-url", run_id=run_id, artifact_id=artifact_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -280,7 +272,6 @@ class AsyncArtifactsResource(AsyncAPIResource):
             cast_to=ArtifactDownloadURLResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def get(
         self,
         artifact_id: int,
@@ -294,7 +285,7 @@ class AsyncArtifactsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactGetResponse:
         """
-        Get Run Artifact
+        Get Run Artifact Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -308,14 +299,13 @@ class AsyncArtifactsResource(AsyncAPIResource):
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._get(
-            path_template("/v1/jobs/runs/{run_id}/artifacts/{artifact_id}", run_id=run_id, artifact_id=artifact_id),
+            path_template("/v2/jobs/runs/{run_id}/artifacts/{artifact_id}", run_id=run_id, artifact_id=artifact_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ArtifactGetResponse,
         )
 
-    @typing_extensions.deprecated("deprecated")
     async def preview(
         self,
         artifact_id: int,
@@ -329,7 +319,7 @@ class AsyncArtifactsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ArtifactPreviewResponse:
         """
-        Preview Run Artifact
+        Preview Run Artifact Public V2
 
         Args:
           extra_headers: Send extra headers
@@ -344,7 +334,7 @@ class AsyncArtifactsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
         return await self._get(
             path_template(
-                "/v1/jobs/runs/{run_id}/artifacts/{artifact_id}/preview", run_id=run_id, artifact_id=artifact_id
+                "/v2/jobs/runs/{run_id}/artifacts/{artifact_id}/preview", run_id=run_id, artifact_id=artifact_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -357,25 +347,17 @@ class ArtifactsResourceWithRawResponse:
     def __init__(self, artifacts: ArtifactsResource) -> None:
         self._artifacts = artifacts
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                artifacts.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = to_raw_response_wrapper(
+            artifacts.list,
         )
-        self.download_url = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                artifacts.download_url,  # pyright: ignore[reportDeprecated],
-            )
+        self.download_url = to_raw_response_wrapper(
+            artifacts.download_url,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                artifacts.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = to_raw_response_wrapper(
+            artifacts.get,
         )
-        self.preview = (  # pyright: ignore[reportDeprecated]
-            to_raw_response_wrapper(
-                artifacts.preview,  # pyright: ignore[reportDeprecated],
-            )
+        self.preview = to_raw_response_wrapper(
+            artifacts.preview,
         )
 
 
@@ -383,25 +365,17 @@ class AsyncArtifactsResourceWithRawResponse:
     def __init__(self, artifacts: AsyncArtifactsResource) -> None:
         self._artifacts = artifacts
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                artifacts.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = async_to_raw_response_wrapper(
+            artifacts.list,
         )
-        self.download_url = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                artifacts.download_url,  # pyright: ignore[reportDeprecated],
-            )
+        self.download_url = async_to_raw_response_wrapper(
+            artifacts.download_url,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                artifacts.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = async_to_raw_response_wrapper(
+            artifacts.get,
         )
-        self.preview = (  # pyright: ignore[reportDeprecated]
-            async_to_raw_response_wrapper(
-                artifacts.preview,  # pyright: ignore[reportDeprecated],
-            )
+        self.preview = async_to_raw_response_wrapper(
+            artifacts.preview,
         )
 
 
@@ -409,25 +383,17 @@ class ArtifactsResourceWithStreamingResponse:
     def __init__(self, artifacts: ArtifactsResource) -> None:
         self._artifacts = artifacts
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                artifacts.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = to_streamed_response_wrapper(
+            artifacts.list,
         )
-        self.download_url = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                artifacts.download_url,  # pyright: ignore[reportDeprecated],
-            )
+        self.download_url = to_streamed_response_wrapper(
+            artifacts.download_url,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                artifacts.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = to_streamed_response_wrapper(
+            artifacts.get,
         )
-        self.preview = (  # pyright: ignore[reportDeprecated]
-            to_streamed_response_wrapper(
-                artifacts.preview,  # pyright: ignore[reportDeprecated],
-            )
+        self.preview = to_streamed_response_wrapper(
+            artifacts.preview,
         )
 
 
@@ -435,23 +401,15 @@ class AsyncArtifactsResourceWithStreamingResponse:
     def __init__(self, artifacts: AsyncArtifactsResource) -> None:
         self._artifacts = artifacts
 
-        self.list = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                artifacts.list,  # pyright: ignore[reportDeprecated],
-            )
+        self.list = async_to_streamed_response_wrapper(
+            artifacts.list,
         )
-        self.download_url = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                artifacts.download_url,  # pyright: ignore[reportDeprecated],
-            )
+        self.download_url = async_to_streamed_response_wrapper(
+            artifacts.download_url,
         )
-        self.get = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                artifacts.get,  # pyright: ignore[reportDeprecated],
-            )
+        self.get = async_to_streamed_response_wrapper(
+            artifacts.get,
         )
-        self.preview = (  # pyright: ignore[reportDeprecated]
-            async_to_streamed_response_wrapper(
-                artifacts.preview,  # pyright: ignore[reportDeprecated],
-            )
+        self.preview = async_to_streamed_response_wrapper(
+            artifacts.preview,
         )

@@ -72,7 +72,7 @@ class DomainKnowledgeResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/v1/domain-knowledge/driver",
+            "/v2/domain-knowledge/driver",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -141,7 +141,7 @@ class AsyncDomainKnowledgeResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/v1/domain-knowledge/driver",
+            "/v2/domain-knowledge/driver",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
