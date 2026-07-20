@@ -26,7 +26,7 @@ class TestJobs:
     @parametrize
     def test_method_create(self, client: Nimble) -> None:
         job = client.jobs.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
         )
         assert_matches_type(JobCreateResponse, job, path=["response"])
@@ -35,7 +35,7 @@ class TestJobs:
     @parametrize
     def test_method_create_with_all_params(self, client: Nimble) -> None:
         job = client.jobs.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
             description="description",
             destination={
@@ -60,7 +60,7 @@ class TestJobs:
     @parametrize
     def test_raw_response_create(self, client: Nimble) -> None:
         response = client.jobs.with_raw_response.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
         )
 
@@ -73,7 +73,7 @@ class TestJobs:
     @parametrize
     def test_streaming_response_create(self, client: Nimble) -> None:
         with client.jobs.with_streaming_response.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
         ) as response:
             assert not response.is_closed
@@ -281,7 +281,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_method_create(self, async_client: AsyncNimble) -> None:
         job = await async_client.jobs.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
         )
         assert_matches_type(JobCreateResponse, job, path=["response"])
@@ -290,7 +290,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncNimble) -> None:
         job = await async_client.jobs.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
             description="description",
             destination={
@@ -315,7 +315,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncNimble) -> None:
         response = await async_client.jobs.with_raw_response.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
         )
 
@@ -328,7 +328,7 @@ class TestAsyncJobs:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncNimble) -> None:
         async with async_client.jobs.with_streaming_response.create(
-            agent_name="agent_name",
+            extract_template_name="extract_template_name",
             name="name",
         ) as response:
             assert not response.is_closed
