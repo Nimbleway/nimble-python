@@ -20,9 +20,6 @@ class AgentCreateParams(TypedDict, total=False):
     display_name: Optional[str]
     """Human-friendly agent name shown to users."""
 
-    domain_expertise: Optional[str]
-    """Domain expertise or operating context for the agent."""
-
     effort: Literal["low", "medium", "high", "x-high", "max"]
     """Default effort level for this agent's runs."""
 
@@ -37,6 +34,9 @@ class AgentCreateParams(TypedDict, total=False):
 
     output_schema: Optional[Dict[str, object]]
     """JSON schema describing the structured output the agent should produce."""
+
+    skill: Optional[str]
+    """Skill or operating context for the agent."""
 
     sources: Sources
     """Source guidance for the agent."""

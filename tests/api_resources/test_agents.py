@@ -35,12 +35,12 @@ class TestAgents:
             agent_name="agent_name",
             description="description",
             display_name="display_name",
-            domain_expertise="domain_expertise",
             effort="low",
             goals=["string"],
             icon="icon",
             is_active=True,
             output_schema={"foo": "bar"},
+            skill="skill",
             sources={
                 "allow": [
                     {
@@ -294,12 +294,12 @@ class TestAsyncAgents:
             agent_name="agent_name",
             description="description",
             display_name="display_name",
-            domain_expertise="domain_expertise",
             effort="low",
             goals=["string"],
             icon="icon",
             is_active=True,
             output_schema={"foo": "bar"},
+            skill="skill",
             sources={
                 "allow": [
                     {
