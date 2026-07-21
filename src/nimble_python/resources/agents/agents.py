@@ -77,12 +77,12 @@ class AgentsResource(SyncAPIResource):
         agent_name: Optional[str] | Omit = omit,
         description: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
-        domain_expertise: Optional[str] | Omit = omit,
         effort: Literal["low", "medium", "high", "x-high", "max"] | Omit = omit,
         goals: SequenceNotStr[str] | Omit = omit,
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
+        skill: Optional[str] | Omit = omit,
         sources: agent_create_params.Sources | Omit = omit,
         suggested_questions: SequenceNotStr[str] | Omit = omit,
         template: Optional[str] | Omit = omit,
@@ -108,8 +108,6 @@ class AgentsResource(SyncAPIResource):
 
           display_name: Human-friendly agent name shown to users.
 
-          domain_expertise: Domain expertise or operating context for the agent.
-
           effort: Default effort level for this agent's runs.
 
           goals: Ordered goals for the agent to follow.
@@ -119,6 +117,8 @@ class AgentsResource(SyncAPIResource):
           is_active: Whether the agent can be used to start new runs.
 
           output_schema: JSON schema describing the structured output the agent should produce.
+
+          skill: Skill or operating context for the agent.
 
           sources: Source guidance for the agent.
 
@@ -144,12 +144,12 @@ class AgentsResource(SyncAPIResource):
                     "agent_name": agent_name,
                     "description": description,
                     "display_name": display_name,
-                    "domain_expertise": domain_expertise,
                     "effort": effort,
                     "goals": goals,
                     "icon": icon,
                     "is_active": is_active,
                     "output_schema": output_schema,
+                    "skill": skill,
                     "sources": sources,
                     "suggested_questions": suggested_questions,
                     "template": template,
@@ -355,12 +355,12 @@ class AsyncAgentsResource(AsyncAPIResource):
         agent_name: Optional[str] | Omit = omit,
         description: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
-        domain_expertise: Optional[str] | Omit = omit,
         effort: Literal["low", "medium", "high", "x-high", "max"] | Omit = omit,
         goals: SequenceNotStr[str] | Omit = omit,
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
+        skill: Optional[str] | Omit = omit,
         sources: agent_create_params.Sources | Omit = omit,
         suggested_questions: SequenceNotStr[str] | Omit = omit,
         template: Optional[str] | Omit = omit,
@@ -386,8 +386,6 @@ class AsyncAgentsResource(AsyncAPIResource):
 
           display_name: Human-friendly agent name shown to users.
 
-          domain_expertise: Domain expertise or operating context for the agent.
-
           effort: Default effort level for this agent's runs.
 
           goals: Ordered goals for the agent to follow.
@@ -397,6 +395,8 @@ class AsyncAgentsResource(AsyncAPIResource):
           is_active: Whether the agent can be used to start new runs.
 
           output_schema: JSON schema describing the structured output the agent should produce.
+
+          skill: Skill or operating context for the agent.
 
           sources: Source guidance for the agent.
 
@@ -422,12 +422,12 @@ class AsyncAgentsResource(AsyncAPIResource):
                     "agent_name": agent_name,
                     "description": description,
                     "display_name": display_name,
-                    "domain_expertise": domain_expertise,
                     "effort": effort,
                     "goals": goals,
                     "icon": icon,
                     "is_active": is_active,
                     "output_schema": output_schema,
+                    "skill": skill,
                     "sources": sources,
                     "suggested_questions": suggested_questions,
                     "template": template,

@@ -58,9 +58,6 @@ class Item(BaseModel):
     display_name: str
     """Human-friendly template name shown to users."""
 
-    domain_expertise: str
-    """Domain expertise or operating context for the template."""
-
     effort: Literal["low", "medium", "high", "x-high", "max"]
     """Default effort level for runs created from this template."""
 
@@ -72,6 +69,9 @@ class Item(BaseModel):
 
     output_schema: Optional[Dict[str, object]] = None
     """JSON schema describing the structured output the agent should produce."""
+
+    skill: str
+    """Skill or operating context for the template."""
 
     sources: List[ItemSource]
     """Ordered source groups for the template."""

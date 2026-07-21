@@ -96,9 +96,6 @@ class Item(BaseModel):
     display_name: str
     """Human-friendly agent name shown to users."""
 
-    domain_expertise: str
-    """Domain expertise or operating context for the agent."""
-
     effort: Literal["low", "medium", "high", "x-high", "max"]
     """Default effort level for this agent's runs."""
 
@@ -113,6 +110,9 @@ class Item(BaseModel):
 
     output_schema: Optional[Dict[str, object]] = None
     """JSON schema describing the structured output the agent should produce."""
+
+    skill: str
+    """Skill or operating context for the agent."""
 
     sources: ItemSources
     """Source guidance for the agent."""
