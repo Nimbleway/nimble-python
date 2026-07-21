@@ -21,6 +21,7 @@ from .map_response import MapResponse as MapResponse
 from .job_list_params import JobListParams as JobListParams
 from .search_response import SearchResponse as SearchResponse
 from .serp_run_params import SerpRunParams as SerpRunParams
+from .agent_run_params import AgentRunParams as AgentRunParams
 from .crawl_run_params import CrawlRunParams as CrawlRunParams
 from .job_get_response import JobGetResponse as JobGetResponse
 from .media_run_params import MediaRunParams as MediaRunParams
@@ -34,6 +35,7 @@ from .job_update_params import JobUpdateParams as JobUpdateParams
 from .serp_run_response import SerpRunResponse as SerpRunResponse
 from .task_get_response import TaskGetResponse as TaskGetResponse
 from .agent_get_response import AgentGetResponse as AgentGetResponse
+from .agent_run_response import AgentRunResponse as AgentRunResponse
 from .batch_get_response import BatchGetResponse as BatchGetResponse
 from .crawl_run_response import CrawlRunResponse as CrawlRunResponse
 from .extract_run_params import ExtractRunParams as ExtractRunParams

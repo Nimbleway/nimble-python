@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -15,7 +15,7 @@ from .runs import (
     RunsResourceWithStreamingResponse,
     AsyncRunsResourceWithStreamingResponse,
 )
-from ...types import agent_list_params, agent_create_params, agent_update_params
+from ...types import agent_run_params, agent_list_params, agent_create_params, agent_update_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -36,6 +36,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.agent_get_response import AgentGetResponse
+from ...types.agent_run_response import AgentRunResponse
 from ...types.agent_list_response import AgentListResponse
 from ...types.agent_create_response import AgentCreateResponse
 from ...types.agent_update_response import AgentUpdateResponse
@@ -320,6 +321,72 @@ class AgentsResource(SyncAPIResource):
             cast_to=AgentGetResponse,
         )
 
+    def run(
+        self,
+        *,
+        input: str,
+        effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        enable_events: bool | Omit = omit,
+        input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
+        output_schema: Optional[Dict[str, object]] | Omit = omit,
+        previous_interaction_id: Optional[str] | Omit = omit,
+        sources: Optional[agent_run_params.Sources] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRunResponse:
+        """Creates a minimal persistent Web Search Agent and starts a run for it.
+
+        The
+        response includes `web_search_agent_id` for later agent and run queries.
+
+        Args:
+          input: User prompt or task instructions for the run.
+
+          effort: Canonical effort tier names for the research graph.
+
+          enable_events: Whether to stream run events when supported.
+
+          input_data: Existing records to ENRICH: a list of partial rows, or a single object,
+              mirroring output_schema's shape.
+
+          output_schema: JSON schema overriding the agent's default structured output for this run.
+
+          previous_interaction_id: Previous interaction identifier used to continue a conversation.
+
+          sources: Source guidance overriding the agent default.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v2/agents/runs",
+            body=maybe_transform(
+                {
+                    "input": input,
+                    "effort": effort,
+                    "enable_events": enable_events,
+                    "input_data": input_data,
+                    "output_schema": output_schema,
+                    "previous_interaction_id": previous_interaction_id,
+                    "sources": sources,
+                },
+                agent_run_params.AgentRunParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentRunResponse,
+        )
+
 
 class AsyncAgentsResource(AsyncAPIResource):
     @cached_property
@@ -598,6 +665,72 @@ class AsyncAgentsResource(AsyncAPIResource):
             cast_to=AgentGetResponse,
         )
 
+    async def run(
+        self,
+        *,
+        input: str,
+        effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        enable_events: bool | Omit = omit,
+        input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
+        output_schema: Optional[Dict[str, object]] | Omit = omit,
+        previous_interaction_id: Optional[str] | Omit = omit,
+        sources: Optional[agent_run_params.Sources] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AgentRunResponse:
+        """Creates a minimal persistent Web Search Agent and starts a run for it.
+
+        The
+        response includes `web_search_agent_id` for later agent and run queries.
+
+        Args:
+          input: User prompt or task instructions for the run.
+
+          effort: Canonical effort tier names for the research graph.
+
+          enable_events: Whether to stream run events when supported.
+
+          input_data: Existing records to ENRICH: a list of partial rows, or a single object,
+              mirroring output_schema's shape.
+
+          output_schema: JSON schema overriding the agent's default structured output for this run.
+
+          previous_interaction_id: Previous interaction identifier used to continue a conversation.
+
+          sources: Source guidance overriding the agent default.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v2/agents/runs",
+            body=await async_maybe_transform(
+                {
+                    "input": input,
+                    "effort": effort,
+                    "enable_events": enable_events,
+                    "input_data": input_data,
+                    "output_schema": output_schema,
+                    "previous_interaction_id": previous_interaction_id,
+                    "sources": sources,
+                },
+                agent_run_params.AgentRunParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AgentRunResponse,
+        )
+
 
 class AgentsResourceWithRawResponse:
     def __init__(self, agents: AgentsResource) -> None:
@@ -617,6 +750,9 @@ class AgentsResourceWithRawResponse:
         )
         self.get = to_raw_response_wrapper(
             agents.get,
+        )
+        self.run = to_raw_response_wrapper(
+            agents.run,
         )
 
     @cached_property
@@ -647,6 +783,9 @@ class AsyncAgentsResourceWithRawResponse:
         self.get = async_to_raw_response_wrapper(
             agents.get,
         )
+        self.run = async_to_raw_response_wrapper(
+            agents.run,
+        )
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithRawResponse:
@@ -676,6 +815,9 @@ class AgentsResourceWithStreamingResponse:
         self.get = to_streamed_response_wrapper(
             agents.get,
         )
+        self.run = to_streamed_response_wrapper(
+            agents.run,
+        )
 
     @cached_property
     def templates(self) -> TemplatesResourceWithStreamingResponse:
@@ -704,6 +846,9 @@ class AsyncAgentsResourceWithStreamingResponse:
         )
         self.get = async_to_streamed_response_wrapper(
             agents.get,
+        )
+        self.run = async_to_streamed_response_wrapper(
+            agents.run,
         )
 
     @cached_property
