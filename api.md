@@ -106,6 +106,7 @@ from nimble_python.types import (
     AgentUpdateResponse,
     AgentListResponse,
     AgentGetResponse,
+    AgentRunResponse,
 )
 ```
 
@@ -116,6 +117,7 @@ Methods:
 - <code title="get /v2/agents">client.agents.<a href="./src/nimble_python/resources/agents/agents.py">list</a>(\*\*<a href="src/nimble_python/types/agent_list_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_list_response.py">AgentListResponse</a></code>
 - <code title="delete /v2/agents/{agent_id}">client.agents.<a href="./src/nimble_python/resources/agents/agents.py">delete</a>(agent_id) -> None</code>
 - <code title="get /v2/agents/{agent_id}">client.agents.<a href="./src/nimble_python/resources/agents/agents.py">get</a>(agent_id) -> <a href="./src/nimble_python/types/agent_get_response.py">AgentGetResponse</a></code>
+- <code title="post /v2/agents/runs">client.agents.<a href="./src/nimble_python/resources/agents/agents.py">run</a>(\*\*<a href="src/nimble_python/types/agent_run_params.py">params</a>) -> <a href="./src/nimble_python/types/agent_run_response.py">AgentRunResponse</a></code>
 
 ## Templates
 
