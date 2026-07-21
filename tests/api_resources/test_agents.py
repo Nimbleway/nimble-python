@@ -11,6 +11,7 @@ from tests.utils import assert_matches_type
 from nimble_python import Nimble, AsyncNimble
 from nimble_python.types import (
     AgentGetResponse,
+    AgentRunResponse,
     AgentListResponse,
     AgentCreateResponse,
     AgentUpdateResponse,
@@ -275,6 +276,71 @@ class TestAgents:
                 "",
             )
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run(self, client: Nimble) -> None:
+        agent = client.agents.run(
+            input="input",
+        )
+        assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_run_with_all_params(self, client: Nimble) -> None:
+        agent = client.agents.run(
+            input="input",
+            effort="low",
+            enable_events=True,
+            input_data=[{"foo": "bar"}],
+            output_schema={"foo": "bar"},
+            previous_interaction_id="previous_interaction_id",
+            sources={
+                "allow": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "avoid": "avoid",
+                "block": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "prioritize": "prioritize",
+            },
+        )
+        assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_run(self, client: Nimble) -> None:
+        response = client.agents.with_raw_response.run(
+            input="input",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = response.parse()
+        assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_run(self, client: Nimble) -> None:
+        with client.agents.with_streaming_response.run(
+            input="input",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = response.parse()
+            assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncAgents:
     parametrize = pytest.mark.parametrize(
@@ -533,3 +599,68 @@ class TestAsyncAgents:
             await async_client.agents.with_raw_response.get(
                 "",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agents.run(
+            input="input",
+        )
+        assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_run_with_all_params(self, async_client: AsyncNimble) -> None:
+        agent = await async_client.agents.run(
+            input="input",
+            effort="low",
+            enable_events=True,
+            input_data=[{"foo": "bar"}],
+            output_schema={"foo": "bar"},
+            previous_interaction_id="previous_interaction_id",
+            sources={
+                "allow": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "avoid": "avoid",
+                "block": [
+                    {
+                        "domains": ["string"],
+                        "title": "title",
+                        "order": 0,
+                    }
+                ],
+                "prioritize": "prioritize",
+            },
+        )
+        assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_run(self, async_client: AsyncNimble) -> None:
+        response = await async_client.agents.with_raw_response.run(
+            input="input",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        agent = await response.parse()
+        assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_run(self, async_client: AsyncNimble) -> None:
+        async with async_client.agents.with_streaming_response.run(
+            input="input",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            agent = await response.parse()
+            assert_matches_type(AgentRunResponse, agent, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
