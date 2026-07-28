@@ -37,11 +37,14 @@ class TestRuns:
         run = client.agents.runs.create(
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
+            agent_name="agent_name",
             effort="low",
             enable_events=True,
             input_data=[{"foo": "bar"}],
+            origin="api",
             output_schema={"foo": "bar"},
             previous_interaction_id="previous_interaction_id",
+            skill="skill",
             sources={
                 "allow": [
                     {
@@ -60,6 +63,7 @@ class TestRuns:
                 ],
                 "prioritize": "prioritize",
             },
+            use_case="research",
         )
         assert_matches_type(RunCreateResponse, run, path=["response"])
 
@@ -329,11 +333,14 @@ class TestAsyncRuns:
         run = await async_client.agents.runs.create(
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             input="input",
+            agent_name="agent_name",
             effort="low",
             enable_events=True,
             input_data=[{"foo": "bar"}],
+            origin="api",
             output_schema={"foo": "bar"},
             previous_interaction_id="previous_interaction_id",
+            skill="skill",
             sources={
                 "allow": [
                     {
@@ -352,6 +359,7 @@ class TestAsyncRuns:
                 ],
                 "prioritize": "prioritize",
             },
+            use_case="research",
         )
         assert_matches_type(RunCreateResponse, run, path=["response"])
 

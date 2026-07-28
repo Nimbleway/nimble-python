@@ -289,11 +289,14 @@ class TestAgents:
     def test_method_run_with_all_params(self, client: Nimble) -> None:
         agent = client.agents.run(
             input="input",
+            agent_name="agent_name",
             effort="low",
             enable_events=True,
             input_data=[{"foo": "bar"}],
+            origin="api",
             output_schema={"foo": "bar"},
             previous_interaction_id="previous_interaction_id",
+            skill="skill",
             sources={
                 "allow": [
                     {
@@ -312,6 +315,7 @@ class TestAgents:
                 ],
                 "prioritize": "prioritize",
             },
+            use_case="research",
         )
         assert_matches_type(AgentRunResponse, agent, path=["response"])
 
@@ -613,11 +617,14 @@ class TestAsyncAgents:
     async def test_method_run_with_all_params(self, async_client: AsyncNimble) -> None:
         agent = await async_client.agents.run(
             input="input",
+            agent_name="agent_name",
             effort="low",
             enable_events=True,
             input_data=[{"foo": "bar"}],
+            origin="api",
             output_schema={"foo": "bar"},
             previous_interaction_id="previous_interaction_id",
+            skill="skill",
             sources={
                 "allow": [
                     {
@@ -636,6 +643,7 @@ class TestAsyncAgents:
                 ],
                 "prioritize": "prioritize",
             },
+            use_case="research",
         )
         assert_matches_type(AgentRunResponse, agent, path=["response"])
 

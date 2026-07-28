@@ -52,12 +52,16 @@ class RunsResource(SyncAPIResource):
         agent_id: str,
         *,
         input: str,
+        agent_name: Optional[str] | Omit = omit,
         effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
         input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
+        origin: Literal["api"] | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
         previous_interaction_id: Optional[str] | Omit = omit,
+        skill: Optional[str] | Omit = omit,
         sources: Optional[run_create_params.Sources] | Omit = omit,
+        use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -79,6 +83,9 @@ class RunsResource(SyncAPIResource):
         Args:
           input: User prompt or task instructions for the run.
 
+          agent_name: Stable agent name. On this no-agent-id route, an unseen name creates a new
+              agent; an existing name reuses it. Ignored on the /{agent_id}/runs route.
+
           effort: Canonical effort tier names for the research graph.
 
           enable_events: Whether to stream run events when supported.
@@ -86,11 +93,21 @@ class RunsResource(SyncAPIResource):
           input_data: Existing records to ENRICH: a list of partial rows, or a single object,
               mirroring output_schema's shape.
 
+          origin: Origin of public API runs. Public requests are always API-originated.
+
           output_schema: JSON schema overriding the agent's default structured output for this run.
 
           previous_interaction_id: Previous interaction identifier used to continue a conversation.
 
+          skill: Skill override for this run. One-time only, except when this run creates a new
+              agent via agent_name, in which case it becomes the new agent's stored skill.
+
           sources: Source guidance overriding the agent default.
+
+          use_case: Only settable when this run creates a new agent (via agent_name, or when no
+              agent is resolved), in which case it becomes the new agent's stored use_case.
+              For a run against an existing agent, this must match the agent's own use_case —
+              passing the same value is accepted as a no-op, a different value is rejected.
 
           extra_headers: Send extra headers
 
@@ -107,12 +124,16 @@ class RunsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "input": input,
+                    "agent_name": agent_name,
                     "effort": effort,
                     "enable_events": enable_events,
                     "input_data": input_data,
+                    "origin": origin,
                     "output_schema": output_schema,
                     "previous_interaction_id": previous_interaction_id,
+                    "skill": skill,
                     "sources": sources,
+                    "use_case": use_case,
                 },
                 run_create_params.RunCreateParams,
             ),
@@ -316,12 +337,16 @@ class AsyncRunsResource(AsyncAPIResource):
         agent_id: str,
         *,
         input: str,
+        agent_name: Optional[str] | Omit = omit,
         effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
         input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
+        origin: Literal["api"] | Omit = omit,
         output_schema: Optional[Dict[str, object]] | Omit = omit,
         previous_interaction_id: Optional[str] | Omit = omit,
+        skill: Optional[str] | Omit = omit,
         sources: Optional[run_create_params.Sources] | Omit = omit,
+        use_case: Optional[Literal["research", "enrichment", "dataset_building"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -343,6 +368,9 @@ class AsyncRunsResource(AsyncAPIResource):
         Args:
           input: User prompt or task instructions for the run.
 
+          agent_name: Stable agent name. On this no-agent-id route, an unseen name creates a new
+              agent; an existing name reuses it. Ignored on the /{agent_id}/runs route.
+
           effort: Canonical effort tier names for the research graph.
 
           enable_events: Whether to stream run events when supported.
@@ -350,11 +378,21 @@ class AsyncRunsResource(AsyncAPIResource):
           input_data: Existing records to ENRICH: a list of partial rows, or a single object,
               mirroring output_schema's shape.
 
+          origin: Origin of public API runs. Public requests are always API-originated.
+
           output_schema: JSON schema overriding the agent's default structured output for this run.
 
           previous_interaction_id: Previous interaction identifier used to continue a conversation.
 
+          skill: Skill override for this run. One-time only, except when this run creates a new
+              agent via agent_name, in which case it becomes the new agent's stored skill.
+
           sources: Source guidance overriding the agent default.
+
+          use_case: Only settable when this run creates a new agent (via agent_name, or when no
+              agent is resolved), in which case it becomes the new agent's stored use_case.
+              For a run against an existing agent, this must match the agent's own use_case —
+              passing the same value is accepted as a no-op, a different value is rejected.
 
           extra_headers: Send extra headers
 
@@ -371,12 +409,16 @@ class AsyncRunsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "input": input,
+                    "agent_name": agent_name,
                     "effort": effort,
                     "enable_events": enable_events,
                     "input_data": input_data,
+                    "origin": origin,
                     "output_schema": output_schema,
                     "previous_interaction_id": previous_interaction_id,
+                    "skill": skill,
                     "sources": sources,
+                    "use_case": use_case,
                 },
                 run_create_params.RunCreateParams,
             ),
