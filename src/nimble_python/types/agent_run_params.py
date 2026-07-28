@@ -14,6 +14,13 @@ class AgentRunParams(TypedDict, total=False):
     input: Required[str]
     """User prompt or task instructions for the run."""
 
+    agent_name: Optional[str]
+    """Stable agent name.
+
+    On this no-agent-id route, an unseen name creates a new agent; an existing name
+    reuses it. Ignored on the /{agent_id}/runs route.
+    """
+
     effort: Optional[Literal["low", "medium", "high", "x-high", "max"]]
     """Canonical effort tier names for the research graph."""
 
@@ -26,14 +33,32 @@ class AgentRunParams(TypedDict, total=False):
     mirroring output_schema's shape.
     """
 
+    origin: Literal["api"]
+    """Origin of public API runs. Public requests are always API-originated."""
+
     output_schema: Optional[Dict[str, object]]
     """JSON schema overriding the agent's default structured output for this run."""
 
     previous_interaction_id: Optional[str]
     """Previous interaction identifier used to continue a conversation."""
 
+    skill: Optional[str]
+    """Skill override for this run.
+
+    One-time only, except when this run creates a new agent via agent_name, in which
+    case it becomes the new agent's stored skill.
+    """
+
     sources: Optional[Sources]
     """Source guidance overriding the agent default."""
+
+    use_case: Optional[Literal["research", "enrichment", "dataset_building"]]
+    """
+    Only settable when this run creates a new agent (via agent_name, or when no
+    agent is resolved), in which case it becomes the new agent's stored use_case.
+    For a run against an existing agent, this must match the agent's own use_case —
+    passing the same value is accepted as a no-op, a different value is rejected.
+    """
 
 
 class SourcesAllow(TypedDict, total=False):
