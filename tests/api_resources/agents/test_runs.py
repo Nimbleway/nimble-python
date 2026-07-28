@@ -263,11 +263,11 @@ class TestRuns:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_events(self, client: Nimble) -> None:
-        run = client.agents.runs.stream_events(
+        run_stream = client.agents.runs.stream_events(
             run_id="run_id",
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert run is None
+        run_stream.response.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -277,10 +277,9 @@ class TestRuns:
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        run = response.parse()
-        assert run is None
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -292,8 +291,8 @@ class TestRuns:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            run = response.parse()
-            assert run is None
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -559,11 +558,11 @@ class TestAsyncRuns:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_events(self, async_client: AsyncNimble) -> None:
-        run = await async_client.agents.runs.stream_events(
+        run_stream = await async_client.agents.runs.stream_events(
             run_id="run_id",
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert run is None
+        await run_stream.response.aclose()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -573,10 +572,9 @@ class TestAsyncRuns:
             agent_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        run = await response.parse()
-        assert run is None
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -588,8 +586,8 @@ class TestAsyncRuns:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            run = await response.parse()
-            assert run is None
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
 

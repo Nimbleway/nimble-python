@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -17,6 +17,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..._streaming import Stream, AsyncStream
 from ..._base_client import make_request_options
 from ...types.agents import run_list_params, run_create_params
 from ...types.agents.run_get_response import RunGetResponse
@@ -282,7 +283,7 @@ class RunsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> Stream[object]:
         """
         Stream a run's progress as
         [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
@@ -302,13 +303,15 @@ class RunsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return self._get(
             path_template("/v2/agents/{agent_id}/runs/{run_id}/events", agent_id=agent_id, run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=object,
+            stream=True,
+            stream_cls=Stream[object],
         )
 
 
@@ -567,7 +570,7 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> AsyncStream[object]:
         """
         Stream a run's progress as
         [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
@@ -587,13 +590,15 @@ class AsyncRunsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `agent_id` but received {agent_id!r}")
         if not run_id:
             raise ValueError(f"Expected a non-empty value for `run_id` but received {run_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {"Accept": "text/event-stream", **(extra_headers or {})}
         return await self._get(
             path_template("/v2/agents/{agent_id}/runs/{run_id}/events", agent_id=agent_id, run_id=run_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=object,
+            stream=True,
+            stream_cls=AsyncStream[object],
         )
 
 
