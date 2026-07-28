@@ -151,7 +151,7 @@ Methods:
 - <code title="get /v2/agents/{agent_id}/runs">client.agents.runs.<a href="./src/nimble_python/resources/agents/runs.py">list</a>(agent_id, \*\*<a href="src/nimble_python/types/agents/run_list_params.py">params</a>) -> <a href="./src/nimble_python/types/agents/run_list_response.py">RunListResponse</a></code>
 - <code title="get /v2/agents/{agent_id}/runs/{run_id}">client.agents.runs.<a href="./src/nimble_python/resources/agents/runs.py">get</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/agents/run_get_response.py">RunGetResponse</a></code>
 - <code title="get /v2/agents/{agent_id}/runs/{run_id}/result">client.agents.runs.<a href="./src/nimble_python/resources/agents/runs.py">result</a>(run_id, \*, agent_id) -> <a href="./src/nimble_python/types/agents/run_result_response.py">RunResultResponse</a></code>
-- <code title="get /v2/agents/{agent_id}/runs/{run_id}/events">client.agents.runs.<a href="./src/nimble_python/resources/agents/runs.py">stream_events</a>(run_id, \*, agent_id) -> None</code>
+- <code title="get /v2/agents/{agent_id}/runs/{run_id}/events">client.agents.runs.<a href="./src/nimble_python/resources/agents/runs.py">stream_events</a>(run_id, \*, agent_id) -> object</code>
 
 # Crawl
 
