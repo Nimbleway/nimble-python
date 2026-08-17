@@ -42,6 +42,14 @@ class ClientSearchParams(TypedDict, total=False):
     subagent names (e.g., ['amazon_serp', 'target_serp'])
     """
 
+    full_content: bool
+    """Return richer per-result content on the fast path.
+
+    With search_depth='fast', enables live crawling of both web and news sources so
+    results carry full markdown content instead of snippets only. Higher recall and
+    cost. Ignored for other search_depth values.
+    """
+
     include_answer: bool
     """Generate an LLM-powered answer summary based on search result snippets."""
 

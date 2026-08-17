@@ -305,7 +305,7 @@ class TaskRunResultPublicV2Run(BaseModel):
     created_at: datetime
     """When the run was created."""
 
-    effort: Literal["low", "medium", "high", "x-high", "max"]
+    effort: Literal["low", "medium", "high", "x-high", "5x-high", "max"]
     """Effort level used for the run."""
 
     interaction_id: str
@@ -370,7 +370,7 @@ class TaskRunFailedResultPublicV2Run(BaseModel):
     created_at: datetime
     """When the run was created."""
 
-    effort: Literal["low", "medium", "high", "x-high", "max"]
+    effort: Literal["low", "medium", "high", "x-high", "5x-high", "max"]
     """Effort level used for the run."""
 
     interaction_id: str

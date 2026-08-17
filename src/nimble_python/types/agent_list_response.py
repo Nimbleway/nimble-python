@@ -96,7 +96,7 @@ class Item(BaseModel):
     display_name: str
     """Human-friendly agent name shown to users."""
 
-    effort: Literal["low", "medium", "high", "x-high", "max"]
+    effort: Literal["low", "medium", "high", "x-high", "5x-high", "max"]
     """Default effort level for this agent's runs."""
 
     goals: List[ItemGoal]

@@ -876,6 +876,7 @@ class ExtractResource(SyncAPIResource):
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
+        realtime_total_timeout: float | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
@@ -1012,6 +1013,10 @@ class ExtractResource(SyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
+          realtime_total_timeout: Overall deadline in milliseconds for a realtime request. Clamped to the account
+              total timeout — it can shorten the deadline but never extend it. Has no effect
+              on async requests.
+
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
@@ -1068,6 +1073,7 @@ class ExtractResource(SyncAPIResource):
                     "os": os,
                     "parse": parse,
                     "parser": parser,
+                    "realtime_total_timeout": realtime_total_timeout,
                     "referrer_type": referrer_type,
                     "render": render,
                     "request_timeout": request_timeout,
@@ -1951,6 +1957,7 @@ class ExtractResource(SyncAPIResource):
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
+        realtime_total_timeout: float | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
@@ -2081,6 +2088,10 @@ class ExtractResource(SyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
+          realtime_total_timeout: Overall deadline in milliseconds for a realtime request. Clamped to the account
+              total timeout — it can shorten the deadline but never extend it. Has no effect
+              on async requests.
+
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
@@ -2128,6 +2139,7 @@ class ExtractResource(SyncAPIResource):
                     "os": os,
                     "parse": parse,
                     "parser": parser,
+                    "realtime_total_timeout": realtime_total_timeout,
                     "referrer_type": referrer_type,
                     "render": render,
                     "request_timeout": request_timeout,
@@ -2987,6 +2999,7 @@ class AsyncExtractResource(AsyncAPIResource):
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
+        realtime_total_timeout: float | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
@@ -3123,6 +3136,10 @@ class AsyncExtractResource(AsyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
+          realtime_total_timeout: Overall deadline in milliseconds for a realtime request. Clamped to the account
+              total timeout — it can shorten the deadline but never extend it. Has no effect
+              on async requests.
+
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
@@ -3179,6 +3196,7 @@ class AsyncExtractResource(AsyncAPIResource):
                     "os": os,
                     "parse": parse,
                     "parser": parser,
+                    "realtime_total_timeout": realtime_total_timeout,
                     "referrer_type": referrer_type,
                     "render": render,
                     "request_timeout": request_timeout,
@@ -4062,6 +4080,7 @@ class AsyncExtractResource(AsyncAPIResource):
         os: Literal["windows", "mac os", "linux", "android", "ios"] | Omit = omit,
         parse: bool | Omit = omit,
         parser: Union[Dict[str, object], str] | Omit = omit,
+        realtime_total_timeout: float | Omit = omit,
         referrer_type: Literal[
             "random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"
         ]
@@ -4192,6 +4211,10 @@ class AsyncExtractResource(AsyncAPIResource):
 
           parser: Custom parser configuration as a key-value map
 
+          realtime_total_timeout: Overall deadline in milliseconds for a realtime request. Clamped to the account
+              total timeout — it can shorten the deadline but never extend it. Has no effect
+              on async requests.
+
           referrer_type: Referrer policy for the request
 
           render: Whether to render JavaScript content using a browser
@@ -4239,6 +4262,7 @@ class AsyncExtractResource(AsyncAPIResource):
                     "os": os,
                     "parse": parse,
                     "parser": parser,
+                    "realtime_total_timeout": realtime_total_timeout,
                     "referrer_type": referrer_type,
                     "render": render,
                     "request_timeout": request_timeout,

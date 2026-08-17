@@ -1144,6 +1144,7 @@ class Nimble(SyncAPIClient):
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         focus: Union[str, SequenceNotStr[str]] | Omit = omit,
+        full_content: bool | Omit = omit,
         include_answer: bool | Omit = omit,
         include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         locale: str | Omit = omit,
@@ -1180,6 +1181,11 @@ class Nimble(SyncAPIClient):
 
           focus: Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
               subagent names (e.g., ['amazon_serp', 'target_serp'])
+
+          full_content: Return richer per-result content on the fast path. With search_depth='fast',
+              enables live crawling of both web and news sources so results carry full
+              markdown content instead of snippets only. Higher recall and cost. Ignored for
+              other search_depth values.
 
           include_answer: Generate an LLM-powered answer summary based on search result snippets.
 
@@ -1225,6 +1231,7 @@ class Nimble(SyncAPIClient):
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,
                     "focus": focus,
+                    "full_content": full_content,
                     "include_answer": include_answer,
                     "include_domains": include_domains,
                     "locale": locale,
@@ -2354,6 +2361,7 @@ class AsyncNimble(AsyncAPIClient):
         end_date: Optional[str] | Omit = omit,
         exclude_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         focus: Union[str, SequenceNotStr[str]] | Omit = omit,
+        full_content: bool | Omit = omit,
         include_answer: bool | Omit = omit,
         include_domains: Optional[SequenceNotStr[str]] | Omit = omit,
         locale: str | Omit = omit,
@@ -2390,6 +2398,11 @@ class AsyncNimble(AsyncAPIClient):
 
           focus: Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
               subagent names (e.g., ['amazon_serp', 'target_serp'])
+
+          full_content: Return richer per-result content on the fast path. With search_depth='fast',
+              enables live crawling of both web and news sources so results carry full
+              markdown content instead of snippets only. Higher recall and cost. Ignored for
+              other search_depth values.
 
           include_answer: Generate an LLM-powered answer summary based on search result snippets.
 
@@ -2435,6 +2448,7 @@ class AsyncNimble(AsyncAPIClient):
                     "end_date": end_date,
                     "exclude_domains": exclude_domains,
                     "focus": focus,
+                    "full_content": full_content,
                     "include_answer": include_answer,
                     "include_domains": include_domains,
                     "locale": locale,
