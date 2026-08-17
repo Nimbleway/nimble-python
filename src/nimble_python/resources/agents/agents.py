@@ -78,7 +78,7 @@ class AgentsResource(SyncAPIResource):
         agent_name: Optional[str] | Omit = omit,
         description: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
-        effort: Literal["low", "medium", "high", "x-high", "max"] | Omit = omit,
+        effort: Literal["low", "medium", "high", "x-high", "5x-high", "max"] | Omit = omit,
         goals: SequenceNotStr[str] | Omit = omit,
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
@@ -210,7 +210,6 @@ class AgentsResource(SyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        workspace_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -244,7 +243,6 @@ class AgentsResource(SyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
-                        "workspace_id": workspace_id,
                     },
                     agent_list_params.AgentListParams,
                 ),
@@ -326,7 +324,7 @@ class AgentsResource(SyncAPIResource):
         *,
         input: str,
         agent_name: Optional[str] | Omit = omit,
-        effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        effort: Optional[Literal["low", "medium", "high", "x-high", "5x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
         input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
         origin: Literal["api"] | Omit = omit,
@@ -443,7 +441,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         agent_name: Optional[str] | Omit = omit,
         description: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
-        effort: Literal["low", "medium", "high", "x-high", "max"] | Omit = omit,
+        effort: Literal["low", "medium", "high", "x-high", "5x-high", "max"] | Omit = omit,
         goals: SequenceNotStr[str] | Omit = omit,
         icon: Optional[str] | Omit = omit,
         is_active: bool | Omit = omit,
@@ -575,7 +573,6 @@ class AsyncAgentsResource(AsyncAPIResource):
         *,
         limit: int | Omit = omit,
         offset: int | Omit = omit,
-        workspace_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -609,7 +606,6 @@ class AsyncAgentsResource(AsyncAPIResource):
                     {
                         "limit": limit,
                         "offset": offset,
-                        "workspace_id": workspace_id,
                     },
                     agent_list_params.AgentListParams,
                 ),
@@ -691,7 +687,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         *,
         input: str,
         agent_name: Optional[str] | Omit = omit,
-        effort: Optional[Literal["low", "medium", "high", "x-high", "max"]] | Omit = omit,
+        effort: Optional[Literal["low", "medium", "high", "x-high", "5x-high", "max"]] | Omit = omit,
         enable_events: bool | Omit = omit,
         input_data: Union[Iterable[Dict[str, object]], Dict[str, object], None] | Omit = omit,
         origin: Literal["api"] | Omit = omit,

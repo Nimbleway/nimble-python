@@ -58,7 +58,7 @@ class TemplateGetResponse(BaseModel):
     display_name: str
     """Human-friendly template name shown to users."""
 
-    effort: Literal["low", "medium", "high", "x-high", "max"]
+    effort: Literal["low", "medium", "high", "x-high", "5x-high", "max"]
     """Default effort level for runs created from this template."""
 
     goals: List[Goal]

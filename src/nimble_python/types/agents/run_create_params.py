@@ -21,7 +21,7 @@ class RunCreateParams(TypedDict, total=False):
     reuses it. Ignored on the /{agent_id}/runs route.
     """
 
-    effort: Optional[Literal["low", "medium", "high", "x-high", "max"]]
+    effort: Optional[Literal["low", "medium", "high", "x-high", "5x-high", "max"]]
     """Canonical effort tier names for the research graph."""
 
     enable_events: bool

@@ -1019,6 +1019,13 @@ class Input(TypedDict, total=False):
     parser: Union[Dict[str, object], str]
     """Custom parser configuration as a key-value map"""
 
+    realtime_total_timeout: float
+    """Overall deadline in milliseconds for a realtime request.
+
+    Clamped to the account total timeout — it can shorten the deadline but never
+    extend it. Has no effect on async requests.
+    """
+
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
 
@@ -2082,6 +2089,13 @@ class SharedInputs(TypedDict, total=False):
 
     parser: Union[Dict[str, object], str]
     """Custom parser configuration as a key-value map"""
+
+    realtime_total_timeout: float
+    """Overall deadline in milliseconds for a realtime request.
+
+    Clamped to the account total timeout — it can shorten the deadline but never
+    extend it. Has no effect on async requests.
+    """
 
     referrer_type: Literal["random", "no-referer", "same-origin", "google", "bing", "facebook", "twitter", "instagram"]
     """Referrer policy for the request"""
