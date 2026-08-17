@@ -40,6 +40,13 @@ class Inputs(BaseModel):
     Used for 's3'/'file' types.
     """
 
+    node_data: Optional[Dict[str, List[Dict[str, object]]]] = None
+    """Inline input records keyed by source node id, e.g.
+
+    {'source_a': [{...}]}. Used when type is 'inline' on a dynamic-workflow job,
+    which has one source node per input file. Mutually exclusive with 'data'.
+    """
+
 
 class Schedule(BaseModel):
     """Cron-based schedule controlling when a job runs automatically."""

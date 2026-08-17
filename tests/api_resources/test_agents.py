@@ -166,7 +166,6 @@ class TestAgents:
         agent = client.agents.list(
             limit=1,
             offset=0,
-            workspace_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AgentListResponse, agent, path=["response"])
 
@@ -494,7 +493,6 @@ class TestAsyncAgents:
         agent = await async_client.agents.list(
             limit=1,
             offset=0,
-            workspace_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AgentListResponse, agent, path=["response"])
 

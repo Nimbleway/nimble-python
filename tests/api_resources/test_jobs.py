@@ -48,6 +48,7 @@ class TestJobs:
                 "type": "s3",
                 "data": [{"foo": "bar"}],
                 "file_path": "file_path",
+                "node_data": {"foo": [{"foo": "bar"}]},
             },
             schedule={
                 "cron": "cron",
@@ -108,6 +109,7 @@ class TestJobs:
                 "type": "s3",
                 "data": [{"foo": "bar"}],
                 "file_path": "file_path",
+                "node_data": {"foo": [{"foo": "bar"}]},
             },
             schedule={
                 "cron": "cron",
@@ -303,6 +305,7 @@ class TestAsyncJobs:
                 "type": "s3",
                 "data": [{"foo": "bar"}],
                 "file_path": "file_path",
+                "node_data": {"foo": [{"foo": "bar"}]},
             },
             schedule={
                 "cron": "cron",
@@ -363,6 +366,7 @@ class TestAsyncJobs:
                 "type": "s3",
                 "data": [{"foo": "bar"}],
                 "file_path": "file_path",
+                "node_data": {"foo": [{"foo": "bar"}]},
             },
             schedule={
                 "cron": "cron",
