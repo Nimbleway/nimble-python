@@ -40,6 +40,7 @@ class TestFastSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            resolve_url=True,
             show_hidden_results=False,
         )
         assert_matches_type(FastSerpRunResponse, fast_serp, path=["response"])
@@ -99,6 +100,7 @@ class TestAsyncFastSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            resolve_url=True,
             show_hidden_results=False,
         )
         assert_matches_type(FastSerpRunResponse, fast_serp, path=["response"])

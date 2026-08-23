@@ -57,6 +57,13 @@ class SerpRunParams(TypedDict, total=False):
     render: bool
     """Whether to render the page in a browser before extracting."""
 
+    resolve_url: bool
+    """
+    When true, search result links that point at a search-engine redirector are
+    resolved to their final destination URLs. Best-effort within a time budget:
+    links that cannot be resolved in time are returned unchanged.
+    """
+
     show_hidden_results: bool
     """
     When true, disables Google result filtering (filter=0) so omitted/duplicate and
