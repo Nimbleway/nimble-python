@@ -71,6 +71,7 @@ class SerpResource(SyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        resolve_url: bool | Omit = omit,
         show_hidden_results: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -106,6 +107,10 @@ class SerpResource(SyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          resolve_url: When true, search result links that point at a search-engine redirector are
+              resolved to their final destination URLs. Best-effort within a time budget:
+              links that cannot be resolved in time are returned unchanged.
+
           show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
               highly similar pages are also returned. Applies to Google search engines.
 
@@ -132,6 +137,7 @@ class SerpResource(SyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "resolve_url": resolve_url,
                     "show_hidden_results": show_hidden_results,
                 },
                 serp_run_params.SerpRunParams,
@@ -168,6 +174,7 @@ class SerpResource(SyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        resolve_url: bool | Omit = omit,
         show_hidden_results: bool | Omit = omit,
         storage_compress: bool | Omit = omit,
         storage_object_name: str | Omit = omit,
@@ -209,6 +216,10 @@ class SerpResource(SyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          resolve_url: When true, search result links that point at a search-engine redirector are
+              resolved to their final destination URLs. Best-effort within a time budget:
+              links that cannot be resolved in time are returned unchanged.
+
           show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
               highly similar pages are also returned. Applies to Google search engines.
 
@@ -244,6 +255,7 @@ class SerpResource(SyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "resolve_url": resolve_url,
                     "show_hidden_results": show_hidden_results,
                     "storage_compress": storage_compress,
                     "storage_object_name": storage_object_name,
@@ -350,6 +362,7 @@ class AsyncSerpResource(AsyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        resolve_url: bool | Omit = omit,
         show_hidden_results: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -385,6 +398,10 @@ class AsyncSerpResource(AsyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          resolve_url: When true, search result links that point at a search-engine redirector are
+              resolved to their final destination URLs. Best-effort within a time budget:
+              links that cannot be resolved in time are returned unchanged.
+
           show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
               highly similar pages are also returned. Applies to Google search engines.
 
@@ -411,6 +428,7 @@ class AsyncSerpResource(AsyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "resolve_url": resolve_url,
                     "show_hidden_results": show_hidden_results,
                 },
                 serp_run_params.SerpRunParams,
@@ -447,6 +465,7 @@ class AsyncSerpResource(AsyncAPIResource):
         parse: bool | Omit = omit,
         query: str | Omit = omit,
         render: bool | Omit = omit,
+        resolve_url: bool | Omit = omit,
         show_hidden_results: bool | Omit = omit,
         storage_compress: bool | Omit = omit,
         storage_object_name: str | Omit = omit,
@@ -488,6 +507,10 @@ class AsyncSerpResource(AsyncAPIResource):
 
           render: Whether to render the page in a browser before extracting.
 
+          resolve_url: When true, search result links that point at a search-engine redirector are
+              resolved to their final destination URLs. Best-effort within a time budget:
+              links that cannot be resolved in time are returned unchanged.
+
           show_hidden_results: When true, disables Google result filtering (filter=0) so omitted/duplicate and
               highly similar pages are also returned. Applies to Google search engines.
 
@@ -523,6 +546,7 @@ class AsyncSerpResource(AsyncAPIResource):
                     "parse": parse,
                     "query": query,
                     "render": render,
+                    "resolve_url": resolve_url,
                     "show_hidden_results": show_hidden_results,
                     "storage_compress": storage_compress,
                     "storage_object_name": storage_object_name,

@@ -44,6 +44,7 @@ class TestSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            resolve_url=True,
             show_hidden_results=False,
         )
         assert_matches_type(SerpRunResponse, serp, path=["response"])
@@ -98,6 +99,7 @@ class TestSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            resolve_url=True,
             show_hidden_results=False,
             storage_compress=True,
             storage_object_name="result-2024-01-15.json",
@@ -157,6 +159,7 @@ class TestSerp:
                     "parse": True,
                     "query": "nimble web data",
                     "render": False,
+                    "resolve_url": True,
                     "search_engine": "google_search",
                     "show_hidden_results": False,
                     "storage_compress": True,
@@ -177,6 +180,7 @@ class TestSerp:
                 "parse": True,
                 "query": "nimble web data",
                 "render": False,
+                "resolve_url": True,
                 "search_engine": "google_search",
                 "show_hidden_results": False,
                 "storage_compress": True,
@@ -242,6 +246,7 @@ class TestAsyncSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            resolve_url=True,
             show_hidden_results=False,
         )
         assert_matches_type(SerpRunResponse, serp, path=["response"])
@@ -296,6 +301,7 @@ class TestAsyncSerp:
             parse=True,
             query="nimble web data",
             render=False,
+            resolve_url=True,
             show_hidden_results=False,
             storage_compress=True,
             storage_object_name="result-2024-01-15.json",
@@ -355,6 +361,7 @@ class TestAsyncSerp:
                     "parse": True,
                     "query": "nimble web data",
                     "render": False,
+                    "resolve_url": True,
                     "search_engine": "google_search",
                     "show_hidden_results": False,
                     "storage_compress": True,
@@ -375,6 +382,7 @@ class TestAsyncSerp:
                 "parse": True,
                 "query": "nimble web data",
                 "render": False,
+                "resolve_url": True,
                 "search_engine": "google_search",
                 "show_hidden_results": False,
                 "storage_compress": True,
