@@ -26,7 +26,21 @@ class TestRuns:
     @parametrize
     def test_method_create(self, client: Nimble) -> None:
         run = client.jobs.runs.create(
-            "job_id",
+            job_id="job_id",
+        )
+        assert_matches_type(RunCreateResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_with_all_params(self, client: Nimble) -> None:
+        run = client.jobs.runs.create(
+            job_id="job_id",
+            inputs={
+                "type": "s3",
+                "data": [{"foo": "bar"}],
+                "file_path": "file_path",
+                "node_data": {"foo": [{"foo": "bar"}]},
+            },
         )
         assert_matches_type(RunCreateResponse, run, path=["response"])
 
@@ -34,7 +48,7 @@ class TestRuns:
     @parametrize
     def test_raw_response_create(self, client: Nimble) -> None:
         response = client.jobs.runs.with_raw_response.create(
-            "job_id",
+            job_id="job_id",
         )
 
         assert response.is_closed is True
@@ -46,7 +60,7 @@ class TestRuns:
     @parametrize
     def test_streaming_response_create(self, client: Nimble) -> None:
         with client.jobs.runs.with_streaming_response.create(
-            "job_id",
+            job_id="job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -61,7 +75,7 @@ class TestRuns:
     def test_path_params_create(self, client: Nimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             client.jobs.runs.with_raw_response.create(
-                "",
+                job_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -210,7 +224,21 @@ class TestAsyncRuns:
     @parametrize
     async def test_method_create(self, async_client: AsyncNimble) -> None:
         run = await async_client.jobs.runs.create(
-            "job_id",
+            job_id="job_id",
+        )
+        assert_matches_type(RunCreateResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncNimble) -> None:
+        run = await async_client.jobs.runs.create(
+            job_id="job_id",
+            inputs={
+                "type": "s3",
+                "data": [{"foo": "bar"}],
+                "file_path": "file_path",
+                "node_data": {"foo": [{"foo": "bar"}]},
+            },
         )
         assert_matches_type(RunCreateResponse, run, path=["response"])
 
@@ -218,7 +246,7 @@ class TestAsyncRuns:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncNimble) -> None:
         response = await async_client.jobs.runs.with_raw_response.create(
-            "job_id",
+            job_id="job_id",
         )
 
         assert response.is_closed is True
@@ -230,7 +258,7 @@ class TestAsyncRuns:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncNimble) -> None:
         async with async_client.jobs.runs.with_streaming_response.create(
-            "job_id",
+            job_id="job_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -245,7 +273,7 @@ class TestAsyncRuns:
     async def test_path_params_create(self, async_client: AsyncNimble) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             await async_client.jobs.runs.with_raw_response.create(
-                "",
+                job_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
