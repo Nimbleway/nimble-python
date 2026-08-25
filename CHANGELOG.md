@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 (2026-08-25)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/Nimbleway/nimble-python/compare/v1.4.0...v1.5.0)
+
+### Features
+
+* **api:** api update ([97894ec](https://github.com/Nimbleway/nimble-python/commit/97894eca7385829cf64163430f523f796b530676))
+
 ## 1.4.0 (2026-08-23)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/Nimbleway/nimble-python/compare/v1.3.0...v1.4.0)
