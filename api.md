@@ -288,7 +288,7 @@ from nimble_python.types.jobs import (
 
 Methods:
 
-- <code title="post /v2/jobs/{job_id}/runs">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">create</a>(job_id) -> <a href="./src/nimble_python/types/jobs/run_create_response.py">RunCreateResponse</a></code>
+- <code title="post /v2/jobs/{job_id}/runs">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">create</a>(job_id, \*\*<a href="src/nimble_python/types/jobs/run_create_params.py">params</a>) -> <a href="./src/nimble_python/types/jobs/run_create_response.py">RunCreateResponse</a></code>
 - <code title="get /v2/jobs/{job_id}/runs">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">list</a>(job_id, \*\*<a href="src/nimble_python/types/jobs/run_list_params.py">params</a>) -> <a href="./src/nimble_python/types/jobs/run_list_response.py">RunListResponse</a></code>
 - <code title="post /v2/jobs/runs/{run_id}/cancel">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">cancel</a>(run_id) -> <a href="./src/nimble_python/types/jobs/run_cancel_response.py">RunCancelResponse</a></code>
 - <code title="get /v2/jobs/runs/{run_id}">client.jobs.runs.<a href="./src/nimble_python/resources/jobs/runs/runs.py">get</a>(run_id) -> <a href="./src/nimble_python/types/jobs/run_get_response.py">RunGetResponse</a></code>
