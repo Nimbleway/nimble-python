@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -22,7 +24,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....types.jobs import run_list_params
+from ....types.jobs import run_list_params, run_create_params
 from ...._base_client import make_request_options
 from ....types.jobs.run_get_response import RunGetResponse
 from ....types.jobs.run_list_response import RunListResponse
@@ -60,6 +62,7 @@ class RunsResource(SyncAPIResource):
         self,
         job_id: str,
         *,
+        inputs: Optional[run_create_params.Inputs] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -71,6 +74,8 @@ class RunsResource(SyncAPIResource):
         Trigger Job Run Public V2
 
         Args:
+          inputs: Configuration for the input data a job processes.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -83,6 +88,7 @@ class RunsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return self._post(
             path_template("/v2/jobs/{job_id}/runs", job_id=job_id),
+            body=maybe_transform({"inputs": inputs}, run_create_params.RunCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -229,6 +235,7 @@ class AsyncRunsResource(AsyncAPIResource):
         self,
         job_id: str,
         *,
+        inputs: Optional[run_create_params.Inputs] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -240,6 +247,8 @@ class AsyncRunsResource(AsyncAPIResource):
         Trigger Job Run Public V2
 
         Args:
+          inputs: Configuration for the input data a job processes.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -252,6 +261,7 @@ class AsyncRunsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `job_id` but received {job_id!r}")
         return await self._post(
             path_template("/v2/jobs/{job_id}/runs", job_id=job_id),
+            body=await async_maybe_transform({"inputs": inputs}, run_create_params.RunCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
