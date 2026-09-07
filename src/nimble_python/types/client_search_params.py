@@ -27,7 +27,8 @@ class ClientSearchParams(TypedDict, total=False):
     deep_search: Optional[bool]
     """Deprecated.
 
-    Use search_depth instead. true maps to 'deep', false maps to 'lite'.
+    Use search_depth with full_content instead. true maps to 'lite' with
+    full_content=true, false maps to 'lite'.
     """
 
     end_date: Optional[str]
@@ -43,11 +44,9 @@ class ClientSearchParams(TypedDict, total=False):
     """
 
     full_content: bool
-    """Return richer per-result content on the fast path.
-
-    With search_depth='fast', enables live crawling of both web and news sources so
-    results carry full markdown content instead of snippets only. Higher recall and
-    cost. Ignored for other search_depth values.
+    """
+    Return full page content for each result, in addition to its title, url, and
+    description. Works with either search_depth value. Higher recall and cost.
     """
 
     include_answer: bool
@@ -74,13 +73,12 @@ class ClientSearchParams(TypedDict, total=False):
     output_format: Literal["plain_text", "markdown", "simplified_html"]
     """Output format: plain_text, markdown, or simplified_html"""
 
-    search_depth: Optional[Literal["lite", "fast", "deep"]]
+    search_depth: Optional[Literal["lite", "standard"]]
     """Controls content richness and latency of search results.
 
     - lite: Token-efficient metadata for high-volume pipelines (title, URL,
       description only)
-    - fast: Rich content (~2K chars) optimized for AI agents
-    - deep: Full page content via Webit scraping for comprehensive analysis
+    - standard: Rich content (~2K chars) optimized for AI agents
     """
 
     start_date: Optional[str]
