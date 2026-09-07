@@ -1151,7 +1151,7 @@ class Nimble(SyncAPIClient):
         max_results: int | Omit = omit,
         max_subagents: int | Omit = omit,
         output_format: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
-        search_depth: Optional[Literal["lite", "fast", "deep"]] | Omit = omit,
+        search_depth: Optional[Literal["lite", "standard"]] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1173,7 +1173,8 @@ class Nimble(SyncAPIClient):
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
 
-          deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
+          deep_search: Deprecated. Use search_depth with full_content instead. true maps to 'lite' with
+              full_content=true, false maps to 'lite'.
 
           end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
 
@@ -1182,10 +1183,8 @@ class Nimble(SyncAPIClient):
           focus: Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
               subagent names (e.g., ['amazon_serp', 'target_serp'])
 
-          full_content: Return richer per-result content on the fast path. With search_depth='fast',
-              enables live crawling of both web and news sources so results carry full
-              markdown content instead of snippets only. Higher recall and cost. Ignored for
-              other search_depth values.
+          full_content: Return full page content for each result, in addition to its title, url, and
+              description. Works with either search_depth value. Higher recall and cost.
 
           include_answer: Generate an LLM-powered answer summary based on search result snippets.
 
@@ -1205,8 +1204,7 @@ class Nimble(SyncAPIClient):
 
               - lite: Token-efficient metadata for high-volume pipelines (title, URL,
                 description only)
-              - fast: Rich content (~2K chars) optimized for AI agents
-              - deep: Full page content via Webit scraping for comprehensive analysis
+              - standard: Rich content (~2K chars) optimized for AI agents
 
           start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
 
@@ -2368,7 +2366,7 @@ class AsyncNimble(AsyncAPIClient):
         max_results: int | Omit = omit,
         max_subagents: int | Omit = omit,
         output_format: Literal["plain_text", "markdown", "simplified_html"] | Omit = omit,
-        search_depth: Optional[Literal["lite", "fast", "deep"]] | Omit = omit,
+        search_depth: Optional[Literal["lite", "standard"]] | Omit = omit,
         start_date: Optional[str] | Omit = omit,
         time_range: Optional[Literal["hour", "day", "week", "month", "year"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -2390,7 +2388,8 @@ class AsyncNimble(AsyncAPIClient):
 
           country: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
 
-          deep_search: Deprecated. Use search_depth instead. true maps to 'deep', false maps to 'lite'.
+          deep_search: Deprecated. Use search_depth with full_content instead. true maps to 'lite' with
+              full_content=true, false maps to 'lite'.
 
           end_date: Filter results before this date (format: YYYY-MM-DD or YYYY)
 
@@ -2399,10 +2398,8 @@ class AsyncNimble(AsyncAPIClient):
           focus: Search focus mode (e.g., 'general', 'news', 'shopping') or a list of explicit
               subagent names (e.g., ['amazon_serp', 'target_serp'])
 
-          full_content: Return richer per-result content on the fast path. With search_depth='fast',
-              enables live crawling of both web and news sources so results carry full
-              markdown content instead of snippets only. Higher recall and cost. Ignored for
-              other search_depth values.
+          full_content: Return full page content for each result, in addition to its title, url, and
+              description. Works with either search_depth value. Higher recall and cost.
 
           include_answer: Generate an LLM-powered answer summary based on search result snippets.
 
@@ -2422,8 +2419,7 @@ class AsyncNimble(AsyncAPIClient):
 
               - lite: Token-efficient metadata for high-volume pipelines (title, URL,
                 description only)
-              - fast: Rich content (~2K chars) optimized for AI agents
-              - deep: Full page content via Webit scraping for comprehensive analysis
+              - standard: Rich content (~2K chars) optimized for AI agents
 
           start_date: Filter results after this date (format: YYYY-MM-DD or YYYY)
 
