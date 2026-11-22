@@ -136,6 +136,7 @@ exclude = [
     ".venv",
     ".nox",
     ".git",
+    "candidate/generated",
 ]
 
 reportImplicitOverride = true
@@ -154,7 +155,7 @@ show_error_codes = true
 #
 # We also exclude our `tests` as mypy doesn't always infer
 # types correctly and Pyright will still catch any type errors.
-exclude = ["src/nimble_python/_files.py", "_dev/.*.py", "tests/.*"]
+exclude = ["src/nimble_python/_files.py", "_dev/.*.py", "tests/.*", "candidate/.*"]
 
 strict_equality = true
 implicit_reexport = true
@@ -197,6 +198,7 @@ ignore_missing_imports = true
 
 
 [tool.ruff]
+extend-exclude = ["candidate/generated"]
 line-length = 120
 output-format = "grouped"
 target-version = "py38"
