@@ -1,0 +1,30 @@
+name: SDK candidate
+
+on:
+  pull_request:
+    paths:
+      - 'candidate/**'
+      - '.github/workflows/sdk-candidate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify frozen SDK input
+        run: echo '283b1079b67453be6e8f06ccd3bf9955fedd553a9ab881e3f1f3904467d87cca  candidate/contract/openapi.yaml' | sha256sum --check
+      - name: Regenerate selected client
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/local" \
+            openapitools/openapi-generator-cli:v7.27.0 generate \
+            -i /local/candidate/contract/openapi.yaml -g python \
+            -o /local/candidate/generated \
+            --additional-properties=packageName=nimble_client \
+            --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false \
+            > "$RUNNER_TEMP/sdk-generation.log" 2>&1
+          test -z "$(git status --porcelain -- candidate/generated)"
+      - name: Compile candidate
+        run: python -m compileall -q candidate/generated/nimble_client
