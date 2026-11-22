@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
       - name: Verify frozen SDK input
         run: echo '283b1079b67453be6e8f06ccd3bf9955fedd553a9ab881e3f1f3904467d87cca  candidate/contract/openapi.yaml' | sha256sum --check
       - name: Regenerate selected client
@@ -28,3 +31,18 @@ jobs:
           test -z "$(git status --porcelain -- candidate/generated)"
       - name: Compile candidate
         run: python -m compileall -q candidate/generated/nimble_client
+      - name: Build and install candidate wheel
+        run: |
+          python -m pip install build
+          mkdir -p "$RUNNER_TEMP/sdk-artifact"
+          python -m build --wheel --sdist \
+            --outdir "$RUNNER_TEMP/sdk-artifact" candidate/generated \
+            > "$RUNNER_TEMP/sdk-build.log" 2>&1
+          python -m venv "$RUNNER_TEMP/sdk-consumer"
+          "$RUNNER_TEMP/sdk-consumer/bin/pip" install "$RUNNER_TEMP"/sdk-artifact/*.whl
+          "$RUNNER_TEMP/sdk-consumer/bin/python" -c 'import nimble_client'
+      - uses: actions/upload-artifact@v7
+        with:
+          name: python-sdk-candidate
+          path: ${{ runner.temp }}/sdk-artifact/*
+          if-no-files-found: error
